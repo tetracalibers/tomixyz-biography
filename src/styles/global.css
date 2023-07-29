@@ -10,6 +10,23 @@
       }
     }
   }
+  @font-face {
+    font-family: "TsukuBRdGothic";
+    src: url("/fonts/AppleTsukuBRdGothic-Regular-AlphaNum-01.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "TsukuBRdGothic";
+    src: url("/fonts/AppleTsukuBRdGothic-Bold-AlphaNum-02.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  body {
+    font-family: "Ysabeau Office", "TsukuBRdGothic";
+  }
 }
 @tailwind components;
 @tailwind utilities;
