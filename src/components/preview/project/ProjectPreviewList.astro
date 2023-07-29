@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from "astro:content"
+import ProjectPreview from "./ProjectPreveiw.astro"
+
+interface Props {
+  projects: CollectionEntry<"project">
+}
+
+const { projects } = Astro.props
+const sortedPosts = projects.sort((a, b) => new Date(b.date) - new Date(a.date))
+---
+
+<section class="post-preview__list">
+  {sortedPosts.map((post) => <ProjectPreview project={post} />)}
+</section>
+<style>
+  .post-preview__list {
+    @apply flex flex-col gap-12;
+  }
+</style>
