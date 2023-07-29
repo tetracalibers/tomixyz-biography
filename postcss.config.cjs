@@ -1,6 +1,3 @@
 module.exports = {
-    plugins: [
-        require('tailwindcss/nesting'),
-        require('tailwindcss')
-    ],
+  plugins: [require("tailwindcss/nesting"), require("tailwindcss")]
 }

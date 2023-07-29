@@ -61,5 +61,7 @@ print('hello world')
 ## Javascript
 
 ```js
-const func = () => {alert("hello")}
+const func = () => {
+  alert("hello")
+}
 ```

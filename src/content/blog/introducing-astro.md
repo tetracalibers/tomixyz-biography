@@ -7,8 +7,8 @@ authorTwitter: FredKSchott
 authorImage: https://pbs.twimg.com/profile_images/1272979356529221632/sxvncugt_400x400.jpg
 category: design
 tags:
-- astro
-- jam-stack
+  - astro
+  - jam-stack
 description: There's a simple secret to building a faster website — just ship less.
 ---
 
