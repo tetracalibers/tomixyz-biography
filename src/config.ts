@@ -1,9 +1,13 @@
 import type { NavItems } from "./types"
 
 export const NAV_ITEMS: NavItems = {
-  home: {
+  about: {
     path: "/",
-    title: "home"
+    title: "about"
+  },
+  projects: {
+    path: "/projects",
+    title: "projects"
   },
   blog: {
     path: "/blog",
@@ -16,10 +20,6 @@ export const NAV_ITEMS: NavItems = {
   media: {
     path: "/media",
     title: "media"
-  },
-  about: {
-    path: "/about",
-    title: "about"
   }
 }
 
