@@ -25,25 +25,24 @@ export const NAV_ITEMS: NavItems = {
 
 export const SITE = {
   // Your site's detail?
-  name: "Ink",
-  title: "Astro - Ink",
-  description: "Crisp, minimal, personal blog theme for Astro",
-  url: "https://astro-ink.vercel.app",
-  githubUrl: "https://github.com/one-aalam/astro-ink",
+  name: "tomixy's biography",
+  title: "tomixy's biography",
+  description: "",
+  url: "",
+  githubUrl: "https://github.com/tetracalibers",
   listDrafts: true,
-  image: "https://raw.githubusercontent.com/one-aalam/astro-ink/main/public/astro-banner.png",
+  image: "/images/profiles/pastel-tomixy_op.png",
   // YT video channel Id (used in media.astro)
   ytChannelId: "",
   // Optional, user/author settings (example)
   // Author: name
-  author: "", // Example: Fred K. Schott
+  author: "tomixy", // Example: Fred K. Schott
   // Author: Twitter handler
-  authorTwitter: "", // Example: FredKSchott
+  authorTwitter: "tetracalibers", // Example: FredKSchott
   // Author: Image external source
-  authorImage: "", // Example: https://pbs.twimg.com/profile_images/1272979356529221632/sxvncugt_400x400.jpg, https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png
+  authorImage: "/images/profiles/pastel-tomixy_op.png", // Example: https://pbs.twimg.com/profile_images/1272979356529221632/sxvncugt_400x400.jpg, https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png
   // Author: Bio
-  authorBio:
-    "Crisp, minimal, personal blog theme for Astro. Crisp, minimal, personal blog theme for Astro. Crisp, minimal, personal blog theme for Astro"
+  authorBio: ""
 }
 
 // Ink - Theme configuration
