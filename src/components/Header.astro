@@ -6,19 +6,11 @@ import SearchBtn from "./SearchBtn.svelte"
 ---
 
 <header class="header">
-  <div class="header__logo">
-    <a href="/" class="avatar">
-      <img class="header__logo-img" src="/assets/logo.svg" alt="Astro logo" />
-    </a>
-  </div>
   <div class="header__meta flex-1">
     <h3 class="header__title dark:text-theme-dark-secondary">
       <a href="">{SITE.name}</a>
     </h3>
     <div class="header__meta-more flex">
-      <p class="header__desc">
-        {SITE.description}
-      </p>
       <nav class="header__nav flex">
         <ul class="header__ref-list">
           <li>
@@ -56,16 +48,26 @@ import SearchBtn from "./SearchBtn.svelte"
   .header {
     @apply flex gap-4 border-b py-3 /* border-gray-200 dark:border-gray-700 - check styles/global.css */;
   }
-  .header__logo-img {
-    @apply w-16 h-16 rounded-full overflow-hidden;
+  .header__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .header__meta-more {
+    padding-inline: 1rem;
+    justify-content: flex-end;
   }
   .header__title {
     @apply text-4xl font-extrabold md:text-5xl text-theme-secondary dark:text-theme-dark-secondary;
+    text-align: center;
   }
   .header__desc {
     @apply text-xl flex-1 dark:text-gray-200;
   }
   .header__ref-list {
     @apply flex gap-3 text-gray-400;
+  }
+  .header__ref-list > li {
+    display: flex;
   }
 </style>
