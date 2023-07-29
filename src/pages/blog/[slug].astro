@@ -14,13 +14,10 @@ import Tabs from "../../components/mdoc/Tabs/Tabs.astro"
 const { slug } = Astro.params
 const entry = await getEntryBySlug("blog", slug!)
 
-const resp = await fetch(`${import.meta.env.SITE_URI}/api/blog/views/${slug}`)
-const stats = await resp.json()
-
 const { Content } = await entry.render()
 ---
 
-<PostLayout content={entry.data} stats={stats}>
+<PostLayout content={entry.data}>
   <Content
     components={{
       Callout,
