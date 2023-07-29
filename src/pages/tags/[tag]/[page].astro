@@ -11,7 +11,7 @@ let title = "Posts By Tags"
 let description = "All the articles posted so far..."
 
 export async function getStaticPaths({ paginate }) {
-  const allPosts = await getCollection("blog")
+  const allPosts = await getCollection("project")
   const allTags = new Set<string>()
   allPosts.map((post) => {
     post.data.tags && post.data.tags.map((tag) => allTags.add(tag.toLowerCase()))

@@ -7,7 +7,7 @@ import DefaultPageLayout from "$/layouts/default.astro"
 let title = "All Tags"
 let description = "All the tags used so far..."
 
-const allPosts = await getCollection("blog")
+const allPosts = await getCollection("project")
 const tags = [
   ...new Set(
     [].concat.apply(
