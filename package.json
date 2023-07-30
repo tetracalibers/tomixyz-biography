@@ -7,7 +7,6 @@
     "dev": "astro dev",
     "build": "astro build",
     "check": "astro check",
-    "postbuild": "node ./scripts/search/prepare-index.js",
     "preview": "astro preview",
     "format": "prettier --write --plugin prettier-plugin-astro --plugin prettier-plugin-svelte ."
   },
