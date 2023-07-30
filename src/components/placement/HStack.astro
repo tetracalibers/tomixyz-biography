@@ -1,0 +1,17 @@
+<div class="tetcali-grid">
+  <slot />
+</div>
+
+<style>
+  .tetcali-grid {
+    display: flex;
+    column-gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .tetcali-grid > :global(*) {
+    flex-basis: 0;
+    flex-shrink: 1;
+    flex-grow: 999;
+  }
+</style>
