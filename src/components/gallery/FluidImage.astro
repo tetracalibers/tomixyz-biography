@@ -1,0 +1,21 @@
+---
+const { src, alt = "", maxHeight = 250 } = Astro.props
+---
+
+<img class="fluid-image" src={src} alt={alt} />
+
+<style define:vars={{ maxHeight: `${maxHeight}px` }}>
+  .fluid-image {
+    --fluid-bp-320-600: calc((100vw - 320px) / (600 - 320));
+    --__space: clamp(16px, (16px + (68 - 16) * var(--fluid-bp-320-600)), 68px);
+
+    width: 100%;
+    height: 100%;
+    max-height: calc(var(--maxHeight) + var(--__space) * 2);
+
+    box-sizing: border-box;
+
+    object-position: center;
+    object-fit: contain;
+  }
+</style>
