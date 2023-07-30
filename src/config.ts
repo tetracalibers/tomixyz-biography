@@ -2,23 +2,23 @@ import type { NavItems } from "./types"
 
 export const NAV_ITEMS: NavItems = {
   about: {
-    path: "/",
+    path: "/tomixyz-biography/",
     title: "about"
   },
   projects: {
-    path: "/projects",
+    path: "/tomixyz-biography/projects",
     title: "projects"
   },
   blog: {
-    path: "/blog",
+    path: "/tomixyz-biography/blog",
     title: "blog"
   },
   tags: {
-    path: "/tags",
+    path: "/tomixyz-biography/tags",
     title: "tags"
   }
   // media: {
-  //   path: "/media",
+  //   path: "/tomixyz-biography/media",
   //   title: "media"
   // }
 }

@@ -14,7 +14,11 @@ const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())]
     {
       tags.map((tag) => (
         <li>
-          <a class="tag" href={`/tags/${tag.toLowerCase()}`} title={`View posts tagged under "${tag}"`}>
+          <a
+            class="tag"
+            href={`/tomixyz-biography/tags/${tag.toLowerCase()}`}
+            title={`View posts tagged under "${tag}"`}
+          >
             {tag}
           </a>
         </li>
