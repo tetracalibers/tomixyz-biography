@@ -16,11 +16,11 @@ export const NAV_ITEMS: NavItems = {
   tags: {
     path: "/tags",
     title: "tags"
-  },
-  media: {
-    path: "/media",
-    title: "media"
   }
+  // media: {
+  //   path: "/media",
+  //   title: "media"
+  // }
 }
 
 export const SITE = {
