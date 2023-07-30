@@ -1,18 +1,19 @@
 ---
+import { SITE } from "$/config"
 const { page } = Astro.props
 ---
 
 <div class="page__actions">
   {
     page.url.prev && (
-      <a class="action__go-to-x" href={page.url.prev} title="Go to Previous">
+      <a class="action__go-to-x" href={SITE.base + page.url.prev} title="Go to Previous">
         &larr; Prev
       </a>
     )
   }
   {
     page.url.next && (
-      <a class="action__go-to-x" href={page.url.next} title="Go to Next">
+      <a class="action__go-to-x" href={SITE.base + page.url.next} title="Go to Next">
         Next &rarr;
       </a>
     )
