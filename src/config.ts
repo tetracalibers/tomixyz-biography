@@ -29,6 +29,7 @@ export const SITE = {
   title: "tomixy's biography",
   description: "",
   url: "",
+  base: "/tomixyz-biography",
   githubUrl: "https://github.com/tetracalibers",
   listDrafts: true,
   image: "/tomixyz-biography/images/profiles/pastel-tomixy_op.png",
