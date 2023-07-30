@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content"
+import DefaultPageLayout from "$/layouts/default.astro"
+import Paginator from "$/components/Paginator.astro"
+import { PAGE_SIZE } from "$/config"
+import EventPreviewList from "$/components/preview/event/EventPreviewList.astro"
+
+let title = "Events"
+let description = "登壇したイベント"
+
+export async function getStaticPaths({ paginate }) {
+  const allPosts = await getCollection("event")
+  const sortedPosts = allPosts.sort((a, b) => new Date(b.data.date) - new Date(a.data.date))
+
+  return paginate(sortedPosts, {
+    pageSize: PAGE_SIZE
+  })
+}
+
+const { page } = Astro.props
+---
+
+<DefaultPageLayout content={{ title, description }}>
+  <EventPreviewList projects={page.data} />
+  <Paginator page={page} />
+</DefaultPageLayout>

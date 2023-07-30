@@ -1,0 +1,34 @@
+---
+import { getCollection } from "astro:content"
+import ProjectLayout from "$/layouts/event.astro"
+
+import Callout from "../../components/mdoc/Callout.astro"
+import Link from "../../components/mdoc/Link.astro"
+import TweetEmbed from "../../components/mdoc/TweetEmbed.astro"
+import YTVideoEmbed from "../../components/mdoc/YTVideoEmbed.astro"
+import Tabs from "../../components/mdoc/Tabs/Tabs.astro"
+
+export async function getStaticPaths() {
+  const entries = await getCollection("event")
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry }
+  }))
+}
+
+const { entry } = Astro.props
+
+const { Content } = await entry.render()
+---
+
+<ProjectLayout content={entry.data}>
+  <Content
+    components={{
+      Callout,
+      Link,
+      TweetEmbed,
+      YTVideoEmbed,
+      Tabs
+    }}
+  />
+</ProjectLayout>

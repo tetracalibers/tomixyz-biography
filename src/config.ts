@@ -9,6 +9,10 @@ export const NAV_ITEMS: NavItems = {
     path: "/tomixyz-biography/projects",
     title: "projects"
   },
+  events: {
+    path: "/tomixyz-biography/events",
+    title: "events"
+  },
   blog: {
     path: "/tomixyz-biography/blog",
     title: "blog"
