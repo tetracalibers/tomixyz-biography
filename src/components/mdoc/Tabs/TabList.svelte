@@ -1,9 +1,9 @@
 <div class="tab-list">
-	<slot></slot>
+  <slot />
 </div>
 
 <style>
-	.tab-list {
-        @apply border-b border-solid border-gray-500;
-	}
+  .tab-list {
+    @apply border-b border-solid border-gray-500;
+  }
 </style>
