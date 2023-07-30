@@ -35,7 +35,7 @@ const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorIm
       </div>
       <h1 class="post__title">{content.title}</h1>
       <h5 class={`post__desc ${AUTHOR_AVATAR ? "flex flex-row gap-2" : ""}`}>
-        <div class={AUTHOR_AVATAR ? "flex flex-col border-l-2 pl-2" : ""}>
+        <div class={AUTHOR_AVATAR ? "flex flex-col border-l-2 pl-2 w-full" : ""}>
           <div class="flex">
             {content.url && <a href={content.url} title="go to web site"><Icon name="line-md/external-link-rounded" size="30" /></a>}
             {content.github && <a href={content.github} title="gitHub"><Icon name="line-md/github-loop" size="30" /></a>}
