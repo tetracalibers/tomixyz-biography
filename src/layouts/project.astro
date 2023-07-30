@@ -36,9 +36,9 @@ const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorIm
       <h1 class="post__title">{content.title}</h1>
       <h5 class={`post__desc ${AUTHOR_AVATAR ? "flex flex-row gap-2" : ""}`}>
         <div class={AUTHOR_AVATAR ? "flex flex-col border-l-2 pl-2 w-full" : ""}>
-          <div class="flex">
-            {content.url && <a href={content.url} title="go to web site"><Icon name="line-md/external-link-rounded" size="30" /></a>}
-            {content.github && <a href={content.github} title="gitHub"><Icon name="line-md/github-loop" size="30" /></a>}
+          <div class="flex gap-1">
+            {content.url && <a class="project__link" href={content.url}><Icon name="line-md/external-link-rounded" size="30" />Visit Site</a>}
+            {content.github && <a class="project__link" href={content.github}><Icon name="line-md/github-loop" size="30" />GitHub</a>}
           </div>
           <span class="post__date">
             {new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(new Date(content.date))}
@@ -164,6 +164,10 @@ const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorIm
       @apply rounded-md shadow-md shadow-theme-dark-secondary dark:shadow-theme-primary hover:shadow-theme-secondary hover:dark:shadow-theme-secondary hover:shadow-lg transition-all;
       display: flex;
       text-align: center;
+    }
+    .project__link {
+      display: flex;
+      font-weight: bold;
     }
   </style>
 </html>
