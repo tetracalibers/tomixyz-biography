@@ -53,6 +53,9 @@ module.exports = {
             },
             h3: {
               color: colors.dark.secondary
+            },
+            h4: {
+              color: colors.dark.secondary
             }
           }
         }
