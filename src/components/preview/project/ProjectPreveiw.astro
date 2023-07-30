@@ -11,27 +11,48 @@ const {
 } = Astro.props
 ---
 
-<div class="post-preview">
-  <div class="sm:w-20 md:w-32">
-    <div class="post-preview__date">
-      <span class="post-preview__date__day">{new Date(project.date).getDate()}</span>
-      <span class="post-preview__date__month-n-year">
-        {`${getMonthName(project.date)} ${new Date(project.date).getFullYear()}`}
-      </span>
+<div class="post-preview flex justify-between flex-wrap">
+  <div class="post-preview__content flex">
+    <div class="sm:w-20 md:w-32">
+      <div class="post-preview__date">
+        <span class="post-preview__date__day">{new Date(project.date).getDate()}</span>
+        <span class="post-preview__date__month-n-year">
+          {`${getMonthName(project.date)} ${new Date(project.date).getFullYear()}`}
+        </span>
+      </div>
+    </div>
+    <div class="flex-1">
+      <h4 class="post-preview__title dark:text-theme-dark-primary">
+        <a href={`/tomixyz-biography/projects/${slug}`} title={project.title}>{project.title}</a>
+      </h4>
+      <p class="post-preview__desc">
+        {project.description}
+      </p>
     </div>
   </div>
-  <div class="flex-1">
-    <h4 class="post-preview__title dark:text-theme-dark-primary">
-      <a href={`/tomixyz-biography/projects/${slug}`} title={project.title}>{project.title}</a>
-    </h4>
-    <p class="post-preview__desc">
-      {project.description}
-    </p>
-  </div>
+  {
+    project.image && (
+      <div class="post-preview__thumb">
+        <img src={project.image} alt={project.title} class="w-full object-cover object-center rounded-md" />
+      </div>
+    )
+  }
 </div>
+
 <style>
   .post-preview {
-    @apply flex gap-6;
+    --breakpoint: 500px;
+    gap: 1rem;
+  }
+  .post-preview__content {
+    flex-basis: calc((var(--breakpoint) - 100%) * 999);
+    flex-grow: 1;
+    column-gap: 1rem;
+    align-items: center;
+  }
+  .post-preview__thumb {
+    flex-basis: calc((var(--breakpoint) - 100%) * 999);
+    flex-grow: 0.5;
   }
   .post-preview__date {
     @apply flex flex-col w-full text-center;
