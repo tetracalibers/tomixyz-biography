@@ -20,6 +20,12 @@ module.exports = {
         dark: {
           css: {
             color: theme("colors.gray.200"),
+            a: {
+              color: colors.dark.primary,
+              "&:hover": {
+                color: colors.primary
+              }
+            },
             blockquote: {
               color: colors.dark.primary,
               borderColor: colors.primary
@@ -32,9 +38,9 @@ module.exports = {
         DEFAULT: {
           css: {
             a: {
-              color: colors.dark.primary,
+              color: colors.primary,
               "&:hover": {
-                color: colors.primary
+                color: colors.dark.primary
               }
             },
             blockquote: {
