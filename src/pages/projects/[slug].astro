@@ -1,5 +1,5 @@
 ---
-import { getEntryBySlug } from "astro:content"
+import { getCollection } from "astro:content"
 import PostLayout from "$/layouts/post.astro"
 
 import Callout from "../../components/mdoc/Callout.astro"
@@ -8,11 +8,15 @@ import TweetEmbed from "../../components/mdoc/TweetEmbed.astro"
 import YTVideoEmbed from "../../components/mdoc/YTVideoEmbed.astro"
 import Tabs from "../../components/mdoc/Tabs/Tabs.astro"
 
-// get the views count
-// get the likes count
+export async function getStaticPaths() {
+  const entries = await getCollection("project")
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry }
+  }))
+}
 
-const { slug } = Astro.params
-const entry = await getEntryBySlug("project", slug!)
+const { entry } = Astro.props
 
 const { Content } = await entry.render()
 ---
