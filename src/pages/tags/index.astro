@@ -6,14 +6,7 @@ let title = "All Tags"
 let description = "All the tags used so far..."
 
 const allPosts = await getCollection("project")
-const tags = [
-  ...new Set(
-    [].concat.apply(
-      [],
-      allPosts.map((post) => post.data.tags)
-    )
-  )
-]
+const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())]
 ---
 
 <DefaultPageLayout content={{ title, description }}>
@@ -21,7 +14,7 @@ const tags = [
     {
       tags.map((tag) => (
         <li>
-          <a class="tag" href={`/tags/${tag}`} title={`View posts tagged under "${tag}"`}>
+          <a class="tag" href={`/tags/${tag.toLowerCase()}`} title={`View posts tagged under "${tag}"`}>
             {tag}
           </a>
         </li>
