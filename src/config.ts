@@ -13,6 +13,10 @@ export const NAV_ITEMS: NavItems = {
     path: "/tomixyz-biography/events",
     title: "events"
   },
+  writing: {
+    path: "/tomixyz-biography/writing",
+    title: "writing"
+  },
   blog: {
     path: "/tomixyz-biography/blog",
     title: "blog"
@@ -21,10 +25,6 @@ export const NAV_ITEMS: NavItems = {
     path: "/tomixyz-biography/tags",
     title: "tags"
   }
-  // media: {
-  //   path: "/tomixyz-biography/media",
-  //   title: "media"
-  // }
 }
 
 export const SITE = {
