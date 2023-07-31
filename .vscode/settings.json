@@ -1,5 +1,7 @@
 {
   "files.associations": {
-    "*.mdoc": "markdown"
-  }
+    "*.mdoc": "markdown",
+    "*.mdx": "mdx"
+  },
+  "editor.formatOnSave": true
 }
