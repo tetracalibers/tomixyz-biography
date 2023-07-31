@@ -3,6 +3,7 @@ import { SITE } from "$/config"
 import SvgIcon from "./SvgIcon.astro"
 import ModeSwitcherBtn from "./ModeSwitcherBtn.svelte"
 import SearchBtn from "./SearchBtn.svelte"
+import { Icon } from "astro-icon"
 ---
 
 <header class="header">
@@ -27,12 +28,8 @@ import SearchBtn from "./SearchBtn.svelte"
             </a>
           </li>
           <li>
-            <a href="/rss.xml" title="RSS">
-              <SvgIcon>
-                <path d="M4 11a9 9 0 0 1 9 9"></path>
-                <path d="M4 4a16 16 0 0 1 16 16"></path>
-                <circle cx="5" cy="19" r="1"></circle>
-              </SvgIcon>
+            <a href={"https://twitter.com/" + SITE.authorTwitter} title="Twitter">
+              <Icon name="humbleicons/brand-twitter" size="24" />
             </a>
           </li>
           <li>
