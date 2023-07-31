@@ -1,0 +1,139 @@
+---
+title: "Writing"
+description: "書いたもの"
+---
+
+import DefaultPageLayout from "$/layouts/default.astro"
+import Prose from "$/components/Prose.astro"
+import MediaPreviewList from "$/components/preview/writing/WritingPreviewList.astro"
+
+<DefaultPageLayout content={{ title: frontmatter.title, description: frontmatter.description }}>
+
+<Prose>
+
+## メディアでの執筆
+
+<MediaPreviewList
+  posts={[
+    {
+      title: "データ形式の検証ライブラリ、Zodを使う",
+      media: "CodeGrid",
+      url: "https://www.codegrid.net/series/2023-zod/",
+      date: "2023-04-13"
+    },
+    {
+      title: "astro-iconを使ったアイコンの実装と管理",
+      media: "CodeGrid",
+      url: "https://www.codegrid.net/series/2023-astro-icon/",
+      date: "2023-02-24"
+    }
+  ]}
+/>
+
+## スライド
+
+<MediaPreviewList
+  posts={[
+    {
+      title: "CSS Animation パフォーマンスを考える原理",
+      url: "https://tetracalibers.github.io/TechFeedEN-14-LT/1",
+      media: "TechFeed Experts Night#14 登壇資料",
+      date: "2023-03-01"
+    },
+    {
+      title: "イメージでわかるページネーションAPI",
+      url: "https://tetracalibers.github.io/pixelgrid-entrance-LT/1",
+      date: "2022-10-20"
+    }
+  ]}
+/>
+
+## 講師として制作した教材
+
+<MediaPreviewList
+  posts={[
+    {
+      title: "HTML/CSS入門ノート",
+      url: "https://tetracalibers.notion.site/tetracalibers/HTML-CSS-6c6891810c894831aea26d635f1424cb",
+      media: "IT企業新人研修配布資料",
+      date: "2022-05-01"
+    },
+    {
+      title: "VBA自習補助ノート",
+      url: "https://tetracalibers.notion.site/tetracalibers/VBA-5e78e9e1f002474a8209d4def99bef00",
+      media: "IT企業新人研修配布資料",
+      date: "2022-05-01"
+    }
+  ]}
+/>
+
+## ノート
+
+<MediaPreviewList
+  posts={[
+    {
+      title: "Card Component Tutorial",
+      url: "https://tetracalibers.github.io/web-feature-note/demo/card-tutorial-step/1/",
+      media: "CSS Container Queryチュートリアル",
+      date: "2023-01-01"
+    },
+    {
+      title: "CSS Animation Compare Patterns",
+      url: "https://tetracalibers.github.io/web-feature-note/demo/compare-pattern/",
+      media: "パフォーマンス計測に使用したデモ",
+      date: "2023-01-01"
+    },
+    {
+      title: "CSS All Modules Note",
+      url: "https://tetracalibers.github.io/web-feature-note/",
+      media: "自分用ノート",
+      date: "2023-01-01"
+    },
+    {
+      title: "ネットワークのお話",
+      url: "https://tetracalibers.notion.site/tetracalibers/8d529be3e99b4ad480983108349a67e0",
+      media: "自分用ノート",
+      date: "2022-01-01"
+    },
+    {
+      title: "ハードウェアのお話",
+      url: "https://tetracalibers.notion.site/tetracalibers/1a131bcad8414a7093fce74f2c32c27a",
+      media: "自分用ノート",
+      date: "2022-01-01"
+    },
+    {
+      title: "OSのお話",
+      url: "https://tetracalibers.notion.site/tetracalibers/OS-a610f4896d324d0b8971d684aac04a6d",
+      media: "自分用ノート",
+      date: "2022-01-01"
+    },
+    {
+      title: "プログラムのお話",
+      url: "https://tetracalibers.notion.site/tetracalibers/fa109fa4142f4db1adf618fb3316ceb0",
+      media: "自分用ノート",
+      date: "2022-01-01"
+    },
+    {
+      title: "JavaScriptからNode.jsへ",
+      url: "https://tetracalibers.notion.site/tetracalibers/JavaScript-Node-js-de7c77fe200a4504963f8217013b29f1",
+      media: "自分用ノート",
+      date: "2021-12-01"
+    },
+    {
+      title: "Effective Java理解への道のり",
+      url: "https://tetracalibers.notion.site/tetracalibers/Effective-Java-ac6ba5f7178d4a4fa87620c86ff991a5",
+      media: "自分用ノート",
+      date: "2021-12-01"
+    }
+  ]}
+/>
+
+## 外部ブログ・アカウント
+
+- [ネッシーの心境](https://nessie-from-the-sea.hatenadiary.jp/)
+- [VScode住人の探検記](https://tetracalibers.hatenadiary.com/)
+- [tetracalibers.net](https://tetracalibers.net/)
+- [Clearnote](https://www.clearnotebooks.com/ja/authors/2541851)
+
+</Prose>
+</DefaultPageLayout>

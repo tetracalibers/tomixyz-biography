@@ -3,7 +3,7 @@ import MediaPreview from "./WritingPreview.astro"
 const { posts } = Astro.props
 ---
 
-<section class="media-preview__list">
+<section class="media-preview__list not-prose">
   {posts.map((post) => <MediaPreview post={post} />)}
 </section>
 <style>
