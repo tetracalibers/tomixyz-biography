@@ -38,7 +38,7 @@ const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorIm
         <div class={AUTHOR_AVATAR ? "flex flex-col border-l-2 pl-2 w-full" : ""}>
           <div class="flex gap-1">
             {content.url && <a class="project__link" href={content.url}><Icon name="line-md/external-link-rounded" size="30" />Visit Site</a>}
-            {content.github && <a class="project__link" href={content.github}><Icon name="line-md/github-loop" size="30" />GitHub</a>}
+            {content.github && <a class="project__link" href={content.github}><Icon name="lucide:github" size="30" />GitHub</a>}
           </div>
           <span class="post__date">
             {new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(new Date(content.date))}
