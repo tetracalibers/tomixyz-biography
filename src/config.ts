@@ -32,7 +32,7 @@ export const SITE = {
   name: "tomixy's biography",
   title: "tomixy's biography",
   description: "",
-  url: "",
+  url: "https://tetracalibers.github.io/tomixyz-biography",
   base: "/tomixyz-biography",
   githubUrl: "https://github.com/tetracalibers",
   listDrafts: true,
