@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content"
+import { PAGE_SIZE } from "$/config"
+import DefaultPageLayout from "$/layouts/default.astro"
+import Paginator from "$/components/Paginator.astro"
+import ProjectPreviewList from "$components/preview/project/ProjectPreviewList.astro"
+
+export async function getStaticPaths({ paginate }) {
+  const projects = await getCollection("project")
+  const targets = [...projects]
+
+  const allTags = new Set<string>()
+  targets.forEach((post) => {
+    if (!post.data.tags) return
+    post.data.tags.forEach((tag) => allTags.add(tag))
+  })
+
+  const isMatchTag = (tag: string, tags: string[]) => tags.map((tag) => tag.toLowerCase()).includes(tag.toLowerCase())
+
+  return Array.from(allTags).map((tag) => {
+    const filteredProjects = projects
+      .filter((post) => isMatchTag(tag, post.data.tags))
+      .sort((a, b) => new Date(b.data.date) - new Date(a.data.date))
+
+    return paginate(filteredProjects, {
+      params: { tag: tag.toLowerCase() },
+      pageSize: PAGE_SIZE
+    })
+  })
+}
+
+const { page } = Astro.props
+const { tag } = Astro.params
+
+const tagName = page.data[0].data.tags.find((t) => tag?.toLowerCase() === t.toLowerCase())
+---
+
+<DefaultPageLayout
+  content={{
+    title: tagName,
+    description: `${tagName}を扱った作品`
+  }}
+>
+  <ProjectPreviewList projects={page.data} />
+  <Paginator page={page} />
+</DefaultPageLayout>

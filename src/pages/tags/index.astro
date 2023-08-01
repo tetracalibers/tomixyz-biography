@@ -2,11 +2,12 @@
 import { getCollection } from "astro:content"
 import DefaultPageLayout from "$/layouts/default.astro"
 
-let title = "All Tags"
-let description = "All the tags used so far..."
+let title = "Skill Tags"
+let description = "技術ごとの作品一覧"
 
-const allPosts = await getCollection("project")
-const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())]
+const projects = await getCollection("project")
+const targets = [...projects]
+const tags = [...new Set(targets.map((post) => post.data.tags).flat())]
 ---
 
 <DefaultPageLayout content={{ title, description }}>
