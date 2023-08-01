@@ -118,14 +118,6 @@
   dependencies:
     prismjs "^1.28.0"
 
-"@astrojs/rss@^2.4.3":
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/@astrojs/rss/-/rss-2.4.3.tgz#fa743fcbbbd65c59b51ba8050e5cdaed65ea6821"
-  integrity sha512-Dc8lxsXiDlnxONVIUuc3ohO1+vV1Hp9fRFdUianOola0S9/xv/6FzIHhkQ62MkaFSlcZm5uIOllRWNKVvuFuoA==
-  dependencies:
-    fast-xml-parser "^4.0.8"
-    kleur "^4.1.5"
-
 "@astrojs/sitemap@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@astrojs/sitemap/-/sitemap-2.0.1.tgz#c0754fa374d406592e38a92695e2a077aa5d28ae"
@@ -1928,13 +1920,6 @@ fast-glob@^3.3.0:
     glob-parent "^5.1.2"
     merge2 "^1.3.0"
     micromatch "^4.0.4"
-
-fast-xml-parser@^4.0.8:
-  version "4.0.13"
-  resolved "https://registry.npmjs.org/fast-xml-parser/-/fast-xml-parser-4.0.13.tgz"
-  integrity sha512-g+OboAw8ol1FgTHhKLR7ZHcItNudceiY04BBrvqa0JBWoPhi/+e5r4H5AeW+EsQCroJLJwsuOP3dD3c6cc5uOg==
-  dependencies:
-    strnum "^1.0.5"
 
 fastq@^1.6.0:
   version "1.15.0"
@@ -4308,11 +4293,6 @@ strip-indent@^1.0.1:
   integrity sha512-I5iQq6aFMM62fBEAIB/hXzwJD6EEZ0xEGCX2t7oXqaKPIRgt4WruAQ285BISgdkP+HLGWyeGmNJcpIwFeRYRUA==
   dependencies:
     get-stdin "^4.0.1"
-
-strnum@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.npmjs.org/strnum/-/strnum-1.0.5.tgz"
-  integrity sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==
 
 style-to-object@^0.4.0:
   version "0.4.0"
