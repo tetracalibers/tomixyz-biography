@@ -52,7 +52,8 @@ export default defineConfig(
         }
       },
       optimizeDeps: {
-        allowNodeBuiltins: true
+        allowNodeBuiltins: true,
+        exclude: ["@resvg/resvg-js-darwin-x64"]
       }
     }
   }
