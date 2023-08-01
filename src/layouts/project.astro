@@ -5,6 +5,7 @@ import MainLayout from "$/components/MainLayout.astro"
 import BaseHead from "$/components/BaseHead.astro"
 import Prose from "$/components/Prose.astro"
 import { Icon } from "astro-icon"
+import { tagToSlug } from "$/utils/tag"
 
 interface Props {
   content: CollectionEntry<"project">["data"]
@@ -27,7 +28,7 @@ const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorIm
         {
           content.tags.length > 0 &&
             content.tags.map((tag) => (
-              <a class="post__tag" href={`${SITE.base}/tags/${tag.toLowerCase()}`} title={tag}>
+              <a class="post__tag" href={`${SITE.base}/tags/${tagToSlug(tag)}`} title={tag}>
                 {tag}
               </a>
             ))

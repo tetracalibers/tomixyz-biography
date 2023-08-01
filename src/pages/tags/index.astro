@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content"
 import DefaultPageLayout from "$/layouts/default.astro"
+import { tagToSlug } from "$/utils/tag"
 
 let title = "Skill Tags"
 let description = "技術ごとの作品一覧"
@@ -15,11 +16,7 @@ const tags = [...new Set(targets.map((post) => post.data.tags).flat())]
     {
       tags.map((tag) => (
         <li>
-          <a
-            class="tag"
-            href={`/tomixyz-biography/tags/${tag.toLowerCase()}`}
-            title={`View posts tagged under "${tag}"`}
-          >
+          <a class="tag" href={`/tomixyz-biography/tags/${tagToSlug(tag)}`} title={`View posts tagged under "${tag}"`}>
             {tag}
           </a>
         </li>

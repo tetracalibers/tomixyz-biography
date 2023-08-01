@@ -4,6 +4,7 @@ import { PAGE_SIZE } from "$/config"
 import DefaultPageLayout from "$/layouts/default.astro"
 import Paginator from "$/components/Paginator.astro"
 import ProjectPreviewList from "$components/preview/project/ProjectPreviewList.astro"
+import { tagToSlug } from "$/utils/tag"
 
 export async function getStaticPaths({ paginate }) {
   const projects = await getCollection("project")
@@ -23,16 +24,14 @@ export async function getStaticPaths({ paginate }) {
       .sort((a, b) => new Date(b.data.date) - new Date(a.data.date))
 
     return paginate(filteredProjects, {
-      params: { tag: tag.toLowerCase() },
+      params: { tag: tagToSlug(tag) },
+      props: { tagName: tag },
       pageSize: PAGE_SIZE
     })
   })
 }
 
-const { page } = Astro.props
-const { tag } = Astro.params
-
-const tagName = page.data[0].data.tags.find((t) => tag?.toLowerCase() === t.toLowerCase())
+const { page, tagName } = Astro.props
 ---
 
 <DefaultPageLayout
