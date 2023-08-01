@@ -1,11 +1,12 @@
-<article class="prose dark:prose-dark prose-a:underline-offset-4 prose-a:decoration-1 prose-a:decoration-dotted">
+---
+const { full = false } = Astro.props
+---
+
+<article
+  class:list={[
+    { "max-w-none": full },
+    "prose dark:prose-dark prose-a:underline-offset-4 prose-a:decoration-1 prose-a:decoration-dotted"
+  ]}
+>
   <slot />
 </article>
-
-<style>
-  .prose {
-    @apply max-w-none
-        /* Size Modifiers: https://github.com/tailwindlabs/tailwindcss-typography#size-modifiers */
-        /* Color Themes: https://github.com/tailwindlabs/tailwindcss-typography#color-modifiers */;
-  }
-</style>
