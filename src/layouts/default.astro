@@ -12,7 +12,7 @@ const { content, showPageHeader = true } = Astro.props
     <BaseHead
       title={content.title ? `${SITE.title} | ${content.title}` : SITE.title}
       description={content.description}
-      image={SITE.image}
+      image={content.ogimage}
     />
   </head>
   <MainLayout>

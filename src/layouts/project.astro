@@ -8,9 +8,10 @@ import { Icon } from "astro-icon"
 import { tagToSlug } from "$/utils/tag"
 
 interface Props {
-  content: CollectionEntry<"project">["data"]
+  content: CollectionEntry<"project">["data"],
+  ogimage?: string
 }
-const { content } = Astro.props
+const { content, ogimage } = Astro.props
 
 const AUTHOR_NAME = content.author ? content.author : SITE?.author ? SITE?.author : "Author"
 const AUTHOR_TWITTER = content.authorTwitter ? content.authorTwitter : SITE?.authorTwitter ? SITE?.authorTwitter : ""
@@ -20,7 +21,7 @@ const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorIm
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-    <BaseHead {...content} title={content.title ? `${SITE.title} | ${content.title}` : SITE.title} />
+    <BaseHead {...content} image={ogimage} title={content.title ? `${SITE.title} | ${content.title}` : SITE.title} />
   </head>
   <MainLayout>
     <div class="post__header">

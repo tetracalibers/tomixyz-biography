@@ -7,11 +7,9 @@ import Prose from '$/components/Prose.astro'
 
 interface Props {
     content: CollectionEntry<'blog'>['data'],
-    stats: {
-        views: number
-    }
+    ogimage?: string
 }
-const { content } = Astro.props
+const { content, ogimage } = Astro.props
 
 const AUTHOR_NAME = content.author ? content.author : SITE?.author ? SITE?.author : "Author"
 const AUTHOR_TWITTER = content.authorTwitter ? content.authorTwitter : SITE?.authorTwitter ? SITE?.authorTwitter : ""
@@ -20,7 +18,7 @@ const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorIm
 <!doctype html>
 <html lang="ja">
     <head>
-        <BaseHead {...content} title={ content.title ? `${ SITE.title } | ${content.title}` : SITE.title }/>
+        <BaseHead {...content} image={ogimage} title={ content.title ? `${ SITE.title } | ${content.title}` : SITE.title }/>
     </head>
     <MainLayout>
         <div class="post__header">

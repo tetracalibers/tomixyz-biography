@@ -6,11 +6,12 @@ import "../styles/global.css"
 export type Props = {
   title: string
   description: string
-  permalink: string
-  image: string
+  permalink?: string
+  image?: string
 }
 
 const { title = SITE.title, description, permalink, image } = Astro.props
+const ogimage = image ? `${SITE.url}${image}` : `${SITE.url}/og-image.png`
 ---
 
 <meta charset="UTF-8" />
@@ -58,14 +59,14 @@ const { title = SITE.title, description, permalink, image } = Astro.props
 <meta property="og:title" content={title} />
 {permalink && <meta property="og:url" content={permalink} />}
 {description && <meta property="og:description" content={description} />}
-{image && <meta property="og:image" content={image} />}
+<meta property="og:image" content={ogimage} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:title" content={title} />
 {permalink && <meta property="twitter:url" content={permalink} />}
 {description && <meta property="twitter:description" content={description} />}
-{image && <meta property="twitter:image" content={image} />}
+<meta property="twitter:image" content={ogimage} />
 
 <script is:inline>
   const theme = (() => {
