@@ -3,11 +3,11 @@ import type { CollectionEntry } from "astro:content"
 import EventPreview from "./EventPreveiw.astro"
 
 interface Props {
-  projects: CollectionEntry<"event">
+  events: CollectionEntry<"event">
 }
 
-const { projects } = Astro.props
-const sortedPosts = projects.sort((a, b) => new Date(b.date) - new Date(a.date))
+const { events } = Astro.props
+const sortedPosts = events.sort((a, b) => new Date(b.date) - new Date(a.date))
 ---
 
 <section class="post-preview__list">

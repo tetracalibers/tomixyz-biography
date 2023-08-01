@@ -21,6 +21,6 @@ const { page } = Astro.props
 ---
 
 <DefaultPageLayout content={{ title, description }}>
-  <EventPreviewList projects={page.data} />
+  <EventPreviewList events={page.data} />
   <Paginator page={page} />
 </DefaultPageLayout>
