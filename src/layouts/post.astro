@@ -24,9 +24,6 @@ const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorIm
     </head>
     <MainLayout>
         <div class="post__header">
-            <div class="post__tags">
-                { content.tags.length > 0 && content.tags.map(tag => <a class="post__tag" href={`/tags/${tag}`} title={tag}>{tag}</a>) }
-            </div>
             <h1 class="post__title">{ content.title }</h1>
             <h5 class={`post__desc ${AUTHOR_AVATAR ? 'flex flex-row gap-2' : ''}`}>
                 { AUTHOR_AVATAR ? <img class="avatar" src={AUTHOR_AVATAR} alt={`${ AUTHOR_NAME }'s avatar`} /> : ''}
@@ -55,7 +52,7 @@ const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorIm
                 <img class="img__outer" src={content.image} alt={content.title} /><br/>
                 : ""
         }
-        <Prose>
+        <Prose full>
             <slot />
         </Prose>
         <div class="post__footer">
