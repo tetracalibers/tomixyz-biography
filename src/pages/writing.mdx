@@ -7,7 +7,7 @@ import DefaultPageLayout from "$/layouts/default.astro"
 import Prose from "$/components/Prose.astro"
 import MediaPreviewList from "$/components/preview/writing/WritingPreviewList.astro"
 
-<DefaultPageLayout content={{ title: frontmatter.title, description: frontmatter.description }}>
+<DefaultPageLayout content={{ title: frontmatter.title, description: frontmatter.description, ogimage: '/og-image/writing.png' }}>
 
 <Prose full>
 

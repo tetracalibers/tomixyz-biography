@@ -7,6 +7,7 @@ import { PAGE_SIZE } from "$/config"
 
 let title = "Projects"
 let description = "個人で開発したもの"
+const ogimage = `/og-image/projects.png`
 
 export async function getStaticPaths({ paginate }) {
   const allPosts = await getCollection("project")
@@ -20,7 +21,7 @@ export async function getStaticPaths({ paginate }) {
 const { page } = Astro.props
 ---
 
-<DefaultPageLayout content={{ title, description }}>
+<DefaultPageLayout content={{ title, description, ogimage }}>
   <ProjectPreviewList projects={page.data} />
   <Paginator page={page} />
 </DefaultPageLayout>

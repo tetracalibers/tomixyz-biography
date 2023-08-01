@@ -18,9 +18,11 @@ export async function getStaticPaths({ paginate }) {
 }
 
 const { page } = Astro.props
+
+const ogimage = "/og-image/events.png"
 ---
 
-<DefaultPageLayout content={{ title, description }}>
+<DefaultPageLayout content={{ title, description, ogimage }}>
   <EventPreviewList events={page.data} />
   <Paginator page={page} />
 </DefaultPageLayout>

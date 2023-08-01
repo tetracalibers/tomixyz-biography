@@ -9,9 +9,11 @@ let description = "技術ごとの作品一覧"
 const projects = await getCollection("project")
 const targets = [...projects]
 const tags = [...new Set(targets.map((post) => post.data.tags).flat())]
+
+const ogimage = "/og-image/tags.png"
 ---
 
-<DefaultPageLayout content={{ title, description }}>
+<DefaultPageLayout content={{ title, description, ogimage }}>
   <ul class="tag-list">
     {
       tags.map((tag) => (

@@ -17,11 +17,14 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props
+const { slug } = Astro.params
 
 const { Content } = await entry.render()
+
+const ogimage = `/og-image/blog/${slug}.png`
 ---
 
-<PostLayout content={entry.data}>
+<PostLayout content={entry.data} ogimage={ogimage}>
   <Content
     components={{
       Callout,
