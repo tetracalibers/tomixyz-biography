@@ -4,23 +4,28 @@ import { NAV_ITEMS, SITE } from "$/config"
 
 const root = (path: string) => path.replace(SITE.base, "").split("/").filter(Boolean)[0]
 const isCurrent = (path: string) => root(path) === root(Astro.url.pathname)
+
+const navItems = Object.keys(NAV_ITEMS).map((navItemKey) => ({
+  ...NAV_ITEMS[navItemKey],
+  isCurrent: isCurrent(NAV_ITEMS[navItemKey].path)
+}))
 ---
 
 <nav class="nav py-3">
   <ul class="nav-list dark:text-theme-dark-secondary">
     {
-      Object.keys(NAV_ITEMS).map((navItemKey) => (
+      navItems.map((item) => (
         <li>
           <a
             class:list={[
               `pb-1 border-b-2 hover:border-gray-400 hover:dark:border-gray-700 `,
-              !isCurrent(NAV_ITEMS[navItemKey].path) ? "border-gray-100 dark:border-gray-800" : "",
-              isCurrent(NAV_ITEMS[navItemKey].path) ? "border-theme-primary" : ""
+              { "border-gray-100 dark:border-gray-800": !item.isCurrent },
+              { "border-theme-primary": item.isCurrent }
             ]}
-            href={NAV_ITEMS[navItemKey].path}
-            title={NAV_ITEMS[navItemKey].title}
+            href={item.path}
+            title={item.title}
           >
-            {toTitleCase(NAV_ITEMS[navItemKey].title)}
+            {toTitleCase(item.title)}
           </a>
         </li>
       ))
