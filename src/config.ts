@@ -6,23 +6,23 @@ export const NAV_ITEMS: NavItems = {
     title: "about"
   },
   projects: {
-    path: "/tomixyz-biography/projects",
+    path: "/tomixyz-biography/projects/",
     title: "projects"
   },
   events: {
-    path: "/tomixyz-biography/events",
+    path: "/tomixyz-biography/events/",
     title: "events"
   },
   writing: {
-    path: "/tomixyz-biography/writing",
+    path: "/tomixyz-biography/writing/",
     title: "writing"
   },
   blog: {
-    path: "/tomixyz-biography/blog",
+    path: "/tomixyz-biography/blog/",
     title: "blog"
   },
   tags: {
-    path: "/tomixyz-biography/tags",
+    path: "/tomixyz-biography/tags/",
     title: "tags"
   }
 }

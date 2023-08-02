@@ -1,6 +1,9 @@
 ---
 import { toTitleCase } from "$/utils"
-import { NAV_ITEMS } from "$/config"
+import { NAV_ITEMS, SITE } from "$/config"
+
+const root = (path: string) => path.replace(SITE.base, "").split("/").filter(Boolean)[0]
+const isCurrent = (path: string) => root(path) === root(Astro.url.pathname)
 ---
 
 <nav class="nav py-3">
@@ -11,8 +14,8 @@ import { NAV_ITEMS } from "$/config"
           <a
             class:list={[
               `pb-1 border-b-2 hover:border-gray-400 hover:dark:border-gray-700 `,
-              Astro.url.pathname !== NAV_ITEMS[navItemKey].path ? "border-gray-100 dark:border-gray-800" : "",
-              Astro.url.pathname === NAV_ITEMS[navItemKey].path ? "border-theme-primary" : ""
+              !isCurrent(NAV_ITEMS[navItemKey].path) ? "border-gray-100 dark:border-gray-800" : "",
+              isCurrent(NAV_ITEMS[navItemKey].path) ? "border-theme-primary" : ""
             ]}
             href={NAV_ITEMS[navItemKey].path}
             title={NAV_ITEMS[navItemKey].title}
