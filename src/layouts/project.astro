@@ -4,6 +4,7 @@ import { SITE, USE_POST_IMG_OVERLAY, USE_AUTHOR_CARD, USE_SUBSCRIPTION } from "$
 import MainLayout from "$/components/MainLayout.astro"
 import BaseHead from "$/components/BaseHead.astro"
 import Prose from "$/components/Prose.astro"
+import ArticleTitle from "$/components/text/ArticleTitle.astro"
 import { Icon } from "astro-icon"
 import { tagToSlug } from "$/utils/tag"
 
@@ -35,7 +36,7 @@ const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorIm
             ))
         }
       </div>
-      <h1 class="post__title">{content.title}</h1>
+      <ArticleTitle title={content.title} />
       <h5 class={`post__desc ${AUTHOR_AVATAR ? "flex flex-row gap-2" : ""}`}>
         <div class={AUTHOR_AVATAR ? "flex flex-col border-l-2 pl-2 w-full" : ""}>
           <div class="flex gap-1">
@@ -104,12 +105,9 @@ const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorIm
     .post__header {
       @apply py-4 mb-1 text-center md:text-left;
     }
-    .post__title {
-      @apply text-5xl font-extrabold text-theme-primary dark:text-theme-dark-primary;
-      line-height: 1.5;
-    }
     .post__desc {
       @apply text-gray-400 dark:text-gray-100 flex justify-center text-left md:flex-none md:justify-start;
+      margin-top: 2rem;
     }
     .post__author {
       @apply no-underline dark:text-white hover:text-theme-primary;
