@@ -2,14 +2,16 @@
 const { post } = Astro.props
 
 const date = new Date(post.date)
+const year = date.getFullYear().toString()
+const month = (date.getMonth() + 1).toString()
 ---
 
 <div class="post-preview">
   <div class="sm:w-20 md:w-32">
     <div class="post-preview__date">
-      <span class="post-preview__date__day">{date.getFullYear().toString().slice(2)}</span>
+      <span class="post-preview__date__day">{month.padStart(2, "0")}</span>
       <span class="post-preview__date__month-n-year">
-        {date.getFullYear() + "-" + (date.getMonth() + 1).toString().padStart(2, "0")}
+        {year}
       </span>
     </div>
   </div>
