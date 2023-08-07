@@ -17,11 +17,7 @@ const navItems = Object.keys(NAV_ITEMS).map((navItemKey) => ({
       navItems.map((item) => (
         <li>
           <a
-            class:list={[
-              `pb-1 border-b-2 hover:border-gray-400 hover:dark:border-gray-700 `,
-              { "border-gray-100 dark:border-gray-800": !item.isCurrent },
-              { "border-theme-primary": item.isCurrent }
-            ]}
+            class:list={[`pb-1`, { "border-b-2 border-theme-primary": item.isCurrent }]}
             href={item.path}
             title={item.title}
           >
