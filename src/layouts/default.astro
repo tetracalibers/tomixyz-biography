@@ -20,7 +20,7 @@ const { content, showPageHeader = true } = Astro.props
       showPageHeader && (
         <div class="page__header">
           <h1 class="page__title">{content.title}</h1>
-          <h5 class="page__desc">{content.description}</h5>
+          <p class="page__desc">{content.description}</p>
         </div>
       )
     }
@@ -28,14 +28,14 @@ const { content, showPageHeader = true } = Astro.props
   </MainLayout>
   <style>
     .page__header {
-      @apply py-4 mb-1;
+      @apply pt-4 pb-12 mb-1;
     }
     .page__title {
       @apply text-5xl font-extrabold text-theme-primary dark:text-theme-dark-primary;
       line-height: 1.5;
     }
     .page__desc {
-      @apply text-slate-500 dark:text-slate-400;
+      @apply text-theme-secondary dark:text-theme-dark-primary;
     }
   </style>
 </html>

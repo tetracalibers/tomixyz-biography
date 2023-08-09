@@ -23,7 +23,7 @@ module.exports = {
             a: {
               color: colors.dark.primary,
               "&:hover": {
-                color: colors.primary
+                color: colors.dark.secondary
               }
             },
             blockquote: {
@@ -32,22 +32,8 @@ module.exports = {
             },
             "blockquote > p::before, p::after": {
               color: colors.primary
-            }
-          }
-        },
-        DEFAULT: {
-          css: {
-            a: {
-              color: colors.primary,
-              "&:hover": {
-                color: colors.dark.primary
-              }
             },
-            blockquote: {
-              color: colors.primary,
-              borderColor: colors.dark.primary
-            },
-            "blockquote > p::before, p::after": {
+            strong: {
               color: colors.dark.primary
             },
             h1: {
@@ -61,6 +47,38 @@ module.exports = {
             },
             h4: {
               color: colors.dark.secondary
+            }
+          }
+        },
+        DEFAULT: {
+          css: {
+            a: {
+              color: colors.secondary,
+              "&:hover": {
+                color: colors.primary
+              }
+            },
+            blockquote: {
+              color: colors.secondary,
+              borderColor: colors.dark.primary
+            },
+            "blockquote > p::before, p::after": {
+              color: colors.dark.primary
+            },
+            strong: {
+              color: colors.primary
+            },
+            h1: {
+              color: colors.primary
+            },
+            h2: {
+              color: colors.primary
+            },
+            h3: {
+              color: colors.primary
+            },
+            h4: {
+              color: colors.primary
             }
           }
         }

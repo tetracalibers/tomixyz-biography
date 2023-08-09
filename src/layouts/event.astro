@@ -24,9 +24,8 @@ const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorIm
   </head>
   <MainLayout>
     <div class="post__header">
-      
       <h1 class="post__title">{content.title}</h1>
-      <h5 class={`post__desc ${AUTHOR_AVATAR ? "flex flex-row gap-2" : ""}`}>
+      <div class={`post__desc ${AUTHOR_AVATAR ? "flex flex-row gap-2" : ""}`}>
         <div class={AUTHOR_AVATAR ? "flex flex-col border-l-2 pl-2 w-full" : ""}>
           <div class="flex flex-wrap gap-1">
             {content.url && <a class="project__link" href={content.url}><Icon name="line-md/external-link-rounded" size="30" />Info</a>}
@@ -38,7 +37,7 @@ const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorIm
             {new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(new Date(content.date))}
           </span>
         </div>
-      </h5>
+      </div>
     </div>
     {
       content.image ? (
@@ -101,20 +100,20 @@ const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorIm
       line-height: 1.5;
     }
     .post__desc {
-      @apply text-gray-400 dark:text-gray-100 flex justify-center text-left md:flex-none md:justify-start;
+      @apply mt-8 text-slate-400 dark:text-theme-dark-secondary flex justify-center text-left md:flex-none md:justify-start;
     }
     .post__author {
       @apply no-underline dark:text-white hover:text-theme-primary;
     }
     .post__date {
-      @apply text-gray-400;
+      @apply text-slate-500 dark:text-theme-dark-secondary;
     }
     .post__tags {
       @apply inline-flex gap-2;
       flex-wrap: wrap;
     }
     .post__tag {
-      @apply text-gray-400 hover:text-theme-primary dark:hover:text-theme-dark-primary;
+      @apply text-slate-500 dark:text-theme-dark-secondary hover:text-theme-primary dark:hover:text-theme-dark-primary;
     }
 
     .avatar {
