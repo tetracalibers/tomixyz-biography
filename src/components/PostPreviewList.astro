@@ -7,11 +7,10 @@ interface Props {
 }
 
 const { posts } = Astro.props
-const sortedPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date))
 ---
 
 <section class="post-preview__list">
-  {sortedPosts.map((post) => <PostPreview post={post} />)}
+  {posts.map((post) => <PostPreview post={post} />)}
 </section>
 <style>
   .post-preview__list {

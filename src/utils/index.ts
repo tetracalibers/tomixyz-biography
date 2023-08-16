@@ -9,3 +9,7 @@ export const toTitleCase = (str: string) =>
 export const getMonthName = (date: Date) => MONTHS[new Date(date).getMonth()]
 
 export const getSlugFromPathname = (pathname: string) => path.basename(pathname, path.extname(pathname))
+
+export const compareDateForSort = <T extends { data: { date: string } }>(a: T, b: T) => {
+  return +new Date(b.data.date) - +new Date(a.data.date)
+}

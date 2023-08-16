@@ -5,6 +5,7 @@ import DefaultPageLayout from "$/layouts/default.astro"
 import Paginator from "$/components/Paginator.astro"
 import ProjectPreviewList from "$components/preview/project/ProjectPreviewList.astro"
 import { tagToSlug } from "$/utils/tag"
+import { compareDateForSort } from "$/utils"
 
 export async function getStaticPaths({ paginate }) {
   const projects = await getCollection("project")
@@ -19,9 +20,7 @@ export async function getStaticPaths({ paginate }) {
   const isMatchTag = (tag: string, tags: string[]) => tags.map((tag) => tag.toLowerCase()).includes(tag.toLowerCase())
 
   return Array.from(allTags).map((tag) => {
-    const filteredProjects = projects
-      .filter((post) => isMatchTag(tag, post.data.tags))
-      .sort((a, b) => new Date(b.data.date) - new Date(a.data.date))
+    const filteredProjects = projects.filter((post) => isMatchTag(tag, post.data.tags)).sort(compareDateForSort)
 
     return paginate(filteredProjects, {
       params: { tag: tagToSlug(tag) },

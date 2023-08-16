@@ -4,6 +4,7 @@ import DefaultPageLayout from "$/layouts/default.astro"
 import ProjectPreviewList from "$/components/preview/project/ProjectPreviewList.astro"
 import Paginator from "$/components/Paginator.astro"
 import { PAGE_SIZE } from "$/config"
+import { compareDateForSort } from "$/utils"
 
 let title = "Projects"
 let description = "個人で開発したもの"
@@ -11,7 +12,7 @@ const ogimage = `/og-image/projects.png`
 
 export async function getStaticPaths({ paginate }) {
   const allPosts = await getCollection("project")
-  const sortedPosts = allPosts.sort((a, b) => new Date(b.data.date) - new Date(a.data.date))
+  const sortedPosts = allPosts.sort(compareDateForSort)
 
   return paginate(sortedPosts, {
     pageSize: PAGE_SIZE
