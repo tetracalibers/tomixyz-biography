@@ -7,7 +7,7 @@ import Prose from "$/components/Prose.astro"
 import { Icon } from "astro-icon"
 
 interface Props {
-  content: CollectionEntry<"event">["data"],
+  content: CollectionEntry<"event">["data"]
   ogimage?: string
 }
 const { content, ogimage } = Astro.props
@@ -28,10 +28,38 @@ const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorIm
       <div class={`post__desc ${AUTHOR_AVATAR ? "flex flex-row gap-2" : ""}`}>
         <div class={AUTHOR_AVATAR ? "flex flex-col border-l-2 pl-2 w-full" : ""}>
           <div class="flex flex-wrap gap-1">
-            {content.url && <a class="project__link" href={content.url}><Icon name="line-md/external-link-rounded" size="30" />Info</a>}
-            {content.slide && <a class="project__link" href={content.slide}><Icon name="bx/slideshow" size="30" />Slide</a>}
-            {content.archive && <a class="project__link" href={content.archive}><Icon name="majesticons/article-search" size="30" />Archive</a>}
-            {content.github && <a class="project__link" href={content.github}><Icon name="lucide:github" size="30" />GitHub</a>}
+            {
+              content.url && (
+                <a class="project__link" href={content.url}>
+                  <Icon name="line-md/external-link-rounded" size="30" />
+                  Info
+                </a>
+              )
+            }
+            {
+              content.slide && (
+                <a class="project__link" href={content.slide}>
+                  <Icon name="bx/slideshow" size="30" />
+                  Slide
+                </a>
+              )
+            }
+            {
+              content.archive && (
+                <a class="project__link" href={content.archive}>
+                  <Icon name="majesticons/article-search" size="30" />
+                  Archive
+                </a>
+              )
+            }
+            {
+              content.github && (
+                <a class="project__link" href={content.github}>
+                  <Icon name="lucide:github" size="30" />
+                  GitHub
+                </a>
+              )
+            }
           </div>
           <span class="post__date">
             {new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(new Date(content.date))}
@@ -63,37 +91,62 @@ const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorIm
       <slot />
     </Prose>
     <div class="post__footer">
-      { USE_AUTHOR_CARD &&
-          <br/>
+      {
+        USE_AUTHOR_CARD && (
           <div class="author-card">
-              { AUTHOR_AVATAR ? <img class="author-card__img avatar avatar--lg" src={AUTHOR_AVATAR} alt={`${ AUTHOR_NAME }'s avatar`} /> : ''}
-              <div class="author-card__meta">
-                  {
-                      AUTHOR_TWITTER ?
-                          <a class="author-card__author" href={`https://twitter.com/${AUTHOR_TWITTER}`} title={`${AUTHOR_NAME}'s twitter`} target="_blank" rel="external">{ AUTHOR_NAME }</a>
-                          :
-                          <span class="author-card__author">{ AUTHOR_NAME }</span>
-                  }
-                  <p class="author-card__bio">{ SITE.authorBio }</p>
-                  <br/>
-                  {
-                      USE_SUBSCRIPTION ?
-                      <form action="" class="subscription-form">
-                          <label for="email"></label>
-                          <input type="email" name="email" class="flex-grow border-0 text-theme-accent-gray-dark" required="true">
-                          <button type="submit">Subscribe</button>
-                      </form> :
-                      <a class="author-card__follow-btn button" target="_blank" href={`https://twitter.com/intent/follow?screen_name=${AUTHOR_TWITTER}`}>Follow on Twitter</a>
-                  }
-              </div>
+            {AUTHOR_AVATAR ? (
+              <img class="author-card__img avatar avatar--lg" src={AUTHOR_AVATAR} alt={`${AUTHOR_NAME}'s avatar`} />
+            ) : (
+              ""
+            )}
+            <div class="author-card__meta">
+              {AUTHOR_TWITTER ? (
+                <a
+                  class="author-card__author"
+                  href={`https://twitter.com/${AUTHOR_TWITTER}`}
+                  title={`${AUTHOR_NAME}'s twitter`}
+                  target="_blank"
+                  rel="external"
+                >
+                  {AUTHOR_NAME}
+                </a>
+              ) : (
+                <span class="author-card__author">{AUTHOR_NAME}</span>
+              )}
+              <p class="author-card__bio">{SITE.authorBio}</p>
+              <br />
+              {USE_SUBSCRIPTION ? (
+                <form action="" class="subscription-form">
+                  <label for="email" />
+                  <input
+                    type="email"
+                    name="email"
+                    class="flex-grow border-0 text-theme-accent-gray-dark"
+                    required="true"
+                  />
+                  <button type="submit">Subscribe</button>
+                </form>
+              ) : (
+                <a
+                  class="author-card__follow-btn button"
+                  target="_blank"
+                  href={`https://twitter.com/intent/follow?screen_name=${AUTHOR_TWITTER}`}
+                >
+                  Follow on Twitter
+                </a>
+              )}
+            </div>
           </div>
-          <br/>
+        )
       }
-  </div>
+    </div>
   </MainLayout>
   <style>
     .post__header {
       @apply py-4 mb-1 text-center md:text-left;
+    }
+    .post__footer {
+      @apply my-6;
     }
     .post__title {
       @apply text-5xl font-extrabold text-theme-primary dark:text-theme-dark-primary;
