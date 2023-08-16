@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content"
 import EventPreview from "./EventPreveiw.astro"
 
 interface Props {
-  events: CollectionEntry<"event">
+  events: CollectionEntry<"event">[]
 }
 
 const { events } = Astro.props

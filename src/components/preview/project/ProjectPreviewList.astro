@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content"
 import ProjectPreview from "./ProjectPreveiw.astro"
 
 interface Props {
-  projects: CollectionEntry<"project">
+  projects: CollectionEntry<"project">[]
 }
 
 const { projects } = Astro.props
