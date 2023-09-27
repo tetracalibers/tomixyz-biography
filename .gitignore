@@ -24,6 +24,3 @@ netlify
 .astro
 .idea
 .vercel
-
-# astro-i18n-aut
-astro_tmp_pages_*
