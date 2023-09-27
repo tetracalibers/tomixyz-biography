@@ -55,9 +55,6 @@ export default defineConfig(
         allowNodeBuiltins: true,
         exclude: ["@resvg/resvg-js-darwin-x64"]
       }
-    },
-    experimental: {
-      assets: true
     }
   }
 )
