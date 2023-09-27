@@ -28,10 +28,10 @@ export default defineConfig(
     // outDir: './dist',       // When running `astro build`, path to final static output
     // publicDir: './public',   // A folder of static files Astro will copy to the root. Useful for favicons, images, and other files that don’t need processing.
     site: "https://tetracalibers.github.io",
-    base: "/tomixyz-biography",
-    // Your public domain, e.g.: https://my-site.dev/. Used to generate sitemaps and canonical URLs.
+    base: "/tomixyz-biography/",
+    scopedStyleStrategy: "where",
     server: {
-      // port: 3000,         // The port to run the dev server on.
+      port: 3000
     },
     integrations: [
       mdx(),
@@ -55,9 +55,6 @@ export default defineConfig(
         allowNodeBuiltins: true,
         exclude: ["@resvg/resvg-js-darwin-x64"]
       }
-    },
-    experimental: {
-      assets: true
     }
   }
 )

@@ -19,7 +19,7 @@ export async function getStaticPaths({ paginate }) {
 
   const isMatchTag = (tag: string, tags: string[]) => tags.map((tag) => tag.toLowerCase()).includes(tag.toLowerCase())
 
-  return Array.from(allTags).map((tag) => {
+  return Array.from(allTags).flatMap((tag) => {
     const filteredProjects = projects.filter((post) => isMatchTag(tag, post.data.tags)).sort(compareDateForSort)
 
     return paginate(filteredProjects, {
