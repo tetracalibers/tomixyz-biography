@@ -30,9 +30,6 @@ export default defineConfig(
     site: "https://tetracalibers.github.io",
     base: "/tomixyz-biography/",
     scopedStyleStrategy: "where",
-    build: {
-      inlineStylesheets: "auto"
-    },
     server: {
       port: 3000
     },
