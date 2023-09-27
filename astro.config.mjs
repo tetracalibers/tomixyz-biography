@@ -52,12 +52,14 @@ export default defineConfig(
       }),
       i18n({
         locales,
-        defaultLocale
+        defaultLocale,
+        exclude: ["pages/og-image/**/*"]
       }),
       sitemap({
         i18n: {
           locales,
-          defaultLocale
+          defaultLocale,
+          exclude: ["pages/og-image/**/*"]
         },
         filter: filterSitemapByDefaultLocale({ defaultLocale })
       })

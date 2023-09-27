@@ -1,5 +1,13 @@
 import { z, defineCollection } from "astro:content"
 
+const pageCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    ogimage: z.string().optional()
+  })
+})
+
 const blogCollection = defineCollection({
   schema: z.object({
     title: z.string().max(100, "The title length must be less than or equal to 100 chars"),
@@ -36,6 +44,7 @@ const eventCollection = defineCollection({
 })
 
 export const collections = {
+  page: pageCollection,
   blog: blogCollection,
   project: projectCollection,
   event: eventCollection
