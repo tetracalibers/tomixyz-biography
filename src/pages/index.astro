@@ -2,7 +2,7 @@
 import { getEntry } from "astro:content"
 import DefaultPageLayout from "$/layouts/default.astro"
 
-const page = await getEntry("page", "index")
+const page = await getEntry("page", "ja")
 
 const { Content } = await page.render()
 const { data } = page

@@ -3,15 +3,14 @@ import { getCollection } from "astro:content"
 import DefaultPageLayout from "$/layouts/default.astro"
 
 export async function getStaticPaths() {
-  const pages = await getCollection("page", (page) => {
-    const [lang, ...slug] = page.slug.split("/")
-    return lang === "ja" && slug
-  })
+  const pages = await getCollection("page", (page) => page.slug.split("/").length > 1)
 
   return pages.map((page) => {
+    const [lang, ...slug] = page.slug.split("/")
     return {
       params: {
-        page: page.slug
+        lang,
+        page: slug.join("/")
       },
       props: { page }
     }
