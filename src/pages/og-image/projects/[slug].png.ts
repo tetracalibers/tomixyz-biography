@@ -1,4 +1,4 @@
-import { APIContext } from "astro"
+import type { APIContext } from "astro"
 import { getCollection } from "astro:content"
 import { genarateOgImage } from "$/og-image/generate"
 import { nestedOgTemplate } from "$/og-image/template"
