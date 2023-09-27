@@ -22,7 +22,7 @@ export async function getStaticPaths() {
   }))
 }
 
-export async function get({ props }: APIContext) {
+export async function GET({ props }: APIContext) {
   const { tag } = props
   const title = `${tag}を扱った作品`
 

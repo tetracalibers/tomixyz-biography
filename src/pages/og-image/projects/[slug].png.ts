@@ -14,7 +14,7 @@ export async function getStaticPaths() {
   }))
 }
 
-export async function get({ props }: APIContext) {
+export async function GET({ props }: APIContext) {
   const { title } = props
 
   const png = await genarateOgImage(nestedOgTemplate(title, category))
