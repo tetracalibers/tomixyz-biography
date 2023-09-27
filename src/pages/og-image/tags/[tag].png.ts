@@ -28,12 +28,10 @@ export async function get({ props }: APIContext) {
 
   const png = await genarateOgImage(nestedOgTemplate(title, category))
 
-  return {
+  return new Response(png, {
     headers: {
       "Content-Type": "image/png",
       "Cache-Control": "public, max-age=31536000, immutable"
-    },
-
-    body: png
-  }
+    }
+  })
 }

@@ -1,15 +1,13 @@
 import { defaultOgTemplate } from "$/og-image/template"
 import { genarateOgImage } from "$/og-image/generate"
 
-export async function get() {
+export async function GET() {
   const png = await genarateOgImage(defaultOgTemplate())
 
-  return {
+  return new Response(png, {
     headers: {
       "Content-Type": "image/png",
       "Cache-Control": "public, max-age=31536000, immutable"
-    },
-
-    body: png
-  }
+    }
+  })
 }
