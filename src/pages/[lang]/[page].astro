@@ -12,18 +12,18 @@ export async function getStaticPaths() {
         lang,
         page: slug.join("/")
       },
-      props: { page }
+      props: { page, lang }
     }
   })
 }
 
-const { page } = Astro.props
+const { page, lang } = Astro.props
 
 const { Content } = await page.render()
 const { data } = page
 const { title, description, ogimage } = data
 ---
 
-<DefaultPageLayout content={{ title, description, ogimage }}>
+<DefaultPageLayout content={{ title, description, ogimage }} lang={lang}>
   <Content />
 </DefaultPageLayout>

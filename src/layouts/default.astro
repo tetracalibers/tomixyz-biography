@@ -3,11 +3,11 @@ import { SITE } from "$/config"
 import BaseHead from "$/components/BaseHead.astro"
 import MainLayout from "$/components/MainLayout.astro"
 
-const { content, showPageHeader = true } = Astro.props
+const { content, showPageHeader = true, lang = "ja" } = Astro.props
 ---
 
-<!DOCTYPE html>
-<html lang="ja">
+<!doctype html>
+<html lang={lang}>
   <head>
     <BaseHead
       title={content.title ? `${SITE.title} | ${content.title}` : SITE.title}
