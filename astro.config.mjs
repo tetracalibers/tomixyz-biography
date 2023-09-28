@@ -6,6 +6,7 @@ import sitemap from "@astrojs/sitemap"
 import mdx from "@astrojs/mdx"
 import { defineConfig } from "astro/config"
 import markdoc from "@astrojs/markdoc"
+import rehypePrettyCode from "rehype-pretty-code"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
@@ -21,6 +22,13 @@ const __dirname = dirname(__filename)
 
 // https://astro.build/config
 
+const prettyCodeOptions = {
+  theme: {
+    dark: "material-theme-darker",
+    light: "material-theme-lighter"
+  }
+}
+
 // https://astro.build/config
 export default defineConfig(
   /** @type {import('astro').AstroUserConfig} */ {
@@ -33,8 +41,15 @@ export default defineConfig(
     server: {
       port: 3000
     },
+    markdown: {
+      syntaxHighlight: false, // Disable syntax built-in syntax hightlighting from astro
+      rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]]
+    },
     integrations: [
-      mdx(),
+      mdx({
+        syntaxHighlight: false, // Disable syntax built-in syntax hightlighting from astro
+        rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]]
+      }),
       // markdoc(), // disabled now due to an issue with Vercel builds
       svelte(),
       tailwind({

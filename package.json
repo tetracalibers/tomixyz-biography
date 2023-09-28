@@ -30,6 +30,7 @@
     "prettier": "^3.0.0",
     "prettier-plugin-astro": "^0.12.0",
     "prettier-plugin-svelte": "^3.0.3",
+    "rehype-pretty-code": "^0.10.1",
     "satori": "^0.10.1",
     "satori-html": "^0.3.2",
     "svelte": "^4.1.1",
