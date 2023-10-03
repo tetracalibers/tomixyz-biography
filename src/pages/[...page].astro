@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content"
+import DefaultPageLayout from "$/layouts/default.astro"
+
+export async function getStaticPaths() {
+  const pages = await getCollection("page")
+
+  return pages.flatMap((page) => {
+    const [lang, defaultSlug] = page.slug.split("/")
+    const { slug } = page
+    const props = { page, lang }
+    const params = { page: slug }
+    const paths = { props, params }
+    return slug.startsWith("ja") ? [paths, { ...paths, params: { ...params, page: defaultSlug } }] : paths
+  })
+}
+
+const { page } = Astro.props
+
+const { Content } = await page.render()
+const { data } = page
+const { title, description, ogimage, lang } = data
+---
+
+<DefaultPageLayout content={{ title, description, ogimage }} lang={lang}>
+  <Content />
+</DefaultPageLayout>
