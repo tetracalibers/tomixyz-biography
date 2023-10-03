@@ -1,14 +1,20 @@
 ---
 import type { CollectionEntry } from "astro:content"
 import { getMonthName } from "$/utils"
+import { buildPageUrlFor } from "$/utils/i18n/slug"
 
 interface Props {
   post: CollectionEntry<"blog">
+  lang?: string
 }
 
 const {
-  post: { data: post, slug }
+  post: { data: post, slug },
+  lang
 } = Astro.props
+
+const builPageUrl = buildPageUrlFor("blog")
+const pageUrl = builPageUrl(slug, lang)
 ---
 
 <div class="post-preview">
@@ -22,7 +28,7 @@ const {
   </div>
   <div class="flex-1 flex flex-col justify-center">
     <h4 class="post-preview__title dark:text-theme-dark-primary">
-      <a href={`/tomixyz-biography/blog/${slug}`} title={post.title}>{post.title}</a>
+      <a href={pageUrl} title={post.title}>{post.title}</a>
     </h4>
     <p class="post-preview__desc">
       {post.description}

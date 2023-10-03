@@ -1,0 +1,45 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content"
+import DefaultPageLayout from "$/layouts/default.astro"
+import PostPreviewList from "$/components/PostPreviewList.astro"
+import Paginator from "$/components/Paginator.astro"
+import { PAGE_SIZE } from "$/config"
+import { compareDateForSort } from "$/utils"
+import type { GetStaticPaths } from "astro"
+
+let title = "Blog"
+
+let description = "考えていること"
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const _pages = await getCollection("blog")
+  const pages = _pages.sort(compareDateForSort)
+
+  const groupedByLang = pages.reduce((acc, page) => {
+    const [lang] = page.slug.split("/")
+    const sameLang = acc.get(lang) ?? []
+    sameLang.push(page)
+    acc.set(lang, sameLang)
+    return acc
+  }, new Map<string, CollectionEntry<"blog">[]>())
+
+  const jaPages = pages.filter((page) => page.slug.startsWith("ja"))
+  const defaultPages = paginate(jaPages, { pageSize: PAGE_SIZE, params: { lang: undefined } })
+
+  const i18nPages = [...groupedByLang].flatMap(([lang, langPages]) => {
+    return paginate(langPages, { pageSize: PAGE_SIZE, params: { lang } })
+  })
+
+  return [defaultPages, i18nPages].flat()
+}
+
+const { page } = Astro.props
+const { lang } = Astro.params
+
+const ogimage = `/og-image/blog.png`
+---
+
+<DefaultPageLayout content={{ title, description, ogimage }}>
+  <PostPreviewList posts={page.data} lang={lang} />
+  <Paginator page={page} />
+</DefaultPageLayout>

@@ -4,13 +4,14 @@ import PostPreview from "./PostPreview.astro"
 
 interface Props {
   posts: CollectionEntry<"blog">[]
+  lang?: string
 }
 
-const { posts } = Astro.props
+const { posts, lang } = Astro.props
 ---
 
 <section class="post-preview__list">
-  {posts.map((post) => <PostPreview post={post} />)}
+  {posts.map((post) => <PostPreview post={post} lang={lang} />)}
 </section>
 <style>
   .post-preview__list {
