@@ -7,17 +7,11 @@ import Link from "../../../components/mdoc/Link.astro"
 import TweetEmbed from "../../../components/mdoc/TweetEmbed.astro"
 import YTVideoEmbed from "../../../components/mdoc/YTVideoEmbed.astro"
 import Tabs from "../../../components/mdoc/Tabs/Tabs.astro"
+import { i18nPaths } from "$/utils/i18n/routing/article-page"
 
 export async function getStaticPaths() {
-  const pages = await getCollection("blog")
-  return pages.flatMap((page) => {
-    const [lang, defaultSlug] = page.slug.split("/")
-    const { slug } = page
-    const props = { page, lang }
-    const params = { slug: defaultSlug, lang }
-    const paths = { props, params }
-    return slug.startsWith("ja") ? [paths, { ...paths, params: { ...paths.params, lang: undefined } }] : paths
-  })
+  const collection = await getCollection("blog")
+  return i18nPaths({ collection })
 }
 
 const { page } = Astro.props
