@@ -1,17 +1,7 @@
 import { PAGE_SIZE } from "$/config"
 import type { PaginateFunction } from "astro"
 import type { CollectionEntry, ContentCollectionKey } from "astro:content"
-
-const groupByLang = <C extends ContentCollectionKey>(collection: CollectionEntry<C>[]) => {
-  const initial = new Map<string, CollectionEntry<C>[]>()
-  return collection.reduce((acc, page) => {
-    const [lang] = page.slug.split("/")
-    const sameLang = acc.get(lang) ?? []
-    sameLang.push(page)
-    acc.set(lang, sameLang)
-    return acc
-  }, initial)
-}
+import { groupByLang } from "../collection"
 
 type I18nPaginateArgs<C extends ContentCollectionKey> = {
   paginate: PaginateFunction
