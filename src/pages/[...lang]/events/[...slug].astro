@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content"
+import { getCollection, type CollectionEntry } from "astro:content"
 import ProjectLayout from "$/layouts/event.astro"
 import Callout from "$/components/mdoc/Callout.astro"
 import Link from "$/components/mdoc/Link.astro"
@@ -13,15 +13,19 @@ export async function getStaticPaths() {
   return i18nPaths({ collection })
 }
 
+interface Props {
+  page: CollectionEntry<"event">
+}
+
 const { page } = Astro.props
-const { slug } = Astro.params
+const { slug, lang } = Astro.params
 
 const { Content } = await page.render()
 
 const ogimage = `/og-image/events/${slug}.png`
 ---
 
-<ProjectLayout content={page.data} ogimage={ogimage}>
+<ProjectLayout content={page.data} ogimage={ogimage} lang={lang}>
   <Content
     components={{
       Callout,

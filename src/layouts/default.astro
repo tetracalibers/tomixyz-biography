@@ -3,6 +3,16 @@ import { SITE } from "$/config"
 import BaseHead from "$/components/BaseHead.astro"
 import MainLayout from "$/components/MainLayout.astro"
 
+interface Props {
+  content: {
+    title: string
+    description: string
+    ogimage?: string
+  }
+  showPageHeader?: boolean
+  lang?: string
+}
+
 const { content, showPageHeader = true, lang = "ja" } = Astro.props
 ---
 
@@ -12,7 +22,7 @@ const { content, showPageHeader = true, lang = "ja" } = Astro.props
     <BaseHead
       title={content.title ? `${SITE.title} | ${content.title}` : SITE.title}
       description={content.description}
-      image={content.ogimage}
+      image={content.ogimage ?? "/og-image/index.png"}
     />
   </head>
   <MainLayout>

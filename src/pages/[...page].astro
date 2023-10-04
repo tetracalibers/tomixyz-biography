@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content"
+import { getCollection, type CollectionEntry } from "astro:content"
 import DefaultPageLayout from "$/layouts/default.astro"
 import { i18nPaths } from "$/utils/i18n/routing/single-page"
 
@@ -8,11 +8,16 @@ export async function getStaticPaths() {
   return i18nPaths({ collection })
 }
 
-const { page } = Astro.props
+interface Props {
+  page: CollectionEntry<"page">
+  lang: string
+}
+
+const { page, lang } = Astro.props
 
 const { Content } = await page.render()
 const { data } = page
-const { title, description, ogimage, lang } = data
+const { title, description, ogimage } = data
 ---
 
 <DefaultPageLayout content={{ title, description, ogimage }} lang={lang}>

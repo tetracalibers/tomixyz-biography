@@ -9,7 +9,7 @@ export const i18nPaths = <C extends ContentCollectionKey>({ collection }: I18nPa
   return collection.flatMap((page) => {
     const { slug } = page
     const [lang, defaultSlug] = slug.split("/")
-    const paths = { props: { page, lang }, params: { slug: defaultSlug, lang } }
+    const paths = { props: { page }, params: { slug: defaultSlug, lang } }
     return slug.startsWith("ja") ? [paths, { ...paths, params: { ...paths.params, lang: undefined } }] : paths
   })
 }
