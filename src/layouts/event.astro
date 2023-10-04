@@ -13,9 +13,9 @@ interface Props {
 }
 const { content, ogimage, lang = "ja" } = Astro.props
 
-const AUTHOR_NAME = content.author ? content.author : SITE?.author ? SITE?.author : "Author"
-const AUTHOR_TWITTER = content.authorTwitter ? content.authorTwitter : SITE?.authorTwitter ? SITE?.authorTwitter : ""
-const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorImage ? SITE?.authorImage : ""
+const AUTHOR_NAME = SITE.author
+const AUTHOR_TWITTER = SITE.authorTwitter
+const AUTHOR_AVATAR = SITE.authorImage
 ---
 
 <!doctype html>
