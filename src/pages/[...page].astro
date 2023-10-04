@@ -1,18 +1,11 @@
 ---
 import { getCollection } from "astro:content"
 import DefaultPageLayout from "$/layouts/default.astro"
+import { i18nPaths } from "$/utils/i18n/routing/single-page"
 
 export async function getStaticPaths() {
-  const pages = await getCollection("page")
-
-  return pages.flatMap((page) => {
-    const [lang, defaultSlug] = page.slug.split("/")
-    const { slug } = page
-    const props = { page, lang }
-    const params = { page: slug }
-    const paths = { props, params }
-    return slug.startsWith("ja") ? [paths, { ...paths, params: { ...params, page: defaultSlug } }] : paths
-  })
+  const collection = await getCollection("page")
+  return i18nPaths({ collection })
 }
 
 const { page } = Astro.props
