@@ -5,14 +5,16 @@ category: essay
 description: 新米フロントエンドエンジニアになった年を振り返る
 ---
 
-新米フロントエンドエンジニアになった年。
+I became a new front-end developer in 2022.
 
-## 春
+## Spring
 
-3月に高校を卒業。春の約3ヶ月間を東京で過ごす。
+I graduated from high school in March.
+Soon afterwards I moved to Tokyo, and I lived there over the course of 3 months.
 
-東京での春は張り切りすぎて、周囲から頼られる存在になった時もあったけれど、そもそもまだまだ自信のなかった私は、その立ち位置を素直に喜ぶことができなかった。
-具体的に言えば、新卒入社0ヶ月というキャリアで新人研修を率いる立場になってしまっていることへの違和感を消しきれなかった。
+I was so enthusiastic while I lived in Tokyo that many people came to rely on me. 
+However, I just couldn't simply be happy about this because I didn’t have in enough confidence in myself.
+Specifically, it didn’t feel right to be entrusted with the role of training new employees, even through I just had started working in society.
 
 私の頭にあるのは、経験でも知見でもない、本に載っているありふれた知識と、少しだけ掘り下げた解釈だけで、そんな生半可な知識で教壇に立ってしまうということは、楽しかったけれど双方良くない気がしてきてしまったのだ。
 もちろん勉強は常にしていたけれど、実際に現場でも同じことが通用するのか、それがわからぬまま、確信を持てぬままのことをもっともらしく話してしまっても、それに気づく人はいないわけで。
