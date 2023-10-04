@@ -6,7 +6,7 @@ export const toTitleCase = (str: string) =>
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
   })
 
-export const getMonthName = (date: Date) => MONTHS[new Date(date).getMonth()]
+export const getMonthName = (date: string | Date) => MONTHS[new Date(date).getMonth()]
 
 export const getSlugFromPathname = (pathname: string) => path.basename(pathname, path.extname(pathname))
 
