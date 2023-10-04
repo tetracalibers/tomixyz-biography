@@ -1,14 +1,28 @@
 ---
 import { getCollection } from "astro:content"
 import DefaultPageLayout from "$/layouts/default.astro"
-import { tagToSlug } from "$/utils/tag"
+import { collectTags, tagToSlug } from "$/utils/tag"
+import type { GetStaticPaths } from "astro"
+import { groupByLang } from "$/utils/i18n/collection"
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const projects = await getCollection("project")
+  const projectsByLang = groupByLang<"project">(projects)
+  return [...projectsByLang].flatMap(([lang, projects]) => {
+    const tags = collectTags(projects)
+    const paths = { params: { lang }, props: { tags } }
+    return lang === "ja" ? [paths, { ...paths, params: { ...paths.params, lang: undefined } }] : paths
+  })
+}
+
+interface Props {
+  tags: string[]
+}
 
 let title = "Skill Tags"
 let description = "技術ごとの作品一覧"
 
-const projects = await getCollection("project")
-const targets = [...projects]
-const tags = [...new Set(targets.map((post) => post.data.tags).flat())]
+const { tags } = Astro.props
 
 const ogimage = "/og-image/tags.png"
 ---
