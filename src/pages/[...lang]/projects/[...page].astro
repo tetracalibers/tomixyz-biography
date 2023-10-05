@@ -14,7 +14,7 @@ const ogimage = `/og-image/projects.png`
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const collection = (await getCollection("project")).sort(compareDateForSort)
-  return i18nPaginate({ paginate, collection })
+  return i18nPaginate(collection, { paginate })
 }
 
 interface Props {

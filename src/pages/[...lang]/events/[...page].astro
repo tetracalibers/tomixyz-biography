@@ -12,7 +12,7 @@ let description = "登壇したイベント"
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const collection = (await getCollection("event")).sort(compareDateForSort)
-  return i18nPaginate({ paginate, collection })
+  return i18nPaginate(collection, { paginate })
 }
 
 interface Props {

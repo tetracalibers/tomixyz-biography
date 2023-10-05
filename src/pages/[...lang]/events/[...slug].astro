@@ -10,7 +10,7 @@ import { i18nPaths } from "$/utils/i18n/routing/article-page"
 
 export async function getStaticPaths() {
   const collection = await getCollection("event")
-  return i18nPaths({ collection })
+  return i18nPaths(collection)
 }
 
 interface Props {
