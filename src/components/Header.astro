@@ -4,12 +4,16 @@ import SvgIcon from "./SvgIcon.astro"
 import ModeSwitcherBtn from "./ModeSwitcherBtn.svelte"
 import SearchBtn from "./SearchBtn.svelte"
 import { Icon } from "astro-icon"
+import { getLangSlug, splitPath } from "$/utils/i18n/slug"
+
+const slugLang = getLangSlug(splitPath(Astro.url.pathname))
+const topUrl = `${SITE.base}/${slugLang ?? ""}`
 ---
 
 <header class="header">
   <div class="header__meta flex-1">
     <h3 class="header__title dark:text-theme-dark-secondary">
-      <a href={`${SITE.base}/`}>{SITE.name}</a>
+      <a href={topUrl}>{SITE.name}</a>
     </h3>
     <div class="header__meta-more flex">
       <nav class="header__nav flex">
