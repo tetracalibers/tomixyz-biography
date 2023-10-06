@@ -41,6 +41,7 @@ const { tag, lang } = Astro.params
     description: `${tagName}を扱った作品`,
     ogimage: `/og-image/tags/${tag}.png`
   }}
+  lang={lang}
 >
   <ProjectPreviewList projects={page.data} lang={lang} />
   <Paginator page={page} />

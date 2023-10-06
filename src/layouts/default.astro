@@ -10,7 +10,7 @@ interface Props {
     ogimage?: string
   }
   showPageHeader?: boolean
-  lang?: string
+  lang: string | undefined
 }
 
 const { content, showPageHeader = true, lang = "ja" } = Astro.props
