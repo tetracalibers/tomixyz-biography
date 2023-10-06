@@ -4,6 +4,7 @@ import DefaultPageLayout from "$/layouts/default.astro"
 import { collectTags, tagToSlug } from "$/utils/tag"
 import type { GetStaticPaths } from "astro"
 import { groupByLang } from "$/utils/i18n/collection"
+import { buildPageUrlFor } from "$/utils/i18n/slug"
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const projects = await getCollection("project")
@@ -26,6 +27,9 @@ const { tags } = Astro.props
 const { lang } = Astro.params
 
 const ogimage = "/og-image/tags.png"
+
+const buildPageUrl = buildPageUrlFor("tags")
+const pageUrlFromTagName = (tagName: string) => buildPageUrl(tagToSlug(tagName), lang)
 ---
 
 <DefaultPageLayout content={{ title, description, ogimage }} lang={lang}>
@@ -33,7 +37,7 @@ const ogimage = "/og-image/tags.png"
     {
       tags.map((tag) => (
         <li>
-          <a class="tag" href={`/tomixyz-biography/tags/${tagToSlug(tag)}`} title={`View posts tagged under "${tag}"`}>
+          <a class="tag" href={pageUrlFromTagName(tag)} title={`View posts tagged under "${tag}"`}>
             {tag}
           </a>
         </li>
