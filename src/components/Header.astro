@@ -5,6 +5,7 @@ import ModeSwitcherBtn from "./ModeSwitcherBtn.svelte"
 import SearchBtn from "./SearchBtn.svelte"
 import { Icon } from "astro-icon"
 import { getLangSlug, splitPath } from "$/utils/i18n/slug"
+import LanguageSwitcher from "./LanguageSwitcher.astro"
 
 const slugLang = getLangSlug(splitPath(Astro.url.pathname))
 const topUrl = `${SITE.base}/${slugLang ?? ""}`
@@ -39,6 +40,9 @@ const topUrl = `${SITE.base}/${slugLang ?? ""}`
           <li>
             <ModeSwitcherBtn client:visible />
           </li>
+          <li>
+            <LanguageSwitcher currentLang={slugLang} />
+          </li>
         </ul>
       </nav>
     </div>
@@ -67,6 +71,7 @@ const topUrl = `${SITE.base}/${slugLang ?? ""}`
   }
   .header__ref-list {
     @apply flex gap-3 text-gray-400;
+    align-items: center;
   }
   .header__ref-list > li {
     display: flex;

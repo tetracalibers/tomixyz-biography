@@ -1,0 +1,26 @@
+---
+import { SITE } from "$/config"
+import Icon from "astro-icon"
+
+interface Props {
+  currentLang: string | undefined
+}
+
+const { currentLang = "ja" } = Astro.props
+
+const to = currentLang === "ja" ? { slug: "en", label: "English" } : { slug: "ja", label: "Japanese" }
+---
+
+<a class="lang-switcher" href={`${SITE.base}/${to.slug}`} title={`switch to ${to.label}`}>
+  <Icon name="prime/language" size={24} />
+</a>
+
+<style>
+  .lang-switcher:lang(ja) :global(.en-icon) {
+    fill-opacity: 0.5;
+  }
+
+  .lang-switcher:lang(en) :global(.ja-icon) {
+    fill-opacity: 0.5;
+  }
+</style>
