@@ -1,6 +1,6 @@
 ---
-import { SITE } from "$/config"
 import Icon from "astro-icon"
+import path from "node:path"
 
 interface Props {
   currentLang: string | undefined
@@ -8,10 +8,17 @@ interface Props {
 
 const { currentLang = "ja" } = Astro.props
 
-const to = currentLang === "ja" ? { slug: "en", label: "English" } : { slug: "ja", label: "Japanese" }
+const switchLang = ((base: string) => (from: string, to: string) => {
+  return base.includes(from) ? base.replace(from, to) : path.join(base, to)
+})(Astro.url.pathname)
+
+const to =
+  currentLang === "ja"
+    ? { slug: switchLang(currentLang, "en"), label: "English" }
+    : { slug: switchLang(currentLang, "ja"), label: "Japanese" }
 ---
 
-<a class="lang-switcher" href={`${SITE.base}/${to.slug}`} title={`switch to ${to.label}`}>
+<a class="lang-switcher" href={to.slug} title={`switch to ${to.label}`}>
   <Icon name="prime/language" size={24} />
 </a>
 
