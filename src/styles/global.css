@@ -10,6 +10,9 @@
       }
     }
   }
+  :where(:lang(en) p) {
+    font-size: 1.1rem;
+  }
   @font-face {
     font-family: "TsukuBRdGothic";
     src: url("/tomixyz-biography/fonts/AppleTsukuBRdGothic-Regular-AlphaNum-01.otf") format("opentype");
