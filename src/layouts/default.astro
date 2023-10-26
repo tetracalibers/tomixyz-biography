@@ -34,7 +34,7 @@ const { content, showPageHeader = true, lang = "ja" } = Astro.props
         </div>
       )
     }
-    <slot />
+    <div class="page__content"><slot /></div>
   </MainLayout>
   <style>
     .page__header {
@@ -46,6 +46,17 @@ const { content, showPageHeader = true, lang = "ja" } = Astro.props
     }
     .page__desc {
       @apply text-theme-secondary dark:text-theme-dark-primary;
+    }
+
+    .page__content :global(h4) {
+      @apply text-lg;
+    }
+    .page__content :global(h4::before) {
+      content: "$";
+      padding-inline: 0.5em;
+    }
+    .page__content :global(h4 + p) {
+      padding-inline-start: 0.5em;
     }
   </style>
 </html>
