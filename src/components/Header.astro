@@ -1,8 +1,6 @@
 ---
 import { SITE } from "$/config"
-import SvgIcon from "./SvgIcon.astro"
 import ModeSwitcherBtn from "./ModeSwitcherBtn.svelte"
-import SearchBtn from "./SearchBtn.svelte"
 import { Icon } from "astro-icon"
 import { getLangSlug, splitPath } from "$/utils/i18n/slug"
 import LanguageSwitcher from "./LanguageSwitcher.astro"
@@ -18,9 +16,6 @@ const topUrl = `${SITE.base}/${slugLang ?? ""}`
     </h3>
     <nav class="header__nav">
       <ul class="header__ref-list">
-        <!-- <li>
-            <SearchBtn client:visible />
-          </li> -->
         <li>
           <a href="https://www.npmjs.com/~tomixy" title="npm">
             <Icon name="ri/npmjs-line" size="23" />
