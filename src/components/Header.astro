@@ -12,62 +12,62 @@ const topUrl = `${SITE.base}/${slugLang ?? ""}`
 ---
 
 <header class="header">
-  <div class="header__meta">
+  <div class="header__inner">
     <h3 class="header__title dark:text-theme-dark-secondary">
       <a href={topUrl}>{SITE.name}</a>
     </h3>
-    <div class="header__meta-more flex">
-      <nav class="header__nav flex">
-        <ul class="header__ref-list">
-          <!-- <li>
+    <nav class="header__nav">
+      <ul class="header__ref-list">
+        <!-- <li>
             <SearchBtn client:visible />
           </li> -->
-          <li>
-            <a href="https://www.npmjs.com/~tomixy" title="npm">
-              <Icon name="ri/npmjs-line" size="23" />
-            </a>
-          </li>
-          <li>
-            <a href={SITE.githubUrl} title="GitHub">
-              <Icon name="mingcute/github-line" size="24" />
-            </a>
-          </li>
-          <li>
-            <a href={"https://twitter.com/" + SITE.authorTwitter} title="Twitter">
-              <Icon name="humbleicons/brand-twitter" size="24" />
-            </a>
-          </li>
-          <li>
-            <ModeSwitcherBtn client:visible />
-          </li>
-          <li>
-            <LanguageSwitcher currentLang={slugLang} />
-          </li>
-        </ul>
-      </nav>
-    </div>
+        <li>
+          <a href="https://www.npmjs.com/~tomixy" title="npm">
+            <Icon name="ri/npmjs-line" size="23" />
+          </a>
+        </li>
+        <li>
+          <a href={SITE.githubUrl} title="GitHub">
+            <Icon name="mingcute/github-line" size="24" />
+          </a>
+        </li>
+        <li>
+          <a href={"https://twitter.com/" + SITE.authorTwitter} title="Twitter">
+            <Icon name="humbleicons/brand-twitter" size="24" />
+          </a>
+        </li>
+        <li>
+          <ModeSwitcherBtn client:visible />
+        </li>
+        <li>
+          <LanguageSwitcher currentLang={slugLang} />
+        </li>
+      </ul>
+    </nav>
   </div>
 </header>
 
 <style>
   .header {
-    @apply flex gap-4 border-b py-3 /* border-gray-200 dark:border-gray-700 - check styles/global.css */;
-    justify-content: center;
+    @apply border-b py-3;
+    display: grid;
+    place-items: center;
     container-type: inline-size;
     container-name: header;
   }
-  .header__meta {
-    display: flex;
-    flex-direction: column;
-    column-gap: 1.5rem;
-    row-gap: 2.5rem;
+  .header__inner {
+    display: grid;
     place-items: center;
+    gap: 2.5rem;
   }
-  .header__meta-more {
+  .header__nav {
     padding-inline: 1rem;
 
     /* 見出しが改行する ? アイコンは中央揃え : アイコンは左寄せ */
     min-width: min(calc((100cqw - 100%)) * 999, 100cqw);
+
+    /* 左寄せではなく、右寄せに */
+    display: flex;
     justify-content: flex-end;
   }
   .header__title {
