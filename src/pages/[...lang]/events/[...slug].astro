@@ -1,0 +1,38 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content"
+import ProjectLayout from "$/layouts/event.astro"
+import Callout from "$/components/mdoc/Callout.astro"
+import Link from "$/components/mdoc/Link.astro"
+import TweetEmbed from "$/components/mdoc/TweetEmbed.astro"
+import YTVideoEmbed from "$/components/mdoc/YTVideoEmbed.astro"
+import Tabs from "$/components/mdoc/Tabs/Tabs.astro"
+import { i18nPaths } from "$/utils/i18n/routing/article-page"
+
+export async function getStaticPaths() {
+  const collection = await getCollection("event")
+  return i18nPaths(collection)
+}
+
+interface Props {
+  page: CollectionEntry<"event">
+}
+
+const { page } = Astro.props
+const { slug, lang } = Astro.params
+
+const { Content } = await page.render()
+
+const ogimage = `/og-image/events/${slug}.png`
+---
+
+<ProjectLayout content={page.data} ogimage={ogimage} lang={lang}>
+  <Content
+    components={{
+      Callout,
+      Link,
+      TweetEmbed,
+      YTVideoEmbed,
+      Tabs
+    }}
+  />
+</ProjectLayout>

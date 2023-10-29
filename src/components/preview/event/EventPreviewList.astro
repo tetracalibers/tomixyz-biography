@@ -4,13 +4,14 @@ import EventPreview from "./EventPreveiw.astro"
 
 interface Props {
   events: CollectionEntry<"event">[]
+  lang: string | undefined
 }
 
-const { events } = Astro.props
+const { events, lang } = Astro.props
 ---
 
 <section class="post-preview__list">
-  {events.map((post) => <EventPreview event={post} />)}
+  {events.map((post) => <EventPreview event={post} lang={lang} />)}
 </section>
 <style>
   .post-preview__list {

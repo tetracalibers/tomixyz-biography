@@ -5,7 +5,7 @@ import tailwind from "@astrojs/tailwind"
 import sitemap from "@astrojs/sitemap"
 import mdx from "@astrojs/mdx"
 import { defineConfig } from "astro/config"
-import markdoc from "@astrojs/markdoc"
+import remarkBreaks from "remark-breaks"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
@@ -28,10 +28,14 @@ export default defineConfig(
     // outDir: './dist',       // When running `astro build`, path to final static output
     // publicDir: './public',   // A folder of static files Astro will copy to the root. Useful for favicons, images, and other files that don’t need processing.
     site: "https://tetracalibers.github.io",
-    base: "/tomixyz-biography/",
+    base: "/tomixyz-biography",
+    trailingSlash: "ignore",
     scopedStyleStrategy: "where",
     server: {
       port: 3000
+    },
+    markdown: {
+      remarkPlugins: [remarkBreaks]
     },
     integrations: [
       mdx(),

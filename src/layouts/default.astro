@@ -3,16 +3,26 @@ import { SITE } from "$/config"
 import BaseHead from "$/components/BaseHead.astro"
 import MainLayout from "$/components/MainLayout.astro"
 
-const { content, showPageHeader = true } = Astro.props
+interface Props {
+  content: {
+    title: string
+    description: string
+    ogimage?: string
+  }
+  showPageHeader?: boolean
+  lang: string | undefined
+}
+
+const { content, showPageHeader = true, lang = "ja" } = Astro.props
 ---
 
-<!DOCTYPE html>
-<html lang="ja">
+<!doctype html>
+<html lang={lang}>
   <head>
     <BaseHead
       title={content.title ? `${SITE.title} | ${content.title}` : SITE.title}
       description={content.description}
-      image={content.ogimage}
+      image={content.ogimage ?? "/og-image/index.png"}
     />
   </head>
   <MainLayout>
@@ -24,7 +34,7 @@ const { content, showPageHeader = true } = Astro.props
         </div>
       )
     }
-    <slot />
+    <div class="page__content"><slot /></div>
   </MainLayout>
   <style>
     .page__header {
@@ -36,6 +46,17 @@ const { content, showPageHeader = true } = Astro.props
     }
     .page__desc {
       @apply text-theme-secondary dark:text-theme-dark-primary;
+    }
+
+    .page__content :global(h4) {
+      @apply text-lg;
+    }
+    .page__content :global(h4::before) {
+      content: "$";
+      padding-inline: 0.5em;
+    }
+    .page__content :global(h4 + p) {
+      padding-inline-start: 0.5em;
     }
   </style>
 </html>

@@ -8,16 +8,17 @@ import Prose from "$/components/Prose.astro"
 interface Props {
   content: CollectionEntry<"blog">["data"]
   ogimage?: string
+  lang?: string
 }
-const { content, ogimage } = Astro.props
+const { content, ogimage, lang = "ja" } = Astro.props
 
-const AUTHOR_NAME = content.author ? content.author : SITE?.author ? SITE?.author : "Author"
-const AUTHOR_TWITTER = content.authorTwitter ? content.authorTwitter : SITE?.authorTwitter ? SITE?.authorTwitter : ""
-const AUTHOR_AVATAR = content.authorImage ? content.authorImage : SITE?.authorImage ? SITE?.authorImage : ""
+const AUTHOR_NAME = SITE.author
+const AUTHOR_TWITTER = SITE.authorTwitter
+const AUTHOR_AVATAR = SITE.authorImage
 ---
 
-<!DOCTYPE html>
-<html lang="ja">
+<!doctype html>
+<html lang={lang}>
   <head>
     <BaseHead {...content} image={ogimage} title={content.title ? `${SITE.title} | ${content.title}` : SITE.title} />
   </head>

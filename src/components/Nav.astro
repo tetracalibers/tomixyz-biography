@@ -1,14 +1,20 @@
 ---
 import { toTitleCase } from "$/utils"
 import { NAV_ITEMS, SITE } from "$/config"
+import { getLangSlug, root, splitPath } from "$/utils/i18n/slug"
 
-const root = (path: string) => path.replace(SITE.base, "").split("/").filter(Boolean)[0]
-const isCurrent = (path: string) => root(path) === root(Astro.url.pathname)
-
-const navItems = Object.keys(NAV_ITEMS).map((navItemKey) => ({
-  ...NAV_ITEMS[navItemKey],
-  isCurrent: isCurrent(NAV_ITEMS[navItemKey].path)
-}))
+const navItems = Object.keys(NAV_ITEMS).map((navItemKey) => {
+  const { path, ...navItem } = NAV_ITEMS[navItemKey]
+  const navSlugs = splitPath(path)
+  const currSlugs = splitPath(Astro.url.pathname)
+  const lang = getLangSlug(currSlugs)
+  const pathname = lang ? `/${[lang, ...navSlugs].join("/")}` : path
+  return {
+    ...navItem,
+    path: SITE.base + pathname,
+    isCurrent: root(navSlugs) === root(currSlugs)
+  }
+})
 ---
 
 <nav class="nav py-3">

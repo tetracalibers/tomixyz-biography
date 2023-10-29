@@ -2,27 +2,27 @@ import type { NavItems } from "./types"
 
 export const NAV_ITEMS: NavItems = {
   about: {
-    path: "/tomixyz-biography/",
+    path: "/",
     title: "about"
   },
   projects: {
-    path: "/tomixyz-biography/projects/",
+    path: "/projects/",
     title: "projects"
   },
   events: {
-    path: "/tomixyz-biography/events/",
+    path: "/events/",
     title: "events"
   },
   writing: {
-    path: "/tomixyz-biography/writing/",
+    path: "/writing/",
     title: "writing"
   },
   blog: {
-    path: "/tomixyz-biography/blog/",
+    path: "/blog/",
     title: "blog"
   },
   tags: {
-    path: "/tomixyz-biography/tags/",
+    path: "/tags/",
     title: "tags"
   }
 }
@@ -47,7 +47,9 @@ export const SITE = {
   // Author: Image external source
   authorImage: "/tomixyz-biography/images/profiles/pastel-tomixy_op.png", // Example: https://pbs.twimg.com/profile_images/1272979356529221632/sxvncugt_400x400.jpg, https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png
   // Author: Bio
-  authorBio: ""
+  authorBio: "",
+  langs: ["en", "ja"],
+  defaultLang: "ja"
 }
 
 // Ink - Theme configuration

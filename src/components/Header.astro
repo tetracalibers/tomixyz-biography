@@ -1,68 +1,78 @@
 ---
 import { SITE } from "$/config"
-import SvgIcon from "./SvgIcon.astro"
 import ModeSwitcherBtn from "./ModeSwitcherBtn.svelte"
-import SearchBtn from "./SearchBtn.svelte"
 import { Icon } from "astro-icon"
+import { getLangSlug, splitPath } from "$/utils/i18n/slug"
+import LanguageSwitcher from "./LanguageSwitcher.astro"
+
+const slugLang = getLangSlug(splitPath(Astro.url.pathname))
+const topUrl = `${SITE.base}/${slugLang ?? ""}`
 ---
 
 <header class="header">
-  <div class="header__meta flex-1">
+  <div class="header__inner">
     <h3 class="header__title dark:text-theme-dark-secondary">
-      <a href={`${SITE.base}/`}>{SITE.name}</a>
+      <a href={topUrl}>{SITE.name}</a>
     </h3>
-    <div class="header__meta-more flex">
-      <nav class="header__nav flex">
-        <ul class="header__ref-list">
-          <!-- <li>
-            <SearchBtn client:visible />
-          </li> -->
-          <li>
-            <a href={SITE.githubUrl} title="GitHub">
-              <SvgIcon>
-                <path
-                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-                >
-                </path>
-              </SvgIcon>
-            </a>
-          </li>
-          <li>
-            <a href={"https://twitter.com/" + SITE.authorTwitter} title="Twitter">
-              <Icon name="humbleicons/brand-twitter" size="24" />
-            </a>
-          </li>
-          <li>
-            <ModeSwitcherBtn client:visible />
-          </li>
-        </ul>
-      </nav>
-    </div>
+    <nav class="header__nav">
+      <ul class="header__ref-list">
+        <li>
+          <a href="https://www.npmjs.com/~tomixy" title="npm">
+            <Icon name="ri/npmjs-line" size="23" />
+          </a>
+        </li>
+        <li>
+          <a href={SITE.githubUrl} title="GitHub">
+            <Icon name="mingcute/github-line" size="24" />
+          </a>
+        </li>
+        <li>
+          <a href={"https://twitter.com/" + SITE.authorTwitter} title="Twitter">
+            <Icon name="humbleicons/brand-twitter" size="24" />
+          </a>
+        </li>
+        <li>
+          <ModeSwitcherBtn client:visible />
+        </li>
+        <!-- <li>
+          <LanguageSwitcher currentLang={slugLang} />
+        </li> -->
+      </ul>
+    </nav>
   </div>
 </header>
 
 <style>
   .header {
-    @apply flex gap-4 border-b py-3 /* border-gray-200 dark:border-gray-700 - check styles/global.css */;
+    @apply border-b py-3;
+    display: grid;
+    place-items: center;
+    container-type: inline-size;
+    container-name: header;
   }
-  .header__meta {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  .header__inner {
+    display: grid;
+    place-items: center;
+    gap: 2.5rem;
   }
-  .header__meta-more {
+  .header__nav {
     padding-inline: 1rem;
+
+    /* 見出しが改行する ? アイコンは中央揃え : アイコンは左寄せ */
+    min-width: min(calc((100cqw - 100%)) * 999, 100cqw);
+
+    /* 左寄せではなく、右寄せに */
+    display: flex;
     justify-content: flex-end;
   }
   .header__title {
     @apply text-4xl font-extrabold md:text-5xl text-theme-secondary dark:text-theme-dark-secondary;
     text-align: center;
-  }
-  .header__desc {
-    @apply text-xl flex-1 dark:text-gray-200;
+    line-height: normal;
   }
   .header__ref-list {
     @apply flex gap-3 text-gray-400;
+    align-items: center;
   }
   .header__ref-list > li {
     display: flex;

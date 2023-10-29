@@ -4,13 +4,14 @@ import ProjectPreview from "./ProjectPreveiw.astro"
 
 interface Props {
   projects: CollectionEntry<"project">[]
+  lang: string | undefined
 }
 
-const { projects } = Astro.props
+const { projects, lang } = Astro.props
 ---
 
 <section class="post-preview__list">
-  {projects.map((post) => <ProjectPreview project={post} />)}
+  {projects.map((post) => <ProjectPreview project={post} lang={lang} />)}
 </section>
 <style>
   .post-preview__list {

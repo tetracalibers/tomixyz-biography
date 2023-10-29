@@ -1,0 +1,33 @@
+---
+import Icon from "astro-icon"
+import path from "node:path"
+
+interface Props {
+  currentLang: string | undefined
+}
+
+const { currentLang = "ja" } = Astro.props
+
+const switchLang = ((base: string) => (from: string, to: string) => {
+  return base.includes(from) ? base.replace(from, to) : path.join(base, to)
+})(Astro.url.pathname)
+
+const to =
+  currentLang === "ja"
+    ? { slug: switchLang(currentLang, "en"), label: "English" }
+    : { slug: switchLang(currentLang, "ja"), label: "Japanese" }
+---
+
+<a class="lang-switcher" href={to.slug} title={`switch to ${to.label}`}>
+  <Icon name="prime/language" size={24} />
+</a>
+
+<style>
+  .lang-switcher:lang(ja) :global(.en-icon) {
+    fill-opacity: 0.3;
+  }
+
+  .lang-switcher:lang(en) :global(.ja-icon) {
+    fill-opacity: 0.3;
+  }
+</style>
