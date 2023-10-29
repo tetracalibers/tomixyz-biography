@@ -6,10 +6,12 @@ import { nestedOgTemplate } from "$/og-image/template"
 const category = "Events"
 
 export async function getStaticPaths() {
-  const events = await getCollection("event")
+  const events = await getCollection("event", ({ slug }) => {
+    return slug.startsWith("ja/")
+  })
 
   return events.map((event) => ({
-    params: { slug: event.slug },
+    params: { slug: event.slug.replace("ja/", "") },
     props: { title: event.data.title }
   }))
 }

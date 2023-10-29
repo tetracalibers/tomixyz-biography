@@ -6,10 +6,12 @@ import { nestedOgTemplate } from "$/og-image/template"
 const category = "Projects"
 
 export async function getStaticPaths() {
-  const projects = await getCollection("project")
+  const projects = await getCollection("project", ({ slug }) => {
+    return slug.startsWith("ja/")
+  })
 
   return projects.map((project) => ({
-    params: { slug: project.slug },
+    params: { slug: project.slug.replace("ja/", "") },
     props: { title: project.data.title }
   }))
 }
