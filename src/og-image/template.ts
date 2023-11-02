@@ -1,7 +1,7 @@
 import { SITE } from "./../config"
 import fs from "node:fs/promises"
 
-const logoSrc = new URL("../../images/profiles/pastel-tomixy_op.png", import.meta.url)
+const logoSrc = new URL("../../images/for-og/pastel-tomixy_op.png", import.meta.url)
 const logoBuffer = await fs.readFile(logoSrc)
 
 const template = (title: string, subtitle?: string) => /* html */ `

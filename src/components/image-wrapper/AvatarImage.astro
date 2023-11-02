@@ -1,0 +1,8 @@
+---
+import { Image } from "astro:assets"
+import img_tomixy from "../../assets/profiles/pastel-tomixy_op.png"
+
+const { className = "" } = Astro.props
+---
+
+<Image src={img_tomixy} class={className} alt="tomixy's avatar" />

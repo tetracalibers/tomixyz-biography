@@ -7,6 +7,8 @@ import Prose from "$/components/Prose.astro"
 import ArticleTitle from "$/components/text/ArticleTitle.astro"
 import { Icon } from "astro-icon"
 import { tagToSlug } from "$/utils/tag"
+import { Image } from "astro:assets"
+import AvatarImage from "$components/image-wrapper/AvatarImage.astro"
 
 interface Props {
   content: CollectionEntry<"project">["data"]
@@ -17,7 +19,6 @@ const { content, ogimage, lang = "ja" } = Astro.props
 
 const AUTHOR_NAME = SITE.author
 const AUTHOR_TWITTER = SITE.authorTwitter
-const AUTHOR_AVATAR = SITE.authorImage
 ---
 
 <!doctype html>
@@ -38,8 +39,8 @@ const AUTHOR_AVATAR = SITE.authorImage
         }
       </div>
       <ArticleTitle title={content.title} />
-      <div class={`post__desc ${AUTHOR_AVATAR ? "flex flex-row gap-2" : ""}`}>
-        <div class={AUTHOR_AVATAR ? "flex flex-col border-l-2 pl-2 w-full" : ""}>
+      <div class="post__desc flex flex-row gap-2">
+        <div class="flex flex-col border-l-2 pl-2 w-full">
           <div class="flex gap-1">
             {
               content.url && (
@@ -69,14 +70,14 @@ const AUTHOR_AVATAR = SITE.authorImage
         USE_POST_IMG_OVERLAY ? (
           <>
             <div class="img__outer">
-              <img src={content.image} alt={content.title} />
+              <Image src={content.image} alt={content.title} />
               <div class="img_gradient" />
             </div>
             <br />
           </>
         ) : (
           <>
-            <img class="img__outer" src={content.image} alt={content.title} />
+            <Image class="img__outer" src={content.image} alt={content.title} />
             <br />
           </>
         )
@@ -91,11 +92,7 @@ const AUTHOR_AVATAR = SITE.authorImage
       {
         USE_AUTHOR_CARD && (
           <div class="author-card">
-            {AUTHOR_AVATAR ? (
-              <img class="author-card__img avatar avatar--lg" src={AUTHOR_AVATAR} alt={`${AUTHOR_NAME}'s avatar`} />
-            ) : (
-              ""
-            )}
+            <AvatarImage className="author-card__img avatar avatar--lg" />
             <div class="author-card__meta">
               {AUTHOR_TWITTER ? (
                 <a

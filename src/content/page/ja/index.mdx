@@ -5,6 +5,9 @@ description: "I'm a front-end developer for PixelGrid Inc."
 
 import Prose from "$/components/Prose.astro"
 
+import { Image } from "astro:assets"
+import img_tomixy from "../../../assets//profiles/pastel-tomixy_op.png"
+
 <Prose>
 
 2002年生まれ。
@@ -14,7 +17,7 @@ import Prose from "$/components/Prose.astro"
 2022年11月に[株式会社ピクセルグリッド](https://www.pxgrid.com/)に入社し、現在は末っ子フロントエンドエンジニアとして邁進している。
 
 <div class="author">
-  <img class="rounded-full" width="160" src="/tomixyz-biography/images/profiles/pastel-tomixy_op.png" title="tomixy" />
+  <Image src={img_tomixy} alt="tomixy" style="max-width: 160px;" />
 </div>
 
 ## History
