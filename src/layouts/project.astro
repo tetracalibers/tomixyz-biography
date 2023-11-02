@@ -7,6 +7,8 @@ import Prose from "$/components/Prose.astro"
 import ArticleTitle from "$/components/text/ArticleTitle.astro"
 import { Icon } from "astro-icon"
 import { tagToSlug } from "$/utils/tag"
+import { Image } from "astro:assets"
+import AvatarImage from "$components/image-wrapper/AvatarImage.astro"
 
 interface Props {
   content: CollectionEntry<"project">["data"]
@@ -69,14 +71,14 @@ const AUTHOR_AVATAR = SITE.authorImage
         USE_POST_IMG_OVERLAY ? (
           <>
             <div class="img__outer">
-              <img src={content.image} alt={content.title} />
+              <Image src={content.image} alt={content.title} />
               <div class="img_gradient" />
             </div>
             <br />
           </>
         ) : (
           <>
-            <img class="img__outer" src={content.image} alt={content.title} />
+            <Image class="img__outer" src={content.image} alt={content.title} />
             <br />
           </>
         )
@@ -91,11 +93,7 @@ const AUTHOR_AVATAR = SITE.authorImage
       {
         USE_AUTHOR_CARD && (
           <div class="author-card">
-            {AUTHOR_AVATAR ? (
-              <img class="author-card__img avatar avatar--lg" src={AUTHOR_AVATAR} alt={`${AUTHOR_NAME}'s avatar`} />
-            ) : (
-              ""
-            )}
+            <AvatarImage className="author-card__img avatar avatar--lg" />
             <div class="author-card__meta">
               {AUTHOR_TWITTER ? (
                 <a

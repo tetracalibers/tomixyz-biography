@@ -20,15 +20,16 @@ const blogCollection = defineCollection({
 })
 
 const projectCollection = defineCollection({
-  schema: z.object({
-    title: z.string().max(100, "The title length must be less than or equal to 100 chars"),
-    description: z.string(),
-    tags: z.array(z.string()).default([]),
-    date: z.string(),
-    image: z.string().optional(),
-    url: z.string().url().optional(),
-    github: z.string().url().optional()
-  })
+  schema: ({ image }) =>
+    z.object({
+      title: z.string().max(100, "The title length must be less than or equal to 100 chars"),
+      description: z.string(),
+      tags: z.array(z.string()).default([]),
+      date: z.string(),
+      image: image().optional(),
+      url: z.string().url().optional(),
+      github: z.string().url().optional()
+    })
 })
 
 const eventCollection = defineCollection({

@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content"
 import { getMonthName } from "$/utils"
 import { buildPageUrlFor } from "$/utils/i18n/slug"
+import { Image } from "astro:assets"
 
 interface Props {
   project: CollectionEntry<"project">
@@ -39,7 +40,7 @@ const pageUrl = builPageUrl(slug, lang)
   {
     project.image && (
       <div class="post-preview__thumb">
-        <img src={project.image} alt={project.title} class="w-full object-cover object-center rounded-md" />
+        <Image src={project.image} alt={project.title} class="w-full object-cover object-center rounded-md" />
       </div>
     )
   }
