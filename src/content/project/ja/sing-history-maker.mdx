@@ -15,16 +15,21 @@ description: カラオケ楽曲検索＆管理アプリケーション
 import FluidImage from "$/components/gallery/FluidImage.astro"
 import HStack from "$/components/placement/HStack.astro"
 
+import img_EditModal from "../../../assets/projects/sing-history-maker/edit-modal.png"
+import img_AddModalTablet from "../../../assets/projects/sing-history-maker/add-modal-tablet.png"
+import img_SongListMobile from "../../../assets/projects/sing-history-maker/song-list-mobile.png"
+import img_SortFilterMenuMobile from "../../../assets/projects/sing-history-maker/sort-filter-menu-mobile.png"
+
 ReactによるSPAアプリケーション。バックエンドAPIはLaravelで構築。DBはpostgresqlを採用し、herokuによってデプロイ・運用を行っていた。（※改修に伴い、現在はサービス停止中。）
 
 歌唱キー、スコア、改善目標などを記録できるサービスで、楽曲名やアーティスト名の入力はiTunes APIとの通信によりオートコンプリートされるように実装。
 歌唱キー、曲名、アーティスト名、日時、スコア、改善目標など、多数の項目でソート・フィルタリングできる機能も組み込んでいる。
 美しいデザインもとことん追求し、グラスモーフィズムを踏襲した幻想的な雰囲気に仕上がっている。
 
-<FluidImage src="/tomixyz-biography/images/projects/sing-history-maker/edit-modal.png" />
+<FluidImage src={img_EditModal} />
 
 <HStack>
-  <FluidImage src="/tomixyz-biography/images/projects/sing-history-maker/add-modal-tablet.png" />
-  <FluidImage src="/tomixyz-biography/images/projects/sing-history-maker/song-list-mobile.png" />
-  <FluidImage src="/tomixyz-biography/images/projects/sing-history-maker/sort-filter-menu-mobile.png" />
+  <FluidImage src={img_AddModalTablet} />
+  <FluidImage src={img_SongListMobile} />
+  <FluidImage src={img_SortFilterMenuMobile} />
 </HStack>
