@@ -9,13 +9,14 @@ const pageCollection = defineCollection({
 })
 
 const blogCollection = defineCollection({
-  schema: z.object({
-    title: z.string().max(100, "The title length must be less than or equal to 100 chars"),
-    description: z.string(),
-    date: z.string(),
-    image: z.string().optional(),
-    category: z.enum(["essay", "tech"])
-  })
+  schema: ({ image }) =>
+    z.object({
+      title: z.string().max(100, "The title length must be less than or equal to 100 chars"),
+      description: z.string(),
+      date: z.string(),
+      image: image().optional(),
+      category: z.enum(["essay", "tech"])
+    })
 })
 
 const projectCollection = defineCollection({
