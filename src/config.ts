@@ -36,7 +36,6 @@ export const SITE = {
   base: "/tomixyz-biography",
   githubUrl: "https://github.com/tetracalibers",
   listDrafts: true,
-  image: "/tomixyz-biography/images/profiles/pastel-tomixy_op.png",
   // YT video channel Id (used in media.astro)
   ytChannelId: "",
   // Optional, user/author settings (example)
@@ -44,8 +43,6 @@ export const SITE = {
   author: "tomixy", // Example: Fred K. Schott
   // Author: Twitter handler
   authorTwitter: "tetracalibers", // Example: FredKSchott
-  // Author: Image external source
-  authorImage: "/tomixyz-biography/images/profiles/pastel-tomixy_op.png", // Example: https://pbs.twimg.com/profile_images/1272979356529221632/sxvncugt_400x400.jpg, https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png
   // Author: Bio
   authorBio: "",
   langs: ["en", "ja"],

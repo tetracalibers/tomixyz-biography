@@ -4,6 +4,8 @@ import { SITE, USE_POST_IMG_OVERLAY, USE_AUTHOR_CARD, USE_SUBSCRIPTION } from "$
 import MainLayout from "$/components/MainLayout.astro"
 import BaseHead from "$/components/BaseHead.astro"
 import Prose from "$/components/Prose.astro"
+import AvatarImage from "$components/image-wrapper/AvatarImage.astro"
+import { Image } from "astro:assets"
 
 interface Props {
   content: CollectionEntry<"blog">["data"]
@@ -14,7 +16,6 @@ const { content, ogimage, lang = "ja" } = Astro.props
 
 const AUTHOR_NAME = SITE.author
 const AUTHOR_TWITTER = SITE.authorTwitter
-const AUTHOR_AVATAR = SITE.authorImage
 ---
 
 <!doctype html>
@@ -25,9 +26,9 @@ const AUTHOR_AVATAR = SITE.authorImage
   <MainLayout>
     <div class="post__header">
       <h1 class="post__title">{content.title}</h1>
-      <div class={`post__desc ${AUTHOR_AVATAR ? "flex flex-row gap-2" : ""}`}>
-        {AUTHOR_AVATAR ? <img class="avatar" src={AUTHOR_AVATAR} alt={`${AUTHOR_NAME}'s avatar`} /> : ""}
-        <div class={AUTHOR_AVATAR ? "flex flex-col border-l-2 pl-2" : ""}>
+      <div class="post__desc flex flex-row gap-2">
+        <AvatarImage className="avatar" />
+        <div class="flex flex-col border-l-2 pl-2">
           {
             AUTHOR_TWITTER ? (
               <a
@@ -43,7 +44,6 @@ const AUTHOR_AVATAR = SITE.authorImage
               <span class="post__author">{AUTHOR_NAME}</span>
             )
           }
-          {!AUTHOR_AVATAR ? " | " : ""}
           <span class="post__date">
             {new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(new Date(content.date))}
           </span>
@@ -55,14 +55,14 @@ const AUTHOR_AVATAR = SITE.authorImage
         USE_POST_IMG_OVERLAY ? (
           <>
             <div class="img__outer">
-              <img src={content.image} alt={content.title} />
+              <Image src={content.image} alt={content.title} />
               <div class="img_gradient" />
             </div>
             <br />
           </>
         ) : (
           <>
-            <img class="img__outer" src={content.image} alt={content.title} />
+            <Image class="img__outer" src={content.image} alt={content.title} />
             <br />
           </>
         )
@@ -77,11 +77,7 @@ const AUTHOR_AVATAR = SITE.authorImage
       {
         USE_AUTHOR_CARD && (
           <div class="author-card">
-            {AUTHOR_AVATAR ? (
-              <img class="author-card__img avatar avatar--lg" src={AUTHOR_AVATAR} alt={`${AUTHOR_NAME}'s avatar`} />
-            ) : (
-              ""
-            )}
+            <AvatarImage className="author-card__img avatar avatar--lg" />
             <div class="author-card__meta">
               {AUTHOR_TWITTER ? (
                 <a

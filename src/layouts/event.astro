@@ -17,7 +17,6 @@ const { content, ogimage, lang = "ja" } = Astro.props
 
 const AUTHOR_NAME = SITE.author
 const AUTHOR_TWITTER = SITE.authorTwitter
-const AUTHOR_AVATAR = SITE.authorImage
 ---
 
 <!doctype html>
@@ -28,8 +27,8 @@ const AUTHOR_AVATAR = SITE.authorImage
   <MainLayout>
     <div class="post__header">
       <h1 class="post__title">{content.title}</h1>
-      <div class={`post__desc ${AUTHOR_AVATAR ? "flex flex-row gap-2" : ""}`}>
-        <div class={AUTHOR_AVATAR ? "flex flex-col border-l-2 pl-2 w-full" : ""}>
+      <div class="post__desc flex flex-row gap-2">
+        <div class="flex flex-col border-l-2 pl-2 w-full">
           <div class="flex flex-wrap gap-1">
             {
               content.url && (
