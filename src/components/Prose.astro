@@ -1,10 +1,10 @@
 ---
-const { full = false, grid = true, fill = true } = Astro.props
+const { grid = true, fill = true } = Astro.props
 ---
 
 <article
   class:list={[
-    { "max-w-none": full, grid, fill },
+    { grid, fill },
     "prose dark:prose-dark prose-a:underline-offset-4 prose-a:decoration-1 prose-a:decoration-dotted leading-loose tracking-wide"
   ]}
 >
