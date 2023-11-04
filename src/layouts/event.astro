@@ -6,10 +6,10 @@ import BaseHead from "$/components/BaseHead.astro"
 import Prose from "$/components/Prose.astro"
 import AvatarImage from "$/components/image-wrapper/AvatarImage.astro"
 import ArticleSummary from "$components/article-header/ArticleSummary.astro"
-import IconLink from "$components/article-header/IconLink.astro"
 import PublishDate from "$components/article-header/PublishDate.astro"
 import CoverImage from "$components/article-header/CoverImage.astro"
 import ArticleMetaBlock from "$components/article-header/ArticleMetaBlock.astro"
+import IconLinkList from "$/components/article-header/IconLinkList.astro"
 
 interface Props {
   content: CollectionEntry<"event">["data"]
@@ -33,12 +33,14 @@ const AUTHOR_TWITTER = SITE.authorTwitter
       <ArticleSummary summary={content.description} />
       <div class="flex justify-center md:flex-none md:justify-start flex-row gap-2">
         <ArticleMetaBlock>
-          <div class="flex flex-wrap gap-1">
-            {content.url && <IconLink url={content.url} icon="line-md/external-link-rounded" label="Info" />}
-            {content.slide && <IconLink url={content.slide} icon="bx/slideshow" label="Slide" />}
-            {content.archive && <IconLink url={content.archive} icon="majesticons/article-search" label="Archive" />}
-            {content.github && <IconLink url={content.github} icon="lucide:github" label="GitHub" />}
-          </div>
+          <IconLinkList
+            links={[
+              { url: content.url, icon: "line-md/external-link-rounded", label: "Info" },
+              { url: content.slide, icon: "bx/slideshow", label: "Slide" },
+              { url: content.archive, icon: "majesticons/article-search", label: "Archive" },
+              { url: content.github, icon: "lucide:github", label: "GitHub" }
+            ]}
+          />
           <PublishDate date={content.date} />
         </ArticleMetaBlock>
       </div>
