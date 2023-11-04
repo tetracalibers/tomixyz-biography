@@ -1,0 +1,11 @@
+---
+interface Props {
+  date: string
+}
+
+const { date } = Astro.props
+---
+
+<span class="text-slate-500 dark:text-theme-dark-secondary">
+  {new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(new Date(date))}
+</span>

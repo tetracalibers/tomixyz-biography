@@ -8,6 +8,7 @@ import AvatarImage from "$/components/image-wrapper/AvatarImage.astro"
 import { Image } from "astro:assets"
 import ArticleSummary from "$components/article-header/ArticleSummary.astro"
 import IconLink from "$components/article-header/IconLink.astro"
+import PublishDate from "$components/article-header/PublishDate.astro"
 
 interface Props {
   content: CollectionEntry<"event">["data"]
@@ -37,9 +38,7 @@ const AUTHOR_TWITTER = SITE.authorTwitter
             {content.archive && <IconLink url={content.archive} icon="majesticons/article-search" label="Archive" />}
             {content.github && <IconLink url={content.github} icon="lucide:github" label="GitHub" />}
           </div>
-          <span class="post__date">
-            {new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(new Date(content.date))}
-          </span>
+          <PublishDate date={content.date} />
         </div>
       </div>
     </div>
@@ -129,9 +128,6 @@ const AUTHOR_TWITTER = SITE.authorTwitter
     }
     .post__author {
       @apply no-underline dark:text-white hover:text-theme-primary;
-    }
-    .post__date {
-      @apply text-slate-500 dark:text-theme-dark-secondary;
     }
     .post__tags {
       @apply inline-flex gap-2;

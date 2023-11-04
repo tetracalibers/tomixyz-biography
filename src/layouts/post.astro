@@ -6,6 +6,7 @@ import BaseHead from "$/components/BaseHead.astro"
 import Prose from "$/components/Prose.astro"
 import AvatarImage from "$components/image-wrapper/AvatarImage.astro"
 import { Image } from "astro:assets"
+import PublishDate from "$components/article-header/PublishDate.astro"
 
 interface Props {
   content: CollectionEntry<"blog">["data"]
@@ -44,9 +45,7 @@ const AUTHOR_TWITTER = SITE.authorTwitter
               <span class="post__author">{AUTHOR_NAME}</span>
             )
           }
-          <span class="post__date">
-            {new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(new Date(content.date))}
-          </span>
+          <PublishDate date={content.date} />
         </div>
       </div>
     </div>
@@ -136,9 +135,6 @@ const AUTHOR_TWITTER = SITE.authorTwitter
     }
     .post__author {
       @apply no-underline text-gray-500 dark:text-gray-100 hover:text-theme-primary;
-    }
-    .post__date {
-      @apply text-slate-500 dark:text-theme-dark-secondary;
     }
     .post__tags {
       @apply inline-flex gap-2;

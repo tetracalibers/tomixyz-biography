@@ -10,6 +10,7 @@ import AvatarImage from "$components/image-wrapper/AvatarImage.astro"
 import ArticleSummary from "$/components/article-header/ArticleSummary.astro"
 import TagList from "$/components/article-header/TagList.astro"
 import IconLink from "$/components/article-header/IconLink.astro"
+import PublishDate from "$/components/article-header/PublishDate.astro"
 
 interface Props {
   content: CollectionEntry<"project">["data"]
@@ -41,9 +42,7 @@ const AUTHOR_TWITTER = SITE.authorTwitter
               {content.url && <IconLink url={content.url} icon="line-md/external-link-rounded" label="Visit Site" />}
               {content.github && <IconLink url={content.github} icon="lucide:github" label="GitHub" />}
             </div>
-            <span class="post__date">
-              {new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(new Date(content.date))}
-            </span>
+            <PublishDate date={content.date} />
           </div>
         </div>
       </div>
@@ -132,9 +131,6 @@ const AUTHOR_TWITTER = SITE.authorTwitter
     }
     .post__author {
       @apply no-underline dark:text-white hover:text-theme-primary;
-    }
-    .post__date {
-      @apply text-slate-500 dark:text-theme-dark-secondary;
     }
     .avatar {
       @apply w-12 h-12 rounded-full object-cover p-1 border-2 border-solid border-theme-dark-primary dark:border-theme-primary;
