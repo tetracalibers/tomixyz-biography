@@ -7,6 +7,7 @@ import Prose from "$/components/Prose.astro"
 import AvatarImage from "$/components/image-wrapper/AvatarImage.astro"
 import { Icon } from "astro-icon"
 import { Image } from "astro:assets"
+import ArticleSummary from "$components/article-header/ArticleSummary.astro"
 
 interface Props {
   content: CollectionEntry<"event">["data"]
@@ -27,9 +28,7 @@ const AUTHOR_TWITTER = SITE.authorTwitter
   <MainLayout>
     <div class="post__header justify-center md:justify-start">
       <h1 class="post__title">{content.title}</h1>
-      <div>
-        <p class="text-slate-500 dark:text-theme-dark-secondary text-lg indent-2">{content.description}</p>
-      </div>
+      <ArticleSummary summary={content.description} />
       <div class="post__desc flex flex-row gap-2">
         <div class="flex flex-col border-l-2 pl-2 w-full">
           <div class="flex flex-wrap gap-1">
