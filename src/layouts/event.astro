@@ -10,6 +10,8 @@ import PublishDate from "$components/article-header/PublishDate.astro"
 import CoverImage from "$components/article-header/CoverImage.astro"
 import ArticleMetaBlock from "$components/article-header/ArticleMetaBlock.astro"
 import IconLinkList from "$/components/article-header/IconLinkList.astro"
+import ArticleHeaderBlock from "$components/article-header/ArticleHeaderBlock.astro"
+import ArticleHeaderContentBlock from "$components/article-header/ArticleHeaderContentBlock.astro"
 
 interface Props {
   content: CollectionEntry<"event">["data"]
@@ -28,11 +30,13 @@ const AUTHOR_TWITTER = SITE.authorTwitter
     <BaseHead {...content} image={ogimage} title={content.title ? `${SITE.title} | ${content.title}` : SITE.title} />
   </head>
   <MainLayout>
-    <div class="post__header justify-center md:justify-start">
-      <h1 class="post__title">{content.title}</h1>
-      <ArticleSummary summary={content.description} />
-      <div class="flex justify-center md:flex-none md:justify-start flex-row gap-2">
-        <ArticleMetaBlock>
+    <ArticleHeaderBlock>
+      <ArticleHeaderContentBlock slot="content">
+        <Fragment slot="heading">
+          <h1 class="post__title">{content.title}</h1>
+          <ArticleSummary summary={content.description} />
+        </Fragment>
+        <ArticleMetaBlock slot="meta">
           <IconLinkList
             links={[
               { url: content.url, icon: "line-md/external-link-rounded", label: "Info" },
@@ -43,9 +47,9 @@ const AUTHOR_TWITTER = SITE.authorTwitter
           />
           <PublishDate date={content.date} />
         </ArticleMetaBlock>
-      </div>
-    </div>
-    <CoverImage src={content.image} alt={content.title} />
+      </ArticleHeaderContentBlock>
+      <CoverImage slot="image" src={content.image} alt={content.title} />
+    </ArticleHeaderBlock>
     <Prose>
       <slot />
     </Prose>
