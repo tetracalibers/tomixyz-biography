@@ -5,9 +5,9 @@ import MainLayout from "$/components/MainLayout.astro"
 import BaseHead from "$/components/BaseHead.astro"
 import Prose from "$/components/Prose.astro"
 import AvatarImage from "$/components/image-wrapper/AvatarImage.astro"
-import { Icon } from "astro-icon"
 import { Image } from "astro:assets"
 import ArticleSummary from "$components/article-header/ArticleSummary.astro"
+import IconLink from "$components/article-header/IconLink.astro"
 
 interface Props {
   content: CollectionEntry<"event">["data"]
@@ -32,38 +32,10 @@ const AUTHOR_TWITTER = SITE.authorTwitter
       <div class="post__desc flex flex-row gap-2">
         <div class="flex flex-col border-l-2 pl-2 w-full">
           <div class="flex flex-wrap gap-1">
-            {
-              content.url && (
-                <a class="project__link" href={content.url}>
-                  <Icon name="line-md/external-link-rounded" size="30" />
-                  Info
-                </a>
-              )
-            }
-            {
-              content.slide && (
-                <a class="project__link" href={content.slide}>
-                  <Icon name="bx/slideshow" size="30" />
-                  Slide
-                </a>
-              )
-            }
-            {
-              content.archive && (
-                <a class="project__link" href={content.archive}>
-                  <Icon name="majesticons/article-search" size="30" />
-                  Archive
-                </a>
-              )
-            }
-            {
-              content.github && (
-                <a class="project__link" href={content.github}>
-                  <Icon name="lucide:github" size="30" />
-                  GitHub
-                </a>
-              )
-            }
+            {content.url && <IconLink url={content.url} icon="line-md/external-link-rounded" label="Info" />}
+            {content.slide && <IconLink url={content.slide} icon="bx/slideshow" label="Slide" />}
+            {content.archive && <IconLink url={content.archive} icon="majesticons/article-search" label="Archive" />}
+            {content.github && <IconLink url={content.github} icon="lucide:github" label="GitHub" />}
           </div>
           <span class="post__date">
             {new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(new Date(content.date))}
@@ -210,10 +182,6 @@ const AUTHOR_TWITTER = SITE.authorTwitter
       @apply rounded-md shadow-md shadow-theme-dark-secondary dark:shadow-theme-primary hover:shadow-theme-secondary hover:dark:shadow-theme-secondary hover:shadow-lg transition-all;
       display: flex;
       text-align: center;
-    }
-    .project__link {
-      display: flex;
-      font-weight: bold;
     }
   </style>
 </html>

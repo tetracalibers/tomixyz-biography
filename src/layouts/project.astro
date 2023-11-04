@@ -5,11 +5,11 @@ import MainLayout from "$/components/MainLayout.astro"
 import BaseHead from "$/components/BaseHead.astro"
 import Prose from "$/components/Prose.astro"
 import ArticleTitle from "$/components/text/ArticleTitle.astro"
-import { Icon } from "astro-icon"
 import { Image } from "astro:assets"
 import AvatarImage from "$components/image-wrapper/AvatarImage.astro"
 import ArticleSummary from "$/components/article-header/ArticleSummary.astro"
 import TagList from "$/components/article-header/TagList.astro"
+import IconLink from "$/components/article-header/IconLink.astro"
 
 interface Props {
   content: CollectionEntry<"project">["data"]
@@ -38,22 +38,8 @@ const AUTHOR_TWITTER = SITE.authorTwitter
         <div class="post__desc flex h-fit gap-2">
           <div class="flex flex-col border-l-2 pl-2 w-full">
             <div class="flex gap-1">
-              {
-                content.url && (
-                  <a class="project__link" href={content.url}>
-                    <Icon name="line-md/external-link-rounded" size="30" />
-                    Visit Site
-                  </a>
-                )
-              }
-              {
-                content.github && (
-                  <a class="project__link" href={content.github}>
-                    <Icon name="lucide:github" size="30" />
-                    GitHub
-                  </a>
-                )
-              }
+              {content.url && <IconLink url={content.url} icon="line-md/external-link-rounded" label="Visit Site" />}
+              {content.github && <IconLink url={content.github} icon="lucide:github" label="GitHub" />}
             </div>
             <span class="post__date">
               {new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(new Date(content.date))}
@@ -191,10 +177,6 @@ const AUTHOR_TWITTER = SITE.authorTwitter
       @apply rounded-md shadow-md shadow-theme-dark-secondary dark:shadow-theme-primary hover:shadow-theme-secondary hover:dark:shadow-theme-secondary hover:shadow-lg transition-all;
       display: flex;
       text-align: center;
-    }
-    .project__link {
-      display: flex;
-      font-weight: bold;
     }
   </style>
 </html>
