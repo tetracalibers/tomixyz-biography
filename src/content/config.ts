@@ -9,12 +9,11 @@ const pageCollection = defineCollection({
 })
 
 const blogCollection = defineCollection({
-  schema: ({ image }) =>
+  schema: () =>
     z.object({
       title: z.string().max(100, "The title length must be less than or equal to 100 chars"),
       description: z.string(),
       date: z.string(),
-      image: image().optional(),
       category: z.enum(["essay", "tech"])
     })
 })
@@ -26,7 +25,7 @@ const projectCollection = defineCollection({
       description: z.string(),
       tags: z.array(z.string()).default([]),
       date: z.string(),
-      image: image().optional(),
+      image: image(),
       url: z.string().url().optional(),
       github: z.string().url().optional()
     })
@@ -38,7 +37,7 @@ const eventCollection = defineCollection({
       title: z.string().max(100, "The title length must be less than or equal to 100 chars"),
       description: z.string(),
       date: z.string(),
-      image: image().optional(),
+      image: image(),
       url: z.string().url().optional(),
       slide: z.string().url().optional(),
       archive: z.string().url().optional(),

@@ -1,12 +1,18 @@
 ---
 import type { CollectionEntry } from "astro:content"
-import { SITE, USE_POST_IMG_OVERLAY, USE_AUTHOR_CARD, USE_SUBSCRIPTION } from "$/config"
+import { SITE, USE_AUTHOR_CARD, USE_SUBSCRIPTION } from "$/config"
 import MainLayout from "$/components/MainLayout.astro"
 import BaseHead from "$/components/BaseHead.astro"
 import Prose from "$/components/Prose.astro"
 import AvatarImage from "$/components/image-wrapper/AvatarImage.astro"
-import { Icon } from "astro-icon"
-import { Image } from "astro:assets"
+import ArticleSummary from "$components/article-header/ArticleSummary.astro"
+import PublishDate from "$components/article-header/PublishDate.astro"
+import CoverImage from "$components/article-header/CoverImage.astro"
+import ArticleMetaBlock from "$components/article-header/ArticleMetaBlock.astro"
+import IconLinkList from "$/components/article-header/IconLinkList.astro"
+import ArticleHeaderBlock from "$components/article-header/ArticleHeaderBlock.astro"
+import ArticleHeaderContentBlock from "$components/article-header/ArticleHeaderContentBlock.astro"
+import ArticleTitle from "$components/article-header/ArticleTitle.astro"
 
 interface Props {
   content: CollectionEntry<"event">["data"]
@@ -25,70 +31,26 @@ const AUTHOR_TWITTER = SITE.authorTwitter
     <BaseHead {...content} image={ogimage} title={content.title ? `${SITE.title} | ${content.title}` : SITE.title} />
   </head>
   <MainLayout>
-    <div class="post__header">
-      <h1 class="post__title">{content.title}</h1>
-      <div class="post__desc flex flex-row gap-2">
-        <div class="flex flex-col border-l-2 pl-2 w-full">
-          <div class="flex flex-wrap gap-1">
-            {
-              content.url && (
-                <a class="project__link" href={content.url}>
-                  <Icon name="line-md/external-link-rounded" size="30" />
-                  Info
-                </a>
-              )
-            }
-            {
-              content.slide && (
-                <a class="project__link" href={content.slide}>
-                  <Icon name="bx/slideshow" size="30" />
-                  Slide
-                </a>
-              )
-            }
-            {
-              content.archive && (
-                <a class="project__link" href={content.archive}>
-                  <Icon name="majesticons/article-search" size="30" />
-                  Archive
-                </a>
-              )
-            }
-            {
-              content.github && (
-                <a class="project__link" href={content.github}>
-                  <Icon name="lucide:github" size="30" />
-                  GitHub
-                </a>
-              )
-            }
-          </div>
-          <span class="post__date">
-            {new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(new Date(content.date))}
-          </span>
-        </div>
-      </div>
-    </div>
-    {
-      content.image ? (
-        USE_POST_IMG_OVERLAY ? (
-          <>
-            <div class="img__outer">
-              <Image src={content.image} alt={content.title} />
-              <div class="img_gradient" />
-            </div>
-            <br />
-          </>
-        ) : (
-          <>
-            <Image class="img__outer" src={content.image} alt={content.title} />
-            <br />
-          </>
-        )
-      ) : (
-        ""
-      )
-    }
+    <ArticleHeaderBlock>
+      <ArticleHeaderContentBlock slot="content">
+        <Fragment slot="heading">
+          <ArticleTitle title={content.title} />
+          <ArticleSummary summary={content.description} />
+        </Fragment>
+        <ArticleMetaBlock slot="meta">
+          <IconLinkList
+            links={[
+              { url: content.url, icon: "line-md/external-link-rounded", label: "Info" },
+              { url: content.slide, icon: "bx/slideshow", label: "Slide" },
+              { url: content.archive, icon: "majesticons/article-search", label: "Archive" },
+              { url: content.github, icon: "lucide:github", label: "GitHub" }
+            ]}
+          />
+          <PublishDate date={content.date} />
+        </ArticleMetaBlock>
+      </ArticleHeaderContentBlock>
+      <CoverImage slot="image" src={content.image} alt={content.title} />
+    </ArticleHeaderBlock>
     <Prose>
       <slot />
     </Prose>
@@ -141,23 +103,13 @@ const AUTHOR_TWITTER = SITE.authorTwitter
   </MainLayout>
   <style>
     .post__header {
-      @apply py-4 mb-1 text-center md:text-left;
+      @apply grid gap-8 py-4 mb-1 text-center md:text-left;
     }
     .post__footer {
       @apply my-6;
     }
-    .post__title {
-      @apply text-5xl font-extrabold text-theme-primary dark:text-theme-dark-primary;
-      line-height: 1.5;
-    }
-    .post__desc {
-      @apply mt-8 text-slate-400 dark:text-theme-dark-secondary flex justify-center text-left md:flex-none md:justify-start;
-    }
     .post__author {
       @apply no-underline dark:text-white hover:text-theme-primary;
-    }
-    .post__date {
-      @apply text-slate-500 dark:text-theme-dark-secondary;
     }
     .post__tags {
       @apply inline-flex gap-2;
@@ -173,14 +125,6 @@ const AUTHOR_TWITTER = SITE.authorTwitter
     .avatar--lg {
       @apply w-32 h-32;
     }
-
-    .img__outer {
-      @apply relative rounded-lg drop-shadow-xl overflow-hidden;
-    }
-    .img_gradient {
-      @apply absolute z-10 w-full bottom-0 left-0 h-full bg-gradient-to-tr from-theme-primary dark:from-theme-dark-primary;
-    }
-
     .author-card {
       @apply text-gray-500 dark:text-gray-100 flex flex-row gap-4 justify-start text-left;
     }
@@ -208,10 +152,6 @@ const AUTHOR_TWITTER = SITE.authorTwitter
       @apply rounded-md shadow-md shadow-theme-dark-secondary dark:shadow-theme-primary hover:shadow-theme-secondary hover:dark:shadow-theme-secondary hover:shadow-lg transition-all;
       display: flex;
       text-align: center;
-    }
-    .project__link {
-      display: flex;
-      font-weight: bold;
     }
   </style>
 </html>

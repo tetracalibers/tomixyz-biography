@@ -1,0 +1,15 @@
+<div class="flex flex-col justify-evenly gap-8 h-full">
+  <div class="_heading h-fit grid gap-8 justify-center sm:justify-start">
+    <slot name="heading" />
+  </div>
+  <slot name="meta" />
+</div>
+
+<style>
+  ._heading :global(> *) {
+    min-width: 0;
+  }
+  ._heading :global(> astro-island > *) {
+    min-width: 0;
+  }
+</style>
