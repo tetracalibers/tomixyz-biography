@@ -27,8 +27,8 @@ const AUTHOR_TWITTER = SITE.authorTwitter
     <BaseHead {...content} image={ogimage} title={content.title ? `${SITE.title} | ${content.title}` : SITE.title} />
   </head>
   <MainLayout>
-    <div class="post__header">
-      <div class="post__tags">
+    <div class="post__header justify-center md:justify-start">
+      <div class="post__tags justify-center md:justify-start">
         {
           content.tags.length > 0 &&
             content.tags.map((tag) => (

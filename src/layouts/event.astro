@@ -25,7 +25,7 @@ const AUTHOR_TWITTER = SITE.authorTwitter
     <BaseHead {...content} image={ogimage} title={content.title ? `${SITE.title} | ${content.title}` : SITE.title} />
   </head>
   <MainLayout>
-    <div class="post__header">
+    <div class="post__header justify-center md:justify-start">
       <h1 class="post__title">{content.title}</h1>
       <div>
         <p class="text-slate-500 dark:text-theme-dark-secondary text-lg indent-2">{content.description}</p>
