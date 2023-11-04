@@ -12,6 +12,7 @@ import ArticleMetaBlock from "$components/article-header/ArticleMetaBlock.astro"
 import IconLinkList from "$/components/article-header/IconLinkList.astro"
 import ArticleHeaderBlock from "$components/article-header/ArticleHeaderBlock.astro"
 import ArticleHeaderContentBlock from "$components/article-header/ArticleHeaderContentBlock.astro"
+import ArticleTitle from "$components/article-header/ArticleTitle.astro"
 
 interface Props {
   content: CollectionEntry<"event">["data"]
@@ -33,7 +34,7 @@ const AUTHOR_TWITTER = SITE.authorTwitter
     <ArticleHeaderBlock>
       <ArticleHeaderContentBlock slot="content">
         <Fragment slot="heading">
-          <h1 class="post__title">{content.title}</h1>
+          <ArticleTitle title={content.title} />
           <ArticleSummary summary={content.description} />
         </Fragment>
         <ArticleMetaBlock slot="meta">
@@ -106,10 +107,6 @@ const AUTHOR_TWITTER = SITE.authorTwitter
     }
     .post__footer {
       @apply my-6;
-    }
-    .post__title {
-      @apply text-5xl font-extrabold text-theme-primary dark:text-theme-dark-primary;
-      line-height: 1.5;
     }
     .post__author {
       @apply no-underline dark:text-white hover:text-theme-primary;

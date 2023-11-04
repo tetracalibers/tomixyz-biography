@@ -3,26 +3,22 @@ import OverflowFadeText from "$/components/text/OverflowFadeText.svelte"
 
 interface Props {
   title: string
+  overflow: "fade" | "wrap"
 }
 
-const { title } = Astro.props
+const { title, overflow = "wrap" } = Astro.props
 
 const maxWordLength = Math.max(...title.split(" ").map((word) => word.length))
-const isFadable = maxWordLength > 11
+const isFadable = overflow === "fade" && maxWordLength > 11
 
-const classes = ["post__title", "text-5xl font-extrabold sm:text-left text-theme-primary dark:text-theme-dark-primary"]
+const className =
+  "leading-tight text-5xl font-extrabold text-center sm:text-left text-theme-primary dark:text-theme-dark-primary"
 ---
 
 {
   isFadable ? (
-    <OverflowFadeText as="h1" text={title} class={classes.join(" ")} client:load />
+    <OverflowFadeText as="h1" text={title} class={className} client:load />
   ) : (
-    <h1 class={classes.join(" ")}>{title}</h1>
+    <h1 class={className}>{title}</h1>
   )
 }
-
-<style>
-  .post__title {
-    line-height: 1.2;
-  }
-</style>
