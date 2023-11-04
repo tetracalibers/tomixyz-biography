@@ -39,6 +39,9 @@ const AUTHOR_TWITTER = SITE.authorTwitter
         }
       </div>
       <ArticleTitle title={content.title} />
+      <div>
+        <p class="text-slate-500 dark:text-theme-dark-secondary text-lg indent-2">{content.description}</p>
+      </div>
       <div class="post__desc flex flex-row gap-2">
         <div class="flex flex-col border-l-2 pl-2 w-full">
           <div class="flex gap-1">
@@ -137,13 +140,13 @@ const AUTHOR_TWITTER = SITE.authorTwitter
   </MainLayout>
   <style>
     .post__header {
-      @apply py-4 mb-1 text-center md:text-left;
+      @apply grid gap-8 py-4 mb-1 text-center md:text-left;
     }
     .post__footer {
       @apply my-6;
     }
     .post__desc {
-      @apply mt-8 text-slate-400 dark:text-theme-dark-secondary flex justify-center text-left md:flex-none md:justify-start;
+      @apply text-slate-400 dark:text-theme-dark-secondary flex justify-center text-left md:flex-none md:justify-start;
     }
     .post__author {
       @apply no-underline dark:text-white hover:text-theme-primary;
