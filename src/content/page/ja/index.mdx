@@ -1,12 +1,13 @@
 ---
 title: "tomixy"
 description: "I'm a front-end developer for PixelGrid Inc."
+ogimage: "/og-image.png"
 ---
 
 import Prose from "$/components/Prose.astro"
 
 import { Image } from "astro:assets"
-import img_tomixy from "../../../assets//profiles/pastel-tomixy_op.png"
+import img_tomixy from "../../../assets/profiles/pastel-tomixy_op.png"
 
 <Prose>
 
@@ -19,6 +20,10 @@ import img_tomixy from "../../../assets//profiles/pastel-tomixy_op.png"
 <div class="author">
   <Image src={img_tomixy} alt="tomixy" style="max-width: 160px;" />
 </div>
+
+</Prose>
+
+<Prose fill={false} grid={false}>
 
 ## History
 

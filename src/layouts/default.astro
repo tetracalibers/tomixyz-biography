@@ -39,6 +39,7 @@ const { content, showPageHeader = true, lang = "ja" } = Astro.props
   <style>
     .page__header {
       @apply pt-4 pb-12 mb-1;
+      text-align: center;
     }
     .page__title {
       @apply text-5xl font-extrabold text-theme-primary dark:text-theme-dark-primary;
@@ -50,10 +51,19 @@ const { content, showPageHeader = true, lang = "ja" } = Astro.props
 
     .page__content :global(h4) {
       @apply text-lg;
+
+      border-image-source: linear-gradient(to right, currentColor, transparent);
+      border-image-width: 0 0 1px 0;
+      border-image-outset: 5px;
+      border-image-slice: 1;
+
+      /** 2行目以降字下げ */
+      text-indent: -1em;
+      padding-left: 1em;
     }
     .page__content :global(h4::before) {
       content: "$";
-      padding-inline: 0.5em;
+      padding-inline-end: 0.5em;
     }
     .page__content :global(h4 + p) {
       padding-inline-start: 0.5em;

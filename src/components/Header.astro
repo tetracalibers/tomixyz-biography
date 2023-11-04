@@ -34,9 +34,13 @@ const topUrl = `${SITE.base}/${slugLang ?? ""}`
         <li>
           <ModeSwitcherBtn client:visible />
         </li>
-        <!-- <li>
-          <LanguageSwitcher currentLang={slugLang} />
-        </li> -->
+        {
+          import.meta.env.DEV && (
+            <li>
+              <LanguageSwitcher currentLang={slugLang} />
+            </li>
+          )
+        }
       </ul>
     </nav>
   </div>

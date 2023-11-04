@@ -11,11 +11,11 @@
     }
   }
   :where(:lang(en) p) {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
   @font-face {
     font-family: "TsukuBRdGothic";
-    src: url("/tomixyz-biography/fonts/AppleTsukuBRdGothic-Regular-AlphaNum-01.otf") format("opentype");
+    src: url("/tomixyz-biography/fonts/AppleTsukuARdGothic-Regular-AlphaNum-01.otf") format("opentype");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
