@@ -12,6 +12,17 @@ const { grid = true, fill = true } = Astro.props
 </article>
 
 <style>
+  .prose :global(> img) {
+    margin-block: 2em;
+  }
+
+  .prose :global(> *:has(img)) {
+    margin-block: 2em;
+  }
+  .prose :global(> *:has(img) > img) {
+    margin: 0;
+  }
+
   article.prose:has(*) {
     max-width: inherit;
   }
