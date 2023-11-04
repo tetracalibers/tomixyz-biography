@@ -13,6 +13,7 @@ import CoverImage from "$/components/article-header/CoverImage.astro"
 import ArticleMetaBlock from "$components/article-header/ArticleMetaBlock.astro"
 import IconLinkList from "$/components/article-header/IconLinkList.astro"
 import ArticleHeaderContentBlock from "$/components/article-header/ArticleHeaderContentBlock.astro"
+import ArticleHeaderBlock from "$/components/article-header/ArticleHeaderBlock.astro"
 
 interface Props {
   content: CollectionEntry<"project">["data"]
@@ -31,31 +32,25 @@ const AUTHOR_TWITTER = SITE.authorTwitter
     <BaseHead {...content} image={ogimage} title={content.title ? `${SITE.title} | ${content.title}` : SITE.title} />
   </head>
   <MainLayout>
-    <div class="flex flex-wrap gap-8 px-4">
-      <div class="grow">
-        <ArticleHeaderContentBlock>
-          <Fragment slot="heading">
-            <TagList tags={content.tags} />
-            <ArticleTitle title={content.title} />
-            <ArticleSummary summary={content.description} />
-          </Fragment>
-          <Fragment slot="meta">
-            <ArticleMetaBlock>
-              <IconLinkList
-                links={[
-                  { url: content.url, icon: "line-md/external-link-rounded", label: "Visit Site" },
-                  { url: content.github, icon: "lucide:github", label: "GitHub" }
-                ]}
-              />
-              <PublishDate date={content.date} />
-            </ArticleMetaBlock>
-          </Fragment>
-        </ArticleHeaderContentBlock>
-      </div>
-      <div class="grow-[9999] basis-96 flex items-center">
-        <CoverImage src={content.image} alt={content.title} />
-      </div>
-    </div>
+    <ArticleHeaderBlock>
+      <ArticleHeaderContentBlock slot="content">
+        <Fragment slot="heading">
+          <TagList tags={content.tags} />
+          <ArticleTitle title={content.title} />
+          <ArticleSummary summary={content.description} />
+        </Fragment>
+        <ArticleMetaBlock slot="meta">
+          <IconLinkList
+            links={[
+              { url: content.url, icon: "line-md/external-link-rounded", label: "Visit Site" },
+              { url: content.github, icon: "lucide:github", label: "GitHub" }
+            ]}
+          />
+          <PublishDate date={content.date} />
+        </ArticleMetaBlock>
+      </ArticleHeaderContentBlock>
+      <CoverImage slot="image" src={content.image} alt={content.title} />
+    </ArticleHeaderBlock>
     <Prose>
       <slot />
     </Prose>
