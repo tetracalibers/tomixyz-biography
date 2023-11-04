@@ -11,7 +11,7 @@
     }
   }
   :where(:lang(en) p) {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
   @font-face {
     font-family: "TsukuBRdGothic";
