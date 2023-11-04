@@ -71,6 +71,10 @@ const { grid = true, fill = true } = Astro.props
     background-color: transparent;
   }
 
+  .prose.grid:has(*) :global(> *) {
+    margin-inline: -1rem;
+  }
+
   .prose.fill:has(*)::before {
     background-color: #f4f6ff;
   }
