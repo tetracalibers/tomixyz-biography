@@ -10,7 +10,7 @@ const { title } = Astro.props
 const maxWordLength = Math.max(...title.split(" ").map((word) => word.length))
 const isFadable = maxWordLength > 11
 
-const classes = ["post__title", "text-5xl font-extrabold text-theme-primary dark:text-theme-dark-primary"]
+const classes = ["post__title", "text-5xl font-extrabold sm:text-left text-theme-primary dark:text-theme-dark-primary"]
 ---
 
 {
