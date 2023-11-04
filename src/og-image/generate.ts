@@ -3,7 +3,7 @@ import { html } from "satori-html"
 import { Resvg } from "@resvg/resvg-js"
 import fs from "node:fs/promises"
 
-const jaFontSrc = new URL("../../fonts/AppleTsukuBRdGothic-Regular-AlphaNum-01.otf", import.meta.url)
+const jaFontSrc = new URL("../../fonts/AppleTsukuARdGothic-Regular-AlphaNum-01.otf", import.meta.url)
 const enFontSrc = new URL("../../fonts/YsabeauOffice-Light.otf", import.meta.url)
 
 const jaFontBuffer = await fs.readFile(jaFontSrc)
