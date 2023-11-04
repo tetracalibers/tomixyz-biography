@@ -6,9 +6,9 @@ import BaseHead from "$/components/BaseHead.astro"
 import Prose from "$/components/Prose.astro"
 import ArticleTitle from "$/components/text/ArticleTitle.astro"
 import { Icon } from "astro-icon"
-import { tagToSlug } from "$/utils/tag"
 import { Image } from "astro:assets"
 import AvatarImage from "$components/image-wrapper/AvatarImage.astro"
+import TagList from "$/components/article-header/TagList.astro"
 
 interface Props {
   content: CollectionEntry<"project">["data"]
@@ -30,16 +30,7 @@ const AUTHOR_TWITTER = SITE.authorTwitter
     <div class="flex flex-wrap gap-8 px-4">
       <div class="post__header flex flex-col justify-evenly grow gap-8">
         <div class="h-fit grid gap-8">
-          <div class="post__tags justify-center sm:justify-start">
-            {
-              content.tags.length > 0 &&
-                content.tags.map((tag) => (
-                  <a class="post__tag" href={`${SITE.base}/tags/${tagToSlug(tag)}`} title={tag}>
-                    {tag}
-                  </a>
-                ))
-            }
-          </div>
+          <TagList tags={content.tags} />
           <ArticleTitle title={content.title} />
           <div>
             <p class="text-slate-500 dark:text-theme-dark-secondary text-lg indent-2 text-left">
@@ -162,14 +153,6 @@ const AUTHOR_TWITTER = SITE.authorTwitter
     .post__date {
       @apply text-slate-500 dark:text-theme-dark-secondary;
     }
-    .post__tags {
-      @apply inline-flex gap-2;
-      flex-wrap: wrap;
-    }
-    .post__tag {
-      @apply text-slate-500 dark:text-theme-dark-secondary hover:text-theme-primary dark:hover:text-theme-dark-primary;
-    }
-
     .avatar {
       @apply w-12 h-12 rounded-full object-cover p-1 border-2 border-solid border-theme-dark-primary dark:border-theme-primary;
     }
