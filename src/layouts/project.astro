@@ -27,67 +27,75 @@ const AUTHOR_TWITTER = SITE.authorTwitter
     <BaseHead {...content} image={ogimage} title={content.title ? `${SITE.title} | ${content.title}` : SITE.title} />
   </head>
   <MainLayout>
-    <div class="post__header justify-center md:justify-start">
-      <div class="post__tags justify-center md:justify-start">
-        {
-          content.tags.length > 0 &&
-            content.tags.map((tag) => (
-              <a class="post__tag" href={`${SITE.base}/tags/${tagToSlug(tag)}`} title={tag}>
-                {tag}
-              </a>
-            ))
-        }
-      </div>
-      <ArticleTitle title={content.title} />
-      <div>
-        <p class="text-slate-500 dark:text-theme-dark-secondary text-lg indent-2">{content.description}</p>
-      </div>
-      <div class="post__desc flex flex-row gap-2">
-        <div class="flex flex-col border-l-2 pl-2 w-full">
-          <div class="flex gap-1">
+    <div class="flex flex-wrap gap-8 px-4">
+      <div class="post__header flex flex-col justify-evenly grow gap-8">
+        <div class="h-fit grid gap-8">
+          <div class="post__tags justify-center sm:justify-start">
             {
-              content.url && (
-                <a class="project__link" href={content.url}>
-                  <Icon name="line-md/external-link-rounded" size="30" />
-                  Visit Site
-                </a>
-              )
-            }
-            {
-              content.github && (
-                <a class="project__link" href={content.github}>
-                  <Icon name="lucide:github" size="30" />
-                  GitHub
-                </a>
-              )
+              content.tags.length > 0 &&
+                content.tags.map((tag) => (
+                  <a class="post__tag" href={`${SITE.base}/tags/${tagToSlug(tag)}`} title={tag}>
+                    {tag}
+                  </a>
+                ))
             }
           </div>
-          <span class="post__date">
-            {new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(new Date(content.date))}
-          </span>
+          <ArticleTitle title={content.title} />
+          <div>
+            <p class="text-slate-500 dark:text-theme-dark-secondary text-lg indent-2 text-left">
+              {content.description}
+            </p>
+          </div>
+        </div>
+        <div class="post__desc flex h-fit gap-2">
+          <div class="flex flex-col border-l-2 pl-2 w-full">
+            <div class="flex gap-1">
+              {
+                content.url && (
+                  <a class="project__link" href={content.url}>
+                    <Icon name="line-md/external-link-rounded" size="30" />
+                    Visit Site
+                  </a>
+                )
+              }
+              {
+                content.github && (
+                  <a class="project__link" href={content.github}>
+                    <Icon name="lucide:github" size="30" />
+                    GitHub
+                  </a>
+                )
+              }
+            </div>
+            <span class="post__date">
+              {new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(new Date(content.date))}
+            </span>
+          </div>
         </div>
       </div>
+      <div class="grow-[9999] basis-96 flex items-center">
+        {
+          content.image ? (
+            USE_POST_IMG_OVERLAY ? (
+              <>
+                <div class="img__outer w-full">
+                  <Image src={content.image} alt={content.title} />
+                  <div class="img_gradient" />
+                </div>
+                <br />
+              </>
+            ) : (
+              <>
+                <Image class="img__outer w-full" src={content.image} alt={content.title} />
+                <br />
+              </>
+            )
+          ) : (
+            ""
+          )
+        }
+      </div>
     </div>
-    {
-      content.image ? (
-        USE_POST_IMG_OVERLAY ? (
-          <>
-            <div class="img__outer">
-              <Image src={content.image} alt={content.title} />
-              <div class="img_gradient" />
-            </div>
-            <br />
-          </>
-        ) : (
-          <>
-            <Image class="img__outer" src={content.image} alt={content.title} />
-            <br />
-          </>
-        )
-      ) : (
-        ""
-      )
-    }
     <Prose>
       <slot />
     </Prose>
@@ -140,7 +148,7 @@ const AUTHOR_TWITTER = SITE.authorTwitter
   </MainLayout>
   <style>
     .post__header {
-      @apply grid gap-8 py-4 mb-1 text-center md:text-left;
+      @apply py-4 mb-1 text-center md:text-left;
     }
     .post__footer {
       @apply my-6;
