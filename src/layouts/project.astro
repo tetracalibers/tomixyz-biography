@@ -12,7 +12,7 @@ import PublishDate from "$/components/article-header/PublishDate.astro"
 import CoverImage from "$/components/article-header/CoverImage.astro"
 import ArticleMetaBlock from "$components/article-header/ArticleMetaBlock.astro"
 import IconLinkList from "$/components/article-header/IconLinkList.astro"
-import ArticleHeadingBlock from "$/components/article-header/ArticleHeadingBlock.astro"
+import ArticleHeaderContentBlock from "$/components/article-header/ArticleHeaderContentBlock.astro"
 
 interface Props {
   content: CollectionEntry<"project">["data"]
@@ -32,23 +32,25 @@ const AUTHOR_TWITTER = SITE.authorTwitter
   </head>
   <MainLayout>
     <div class="flex flex-wrap gap-8 px-4">
-      <div class="post__header flex flex-col justify-evenly grow gap-8">
-        <ArticleHeadingBlock>
-          <TagList tags={content.tags} />
-          <ArticleTitle title={content.title} />
-          <ArticleSummary summary={content.description} />
-        </ArticleHeadingBlock>
-        <div class="flex justify-center md:flex-none md:justify-start h-fit gap-2">
-          <ArticleMetaBlock>
-            <IconLinkList
-              links={[
-                { url: content.url, icon: "line-md/external-link-rounded", label: "Visit Site" },
-                { url: content.github, icon: "lucide:github", label: "GitHub" }
-              ]}
-            />
-            <PublishDate date={content.date} />
-          </ArticleMetaBlock>
-        </div>
+      <div class="grow">
+        <ArticleHeaderContentBlock>
+          <Fragment slot="heading">
+            <TagList tags={content.tags} />
+            <ArticleTitle title={content.title} />
+            <ArticleSummary summary={content.description} />
+          </Fragment>
+          <Fragment slot="meta">
+            <ArticleMetaBlock>
+              <IconLinkList
+                links={[
+                  { url: content.url, icon: "line-md/external-link-rounded", label: "Visit Site" },
+                  { url: content.github, icon: "lucide:github", label: "GitHub" }
+                ]}
+              />
+              <PublishDate date={content.date} />
+            </ArticleMetaBlock>
+          </Fragment>
+        </ArticleHeaderContentBlock>
       </div>
       <div class="grow-[9999] basis-96 flex items-center">
         <CoverImage src={content.image} alt={content.title} />
