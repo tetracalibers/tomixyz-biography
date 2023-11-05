@@ -23,7 +23,6 @@ interface Props {
 const { content, ogimage, lang = "ja" } = Astro.props
 
 const AUTHOR_NAME = SITE.author
-const AUTHOR_TWITTER = SITE.authorTwitter
 ---
 
 <!doctype html>
@@ -62,14 +61,6 @@ const AUTHOR_TWITTER = SITE.authorTwitter
             <div class="author-card__meta">
               <span class="author-card__author">{AUTHOR_NAME}</span>
               <p class="author-card__bio">{SITE.authorBio}</p>
-              <br />
-              <a
-                class="author-card__follow-btn button"
-                target="_blank"
-                href={`https://twitter.com/intent/follow?screen_name=${AUTHOR_TWITTER}`}
-              >
-                Follow on Twitter
-              </a>
             </div>
           </div>
         )
