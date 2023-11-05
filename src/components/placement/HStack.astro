@@ -1,4 +1,4 @@
-<div class="tetcali-grid h-fit gap-8">
+<div class="tetcali-grid h-fit">
   <slot />
 </div>
 
@@ -6,6 +6,8 @@
   .tetcali-grid {
     display: flex;
     flex-wrap: wrap;
+    row-gap: 3em;
+    column-gap: 2em;
   }
 
   .tetcali-grid > :global(*) {

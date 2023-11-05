@@ -3,7 +3,7 @@ import OverflowFadeText from "$/components/text/OverflowFadeText.svelte"
 
 interface Props {
   title: string
-  overflow: "fade" | "wrap"
+  overflow?: "fade" | "wrap"
 }
 
 const { title, overflow = "wrap" } = Astro.props
