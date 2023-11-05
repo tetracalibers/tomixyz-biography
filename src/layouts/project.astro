@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content"
-import { SITE, USE_AUTHOR_CARD, USE_SUBSCRIPTION } from "$/config"
+import { SITE, USE_AUTHOR_CARD } from "$/config"
 import MainLayout from "$/components/MainLayout.astro"
 import BaseHead from "$/components/BaseHead.astro"
 import Prose from "$/components/Prose.astro"
@@ -75,26 +75,13 @@ const AUTHOR_TWITTER = SITE.authorTwitter
               )}
               <p class="author-card__bio">{SITE.authorBio}</p>
               <br />
-              {USE_SUBSCRIPTION ? (
-                <form action="" class="subscription-form">
-                  <label for="email" />
-                  <input
-                    type="email"
-                    name="email"
-                    class="flex-grow border-0 text-theme-accent-gray-dark"
-                    required="true"
-                  />
-                  <button type="submit">Subscribe</button>
-                </form>
-              ) : (
-                <a
-                  class="author-card__follow-btn button"
-                  target="_blank"
-                  href={`https://twitter.com/intent/follow?screen_name=${AUTHOR_TWITTER}`}
-                >
-                  Follow on Twitter
-                </a>
-              )}
+              <a
+                class="author-card__follow-btn button"
+                target="_blank"
+                href={`https://twitter.com/intent/follow?screen_name=${AUTHOR_TWITTER}`}
+              >
+                Follow on Twitter
+              </a>
             </div>
           </div>
         )
