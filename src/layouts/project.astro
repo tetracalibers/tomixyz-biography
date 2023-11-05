@@ -71,9 +71,6 @@ const AUTHOR_NAME = SITE.author
     .post__footer {
       @apply my-6;
     }
-    .post__author {
-      @apply no-underline dark:text-white hover:text-theme-primary;
-    }
     .avatar {
       @apply w-12 h-12 rounded-full object-cover p-1 border-2 border-solid border-theme-dark-primary dark:border-theme-primary;
     }
@@ -91,22 +88,6 @@ const AUTHOR_NAME = SITE.author
     }
     .author-card__bio {
       @apply text-gray-400;
-    }
-
-    .subscription-form {
-      @apply w-4/6 mt-2 flex flex-row rounded-lg overflow-hidden shadow-lg;
-    }
-    .subscription-form input {
-      @apply flex-grow border-0 text-theme-accent-gray-dark;
-    }
-    .subscription-form button,
-    .button {
-      @apply px-4 py-2 uppercase font-bold text-white bg-gradient-to-tr from-theme-primary to-theme-dark-secondary dark:from-theme-dark-secondary dark:to-theme-primary;
-    }
-    .author-card__follow-btn {
-      @apply rounded-md shadow-md shadow-theme-dark-secondary dark:shadow-theme-primary hover:shadow-theme-secondary hover:dark:shadow-theme-secondary hover:shadow-lg transition-all;
-      display: flex;
-      text-align: center;
     }
   </style>
 </html>
