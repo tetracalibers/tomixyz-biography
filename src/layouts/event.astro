@@ -60,19 +60,7 @@ const AUTHOR_TWITTER = SITE.authorTwitter
           <div class="author-card">
             <AvatarImage className="author-card__img avatar avatar--lg" />
             <div class="author-card__meta">
-              {AUTHOR_TWITTER ? (
-                <a
-                  class="author-card__author"
-                  href={`https://twitter.com/${AUTHOR_TWITTER}`}
-                  title={`${AUTHOR_NAME}'s twitter`}
-                  target="_blank"
-                  rel="external"
-                >
-                  {AUTHOR_NAME}
-                </a>
-              ) : (
-                <span class="author-card__author">{AUTHOR_NAME}</span>
-              )}
+              <span class="author-card__author">{AUTHOR_NAME}</span>
               <p class="author-card__bio">{SITE.authorBio}</p>
               <br />
               <a
