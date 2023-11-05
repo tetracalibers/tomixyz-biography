@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content"
-import { SITE, USE_AUTHOR_CARD } from "$/config"
+import { SITE } from "$/config"
 import MainLayout from "$/components/MainLayout.astro"
 import BaseHead from "$/components/BaseHead.astro"
 import Prose from "$/components/Prose.astro"
@@ -51,26 +51,10 @@ const AUTHOR_TWITTER = SITE.authorTwitter
     <Prose>
       <div class="post__content"><slot /></div>
     </Prose>
-    <div class="post__footer">
-      {
-        USE_AUTHOR_CARD && (
-          <div class="author-card">
-            <AvatarImage className="author-card__img avatar avatar--lg" />
-            <div class="author-card__meta">
-              <span class="author-card__author">{AUTHOR_NAME}</span>
-              <p class="author-card__bio">{SITE.authorBio}</p>
-            </div>
-          </div>
-        )
-      }
-    </div>
   </MainLayout>
   <style>
     .post__header {
       @apply py-4 mb-1 text-center md:text-left;
-    }
-    .post__footer {
-      @apply my-6;
     }
     .post__title {
       @apply text-5xl font-extrabold text-theme-primary dark:text-theme-dark-primary;
@@ -84,21 +68,6 @@ const AUTHOR_TWITTER = SITE.authorTwitter
     }
     .avatar {
       @apply w-12 h-12 rounded-full object-cover p-1 border-2 border-solid border-theme-dark-primary dark:border-theme-primary;
-    }
-    .avatar--lg {
-      @apply w-32 h-32;
-    }
-    .author-card {
-      @apply text-gray-500 dark:text-gray-100 flex flex-row gap-4 justify-start text-left;
-    }
-    .author-card__meta {
-      @apply border-l pl-4;
-    }
-    .author-card__author {
-      @apply text-2xl mb-1;
-    }
-    .author-card__bio {
-      @apply text-gray-400;
     }
     .post__content :global(p > img) {
       --fluid-bp-320-600: calc((100vw - 320px) / (600 - 320));
