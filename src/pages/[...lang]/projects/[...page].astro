@@ -8,7 +8,7 @@ import type { GetStaticPaths, Page } from "astro"
 import { i18nPaginate } from "$/utils/i18n/routing/preview-list-page"
 
 let title = "Projects"
-let description = "個人で開発したもの"
+let i18nDescription = { ja: "個人で開発したもの", en: "I enjoy personal development." }
 
 const ogimage = `/og-image/projects.png`
 
@@ -23,6 +23,8 @@ interface Props {
 }
 
 const { page, lang } = Astro.props
+
+const description = i18nDescription[lang]
 ---
 
 <DefaultPageLayout content={{ title, description, ogimage }} lang={lang}>

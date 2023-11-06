@@ -34,12 +34,17 @@ interface Props {
 
 const { page, tagName, lang } = Astro.props
 const { tag } = Astro.params
+
+const i18nDescription = {
+  ja: `${tagName}を扱った作品`,
+  en: `Works using ${tagName}`
+}
 ---
 
 <DefaultPageLayout
   content={{
     title: tagName,
-    description: `${tagName}を扱った作品`,
+    description: i18nDescription[lang],
     ogimage: `/og-image/tags/${tag}.png`
   }}
   lang={lang}

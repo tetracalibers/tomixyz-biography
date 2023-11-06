@@ -22,11 +22,12 @@ interface Props {
 }
 
 let title = "Skill Tags"
-let description = "技術ごとの作品一覧"
+let i18nDescription = { ja: "技術ごとの作品一覧", en: "Links to a list of works by technology used" }
 
 const { tags, lang } = Astro.props
 
 const ogimage = "/og-image/tags.png"
+const description = i18nDescription[lang]
 
 const buildPageUrl = buildPageUrlFor("tags")
 const pageUrlFromTagName = (tagName: string) => buildPageUrl(tagToSlug(tagName), lang)
