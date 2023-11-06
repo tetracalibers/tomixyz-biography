@@ -19,10 +19,10 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 
 interface Props {
   page: Page<CollectionEntry<"project">>
+  lang: string
 }
 
-const { page } = Astro.props
-const { lang } = Astro.params
+const { page, lang } = Astro.props
 ---
 
 <DefaultPageLayout content={{ title, description, ogimage }} lang={lang}>

@@ -14,10 +14,18 @@ export const i18nPaginatePerLang = <C extends ContentCollectionKey>(
   collection: CollectionEntry<C>[],
   { paginate, params, props }: PaginateOptions
 ) => {
-  const i18nPaths = paginate(collection, { pageSize: PAGE_SIZE, params: { lang, ...params }, props })
+  const i18nPaths = paginate(collection, {
+    pageSize: PAGE_SIZE,
+    params: { lang, ...params },
+    props: { lang, ...props }
+  })
 
   if (lang === "ja") {
-    const defaultPaths = paginate(collection, { pageSize: PAGE_SIZE, params: { lang: undefined, ...params }, props })
+    const defaultPaths = paginate(collection, {
+      pageSize: PAGE_SIZE,
+      params: { lang: undefined, ...params },
+      props: { lang, ...props }
+    })
     return [...i18nPaths, ...defaultPaths]
   }
 
