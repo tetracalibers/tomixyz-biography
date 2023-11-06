@@ -7,7 +7,7 @@ ogimage: "/og-image/writing.png"
 import Prose from "$/components/Prose.astro"
 import MediaPreviewList from "$/components/preview/writing/WritingPreviewList.astro"
 
-<Prose grid={false}>
+<Prose grid={false} fill={false}>
 
 ## メディアでの執筆
 
@@ -17,12 +17,6 @@ import MediaPreviewList from "$/components/preview/writing/WritingPreviewList.as
       title: "会社サイトリニューアルの検討と実際：実装編",
       media: "CodeGrid",
       url: "https://www.codegrid.net/series/2023-corporate-site-dev/",
-      date: "2023-08-31"
-    },
-    {
-      title: "根掘り葉掘り、先輩に聞いてみた",
-      media: "CodeGrid",
-      url: "https://www.codegrid.net/series/2023-talk-about-careers/",
       date: "2023-08-31"
     },
     {
@@ -42,6 +36,19 @@ import MediaPreviewList from "$/components/preview/writing/WritingPreviewList.as
       media: "CodeGrid",
       url: "https://www.codegrid.net/series/2023-astro-icon/",
       date: "2023-02-24"
+    }
+  ]}
+/>
+
+## インタビュー・対談
+
+<MediaPreviewList
+  posts={[
+    {
+      title: "根掘り葉掘り、先輩に聞いてみた",
+      media: "CodeGrid",
+      url: "https://www.codegrid.net/series/2023-talk-about-careers/",
+      date: "2023-08-31"
     }
   ]}
 />
