@@ -1,0 +1,15 @@
+---
+import PageTitle from "./PageTitle.astro"
+
+interface Props {
+  title: string
+  subtitle: string
+}
+
+const { title, subtitle } = Astro.props
+---
+
+<div class="flex flex-col text-center">
+  <PageTitle title={title} />
+  <p class="text-theme-secondary dark:text-theme-dark-primary">{subtitle}</p>
+</div>
