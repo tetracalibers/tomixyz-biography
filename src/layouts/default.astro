@@ -10,11 +10,10 @@ interface Props {
     description: string
     ogimage?: string
   }
-  showPageHeader?: boolean
   lang: string | undefined
 }
 
-const { content, showPageHeader = true, lang = "ja" } = Astro.props
+const { content, lang = "ja" } = Astro.props
 ---
 
 <!doctype html>
@@ -27,7 +26,7 @@ const { content, showPageHeader = true, lang = "ja" } = Astro.props
     />
   </head>
   <MainLayout>
-    {showPageHeader && <PageHeader title={content.title} subtitle={content.description} />}
+    <PageHeader title={content.title} subtitle={content.description} />
     <div class="page__content"><slot /></div>
   </MainLayout>
   <style>
