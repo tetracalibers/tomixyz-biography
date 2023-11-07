@@ -1,19 +1,12 @@
 ---
-const { post } = Astro.props
+import PublishMonth from "$components/article-link/PublishMonth.astro"
 
-const date = new Date(post.date)
-const year = date.getFullYear().toString()
-const month = (date.getMonth() + 1).toString()
+const { post } = Astro.props
 ---
 
 <div class="post-preview">
   <div class="sm:w-20 md:w-32">
-    <div class="post-preview__date">
-      <span class="post-preview__date__day">{month.padStart(2, "0")}</span>
-      <span class="post-preview__date__month-n-year">
-        {year}
-      </span>
-    </div>
+    <PublishMonth date={post.date} />
   </div>
   <div class="flex-1 flex flex-col justify-center">
     <h2 class="post-preview__title dark:text-theme-dark-primary">
@@ -25,15 +18,6 @@ const month = (date.getMonth() + 1).toString()
 <style>
   .post-preview {
     @apply flex gap-6;
-  }
-  .post-preview__date {
-    @apply flex flex-col w-full text-center;
-  }
-  .post-preview__date__day {
-    @apply text-5xl font-semibold text-gray-500 dark:text-gray-300;
-  }
-  .post-preview__date__month-n-year {
-    @apply text-gray-500 dark:text-gray-300;
   }
   .post-preview__title {
     @apply text-xl font-semibold text-theme-primary dark:text-theme-dark-primary /* this doesn't works here */ hover:underline mb-2;
