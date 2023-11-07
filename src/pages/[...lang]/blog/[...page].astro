@@ -8,7 +8,7 @@ import type { GetStaticPaths, Page } from "astro"
 import { i18nPaginate } from "$/utils/i18n/routing/preview-list-page"
 
 let title = "Blog"
-let description = "考えていること"
+let i18nDescription = { ja: "考えていること", en: "Nostalgia and Setting goals" }
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const collection = (await getCollection("blog")).sort(compareDateForSort)
@@ -17,12 +17,13 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 
 interface Props {
   page: Page<CollectionEntry<"blog">>
+  lang: string
 }
 
-const { page } = Astro.props
-const { lang } = Astro.params
+const { page, lang } = Astro.props
 
 const ogimage = `/og-image/blog.png`
+const description = i18nDescription[lang]
 ---
 
 <DefaultPageLayout content={{ title, description, ogimage }} lang={lang}>
