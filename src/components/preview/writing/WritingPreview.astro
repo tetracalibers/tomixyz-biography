@@ -1,6 +1,15 @@
 ---
 import PublishMonth from "$components/article-link/PublishMonth.astro"
 
+interface Props {
+  post: {
+    title: string
+    url: string
+    date: string
+    media?: string
+  }
+}
+
 const { post } = Astro.props
 ---
 
