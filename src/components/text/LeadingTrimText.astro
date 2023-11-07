@@ -1,0 +1,54 @@
+---
+import type { HTMLTag } from "astro/types"
+
+interface Props {
+  tag: HTMLTag
+  className?: string
+  trim?: "start" | "end" | "both"
+}
+
+const { tag, className = "", trim = "both", ...attributes } = Astro.props
+
+const Element = tag
+---
+
+<Element {...attributes} class={className.concat(` _leading-trim _--${trim}`)}>
+  <slot />
+</Element>
+
+<style>
+  /* 上下のhalf-leadingを削る */
+  @supports not (text-box-edge: cap) {
+    ._leading-trim {
+      display: flex;
+      flex-direction: column;
+    }
+    ._leading-trim:is(._--start, ._--both)::before {
+      display: block;
+      content: "";
+      margin-top: calc(-1 * (1lh - 1em) / 2);
+      margin-top: calc(-1 * (1lh - 1cap) / 2);
+    }
+    ._leading-trim:is(._--end, ._--both)::after {
+      display: block;
+      content: "";
+      margin-bottom: calc(-1 * (1lh - 1em) / 2);
+      margin-bottom: calc(-1 * (1lh - 1cap) / 2);
+    }
+  }
+  @supports (text-box-edge: cap) {
+    ._leading-trim {
+      text-box-edge: cap alphabetic;
+    }
+
+    ._leading-trim._--both {
+      text-box-trim: both;
+    }
+    ._leading-trim._--start {
+      text-box-trim: start;
+    }
+    ._leading-trim._--end {
+      text-box-trim: end;
+    }
+  }
+</style>

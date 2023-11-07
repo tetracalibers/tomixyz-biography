@@ -2,6 +2,7 @@
 import { SITE } from "$/config"
 import BaseHead from "$/components/BaseHead.astro"
 import MainLayout from "$/components/MainLayout.astro"
+import PageHeader from "$/components/index-page/PageHeader.astro"
 
 interface Props {
   content: {
@@ -9,11 +10,10 @@ interface Props {
     description: string
     ogimage?: string
   }
-  showPageHeader?: boolean
   lang: string | undefined
 }
 
-const { content, showPageHeader = true, lang = "ja" } = Astro.props
+const { content, lang = "ja" } = Astro.props
 ---
 
 <!doctype html>
@@ -22,33 +22,16 @@ const { content, showPageHeader = true, lang = "ja" } = Astro.props
     <BaseHead
       title={content.title ? `${SITE.title} | ${content.title}` : SITE.title}
       description={content.description}
-      image={content.ogimage ?? "/og-image/index.png"}
+      image={content.ogimage ?? "/og-image.png"}
     />
   </head>
   <MainLayout>
-    {
-      showPageHeader && (
-        <div class="page__header">
-          <h1 class="page__title">{content.title}</h1>
-          <p class="page__desc">{content.description}</p>
-        </div>
-      )
-    }
-    <div class="page__content"><slot /></div>
+    <div class="flex flex-col gap-14">
+      <PageHeader title={content.title} subtitle={content.description} />
+      <div class="page__content contents"><slot /></div>
+    </div>
   </MainLayout>
   <style>
-    .page__header {
-      @apply pt-4 pb-12 mb-1;
-      text-align: center;
-    }
-    .page__title {
-      @apply text-5xl font-extrabold text-theme-primary dark:text-theme-dark-primary;
-      line-height: 1.5;
-    }
-    .page__desc {
-      @apply text-theme-secondary dark:text-theme-dark-primary;
-    }
-
     .page__content :global(h4) {
       @apply text-lg;
 
