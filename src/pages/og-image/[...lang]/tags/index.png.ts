@@ -1,10 +1,15 @@
-import { indexOgTemplate } from "$/og-image/template"
-import { genarateOgImage } from "$/og-image/generate"
+import { SITE } from "$/config"
+import { makeCategoryIndexPageOGP } from "$/lib/og-image"
+import type { APIContext } from "astro"
 
-const title = "Skill Tags: 技術ごとの作品一覧"
+const title = "Skill Tags"
 
-export async function GET() {
-  const png = await genarateOgImage(indexOgTemplate(title))
+export async function getStaticPaths() {
+  return SITE.langs.map((lang) => ({ params: { lang }, props: { lang } }))
+}
+
+export async function GET({ props }: APIContext) {
+  const png = await makeCategoryIndexPageOGP(props.lang, title)
 
   return new Response(png, {
     headers: {
