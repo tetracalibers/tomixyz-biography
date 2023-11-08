@@ -1,25 +1,25 @@
+import { makeCategoryLowerPageOGP } from "$/lib/og-image"
 import type { APIContext } from "astro"
 import { getCollection } from "astro:content"
-import { genarateOgImage } from "$/og-image/generate"
-import { nestedOgTemplate } from "$/og-image/template"
 
 const category = "Projects"
 
 export async function getStaticPaths() {
-  const projects = await getCollection("project", ({ slug }) => {
-    return slug.startsWith("ja/")
-  })
+  const projects = await getCollection("project")
 
-  return projects.map((project) => ({
-    params: { slug: project.slug.replace("ja/", "") },
-    props: { title: project.data.title }
-  }))
+  return projects.map((project) => {
+    const [lang, slug] = project.slug.split("/")
+    return {
+      params: { slug, lang },
+      props: { title: project.data.title, lang }
+    }
+  })
 }
 
 export async function GET({ props }: APIContext) {
-  const { title } = props
+  const { title, lang } = props
 
-  const png = await genarateOgImage(nestedOgTemplate(title, category))
+  const png = await makeCategoryLowerPageOGP(lang, category, title)
 
   return new Response(png, {
     headers: {
