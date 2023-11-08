@@ -10,7 +10,7 @@ const initEmbeddedTemplates = async () => {
       ja: "public/fonts/AppleTsukuARdGothic-Regular-AlphaNum-01.otf"
     },
     image: {
-      logo: "public/images/for-og/pastel-tomixy_op.png"
+      logo: "src/assets/profiles/pastel-tomixy_op.png"
     }
   })
 
