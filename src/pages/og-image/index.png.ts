@@ -1,10 +1,7 @@
-import { defaultOgTemplate } from "$/og-image/template"
-import { genarateOgImage } from "$/og-image/generate"
+import { defaultOGP } from "$/lib/og-image"
 
 export async function GET() {
-  const png = await genarateOgImage(defaultOgTemplate())
-
-  return new Response(png, {
+  return new Response(defaultOGP, {
     headers: {
       "Content-Type": "image/png",
       "Cache-Control": "public, max-age=31536000, immutable"

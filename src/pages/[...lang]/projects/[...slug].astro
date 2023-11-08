@@ -15,14 +15,15 @@ export async function getStaticPaths() {
 
 interface Props {
   page: CollectionEntry<"project">
+  lang: string
 }
 
-const { page } = Astro.props
-const { slug, lang } = Astro.params
+const { page, lang } = Astro.props
+const { slug } = Astro.params
 
 const { Content } = await page.render()
 
-const ogimage = `/og-image/projects/${slug}.png`
+const ogimage = `/og-image/${lang}/projects/${slug}.png`
 ---
 
 <ProjectLayout content={page.data} ogimage={ogimage} lang={lang}>

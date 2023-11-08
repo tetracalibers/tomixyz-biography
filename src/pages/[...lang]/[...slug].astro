@@ -14,10 +14,13 @@ interface Props {
 }
 
 const { page, lang } = Astro.props
+const { slug } = Astro.params
 
 const { Content } = await page.render()
 const { data } = page
-const { title, description, ogimage } = data
+const { title, description } = data
+
+const ogimage = slug ? `/og-image/${lang}/${slug}.png` : "/og-image.png"
 ---
 
 <DefaultPageLayout content={{ title, description, ogimage }} lang={lang}>
