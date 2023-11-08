@@ -3,8 +3,7 @@ import { z, defineCollection } from "astro:content"
 const pageCollection = defineCollection({
   schema: z.object({
     title: z.string(),
-    description: z.string(),
-    ogimage: z.string().optional()
+    description: z.string()
   })
 })
 
