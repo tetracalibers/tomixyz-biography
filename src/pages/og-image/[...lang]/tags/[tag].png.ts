@@ -1,8 +1,8 @@
 import type { APIContext } from "astro"
 import { getCollection } from "astro:content"
-import { genarateOgImage } from "$/og-image/generate"
-import { nestedOgTemplate } from "$/og-image/template"
 import { tagToSlug } from "$/utils/tag"
+import { SITE } from "$/config"
+import { makeCategoryLowerPageOGP } from "$/lib/og-image"
 
 const category = "Skill Tags"
 
@@ -16,17 +16,23 @@ export async function getStaticPaths() {
     post.data.tags.forEach((tag) => tags.add(tag))
   })
 
-  return [...tags].map((tag) => ({
-    params: { tag: tagToSlug(tag) },
-    props: { tag }
-  }))
+  return SITE.langs.flatMap((lang) => {
+    return [...tags].map((tag) => ({
+      params: { tag: tagToSlug(tag), lang },
+      props: { tag, lang }
+    }))
+  })
 }
 
 export async function GET({ props }: APIContext) {
-  const { tag } = props
-  const title = `${tag}を扱った作品`
+  const { tag, lang } = props
 
-  const png = await genarateOgImage(nestedOgTemplate(title, category))
+  const title = {
+    ja: `${tag}を扱った作品`,
+    en: `Works using ${tag}`
+  }
+
+  const png = await makeCategoryLowerPageOGP(lang, category, title[lang])
 
   return new Response(png, {
     headers: {
