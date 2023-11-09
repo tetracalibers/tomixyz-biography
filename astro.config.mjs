@@ -48,10 +48,7 @@ export default defineConfig(
       remarkPlugins: [remarkBreaks]
     },
     integrations: [
-      mdx({
-        syntaxHighlight: false, // Disable syntax built-in syntax hightlighting from astro
-        rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]]
-      }),
+      mdx(),
       // markdoc(), // disabled now due to an issue with Vercel builds
       svelte(),
       tailwind({
