@@ -1,30 +1,32 @@
 ---
 import type { CollectionEntry } from "astro:content"
-import { getMonthName } from "$/utils"
+import { buildPageUrlFor } from "$/utils/i18n/slug"
+import { Image } from "astro:assets"
+import PublishDate from "$components/article-link/PublishDate.astro"
 
 interface Props {
   project: CollectionEntry<"project">
+  lang: string | undefined
 }
 
 const {
-  project: { data: project, slug }
+  project: { data: project, slug },
+  lang
 } = Astro.props
+
+const builPageUrl = buildPageUrlFor("projects")
+const pageUrl = builPageUrl(slug, lang)
 ---
 
 <div class="post-preview flex justify-between flex-wrap">
   <div class="post-preview__content flex">
     <div class="sm:w-20 md:w-32">
-      <div class="post-preview__date">
-        <span class="post-preview__date__day">{new Date(project.date).getDate()}</span>
-        <span class="post-preview__date__month-n-year">
-          {`${getMonthName(project.date)} ${new Date(project.date).getFullYear()}`}
-        </span>
-      </div>
+      <PublishDate date={project.date} />
     </div>
     <div class="flex-1 flex flex-col justify-center">
-      <h4 class="post-preview__title dark:text-theme-dark-primary">
-        <a href={`/tomixyz-biography/projects/${slug}`} title={project.title}>{project.title}</a>
-      </h4>
+      <h2 class="post-preview__title dark:text-theme-dark-primary">
+        <a href={pageUrl} title={project.title}>{project.title}</a>
+      </h2>
       <p class="post-preview__desc">
         {project.description}
       </p>
@@ -33,7 +35,7 @@ const {
   {
     project.image && (
       <div class="post-preview__thumb">
-        <img src={project.image} alt={project.title} class="w-full object-cover object-center rounded-md" />
+        <Image src={project.image} alt={project.title} class="w-full object-cover object-center rounded-md" />
       </div>
     )
   }
@@ -54,19 +56,10 @@ const {
     flex-basis: calc((var(--breakpoint) - 100%) * 999);
     flex-grow: 0.5;
   }
-  .post-preview__date {
-    @apply flex flex-col w-full text-center;
-  }
-  .post-preview__date__day {
-    @apply text-6xl font-semibold text-gray-500 dark:text-gray-300;
-  }
-  .post-preview__date__month-n-year {
-    @apply text-gray-500 dark:text-gray-300;
-  }
   .post-preview__title {
     @apply text-2xl font-semibold text-theme-primary dark:text-theme-dark-primary /* this doesn't works here */ hover:underline mb-2;
   }
   .post-preview__desc {
-    @apply text-lg leading-6 line-clamp-2 dark:text-white hyphens-auto;
+    @apply leading-6 dark:text-white hyphens-auto;
   }
 </style>

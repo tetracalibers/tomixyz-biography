@@ -1,0 +1,39 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content"
+import PostLayout from "$/layouts/post.astro"
+import Callout from "$/components/mdoc/Callout.astro"
+import Link from "$/components/mdoc/Link.astro"
+import TweetEmbed from "$/components/mdoc/TweetEmbed.astro"
+import YTVideoEmbed from "$/components/mdoc/YTVideoEmbed.astro"
+import Tabs from "$/components/mdoc/Tabs/Tabs.astro"
+import { i18nPaths } from "$/utils/i18n/routing/article-page"
+
+export async function getStaticPaths() {
+  const collection = await getCollection("blog")
+  return i18nPaths(collection)
+}
+
+interface Props {
+  page: CollectionEntry<"blog">
+  lang: string
+}
+
+const { page, lang } = Astro.props
+const { slug } = Astro.params
+
+const { Content } = await page.render()
+
+const ogimage = `/og-image/${lang}/blog/${slug}.png`
+---
+
+<PostLayout content={page.data} ogimage={ogimage} lang={lang}>
+  <Content
+    components={{
+      Callout,
+      Link,
+      TweetEmbed,
+      YTVideoEmbed,
+      Tabs
+    }}
+  />
+</PostLayout>

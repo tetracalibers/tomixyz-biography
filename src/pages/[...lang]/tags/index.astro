@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content"
+import DefaultPageLayout from "$/layouts/default.astro"
+import { collectTags, tagToSlug } from "$/utils/tag"
+import type { GetStaticPaths } from "astro"
+import { groupByLang } from "$/utils/i18n/collection"
+import { buildPageUrlFor } from "$/utils/i18n/slug"
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const projects = await getCollection("project")
+  const projectsByLang = groupByLang<"project">(projects)
+  return [...projectsByLang].flatMap(([lang, projects]) => {
+    const tags = collectTags(projects)
+    const paths = { params: { lang }, props: { tags, lang } }
+    return lang === "ja" ? [paths, { ...paths, params: { ...paths.params, lang: undefined } }] : paths
+  })
+}
+
+interface Props {
+  tags: string[]
+  lang: string
+}
+
+let title = "Skill Tags"
+let i18nDescription = { ja: "技術ごとの作品一覧", en: "Links to a list of works by technology used" }
+
+const { tags, lang } = Astro.props
+
+const ogimage = `/og-image/${lang}/tags.png`
+const description = i18nDescription[lang]
+
+const buildPageUrl = buildPageUrlFor("tags")
+const pageUrlFromTagName = (tagName: string) => buildPageUrl(tagToSlug(tagName), lang)
+---
+
+<DefaultPageLayout content={{ title, description, ogimage }} lang={lang}>
+  <ul class="tag-list">
+    {
+      tags.map((tag) => (
+        <li>
+          <a class="tag" href={pageUrlFromTagName(tag)} title={`View posts tagged under "${tag}"`}>
+            {tag}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</DefaultPageLayout>
+
+<style>
+  .tag-list {
+    @apply list-none flex gap-2 flex-wrap;
+  }
+  .tag {
+    @apply shadow-md dark:shadow-white dark:shadow-sm inline-block text-xl px-4 py-1 rounded-full text-theme-secondary dark:text-theme-dark-primary hover:bg-white dark:hover:bg-opacity-5 dark:hover:shadow-none;
+  }
+</style>

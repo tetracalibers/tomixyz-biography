@@ -1,0 +1,29 @@
+---
+import OverflowFadeText from "$/components/text/OverflowFadeText.svelte"
+import LeadingTrimText from "$components/text/LeadingTrimText.astro"
+
+interface Props {
+  title: string
+  overflow?: "fade" | "wrap"
+}
+
+const { title, overflow = "wrap" } = Astro.props
+
+const maxWordLength = Math.max(...title.split(" ").map((word) => word.length))
+const isFadable = overflow === "fade" && maxWordLength > 11
+
+const className =
+  "leading-tight text-5xl font-extrabold text-center sm:text-left text-theme-primary dark:text-theme-dark-primary"
+---
+
+{
+  isFadable ? (
+    <LeadingTrimText tag="div">
+      <OverflowFadeText as="h1" text={title} class={className} client:load />
+    </LeadingTrimText>
+  ) : (
+    <LeadingTrimText tag="h1" className={className}>
+      {title}
+    </LeadingTrimText>
+  )
+}

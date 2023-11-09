@@ -1,0 +1,43 @@
+---
+title: TetraCalibers CMS
+date: "2021-12-06"
+image: ../../../assets/projects/tetcali-cms/TetraCalibersCMS-top-short.jpg
+url: https://tetracalibers.net/
+github: https://github.com/tetracalibers/TetraCalibersCMS
+tags:
+  - Laravel
+  - HTML
+  - CSS
+  - jQuery
+  - Vue.js
+  - LaTeX
+  - MySQL
+  - Ruby
+  - Bash
+description: オリジナル教材の公開の場となるWebサイトと専用CMS
+---
+
+import FluidImage from "$/components/gallery/FluidImage.astro"
+import HStack from "$/components/placement/HStack.astro"
+
+import img_ArticleSample from "../../../assets/projects/tetcali-cms/article-sample.png"
+import img_ArticleSampleMobile from "../../../assets/projects/tetcali-cms/article-sample-mobile.png"
+import img_ArticleListSampleMobile from "../../../assets/projects/tetcali-cms/article-list-sample-mobile.png"
+import img_BookSampleTablet from "../../../assets/projects/tetcali-cms/book-sample-tablet.png"
+import img_Footer from "../../../assets/projects/tetcali-cms/footer.png"
+
+LaTeXで組版され、BuildVuでHTMLに変換された自作教材を掲載したり、プログラミングの知見や学習記録をブログとして投稿するためのCMSシステム。
+
+DB設計、サイトデザイン、掲載教材制作、Webサイト構築、CMS機能（記事投稿、カテゴリ管理、SEOマネジメントツール）の実装、サーバー構築、デプロイ、運用の全工程を一人で担った。
+
+DBはMySQL、バックエンドにはLaravel、フロントエンドにはVue、教材組版にはLaTeXを採用。その他、開発ヘルパースクリプトをRubyやbashで記述。
+
+コンテンツのスタイリングを容易にするため、記事執筆画面にはmarkdown風の独自マークアップ言語noicoronパーサを組み込んでいる。
+
+<HStack>
+  <FluidImage src={img_ArticleSampleMobile} />
+  <FluidImage src={img_ArticleListSampleMobile} />
+  <FluidImage src={img_BookSampleTablet} />
+</HStack>
+<FluidImage src={img_ArticleSample} />
+<FluidImage src={img_Footer} />

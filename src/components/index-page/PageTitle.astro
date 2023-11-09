@@ -1,0 +1,17 @@
+---
+import LeadingTrimText from "$components/text/LeadingTrimText.astro"
+
+interface Props {
+  title: string
+}
+
+const { title } = Astro.props
+---
+
+<LeadingTrimText
+  tag="h1"
+  trim="start"
+  className="leading-normal text-5xl font-extrabold text-theme-primary dark:text-theme-dark-primary"
+>
+  {title}
+</LeadingTrimText>

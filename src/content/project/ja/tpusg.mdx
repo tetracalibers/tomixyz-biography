@@ -1,0 +1,33 @@
+---
+title: Try Playing USG
+date: "2021-05-22"
+image: ../../../assets/projects/tpusg/motive.png
+url: https://try-playing-usg.kuron.jp/
+tags:
+  - WordPress
+  - HTML
+  - CSS
+  - jQuery
+  - SVG
+description: リアルタイムチャット風掲示板とブログ機能を備えた交流サイト
+---
+
+import FluidImage from "$/components/gallery/FluidImage.astro"
+import HStack from "$/components/placement/HStack.astro"
+
+import img_SongsMenu from "../../../assets/projects/tpusg/songs-menu-mobile.png"
+import img_BBS from "../../../assets/projects/tpusg/bbs-tablet.png"
+import img_Logo from "../../../assets/projects/tpusg/tpUSGlogo_white.jpg"
+
+アマチュアバンドマンの意見交換の場となる掲示板サイトを開発。デザイン・設計から実装・リリースまで一人で担当。複数名での共同執筆を想定し、管理画面はAction hooks等を駆使して改良した上で提供。
+
+オリジナルのWordPressテーマおよび各所UIをjQuery、HTML、Sassによるコーディングで作成し、BBS機能については、搭載したい機能やサイトデザインとの親和性の問題を解決するため、既存プラグインを使用せずPHPとAjaxによるフルスクラッチ開発を行ったが、いいね機能、リプライ機能、画像添付、Twitter botでの新着投稿通知などを搭載した多機能なものに仕上がっている。
+
+<HStack>
+  <FluidImage maxHeight="400" src={img_SongsMenu} />
+  <FluidImage maxHeight="400" src={img_BBS} />
+</HStack>
+
+また、Illustratorを買うお金がなかったため、サイトのロゴはSVGコードを手書きして作成している。
+
+<FluidImage src={img_Logo} />
