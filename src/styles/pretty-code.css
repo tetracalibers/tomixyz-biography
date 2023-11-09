@@ -37,7 +37,7 @@ pre > code[data-theme="dark"] [data-highlighted-line] {
   border-color: #b2a4ff;
 }
 pre > code:has([data-highlighted-line]) > :not([data-highlighted-line]) {
-  opacity: 0.5;
+  opacity: 0.8;
 }
 /** 
 *  data-line-numbers will be enabled on markdown  
