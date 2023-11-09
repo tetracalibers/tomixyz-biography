@@ -7,6 +7,8 @@ import mdx from "@astrojs/mdx"
 import { defineConfig } from "astro/config"
 import remarkBreaks from "remark-breaks"
 import rehypePrettyCode from "rehype-pretty-code"
+import remarkMath from "remark-math"
+import rehypeKatex from "rehype-katex"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
@@ -44,8 +46,11 @@ export default defineConfig(
     },
     markdown: {
       syntaxHighlight: false, // Disable syntax built-in syntax hightlighting from astro
-      rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
-      remarkPlugins: [remarkBreaks]
+      rehypePlugins: [
+        [rehypePrettyCode, prettyCodeOptions],
+        [rehypeKatex, {}]
+      ],
+      remarkPlugins: [remarkBreaks, remarkMath]
     },
     integrations: [
       mdx(),
