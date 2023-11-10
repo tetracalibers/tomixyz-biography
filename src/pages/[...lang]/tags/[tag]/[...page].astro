@@ -1,38 +1,65 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content"
 import DefaultPageLayout from "$/layouts/default.astro"
-import Paginator from "$/components/Paginator.astro"
 import ProjectPreviewList from "$components/preview/project/ProjectPreviewList.astro"
 import { collectTags, includeTag, tagToSlug } from "$/utils/tag"
 import { compareDateForSort } from "$/utils"
 import { groupByLang } from "$/utils/i18n/collection"
-import type { GetStaticPaths, Page } from "astro"
-import { i18nPaginatePerLang } from "$/utils/i18n/routing/preview-list-page"
+import type { GetStaticPaths } from "astro"
+import { SITE } from "$/config"
+import TutorialPreviewList from "$components/preview/tutorial/TutorialPreviewList.astro"
+import LeadingTrimText from "$components/text/LeadingTrimText.astro"
 
-export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const projects = await getCollection("project")
   const projectsByLang = groupByLang<"project">(projects)
 
-  return [...projectsByLang].flatMap(([lang, projects]) => {
-    const tags = collectTags(projects)
-    return tags.flatMap((tag) => {
-      const matchedProjects = projects.filter(includeTag(tag)).sort(compareDateForSort)
-      return i18nPaginatePerLang(lang, matchedProjects, {
-        paginate,
-        props: { tagName: tag },
-        params: { tag: tagToSlug(tag) }
+  const tutorials = await getCollection("tutorial")
+  const tutorialsByLang = groupByLang<"tutorial">(tutorials)
+
+  const tags = SITE.langs.reduce<{ [lang: string]: string[] }>((acc, lang) => {
+    const projects = projectsByLang.get(lang) ?? []
+    const tutorials = tutorialsByLang.get(lang) ?? []
+    return {
+      ...acc,
+      [lang]: collectTags(projects, tutorials)
+    }
+  }, {})
+
+  return SITE.langs.flatMap((lang) => {
+    return tags[lang].flatMap((tag) => {
+      const matchProjects = (lang: string) =>
+        projectsByLang.get(lang)?.filter(includeTag(tag)).sort(compareDateForSort) ?? []
+      const matchTutorials = (lang: string) =>
+        tutorialsByLang.get(lang)?.filter(includeTag(tag)).sort(compareDateForSort) ?? []
+
+      const pathBy = (lang?: string) => ({
+        params: { lang, tag: tagToSlug(tag) },
+        props: {
+          lang: lang ?? "ja",
+          tagName: tag,
+          matched: {
+            projects: matchProjects(lang ?? "ja"),
+            tutorials: matchTutorials(lang ?? "ja")
+          }
+        }
       })
+
+      return [pathBy("ja"), pathBy("en"), pathBy()]
     })
   })
 }
 
 interface Props {
-  page: Page<CollectionEntry<"project">>
+  matched: {
+    projects: CollectionEntry<"project">[]
+    tutorials: CollectionEntry<"tutorial">[]
+  }
   tagName: string
   lang: string
 }
 
-const { page, tagName, lang } = Astro.props
+const { matched, tagName, lang } = Astro.props
 const { tag } = Astro.params
 
 const i18nDescription = {
@@ -49,6 +76,28 @@ const i18nDescription = {
   }}
   lang={lang}
 >
-  <ProjectPreviewList projects={page.data} lang={lang} />
-  <Paginator page={page} />
+  {
+    matched.tutorials.length > 0 && (
+      <section class="flex flex-col gap-10 text-theme-primary dark:text-theme-dark-primary">
+        <h1 class="flex items-center gap-4 text-3xl before:content-[''] before:h-px before:w-16 before:sm:w-20 before:md:w-32 before:border-b before:border-current">
+          <LeadingTrimText tag="span" trim="start">
+            Tutorial
+          </LeadingTrimText>
+        </h1>
+        <TutorialPreviewList tutorials={matched.tutorials} lang={lang} />
+      </section>
+    )
+  }
+  {
+    matched.projects.length > 0 && (
+      <section class="flex flex-col gap-10 text-theme-primary dark:text-theme-dark-primary">
+        <h1 class="flex items-center gap-4 text-3xl before:content-[''] before:h-px before:w-16 before:sm:w-20 before:md:w-32 before:border-b before:border-current">
+          <LeadingTrimText tag="span" trim="start">
+            Project
+          </LeadingTrimText>
+        </h1>
+        <ProjectPreviewList projects={matched.projects} lang={lang} />
+      </section>
+    )
+  }
 </DefaultPageLayout>
