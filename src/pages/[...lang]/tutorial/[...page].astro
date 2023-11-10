@@ -27,6 +27,6 @@ const description = i18nDescription[lang]
 ---
 
 <DefaultPageLayout content={{ title, description, ogimage }} lang={lang}>
-  <TutorialPreviewList posts={page.data} lang={lang} />
+  <TutorialPreviewList tutorials={page.data} lang={lang} />
   <Paginator page={page} />
 </DefaultPageLayout>
