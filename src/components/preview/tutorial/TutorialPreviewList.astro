@@ -3,16 +3,16 @@ import type { CollectionEntry } from "astro:content"
 import PostPreview from "./TutorialPreview.astro"
 
 interface Props {
-  posts: CollectionEntry<"tutorial">[]
+  tutorials: CollectionEntry<"tutorial">[]
   lang?: string
 }
 
-const { posts, lang } = Astro.props
+const { tutorials, lang } = Astro.props
 ---
 
-<section class="post-preview__list">
-  {posts.map((post) => <PostPreview post={post} lang={lang} />)}
-</section>
+<div class="post-preview__list">
+  {tutorials.map((post) => <PostPreview post={post} lang={lang} />)}
+</div>
 <style>
   .post-preview__list {
     @apply flex flex-col gap-12;
