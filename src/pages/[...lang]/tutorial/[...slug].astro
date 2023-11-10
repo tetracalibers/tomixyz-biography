@@ -7,6 +7,7 @@ import YTVideoEmbed from "$/components/mdoc/YTVideoEmbed.astro"
 import Tabs from "$/components/mdoc/Tabs/Tabs.astro"
 import { i18nPaths } from "$/utils/i18n/routing/article-page"
 import TutorialLayout from "$/layouts/tutorial.astro"
+import DemoArea from "$/components/tutorial/DemoArea.astro"
 
 export async function getStaticPaths() {
   const collection = await getCollection("tutorial")
@@ -33,7 +34,8 @@ const ogimage = `/og-image/${lang}/tutorial/${slug}.png`
       Link,
       TweetEmbed,
       YTVideoEmbed,
-      Tabs
+      Tabs,
+      DemoArea
     }}
   />
 </TutorialLayout>
