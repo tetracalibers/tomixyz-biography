@@ -1,0 +1,712 @@
+---
+title: SVG Filterでinsetなbox-shadowを再現する
+date: "2023-11-09"
+description: todo
+tags:
+  - SVG
+  - SVG Filter
+---
+
+HTML/CSSではいとも簡単に実現できてしまう、こんな表示。
+
+<DemoArea>
+  <div style="margin-block: 25px; width:200px; height:200px; background-color: #D2E0FB; box-shadow: inset 4px 6px 8px rgba(142, 172, 205, 0.7);"></div>
+</DemoArea>
+
+```css
+div {
+  /* inset | offset-x | offset-y | blur-radius | color */
+  box-shadow: inset 4px 6px 8px rgba(142, 172, 205, 0.7);
+
+  width: 200px;
+  height: 200px;
+  background-color: #d2e0fb;
+}
+```
+
+もしもSVGしか使えない（`style`属性も禁止！な）世界に転生したとしたら、この表示をどう実現しますか？
+
+このチュートリアルで、そんな過酷な世界を一緒に生きてみましょう。
+
+持ち物はなにも要りません！
+SVG Filterを触ったことがなくても、きっと大丈夫です。
+
+---
+
+## 影のベースとなるぼかしを作る
+
+影とは結局、要素の内側か外側に加えた、特定の色のぼかし領域。
+
+そこで、まずはぼかしの作り方を考える。
+
+`<feGaussianBlur />`は、ガウスぼかしを実現するためのフィルタである。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="blur">
+        <feGaussianBlur stdDeviation="4" />
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" filter="url(#blur)" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+`<feGaussianBlur/>`では、`stdDeviation`属性でぼかしの強さ（標準偏差）を指定できる。
+
+```html showLineNumbers {3-5}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="4" />
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#blur)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+冒頭のCSSの`box-shadow`では、ぼかし半径の値を`8px`に設定していたが、ここでの`stdDeviation`にはその半分の値`4`を指定している。
+
+ガウスぼかしでは、ぼかし効果のほとんど（95%）が、元のピクセルから半径`stdDeviation * 2px`以内に広がる。
+つまり、`stdDeviation`属性には、ぼかしたい半径の半分の値を指定すればよい。
+
+ちなみにこのフィルタだけなら、CSSの`filter: blur(4px);`で事足りる。
+
+```css
+rect {
+  /** どちらも同じ効果になる */
+  filter: url(#blur);
+  filter: blur(4px);
+}
+```
+
+## `SourceGraphic`と`SourceAlpha`
+
+`<filter />`は、入力画像を変換した上で出力するものである。
+
+`<filter />`の最初の子要素が受け取る入力画像は、このフィルタを指定した要素の描画結果である。
+
+つまり、以下のコードでいえば、`<feGaussianBlur />`が受け取る入力画像は、`filter="url(#blur)"`を指定した`<rect />`要素の描画結果だ。
+
+```html showLineNumbers {7}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="4" />
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#blur)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+`<feXXX />`では、入力画像を`in`属性で指定することができる。
+
+フィルタを指定した要素の描画結果は、`SourceGraphic`という名前で参照できる。
+
+つまり、先ほどのコードの`<feGaussianBlur />`に`in="SourceGraphic"`と指定しても、表示は変わらない。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="blur-in-src">
+        <feGaussianBlur stdDeviation="4" in="SourceGraphic" />
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" filter="url(#blur-in-src)" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {4}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="blur-in-src">
+      <feGaussianBlur stdDeviation="4" in="SourceGraphic" />
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#blur-in-src)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+一方で、`in="SourceAlpha"`と指定すると、次のような表示になる。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="blur-in-alpha">
+        <feGaussianBlur stdDeviation="4" in="SourceAlpha" />
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" filter="url(#blur-in-alpha)" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {4}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="blur-in-alpha">
+      <feGaussianBlur stdDeviation="4" in="SourceAlpha" />
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#blur-in-alpha)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+`SourceAlpha`は、`filter`プロパティを指定した要素の描画部分の**影**と考えるとよい。
+
+仮に、`rect`要素に`fill-opacity`属性を指定することで、描画部分を半透明にすると、`SourceAlpha`の結果である影も薄くなる。
+要素が半透明になると、要素が完全に光を遮ることはなく、わずかに光が透過する…とイメージできる。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="blur-in-alpha">
+        <feGaussianBlur stdDeviation="4" in="SourceAlpha" />
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" fill-opacity="0.2" filter="url(#blur-in-alpha)" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {7}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="blur-in-alpha">
+      <feGaussianBlur stdDeviation="4" in="SourceAlpha" />
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" fill-opacity="0.2" filter="url(#blur-in-alpha)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+## まずは外側の影を作ってみる
+
+`SourceAlpha`は、要素自身が落とす影だと捉えられる。
+
+つまり、`inset`を指定しない`box-shadow`や`drop-shadow`の影は、`SourceAlpha`をそのまま少しずらしたり、ぼかしたりすることで実現できる。
+
+まずは、`inset`も`offset`も指定しない真っ黒な影を`box-shadow`を再現してみよう。
+以下はHTMLとCSSで実現したもの。
+
+<DemoArea>
+  <div style="margin-block: 25px; width:200px; height:200px; background-color: #D2E0FB; box-shadow: 0 0 8px black;"></div>
+</DemoArea>
+
+```css
+div {
+  /* offset-x | offset-y | blur-radius | color */
+  box-shadow: 0 0 8px black;
+
+  width: 200px;
+  height: 200px;
+  background-color: #d2e0fb;
+}
+```
+
+上の例は、周囲をぼかした黒い四角形の上に、元の四角形を乗せることで再現できる。
+ぼかし半径の分だけ、黒い四角形がはみ出して見えるので、その部分が`box-shadow`を模倣するのだ。
+
+さて、前の節で見たように、入力画像を`SourceAlpha`として、`<feGaussianBlur />`を使えば、影用の四角形を作ることができる。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="box-shadow-behind">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="SHADOW" />
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" filter="url(#box-shadow-behind)" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {4}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="box-shadow-behind">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="SHADOW" />
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#box-shadow-behind)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+`result`属性によって、フィルタの出力に名前をつけることができる。
+上の例では、影用の四角形に`SHADOW`という名前をつけている。
+
+この影用の四角形（`SHADOW`）の上に、元の四角形（`SourceGraphic`）を重ねたい。
+
+このようなニーズを叶えるのが、`<feMerge />`である。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="box-shadow">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="SHADOW" />
+        <feMerge>
+          <feMergeNode in="SHADOW" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" filter="url(#box-shadow)" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {5-8}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="box-shadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="SHADOW" />
+      <feMerge>
+        <feMergeNode in="SHADOW" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#box-shadow)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+`<feMerge />`を使うことで、複数のフィルタの出力画像を順番に重ねて出力することができる。
+
+重ねたい出力画像は、`<feMerge />`の子として置いた`<feMergeNode>`の`in`属性で指定する。
+そして、`<feMergeNode>`を並べた順に上へと重なっていく。
+
+ちなみに、上のコードは、次のように書いてもよい。
+
+```html showLineNumbers {4,6}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="box-shadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#box-shadow)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+`<filter />`内に`<feXXX />`を並べていくことは、メソッドチェーンやパイプラインにたとえられる。
+`<filter />`の子として並べられた各`<feXXX />`要素は、その直前の`<feXXX />`の出力を入力として受け取る。
+
+`<feMergeNode />`に`in`属性がない場合は、親である`<feMerge />`への入力がそのまま渡される。
+
+今回の場合、`<feMerge />`の直前に`<feGaussianBlur />`を置いているので、`result="SHADOW"`と`in="SHADOW"`で明示しなくても、`<feGaussianBlur />`の出力がそのまま渡されるのである。
+
+## 影をずらす
+
+`inset`キーワードを加えるのは最後の工程として、次は`offset`の指定を考えてみる。
+
+この節で目指すのは、次のような表示だ。以下はHTML/CSSで描画したもの。
+
+<DemoArea>
+  <div style="margin-block: 25px; width:200px; height:200px; background-color: #D2E0FB; box-shadow: 4px 6px 8px black;"></div>
+</DemoArea>
+
+```css
+div {
+  /* offset-x | offset-y | blur-radius | color */
+  box-shadow: 4px 6px 8px black;
+
+  width: 200px;
+  height: 200px;
+  background-color: #d2e0fb;
+}
+```
+
+`<feOffset />`を使うことで、入力画像をずらすことができる。
+$x$方向の移動量は`dx`属性で、$y$方向の移動量は`dy`属性で指定する。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="offset-shadow">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+        <feOffset dx="4" dy="6" />
+        <feMerge>
+          <feMergeNode />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" filter="url(#offset-shadow)" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {5}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="offset-shadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+      <feOffset dx="4" dy="6" />
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#offset-shadow)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+`<feOffset />`を`<feGaussianBlur />`の直後に置くことで、`<feOffset />`への入力画像が`<feGaussianBlur />`になるので、ぼかした影をずらすことになる。
+
+そしてそのずらした結果は最初の`<feMergeNode />`にそのまま渡され、元の`<rect />`にずらした影を合成した結果が得られる。
+
+## 影に色をつける
+
+真っ黒な影を望む場合は、このままでも十分だろう。
+しかし、そうでない場合が多いと思うので、影の色をカスタマイズする方法を探っていく。
+
+以下はHTML/CSSで描画した、目標とする表示。
+
+<DemoArea>
+  <div style="margin-block: 25px; width:200px; height:200px; background-color: #D2E0FB; box-shadow: 4px 6px 8px rgba(142, 172, 205, 0.7);"></div>
+</DemoArea>
+
+```css
+div {
+  /* offset-x | offset-y | blur-radius | color */
+  box-shadow: 4px 6px 8px rgba(142, 172, 205, 0.7);
+
+  width: 200px;
+  height: 200px;
+  background-color: #d2e0fb;
+}
+```
+
+まず、フィルタ内で色を使うためには、`<feFlood />`を使用する。
+
+とはいえ、`<feFlood />`は、フィルタがかかる領域を超えて、全面を指定した色で塗りつぶすものなので、これだけでは`<svg>`要素全体に色が載ってしまう。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="use-flood">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+        <feOffset dx="4" dy="6" />
+        <feFlood flood-color="rgb(142, 172, 205)" flood-opacity="0.7" />
+        <feMerge>
+          <feMergeNode />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" filter="url(#use-flood)" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {6}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="use-flood">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+      <feOffset dx="4" dy="6" />
+      <feFlood flood-color="rgb(142, 172, 205)" flood-opacity="0.7" />
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#use-flood)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+特定の領域にのみ色を載せたい場合は、うまいことマスクしてあげる必要がある。
+
+`<feComposite />`を使えば、`in`属性と`in2`属性で指定した2つの画像を、各部分でどちらの表示を採用するかを選択しながら合成することができる。
+
+どちらの表示を採用するかの選択は、`<feComposite />`の`operator`属性に指定した合成演算によって行われる。
+
+中でも、`operator="in"`と指定すると、
+
+- `in2`画像の不透明な部分では`in`画像を採用
+- `in2`画像の透明な部分では`in2`画像を採用
+
+という合成が行われる。
+
+今回の場合は、`in2`に影用の四角形、`in`に`<feFlood />`によって塗られた無限平面を指定すればよい。
+
+- 影用の四角形の内側は`<feFlood />`で指定した色で塗りつぶされる
+- 影用の四角形の外側では、`<feFlood />`の色は破棄される
+
+という挙動になり、次のような表示が得られる。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="color-shadow">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+        <feOffset dx="4" dy="6" result="SHADOW" />
+        <feFlood flood-color="rgb(142, 172, 205)" flood-opacity="0.7" />
+        <feComposite in2="SHADOW" operator="in" />
+        <feMerge>
+          <feMergeNode />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" filter="url(#color-shadow)" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {5,7}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="color-shadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+      <feOffset dx="4" dy="6" result="SHADOW" />
+      <feFlood flood-color="rgb(142, 172, 205)" flood-opacity="0.7" />
+      <feComposite in2="SHADOW" operator="in" />
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#color-shadow)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+`<feComposite />`の`in`属性を省略した場合、その直前の`<feXXX />`の出力が`in`属性として渡される。
+
+## 内側に影を落とすための壁を作る
+
+これで、`inset`を指定しなかった場合の`box-shadow`が完成した。
+いよいよ、`inset`と同じ効果を持つフィルタを加えていくフェーズである。
+
+ここまで実装した要素の外側の影は、要素自身が落とす影である。
+
+しかし、`inset`指定で実現される要素の内側の影は、その**要素を取り囲む壁が落とす影**だと考えられる。
+そこで、まずは要素の周りに壁をつくりたい。
+
+`SourceAlpha`では、塗られている部分は真っ黒に設定されてしまうが、塗りの外側の部分は透明なままである。
+この透明部分と黒い部分を反転させることができれば、塗りの外側の部分が黒く塗りつぶされるので、これが要素を取り囲む壁となる。
+
+入力画像の色を加工する`<feComponentTransfer />`をうまく使うことで、`SourceAlpha`の反転を実現できる。
+
+まずは`<feComponentTransfer />`の使い方の一例を見てみよう。
+
+<DemoArea>
+  <svg width="550" height="240" viewBox="0 0 550 240" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="half-opacity">
+        <feComponentTransfer in="SourceGraphic">
+          <feFuncA type="table" tableValues="0 0.5" />
+        </feComponentTransfer>
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" x="10" y="20" width="200" height="200" />
+    <rect fill="#D2E0FB" filter="url(#half-opacity)" x="300" y="20" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {4-6}
+<svg width="550" height="240" viewBox="0 0 550 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="half-opacity">
+      <feComponentTransfer in="SourceGraphic">
+        <feFuncA type="table" tableValues="0 0.5" />
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" x="10" y="20" width="200" height="200" />
+  <rect fill="#D2E0FB" filter="url(#half-opacity)" x="300" y="20" width="200" height="200" />
+</svg>
+```
+
+`<feComponentTransfer />`は、子要素として`<feFuncR />`, `<feFuncG />`, `<feFuncB />`, `<feFuncA />`を並べることで、入力画像の色のR, G, B, Aそれぞれを個別に操作して色を加工するフィルタ。
+
+`<feFuncX />`では、`type`属性で操作の種類を指定する。
+`type="table"`と指定すると、`tableValues`属性で指定した値に従って、色の範囲を変換することができる。
+
+上の例では、フィルタを適用した右側の`<rect />`だけ、半透明になっている。
+半透明にする指示を表しているのが、`<feFuncA />`の部分だ。
+
+`<feFuncA />`の`tableValues`属性には、`0 0.5`と指定している。
+本来、RGBAのA値（アルファチャネル、不透明度）は、`0`から`1`の値を取りうるが、それを`0`から`0.5`の範囲に圧縮しているのだ。
+結果、元の不透明度が`1`の場合は`0.5`に、`0.5`の場合は`0.25`に…と、不透明度が半分になるように変換されている。
+
+さて、透明な部分と塗りの部分を反転させるには、`tableValues`属性の値をどう設定すべきか、予想がついただろうか？
+
+<DemoArea>
+  <svg width="550" height="240" viewBox="0 0 550 240" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="outside">
+        <feComponentTransfer in="SourceAlpha">
+          <feFuncA type="table" tableValues="1 0" />
+        </feComponentTransfer>
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" x="10" y="20" width="200" height="200" />
+    <rect fill="#D2E0FB" filter="url(#outside)" x="300" y="20" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {4-6}
+<svg width="550" height="240" viewBox="0 0 550 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="outside">
+      <feComponentTransfer in="SourceAlpha">
+        <feFuncA type="table" tableValues="1 0" />
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" x="10" y="20" width="200" height="200" />
+  <rect fill="#D2E0FB" filter="url(#outside)" x="300" y="20" width="200" height="200" />
+</svg>
+```
+
+`tableValues`属性の値は、数が小さい順に並べなければならないわけではない。
+むしろ最大値と最小値を入れ替えることで、反転を実現することができる。
+
+透明（不透明度`0`）な部分と塗り（不透明度`1`）の部分を反転させたい場合は、`tableValues`属性の値を`1 0`と指定すればよい。
+すると、元の不透明度が`0`の場合は`1`に、`1`の場合は`0`に…と、不透明度が反転する。
+
+これで、`<rect />`を取り囲む壁ができた。
+
+これまで作ってきた影は、入力画像が`SourceAlpha`であるため、`<rect />`自身が落とす影になっていた。
+本節で作った壁を入力画像に変えることで、この壁が落とす影が生成できる。
+
+そのためには、`<feGaussianBlur />`の`in`属性の値が、`<feComponentTransfer />`の結果（壁）になるようにすればよい。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="blur-outside">
+        <feComponentTransfer in="SourceAlpha">
+          <feFuncA type="table" tableValues="1 0" />
+        </feComponentTransfer>
+        <feGaussianBlur stdDeviation="4" />
+        <feOffset dx="4" dy="6" result="SHADOW" />
+        <feFlood flood-color="rgb(142, 172, 205)" flood-opacity="0.7" />
+        <feComposite in2="SHADOW" operator="in" />
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" filter="url(#blur-outside)" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {4-6}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="blur-outside">
+      <feComponentTransfer in="SourceAlpha">
+        <feFuncA type="table" tableValues="1 0" />
+      </feComponentTransfer>
+      <feGaussianBlur stdDeviation="4" />
+      <feOffset dx="4" dy="6" result="SHADOW" />
+      <feFlood flood-color="rgb(142, 172, 205)" flood-opacity="0.7" />
+      <feComposite in2="SHADOW" operator="in" />
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#blur-outside)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+一旦、元の`<rect />`と影を合成するための`<feMerge />`は削除し、影だけを表示した状態に戻している。
+
+## `inset`な影を完成させる
+
+いよいよ、仕上げのフェーズだ。
+
+まずは、`<rect />`の外側の壁を消して、影だけを残したい。
+
+特定の領域にのみ色を載せたい場合のマスク処理は、`<feComposite operator="in" />`を使うことで実現できたことを覚えているだろうか。
+
+今回は、`in="SHADOW"`、`in2="SourceAlpha"`とすることで、
+
+- `<rect />`の塗りの部分では`in`を採用し、影のみ残る
+- `<rect />`の範囲外では`in2`を採用し、何も残らない（`<rect />`範囲外の`in2`は透明）
+
+という挙動を実現する。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="inset-shadow-only">
+        <feComponentTransfer in="SourceAlpha">
+          <feFuncA type="table" tableValues="1 0" />
+        </feComponentTransfer>
+        <feGaussianBlur stdDeviation="4" />
+        <feOffset dx="4" dy="6" result="SHADOW" />
+        <feFlood flood-color="rgb(142, 172, 205)" flood-opacity="0.7" />
+        <feComposite in2="SHADOW" operator="in" />
+        <feComposite in2="SourceAlpha" operator="in" />
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" filter="url(#inset-shadow-only)" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {11}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="inset-shadow-only">
+      <feComponentTransfer in="SourceAlpha">
+        <feFuncA type="table" tableValues="1 0" />
+      </feComponentTransfer>
+      <feGaussianBlur stdDeviation="4" />
+      <feOffset dx="4" dy="6" result="SHADOW" />
+      <feFlood flood-color="rgb(142, 172, 205)" flood-opacity="0.7" />
+      <feComposite in2="SHADOW" operator="in" />
+      <feComposite in2="SourceAlpha" operator="in" />
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#inset-shadow-only)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+最後に、元の`<rect />`と影を合成するための`<feMerge />`を再度追加しよう。
+
+しかし、外側に影をつけたときとは`<feMergeNode />`の順序が異なり、今回は`<feMergeNode in="SourceGraphic" />`を先に置くことで、影の方が上に重なるようにしている。
+そうしなければ、要素内側の影は要素に隠れてしまうからだ。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="inset-shadow">
+        <feComponentTransfer in="SourceAlpha">
+          <feFuncA type="table" tableValues="1 0" />
+        </feComponentTransfer>
+        <feGaussianBlur stdDeviation="4" />
+        <feOffset dx="4" dy="6" result="SHADOW" />
+        <feFlood flood-color="rgb(142, 172, 205)" flood-opacity="0.7" />
+        <feComposite in2="SHADOW" operator="in" />
+        <feComposite in2="SourceAlpha" operator="in" />
+        <feMerge>
+          <feMergeNode in="SourceGraphic" />
+          <feMergeNode />
+        </feMerge>
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" filter="url(#inset-shadow)" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {12-15}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="inset-shadow">
+      <feComponentTransfer in="SourceAlpha">
+        <feFuncA type="table" tableValues="1 0" />
+      </feComponentTransfer>
+      <feGaussianBlur stdDeviation="4" />
+      <feOffset dx="4" dy="6" result="SHADOW" />
+      <feFlood flood-color="rgb(142, 172, 205)" flood-opacity="0.7" />
+      <feComposite in2="SHADOW" operator="in" />
+      <feComposite in2="SourceAlpha" operator="in" />
+      <feMerge>
+        <feMergeNode in="SourceGraphic" />
+        <feMergeNode />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#inset-shadow)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+完成！！🎉
