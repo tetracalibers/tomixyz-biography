@@ -17,7 +17,7 @@ interface TemplateContent {
   subtitle?: string
 }
 
-const escapeForJaFont = (str: string) => str.replaceAll(" ", "\u00A0")
+const escapeForJaFont = (str: string) => str.replaceAll(" ", "\u00A0").replaceAll("-", "\u2011")
 
 export const useOgSvgTemplate = ({ font, image }: TemplateNeedAssets) => {
   const { logo } = image
