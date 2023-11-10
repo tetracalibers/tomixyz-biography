@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from "astro:content"
+import PostPreview from "./TutorialPreview.astro"
+
+interface Props {
+  posts: CollectionEntry<"tutorial">[]
+  lang?: string
+}
+
+const { posts, lang } = Astro.props
+---
+
+<section class="post-preview__list">
+  {posts.map((post) => <PostPreview post={post} lang={lang} />)}
+</section>
+<style>
+  .post-preview__list {
+    @apply flex flex-col gap-12;
+  }
+</style>

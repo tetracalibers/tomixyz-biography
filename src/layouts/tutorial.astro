@@ -1,0 +1,87 @@
+---
+import type { CollectionEntry } from "astro:content"
+import { SITE } from "$/config"
+import MainLayout from "$/components/MainLayout.astro"
+import BaseHead from "$/components/BaseHead.astro"
+import AvatarImage from "$components/image-wrapper/AvatarImage.astro"
+import PublishDate from "$components/article-header/PublishDate.astro"
+import Prose from "$components/Prose.astro"
+
+interface Props {
+  content: CollectionEntry<"tutorial">["data"]
+  ogimage?: string
+  lang?: string
+}
+const { content, ogimage, lang = "ja" } = Astro.props
+
+const AUTHOR_NAME = SITE.author
+const AUTHOR_TWITTER = SITE.authorTwitter
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <BaseHead {...content} image={ogimage} title={content.title ? `${SITE.title} | ${content.title}` : SITE.title} />
+  </head>
+  <MainLayout>
+    <div class="post__header">
+      <h1 class="post__title">{content.title}</h1>
+      <div class="post__desc flex flex-row gap-2">
+        <AvatarImage className="avatar" />
+        <div class="flex flex-col border-l-2 pl-2">
+          {
+            AUTHOR_TWITTER ? (
+              <a
+                class="post__author"
+                href={`https://twitter.com/${AUTHOR_TWITTER}`}
+                title={`${AUTHOR_NAME}'s twitter`}
+                target="_blank"
+                rel="external"
+              >
+                {AUTHOR_NAME}
+              </a>
+            ) : (
+              <span class="post__author">{AUTHOR_NAME}</span>
+            )
+          }
+          <PublishDate date={content.date} />
+        </div>
+      </div>
+    </div>
+    <Prose>
+      <div class="post__content"><slot /></div>
+    </Prose>
+  </MainLayout>
+  <style>
+    .post__header {
+      @apply py-4 mb-1 text-center md:text-left;
+    }
+    .post__title {
+      @apply text-5xl font-extrabold text-theme-primary dark:text-theme-dark-primary;
+      line-height: 1.5;
+    }
+    .post__desc {
+      @apply my-8 text-gray-500 dark:text-gray-100 flex justify-center text-left md:flex-none md:justify-start;
+    }
+    .post__author {
+      @apply no-underline text-gray-500 dark:text-gray-100 hover:text-theme-primary;
+    }
+    .avatar {
+      @apply w-12 h-12 rounded-full object-cover p-1 border-2 border-solid border-theme-dark-primary dark:border-theme-primary;
+    }
+    .post__content :global(p > img) {
+      --fluid-bp-320-600: calc((100vw - 320px) / (600 - 320));
+      --__max-height: 300px;
+      --__space: clamp(16px, (16px + (68 - 16) * var(--fluid-bp-320-600)), 68px);
+
+      width: 100%;
+      height: 100%;
+      max-height: calc(var(--__max-height) + var(--__space) * 2);
+
+      box-sizing: border-box;
+
+      object-position: center;
+      object-fit: contain;
+    }
+  </style>
+</html>
