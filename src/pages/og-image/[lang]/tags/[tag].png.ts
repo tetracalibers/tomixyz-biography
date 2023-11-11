@@ -29,8 +29,8 @@ export async function GET({ props }: APIContext) {
   const { tag, lang } = props
 
   const title = {
-    ja: `${tag}を扱った作品`,
-    en: `Works using ${tag}`
+    ja: `${tag}を扱った作品や記事`,
+    en: `Works and Articles using ${tag}`
   }
 
   const png = await makeCategoryLowerPageOGP(lang, category, title[lang])
