@@ -47,10 +47,10 @@ export default defineConfig(
     markdown: {
       syntaxHighlight: false, // Disable syntax built-in syntax hightlighting from astro
       rehypePlugins: [
-        [rehypePrettyCode, prettyCodeOptions],
-        [rehypeKatex, {}]
+        [rehypeKatex, {}],
+        [rehypePrettyCode, prettyCodeOptions]
       ],
-      remarkPlugins: [remarkBreaks, remarkMath]
+      remarkPlugins: [remarkMath, remarkBreaks]
     },
     integrations: [
       mdx(),

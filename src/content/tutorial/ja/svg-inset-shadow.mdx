@@ -473,12 +473,277 @@ div {
 
 `<feComposite />`の`in`属性を省略した場合、その直前の`<feXXX />`の出力が`in`属性として渡される。
 
-## 内側に影を落とすための壁を作る
+## いよいよ`inset`の再現へ
 
 これで、`inset`を指定しなかった場合の`box-shadow`が完成した。
 いよいよ、`inset`と同じ効果を持つフィルタを加えていくフェーズである。
 
-ここまで実装した要素の外側の影は、要素自身が落とす影である。
+`inset`を再現する方法はいくつかあるので、それぞれの考え方を鑑賞してみよう。
+
+### 方法1: `xor`と`in`の合わせ技
+
+`<feComposite />`をうまく使えば、影用の四角形が`<rect />`の内側でのみ見えるようにマスクすることができる。
+
+`<feComposite />`での演算を考える際には、`in`属性の入力画像と`in2`属性の入力画像が、どのように重なっているかを考えるとよい。
+
+以下の図では、グレーに塗られている部分が影となる四角形、赤い枠線内が元の`<rect />`部分（`SourceAlpha`の領域）を表している。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="diff">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+        <feOffset dx="4" dy="6" result="SHADOW" />
+        <feFlood flood-color="rgb(142, 172, 205)" flood-opacity="0.7" />
+        <feComposite in2="SHADOW" operator="in" />
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" filter="url(#diff)" x="25" y="25" width="200" height="200" />
+    <rect fill="none" stroke="#EB6383" stroke-width="1.5" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+`<feComposite />`の`in`属性を影の四角形、`in2`属性を`SourceAlpha`としよう。
+
+このとき、`operator="xor"`と指定すると、`in`画像と`in2`画像の**重ならない**部分のみが残る。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="xor">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+        <feOffset dx="4" dy="6" />
+        <feComposite in2="SourceAlpha" operator="xor" />
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" filter="url(#xor)" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {6}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="xor">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+      <feOffset dx="4" dy="6" />
+      <feComposite in2="SourceAlpha" operator="xor" />
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#xor)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+外側の影と内側の影が両方とも残る結果になっている。
+
+そこで、さらに`<feComposite />`を使って、外側の影を消してしまおう。
+
+`operator="in"`と指定すると、`in`画像と`in2`画像の**重なる**部分のみが残るので、元の`<rect />`（`SourceAlpha`）の範囲外の部分は消えることになる。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="xor-and-in">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+        <feOffset dx="4" dy="6" />
+        <feComposite in2="SourceAlpha" operator="xor" />
+        <feComposite in2="SourceAlpha" operator="in" />
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" filter="url(#xor-and-in)" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {7}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="xor-and-in">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+      <feOffset dx="4" dy="6" />
+      <feComposite in2="SourceAlpha" operator="xor" />
+      <feComposite in2="SourceAlpha" operator="in" />
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#xor-and-in)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+これで目的の位置の影が得られた🎉
+
+完成形はこちら。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="inset-shadow-1">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+        <feOffset dx="4" dy="6" />
+        <feComposite in2="SourceAlpha" operator="xor" />
+        <feComposite in2="SourceAlpha" operator="in" result="SHADOW" />
+        <feFlood flood-color="rgb(142, 172, 205)" flood-opacity="0.7" />
+        <feComposite in2="SHADOW" operator="in" />
+        <feMerge>
+          <feMergeNode in="SourceGraphic" />
+          <feMergeNode />
+        </feMerge>
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" filter="url(#inset-shadow-1)" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {6-7}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="inset-shadow-1">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+      <feOffset dx="4" dy="6" />
+      <feComposite in2="SourceAlpha" operator="xor" />
+      <feComposite in2="SourceAlpha" operator="in" result="SHADOW" />
+      <feFlood flood-color="rgb(142, 172, 205)" flood-opacity="0.7" />
+      <feComposite in2="SHADOW" operator="in" />
+      <feMerge>
+        <feMergeNode in="SourceGraphic" />
+        <feMergeNode />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#inset-shadow-1)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+ちなみに、外側に影をつけたときとは`<feMergeNode />`の順序が異なっている。
+
+```html showLineNumbers {10-13}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="inset-shadow-1">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+      <feOffset dx="4" dy="6" />
+      <feComposite in2="SourceAlpha" operator="xor" />
+      <feComposite in2="SourceAlpha" operator="in" result="SHADOW" />
+      <feFlood flood-color="rgb(142, 172, 205)" flood-opacity="0.7" />
+      <feComposite in2="SHADOW" operator="in" />
+      <feMerge>
+        <feMergeNode in="SourceGraphic" />
+        <feMergeNode />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#inset-shadow-1)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+内側に影をつける場合は、`<feMergeNode in="SourceGraphic" />`を先に置くことで、影の方が上に重なるようにしている。
+そうしなければ、要素の内側の影は要素の塗りに隠れてしまうからだ。
+
+### 方法2: `arithmetic`で差集合をつくる
+
+方法1では、`<feComposite />`を2回繰り返して使うことになり、あまりスマートとはいえない。
+
+`<feComposite />`の`operator`には、`arithmetic`という値を指定することもできる。
+この値を指定すると、色の選び方をより細かいパラメータ`k1`、`k2`、`k3`、`k4`属性で制御できるようになる。
+
+具体的には、各ピクセルで次のような計算が行われる。
+`i1`は`in`画像の計算対象ピクセルの色の値、`i2`は`in2`画像の計算対象ピクセルの色の値を表している。
+
+```ruby
+out = k1 * i1 * i2 + k2 * i1 + k3 * i2 + k4
+```
+
+`k1`、`k2`、`k3`、`k4`属性は、指定しなければデフォルト値として`0`が使われる。
+
+仮に、`k2 = -1`、`k3 = 1`とし、それ以外は`0`のままにしておくと、おもしろい式が得られる。
+
+```ruby
+out = k1 * i1 * i2 + k2 * i1 + k3 * i2 + k4
+    = 0 * i1 * i2 + (-1) * i1 + 1 * i2 + 0
+    = i2 - i1
+```
+
+つまり、`in2`画像と`in`画像の差集合をとる演算になる。
+
+集合`in2 - in`は、`in2`の領域のうち、`in`が重ならない部分を表す。
+
+下の図でいえば、赤枠内のうち、影が乗っていない白い部分だけが残ることになる。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <rect fill="#D2E0FB" filter="url(#diff)" x="25" y="25" width="200" height="200" />
+    <rect fill="none" stroke="#EB6383" stroke-width="1.5" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+つまり、こうなる。（差集合はあくまでもイメージで、実際にはアルファ値の引き算を行っているため、ぼかしにより半透明になっている部分は、その透明度に応じて残ることになる。）
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="arithmetic">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+        <feOffset dx="4" dy="6" />
+        <feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" />
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" filter="url(#arithmetic)" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {6}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="arithmetic">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+      <feOffset dx="4" dy="6" />
+      <feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" />
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#arithmetic)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+この演算を利用した完成形はこちら。
+
+<DemoArea>
+  <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="inset-shadow-2">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+        <feOffset dx="4" dy="6" />
+        <feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="SHADOW" />
+        <feFlood flood-color="rgb(142, 172, 205)" flood-opacity="0.7" />
+        <feComposite in2="SHADOW" operator="in" />
+        <feMerge>
+          <feMergeNode in="SourceGraphic" />
+          <feMergeNode />
+        </feMerge>
+      </filter>
+    </defs>
+    <rect fill="#D2E0FB" filter="url(#inset-shadow-2)" x="25" y="25" width="200" height="200" />
+  </svg>
+</DemoArea>
+
+```html showLineNumbers {6}
+<svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="inset-shadow-2">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+      <feOffset dx="4" dy="6" />
+      <feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="SHADOW" />
+      <feFlood flood-color="rgb(142, 172, 205)" flood-opacity="0.7" />
+      <feComposite in2="SHADOW" operator="in" />
+      <feMerge>
+        <feMergeNode in="SourceGraphic" />
+        <feMergeNode />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect fill="#D2E0FB" filter="url(#inset-shadow-2)" x="25" y="25" width="200" height="200" />
+</svg>
+```
+
+### 方法3: 内側に影を落とすための壁を作る（Safari・iOS非対応）
+
+要素の外側の影は、要素自身が落とす影である。
 
 しかし、`inset`指定で実現される要素の内側の影は、その**要素を取り囲む壁が落とす影**だと考えられる。
 そこで、まずは要素の周りに壁をつくりたい。
@@ -568,8 +833,11 @@ div {
 
 これで、`<rect />`を取り囲む壁ができた。
 
-これまで作ってきた影は、入力画像が`SourceAlpha`であるため、`<rect />`自身が落とす影になっていた。
-本節で作った壁を入力画像に変えることで、この壁が落とす影が生成できる。
+`<rect />`の範囲外を黒く塗りつぶすことができているのは、SVGのフィルタ操作は、元画像より`10%`大きいボックスを用意して行われるためだ。
+（しかし、SafariやiOSでは挙動が異なるようで、`<rect />`の範囲外の塗りの部分は見えなくなってしまっているはずだ。）
+
+さて、これまで作ってきた影は、入力画像が`SourceAlpha`であるため、`<rect />`自身が落とす影になっていた。
+たった今作った壁を入力画像に変えることで、この壁が落とす影を生成できる。
 
 そのためには、`<feGaussianBlur />`の`in`属性の値が、`<feComponentTransfer />`の結果（壁）になるようにすればよい。
 
@@ -607,13 +875,7 @@ div {
 </svg>
 ```
 
-一旦、元の`<rect />`と影を合成するための`<feMerge />`は削除し、影だけを表示した状態に戻している。
-
-## `inset`な影を完成させる
-
-いよいよ、仕上げのフェーズだ。
-
-まずは、`<rect />`の外側の壁を消して、影だけを残したい。
+つぎに、`<rect />`の外側の壁を消して、影だけを残したい。
 
 特定の領域にのみ色を載せたい場合のマスク処理は、`<feComposite operator="in" />`を使うことで実現できたことを覚えているだろうか。
 
@@ -662,13 +924,10 @@ div {
 
 最後に、元の`<rect />`と影を合成するための`<feMerge />`を再度追加しよう。
 
-しかし、外側に影をつけたときとは`<feMergeNode />`の順序が異なり、今回は`<feMergeNode in="SourceGraphic" />`を先に置くことで、影の方が上に重なるようにしている。
-そうしなければ、要素内側の影は要素に隠れてしまうからだ。
-
 <DemoArea>
   <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <filter id="inset-shadow">
+      <filter id="inset-shadow-3">
         <feComponentTransfer in="SourceAlpha">
           <feFuncA type="table" tableValues="1 0" />
         </feComponentTransfer>
@@ -683,14 +942,14 @@ div {
         </feMerge>
       </filter>
     </defs>
-    <rect fill="#D2E0FB" filter="url(#inset-shadow)" x="25" y="25" width="200" height="200" />
+    <rect fill="#D2E0FB" filter="url(#inset-shadow-3)" x="25" y="25" width="200" height="200" />
   </svg>
 </DemoArea>
 
 ```html showLineNumbers {12-15}
 <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <filter id="inset-shadow">
+    <filter id="inset-shadow-3">
       <feComponentTransfer in="SourceAlpha">
         <feFuncA type="table" tableValues="1 0" />
       </feComponentTransfer>
@@ -705,7 +964,7 @@ div {
       </feMerge>
     </filter>
   </defs>
-  <rect fill="#D2E0FB" filter="url(#inset-shadow)" x="25" y="25" width="200" height="200" />
+  <rect fill="#D2E0FB" filter="url(#inset-shadow-3)" x="25" y="25" width="200" height="200" />
 </svg>
 ```
 
