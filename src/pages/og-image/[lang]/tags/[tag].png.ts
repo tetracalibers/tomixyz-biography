@@ -8,7 +8,8 @@ const category = "Skill Tags"
 
 export async function getStaticPaths() {
   const projects = await getCollection("project")
-  const targets = [...projects]
+  const tutorials = await getCollection("tutorial")
+  const targets = [...projects, ...tutorials]
 
   const tags = new Set<string>()
   targets.forEach((post) => {
@@ -28,8 +29,8 @@ export async function GET({ props }: APIContext) {
   const { tag, lang } = props
 
   const title = {
-    ja: `${tag}を扱った作品`,
-    en: `Works using ${tag}`
+    ja: `${tag}を扱った作品や記事`,
+    en: `Works and Articles using ${tag}`
   }
 
   const png = await makeCategoryLowerPageOGP(lang, category, title[lang])

@@ -1,7 +1,7 @@
 ---
 import { tagToSlug } from "$/utils/tag"
 import { SITE } from "$/config"
-import LeadingTrimText from "$components/text/LeadingTrimText.astro"
+import Tag from "$components/article-header/Tag.astro"
 
 interface Props {
   tags: string[]
@@ -14,15 +14,9 @@ const { tags } = Astro.props
   {
     tags.length > 0 &&
       tags.map((tag) => (
-        <LeadingTrimText tag="span">
-          <a
-            class="text-slate-500 dark:text-theme-dark-secondary hover:text-theme-primary dark:hover:text-theme-dark-primary"
-            href={`${SITE.base}/tags/${tagToSlug(tag)}`}
-            title={tag}
-          >
-            {tag}
-          </a>
-        </LeadingTrimText>
+        <Tag href={`${SITE.base}/tags/${tagToSlug(tag)}`} title={tag}>
+          {tag}
+        </Tag>
       ))
   }
 </div>

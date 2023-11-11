@@ -5,13 +5,26 @@ import { collectTags, tagToSlug } from "$/utils/tag"
 import type { GetStaticPaths } from "astro"
 import { groupByLang } from "$/utils/i18n/collection"
 import { buildPageUrlFor } from "$/utils/i18n/slug"
+import { SITE } from "$/config"
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const projects = await getCollection("project")
   const projectsByLang = groupByLang<"project">(projects)
-  return [...projectsByLang].flatMap(([lang, projects]) => {
-    const tags = collectTags(projects)
-    const paths = { params: { lang }, props: { tags, lang } }
+
+  const tutorials = await getCollection("tutorial")
+  const tutorialsByLang = groupByLang<"tutorial">(tutorials)
+
+  const tags = SITE.langs.reduce<{ [lang: string]: string[] }>((acc, lang) => {
+    const projects = projectsByLang.get(lang) ?? []
+    const tutorials = tutorialsByLang.get(lang) ?? []
+    return {
+      ...acc,
+      [lang]: collectTags(projects, tutorials).sort()
+    }
+  }, {})
+
+  return SITE.langs.flatMap((lang) => {
+    const paths = { params: { lang }, props: { tags: tags[lang], lang } }
     return lang === "ja" ? [paths, { ...paths, params: { ...paths.params, lang: undefined } }] : paths
   })
 }
@@ -22,7 +35,7 @@ interface Props {
 }
 
 let title = "Skill Tags"
-let i18nDescription = { ja: "技術ごとの作品一覧", en: "Links to a list of works by technology used" }
+let i18nDescription = { ja: "技術ごとの作品や記事一覧", en: "Links to a list of works and articles by technology used" }
 
 const { tags, lang } = Astro.props
 

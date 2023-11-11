@@ -5,13 +5,19 @@ const { grid = true, fill = true } = Astro.props
 <article
   class:list={[
     { grid, fill },
-    "prose dark:prose-dark prose-a:underline-offset-4 prose-a:decoration-1 prose-a:decoration-dotted leading-loose tracking-wide"
+    "prose min-w-fit dark:prose-dark prose-a:underline-offset-4 prose-a:decoration-1 prose-a:decoration-dotted leading-loose tracking-wide"
   ]}
 >
   <slot />
 </article>
 
 <style>
+  .prose :global(> *:only-child) {
+    /** 子要素がoverflowしないように */
+    min-height: 0;
+    min-width: 0; /** for Firefox */
+  }
+
   .prose :global(> * + img) {
     margin-block-start: 3em;
     margin-block-end: 0;
@@ -40,6 +46,22 @@ const { grid = true, fill = true } = Astro.props
     margin-top: 0;
   }
 
+  .prose :global(p > code) {
+    color: inherit;
+    padding: 0.3em 0.5em;
+    background-color: rgba(210, 218, 255, 0.15);
+    border-radius: 1em;
+  }
+  :global(.dark) .prose :global(p > code) {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  .prose :global(:not(pre) > code)::before {
+    display: none;
+  }
+  .prose :global(:not(pre) > code)::after {
+    display: none;
+  }
+
   .prose.grid:has(*) {
     --px: 3vw;
     --py: 3vh;
@@ -63,7 +85,6 @@ const { grid = true, fill = true } = Astro.props
     background-image: linear-gradient(180deg, transparent 96%, var(--line-color) 100%),
       linear-gradient(90deg, transparent 96%, var(--line-color) 100%);
     background-size: 1em 1em;
-    clip-path: inset(0 round 5em);
     -webkit-mask-origin: padding-box;
     -webkit-mask-composite: source-in;
     -webkit-mask-image: linear-gradient(

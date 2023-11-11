@@ -3,9 +3,9 @@ import MediaPreview from "./WritingPreview.astro"
 const { posts } = Astro.props
 ---
 
-<section class="media-preview__list not-prose">
+<div class="media-preview__list not-prose">
   {posts.map((post) => <MediaPreview post={post} />)}
-</section>
+</div>
 <style>
   .media-preview__list {
     @apply flex flex-col gap-12;

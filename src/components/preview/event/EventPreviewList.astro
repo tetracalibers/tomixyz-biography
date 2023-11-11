@@ -10,9 +10,9 @@ interface Props {
 const { events, lang } = Astro.props
 ---
 
-<section class="post-preview__list">
+<div class="post-preview__list">
   {events.map((post) => <EventPreview event={post} lang={lang} />)}
-</section>
+</div>
 <style>
   .post-preview__list {
     @apply flex flex-col gap-12;

@@ -1,17 +1,17 @@
 ---
 import type { CollectionEntry } from "astro:content"
-import PostPreview from "./BlogPreview.astro"
+import PostPreview from "./TutorialPreview.astro"
 
 interface Props {
-  posts: CollectionEntry<"blog">[]
+  tutorials: CollectionEntry<"tutorial">[]
   lang?: string
 }
 
-const { posts, lang } = Astro.props
+const { tutorials, lang } = Astro.props
 ---
 
 <div class="post-preview__list">
-  {posts.map((post) => <PostPreview post={post} lang={lang} />)}
+  {tutorials.map((post) => <PostPreview post={post} lang={lang} />)}
 </div>
 <style>
   .post-preview__list {

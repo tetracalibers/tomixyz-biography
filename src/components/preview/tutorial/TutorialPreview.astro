@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from "astro:content"
+import { buildPageUrlFor } from "$/utils/i18n/slug"
+import PublishDate from "$components/article-link/PublishDate.astro"
+
+interface Props {
+  post: CollectionEntry<"tutorial">
+  lang?: string
+}
+
+const {
+  post: { data: post, slug },
+  lang
+} = Astro.props
+
+const builPageUrl = buildPageUrlFor("tutorial")
+const pageUrl = builPageUrl(slug, lang)
+---
+
+<div class="post-preview">
+  <div class="sm:w-20 md:w-32">
+    <PublishDate date={post.date} />
+  </div>
+  <div class="flex-1 flex flex-col justify-center">
+    <h2 class="post-preview__title dark:text-theme-dark-primary">
+      <a href={pageUrl} title={post.title}>{post.title}</a>
+    </h2>
+    <p class="post-preview__desc">
+      {post.description}
+    </p>
+  </div>
+</div>
+<style>
+  .post-preview {
+    @apply flex gap-6;
+  }
+  .post-preview__title {
+    @apply text-2xl font-semibold text-theme-primary dark:text-theme-dark-primary /* this doesn't works here */ hover:underline mb-2;
+  }
+  .post-preview__desc {
+    @apply leading-6 dark:text-white hyphens-auto;
+  }
+</style>

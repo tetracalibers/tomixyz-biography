@@ -6,6 +6,9 @@ import sitemap from "@astrojs/sitemap"
 import mdx from "@astrojs/mdx"
 import { defineConfig } from "astro/config"
 import remarkBreaks from "remark-breaks"
+import rehypePrettyCode from "rehype-pretty-code"
+import remarkMath from "remark-math"
+import rehypeKatex from "rehype-katex"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
@@ -21,6 +24,13 @@ const __dirname = dirname(__filename)
 
 // https://astro.build/config
 
+const prettyCodeOptions = {
+  theme: {
+    dark: "material-theme-darker",
+    light: "material-theme-lighter"
+  }
+}
+
 // https://astro.build/config
 export default defineConfig(
   /** @type {import('astro').AstroUserConfig} */ {
@@ -35,7 +45,12 @@ export default defineConfig(
       port: 3000
     },
     markdown: {
-      remarkPlugins: [remarkBreaks]
+      syntaxHighlight: false, // Disable syntax built-in syntax hightlighting from astro
+      rehypePlugins: [
+        [rehypePrettyCode, prettyCodeOptions],
+        [rehypeKatex, {}]
+      ],
+      remarkPlugins: [remarkBreaks, remarkMath]
     },
     integrations: [
       mdx(),

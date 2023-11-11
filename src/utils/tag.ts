@@ -2,8 +2,12 @@ export const tagToSlug = (tag: string) => {
   return tag.toLowerCase().replaceAll(/\s/g, "-")
 }
 
-export const collectTags = (collection: { data: { tags: string[] } }[]) => {
-  return [...new Set(collection.flatMap((item) => item.data.tags))]
+export const collectTags = (...collections: { data: { tags: string[] } }[][]) => {
+  const tags = collections
+    .flat()
+    .map((entry) => entry.data.tags)
+    .flat()
+  return [...new Set(tags)]
 }
 
 const isMatchTagOf = (tags: string[]) => {

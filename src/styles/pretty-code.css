@@ -1,0 +1,95 @@
+html.dark
+  :where(pre[data-theme="light"], code[data-theme="light"], [data-rehype-pretty-code-title][data-theme="light"]) {
+  display: none;
+}
+
+html:not(.dark)
+  :where(pre[data-theme="dark"], code[data-theme="dark"], [data-rehype-pretty-code-title][data-theme="dark"]) {
+  display: none;
+}
+
+[data-rehype-pretty-code-fragment] {
+  --pretty-light-bg: #fafafa;
+  --pretty-dark-bg: #212121;
+}
+
+pre {
+  margin-block: 0 !important;
+  padding-inline-start: 0 !important;
+  border-top-left-radius: 0 !important;
+}
+
+pre > code {
+  display: grid; /*  this is way the line will span whole width of `code` component */
+  padding: 1.5rem 0;
+  border-radius: 0.5rem;
+}
+pre > code [data-line] {
+  border-left: 0.5rem solid transparent;
+  padding: 0 0.5rem 0 0;
+}
+pre > code[data-theme="light"] [data-highlighted-line] {
+  background-color: rgb(206 253 255 / 45%);
+  border-color: #f6c6ea;
+}
+pre > code[data-theme="dark"] [data-highlighted-line] {
+  background-color: rgb(74, 76, 94);
+  border-color: #b2a4ff;
+}
+pre > code:has([data-highlighted-line]) > :not([data-highlighted-line]) {
+  opacity: 0.8;
+}
+/** 
+*  data-line-numbers will be enabled on markdown  
+*  with `showLineNumbers` meta string on it
+*/
+pre > code[data-line-numbers] {
+  counter-reset: line;
+}
+pre > code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  margin-inline-start: 0.5em;
+  margin-inline-end: 1em;
+  text-align: right;
+  color: #7ca2dfad;
+}
+pre > code > [data-line]::before {
+  content: "";
+  display: inline-block;
+  width: 1ch;
+  text-align: right;
+}
+
+/** 
+*  we'll need to adjust the space required 
+*  the number depending on the number of digits 
+*/
+pre > code[data-line-numbers-max-digits="2"] > [data-line]::before {
+  width: 2ch;
+}
+
+code[data-line-numbers-max-digits="3"] > [data-line]::before {
+  width: 3ch;
+}
+
+[data-rehype-pretty-code-fragment] {
+  display: flex;
+  flex-direction: column;
+  margin-block: 1.7em;
+}
+[data-rehype-pretty-code-title] {
+  width: fit-content;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  padding: 0 0.7em;
+}
+[data-rehype-pretty-code-title][data-theme="dark"] {
+  background-color: var(--pretty-dark-bg);
+  color: #9abcf3ec;
+}
+[data-rehype-pretty-code-title][data-theme="light"] {
+  background-color: var(--pretty-light-bg);
+  color: var(--pretty-dark-bg);
+}

@@ -17,6 +17,16 @@ const blogCollection = defineCollection({
     })
 })
 
+const tutorialCollection = defineCollection({
+  schema: () =>
+    z.object({
+      title: z.string().max(100, "The title length must be less than or equal to 100 chars"),
+      description: z.string(),
+      tags: z.array(z.string()).default([]),
+      date: z.string()
+    })
+})
+
 const projectCollection = defineCollection({
   schema: ({ image }) =>
     z.object({
@@ -47,6 +57,7 @@ const eventCollection = defineCollection({
 export const collections = {
   page: pageCollection,
   blog: blogCollection,
+  tutorial: tutorialCollection,
   project: projectCollection,
   event: eventCollection
 }
