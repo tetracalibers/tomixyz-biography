@@ -1,0 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Bellefair&display=swap");
+
+.katex {
+  font-family: "Bellefair", KaTeX_Main;
+}
+
+.katex-html {
+  overflow: auto;
+}
