@@ -7,13 +7,16 @@ import AvatarImage from "$components/image-wrapper/AvatarImage.astro"
 import PublishDate from "$components/article-header/PublishDate.astro"
 import Prose from "$components/Prose.astro"
 import TagList from "$components/article-header/TagList.astro"
+import TableOfContents from "$components/toc/TableOfContents.astro"
+import type { MarkdownHeading } from "astro"
 
 interface Props {
   content: CollectionEntry<"tutorial">["data"]
   ogimage?: string
   lang?: string
+  headings: MarkdownHeading[]
 }
-const { content, ogimage, lang = "ja" } = Astro.props
+const { content, ogimage, lang = "ja", headings } = Astro.props
 
 const AUTHOR_NAME = SITE.author
 ---
@@ -24,20 +27,23 @@ const AUTHOR_NAME = SITE.author
     <BaseHead {...content} image={ogimage} title={content.title ? `${SITE.title} | ${content.title}` : SITE.title} />
   </head>
   <MainLayout>
-    <div class="py-4 mb-1 text-center md:text-left flex flex-col gap-8">
-      <h1 class="post__title">{content.title}</h1>
-      <TagList tags={content.tags} />
-      <div class="post__desc flex flex-row gap-2">
-        <AvatarImage className="avatar" />
-        <div class="flex flex-col border-l-2 pl-2">
-          <span class="post__author">{AUTHOR_NAME}</span>
-          <PublishDate date={content.date} />
+    <div class="flex flex-col gap-8">
+      <div class="py-4 mb-1 text-center md:text-left flex flex-col gap-8">
+        <h1 class="post__title">{content.title}</h1>
+        <TagList tags={content.tags} />
+        <div class="post__desc flex flex-row gap-2">
+          <AvatarImage className="avatar" />
+          <div class="flex flex-col border-l-2 pl-2">
+            <span class="post__author">{AUTHOR_NAME}</span>
+            <PublishDate date={content.date} />
+          </div>
         </div>
       </div>
+      <TableOfContents headings={headings} />
+      <Prose>
+        <div class="post__content"><slot /></div>
+      </Prose>
     </div>
-    <Prose>
-      <div class="post__content"><slot /></div>
-    </Prose>
   </MainLayout>
   <style>
     .post__title {
