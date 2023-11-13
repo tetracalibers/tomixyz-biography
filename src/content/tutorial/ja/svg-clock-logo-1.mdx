@@ -1,0 +1,33 @@
+---
+title: stroke-dasharrayで円周上に点を打つ
+date: "2023-11-13"
+description: 時計ロゴを作りながら学ぶ手書きSVG
+tags:
+  - SVG
+---
+
+import ClockScalePoints from "$/demo/svg-clock-logo/step/clock-scale-points.svelte"
+
+import img_clockLogo_op from "$/assets/tutorial/svg-clock-logo/clock-logo_op.png"
+
+illustratorを買うお金もなく、Figmaの存在も知らなかった学生時代、Webサイトのロゴを手書きのSVGコードで制作していた。
+
+その頃はSVGの機能もろくに知らず、ただひたすら図形を並べるだけのコードを書いていた。
+そんなコードを今書き直してみると、3分の1のコードで、より精密に描けることに気づく。
+
+童心に帰って、でも方法は洗練されたものにアップデートして、次のような時計を模したロゴをSVGで一から書いてみるチュートリアルを始めたいと思う。
+
+<DemoArea>
+  <img src={img_clockLogo_op.src} width={400} height={400} />
+</DemoArea>
+
+## 今回の目標
+
+今回は、時計の目盛りを点として円周上に描くことを目標とする。
+
+- `6deg`ごとに直径`4px`の点を打つ
+- `30deg`ごとに直径`8px`の点を打つ
+
+<DemoArea>
+  <ClockScalePoints client:load />
+</DemoArea>
