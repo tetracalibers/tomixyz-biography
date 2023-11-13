@@ -22,7 +22,7 @@ const { grid = true, fill = true } = Astro.props
     margin-block-start: 3em;
     margin-block-end: 0;
   }
-  .prose :global(> *:has(img)) {
+  .prose :global(> *:not(:only-child):has(img)) {
     margin-block-start: 3em;
     margin-block-end: 0;
   }
