@@ -12,6 +12,14 @@ const { grid = true, fill = true } = Astro.props
 </article>
 
 <style>
+  .prose:empty {
+    display: none;
+  }
+
+  .prose:has(> *:only-child:empty) {
+    display: none;
+  }
+
   .prose :global(> *:only-child) {
     /** 子要素がoverflowしないように */
     min-height: 0;
