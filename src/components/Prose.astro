@@ -12,6 +12,14 @@ const { grid = true, fill = true } = Astro.props
 </article>
 
 <style>
+  .prose:empty {
+    display: none;
+  }
+
+  .prose:has(> *:only-child:empty) {
+    display: none;
+  }
+
   .prose :global(> *:only-child) {
     /** 子要素がoverflowしないように */
     min-height: 0;
@@ -22,7 +30,7 @@ const { grid = true, fill = true } = Astro.props
     margin-block-start: 3em;
     margin-block-end: 0;
   }
-  .prose :global(> *:has(img)) {
+  .prose :global(> *:not(:only-child):has(img)) {
     margin-block-start: 3em;
     margin-block-end: 0;
   }
