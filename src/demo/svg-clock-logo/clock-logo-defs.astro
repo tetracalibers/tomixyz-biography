@@ -1,0 +1,34 @@
+---
+import { cx, tr } from "./config"
+import { svg2dataUri, calcPathCircle } from "./utils"
+
+import svgArc from "./texture/arc-texture-v2.svg?raw"
+import svgStripe from "./texture/stripe-texture.svg?raw"
+---
+
+<svg width="0" height="0" viewBox="0 0 600 600" aria-hidden="true" style="position: absolute;">
+  <defs>
+    <filter id="offset-blur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8"></feGaussianBlur>
+      <feOffset dx="8" dy="8"></feOffset>
+      <feMerge>
+        <feMergeNode></feMergeNode>
+        <feMergeNode in="SourceGraphic"></feMergeNode>
+      </feMerge>
+    </filter>
+    <filter id="refrect-rainbow" filterUnits="userSpaceOnUse">
+      <feImage href={svg2dataUri(svgArc)} x="0" y="0" width="100%" height="100%" preserveAspectRatio="none"></feImage>
+      <feComposite operator="in" in2="SourceAlpha"></feComposite>
+    </filter>
+    <filter id="rainbow" filterUnits="userSpaceOnUse">
+      <feImage href={svg2dataUri(svgStripe)} x="0" y="0" width="150%" height="100%" preserveAspectRatio="none">
+      </feImage>
+      <feComposite operator="in" in2="SourceAlpha"></feComposite>
+    </filter>
+    <path id="text-circle" d={calcPathCircle(cx, tr)}></path>
+  </defs>
+</svg>
+
+<style is:global>
+  @import url("https://fonts.googleapis.com/css2?family=Megrim&display=swap");
+</style>
