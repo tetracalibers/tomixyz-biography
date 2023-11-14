@@ -54,13 +54,13 @@ const { grid = true, fill = true } = Astro.props
     margin-top: 0;
   }
 
-  .prose :global(p > code) {
+  .prose :global(:not(pre) > code) {
     color: inherit;
     padding: 0.3em 0.5em;
     background-color: rgba(210, 218, 255, 0.15);
     border-radius: 1em;
   }
-  :global(.dark) .prose :global(p > code) {
+  :global(.dark) .prose :global(:not(pre) > code) {
     background-color: rgba(0, 0, 0, 0.2);
   }
   .prose :global(:not(pre) > code)::before {
