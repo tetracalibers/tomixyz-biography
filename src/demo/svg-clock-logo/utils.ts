@@ -33,8 +33,10 @@ export const calcClockMinuteHandAngle = (minute: number) => {
 
 export const fitViewbox = (svg: SVGSVGElement, { padding = 10 }) => {
   const bB = svg.getBBox()
+  const minX = bB.x - padding
+  const minY = bB.y - padding
   const width = bB.width + padding * 2
   const height = bB.height + padding * 2
-  const viewBox = `${bB.x - padding} ${bB.y - padding} ${width} ${height}`
+  const viewBox = [minX, minY, width, height].map(Math.round).join(" ")
   svg.setAttribute("viewBox", viewBox)
 }
