@@ -95,17 +95,17 @@ code[data-line-numbers-max-digits="3"] > [data-line]::before {
 }
 
 :has(> [data-color-preview]) {
-  --preview-box-size: 0.8em;
-
   margin-inline-start: 2px;
   position: relative;
 }
 [data-color-preview] {
+  --preview-box-size: 0.8em;
+
   display: inline-block;
   width: var(--preview-box-size);
   height: var(--preview-box-size);
   margin-inline-end: 3.5px;
-
+  vertical-align: middle;
   position: relative;
 
   /** light/dark両対応するための二重ボーダー */
