@@ -7,6 +7,7 @@ import mdx from "@astrojs/mdx"
 import { defineConfig } from "astro/config"
 import remarkBreaks from "remark-breaks"
 import rehypePrettyCode from "rehype-pretty-code"
+import { addColorPreview } from "./plugins/pretty-code/add-color-preview"
 import remarkMath from "remark-math"
 import rehypeKatex from "rehype-katex"
 const __filename = fileURLToPath(import.meta.url)
@@ -28,6 +29,9 @@ const prettyCodeOptions = {
   theme: {
     dark: "material-theme-darker",
     light: "material-theme-lighter"
+  },
+  onVisitLine(element) {
+    addColorPreview(element)
   }
 }
 
