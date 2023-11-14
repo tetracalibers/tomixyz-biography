@@ -95,33 +95,23 @@ code[data-line-numbers-max-digits="3"] > [data-line]::before {
 }
 
 :has(> [data-color-preview]) {
-  --preview-box-size: 0.8em;
-
-  vertical-align: middle;
+  margin-inline-start: 2px;
   position: relative;
 }
 [data-color-preview] {
+  --preview-box-size: 0.8em;
+
   display: inline-block;
   width: var(--preview-box-size);
   height: var(--preview-box-size);
-  margin-inline-start: 0.1em;
-  margin-inline-end: 0.2em;
-
-  /** この指定がないと市松模様が上になってしまう */
+  margin-inline-end: 3.5px;
+  vertical-align: middle;
   position: relative;
 
   /** light/dark両対応するための二重ボーダー */
   box-shadow:
     0 0 0 1px white,
     0 0 0 2px #374259;
-}
-:has(> [data-color-preview])::before {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: var(--preview-box-size);
-  height: var(--preview-box-size);
 
   /* 市松模様 */
   --checker-color: #64748b;
@@ -136,5 +126,14 @@ code[data-line-numbers-max-digits="3"] > [data-line]::before {
   background-position:
     0 0,
     calc(var(--preview-box-size) * 0.5) calc(var(--preview-box-size) * 0.5);
-  background-size: var(--preview-box-size) var(--preview-box-size);
+}
+[data-color-preview]::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: var(--preview-box-size);
+  height: var(--preview-box-size);
+  inset: 0;
+
+  background-color: inherit;
 }
