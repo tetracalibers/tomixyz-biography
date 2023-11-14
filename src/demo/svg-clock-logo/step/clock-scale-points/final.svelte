@@ -1,6 +1,6 @@
 <script>
-  import { cx, cy, r } from "../config"
-  import { calcArcLength, fitViewbox } from "../utils"
+  import { cx, cy, r } from "../../config"
+  import { calcArcLength, fitViewbox } from "../../utils"
 </script>
 
 <svg width="300" height="300" use:fitViewbox={{ padding: 10 }}>

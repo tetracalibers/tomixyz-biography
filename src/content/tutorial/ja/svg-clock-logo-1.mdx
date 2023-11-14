@@ -6,7 +6,8 @@ tags:
   - SVG
 ---
 
-import ClockScalePoints from "$/demo/svg-clock-logo/step/clock-scale-points.svelte"
+import ClockScalePoints from "$/demo/svg-clock-logo/step/clock-scale-points/final.svelte"
+import ClockScalePointsByUseRotate from "$/demo/svg-clock-logo/step/clock-scale-points/by-use-rotate.svelte"
 
 import img_clockLogo_op from "$/assets/tutorial/svg-clock-logo/clock-logo_op.png"
 
@@ -31,3 +32,44 @@ illustratorを買うお金もなく、Figmaの存在も知らなかった学生�
 <DemoArea>
   <ClockScalePoints client:load />
 </DemoArea>
+
+## 解答1: `use`で頑張る
+
+昔の自分だったら、次のようなコードを書いていただろう。
+
+<DemoArea>
+  <ClockScalePointsByUseRotate client:load />
+</DemoArea>
+
+```html
+<svg width="300" height="300" viewBox="0 0 600 600">
+  <defs>
+    <circle id="point-5min" cx="200" cy="0" r="8" />
+    <circle id="point-1min" cx="200" cy="0" r="4" />
+  </defs>
+
+  <!-- 時計の目盛りを並べる円周 -->
+  <circle cx="300" cy="300" r="200" fill="none" stroke="black" />
+
+  <!-- 円の中心点を回転の軸に -->
+  <g transform="translate(300, 300)">
+    <!-- 5分ごとの目盛り -->
+    <g fill-opacity="0.8" fill="#F675A8">
+      <use href="#point-5min" transform="rotate(0)" />
+      <use href="#point-5min" transform="rotate(30)" />
+      <!-- 中略 -->
+      <use href="#point-5min" transform="rotate(300)" />
+      <use href="#point-5min" transform="rotate(330)" />
+    </g>
+
+    <!-- 1分ごとの目盛り -->
+    <g fill="#95BDFF">
+      <use href="#point-1min" transform="rotate(6)" />
+      <use href="#point-1min" transform="rotate(12)" />
+      <!-- 中略 -->
+      <use href="#point-1min" transform="rotate(348)" />
+      <use href="#point-1min" transform="rotate(354)" />
+    </g>
+  </g>
+</svg>
+```
