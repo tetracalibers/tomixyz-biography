@@ -93,3 +93,47 @@ code[data-line-numbers-max-digits="3"] > [data-line]::before {
   background-color: var(--pretty-light-bg);
   color: var(--pretty-dark-bg);
 }
+
+:has(> [data-color-preview]) {
+  margin-inline-start: 2px;
+  position: relative;
+}
+[data-color-preview] {
+  --preview-box-size: 0.8em;
+
+  display: inline-block;
+  width: var(--preview-box-size);
+  height: var(--preview-box-size);
+  margin-inline-end: 3.5px;
+  vertical-align: middle;
+  position: relative;
+
+  /** light/dark両対応するための二重ボーダー */
+  box-shadow:
+    0 0 0 1px white,
+    0 0 0 2px #374259;
+
+  /* 市松模様 */
+  --checker-color: #64748b;
+  background-image: linear-gradient(
+      45deg,
+      var(--checker-color) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--checker-color) 75%
+    ),
+    linear-gradient(45deg, var(--checker-color) 25%, transparent 25%, transparent 75%, var(--checker-color) 75%);
+  background-position:
+    0 0,
+    calc(var(--preview-box-size) * 0.5) calc(var(--preview-box-size) * 0.5);
+}
+[data-color-preview]::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: var(--preview-box-size);
+  height: var(--preview-box-size);
+  inset: 0;
+
+  background-color: inherit;
+}
