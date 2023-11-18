@@ -1,84 +1,102 @@
-html.dark
-  :where(pre[data-theme="light"], code[data-theme="light"], [data-rehype-pretty-code-title][data-theme="light"]) {
+/* switch between light/dark theme */
+
+html:not(.dark) [data-rehype-pretty-code-fragment] [data-theme="dark"] {
   display: none;
 }
 
-html:not(.dark)
-  :where(pre[data-theme="dark"], code[data-theme="dark"], [data-rehype-pretty-code-title][data-theme="dark"]) {
+html.dark [data-rehype-pretty-code-fragment] [data-theme="light"] {
   display: none;
 }
 
-[data-rehype-pretty-code-fragment] {
+/* background color */
+
+:root {
   --pretty-light-bg: #fafafa;
   --pretty-dark-bg: #212121;
 }
 
-pre {
-  margin-block: 0 !important;
-  padding-inline-start: 0 !important;
-  border-top-left-radius: 0 !important;
+[data-rehype-pretty-code-fragment] > pre[data-theme="light"] {
+  background-color: var(--pretty-light-bg);
+}
+[data-rehype-pretty-code-fragment] > pre[data-theme="dark"] {
+  background-color: var(--pretty-dark-bg);
 }
 
-pre > code {
-  display: grid; /*  this is way the line will span whole width of `code` component */
-  padding: 1.5rem 0;
-  border-radius: 0.5rem;
+/* layout */
+
+div[data-rehype-pretty-code-fragment] {
+  margin-block: 1.7em;
+
+  /** for title */
+  display: flex;
+  flex-direction: column;
 }
-pre > code [data-line] {
-  border-left: 0.5rem solid transparent;
-  padding: 0 0.5rem 0 0;
+
+div[data-rehype-pretty-code-fragment] > pre {
+  padding-block: 0.8em;
+  padding-inline: 0;
+  margin: 0;
+  overflow-x: auto;
+  border-radius: 0.3em;
+  line-height: 1.7;
 }
-pre > code[data-theme="light"] [data-highlighted-line] {
+
+pre > code > [data-line] {
+  padding-inline-start: 0.5em;
+  padding-inline-end: 1em;
+}
+
+/** line highlight */
+
+pre > code > [data-line] {
+  border-inline-start: 0.5em solid transparent;
+}
+
+pre > code[data-theme="light"] > [data-highlighted-line] {
   background-color: rgb(206 253 255 / 45%);
   border-color: #f6c6ea;
 }
-pre > code[data-theme="dark"] [data-highlighted-line] {
+pre > code[data-theme="dark"] > [data-highlighted-line] {
   background-color: rgb(74, 76, 94);
   border-color: #b2a4ff;
 }
+
 pre > code:has([data-highlighted-line]) > :not([data-highlighted-line]) {
   opacity: 0.8;
 }
-/** 
-*  data-line-numbers will be enabled on markdown  
-*  with `showLineNumbers` meta string on it
-*/
-pre > code[data-line-numbers] {
-  counter-reset: line;
-}
-pre > code[data-line-numbers] > [data-line]::before {
-  counter-increment: line;
-  content: counter(line);
-  display: inline-block;
-  margin-inline-start: 0.5em;
-  margin-inline-end: 1em;
-  text-align: right;
-  color: #7ca2dfad;
-}
+
+/** show line numbers */
+
 pre > code > [data-line]::before {
   content: "";
   display: inline-block;
   width: 1ch;
   text-align: right;
 }
-
-/** 
-*  we'll need to adjust the space required 
-*  the number depending on the number of digits 
-*/
 pre > code[data-line-numbers-max-digits="2"] > [data-line]::before {
   width: 2ch;
 }
-
-code[data-line-numbers-max-digits="3"] > [data-line]::before {
+pre > code[data-line-numbers-max-digits="3"] > [data-line]::before {
   width: 3ch;
 }
 
-[data-rehype-pretty-code-fragment] {
-  display: flex;
-  flex-direction: column;
-  margin-block: 1.7em;
+pre > code[data-line-numbers] {
+  counter-reset: line;
 }
+pre > code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+
+  margin-inline-end: 1em;
+  color: #7ca2dfad;
+}
+
+/** title */
+
+div[data-rehype-pretty-code-title] + pre {
+  border-top-left-radius: 0;
+}
+
 [data-rehype-pretty-code-title] {
   width: fit-content;
   border-top-left-radius: 0.5rem;
@@ -93,6 +111,8 @@ code[data-line-numbers-max-digits="3"] > [data-line]::before {
   background-color: var(--pretty-light-bg);
   color: var(--pretty-dark-bg);
 }
+
+/** color preview */
 
 :has(> [data-color-preview]) {
   margin-inline-start: 2px;

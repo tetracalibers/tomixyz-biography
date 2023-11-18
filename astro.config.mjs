@@ -30,6 +30,7 @@ const prettyCodeOptions = {
     dark: "material-theme-darker",
     light: "material-theme-lighter"
   },
+  keepBackground: false,
   onVisitLine(element) {
     addColorPreview(element)
   }
