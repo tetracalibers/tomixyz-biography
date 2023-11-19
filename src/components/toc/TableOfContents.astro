@@ -1,6 +1,5 @@
 ---
 import type { MarkdownHeading } from "astro"
-import type { content } from "tailwind.config.cjs"
 
 interface Props {
   headings: MarkdownHeading[]
@@ -43,5 +42,8 @@ const { headings } = Astro.props
   }
   ._depth-3::before {
     content: "###";
+  }
+  ._depth-3 {
+    text-indent: 1ch;
   }
 </style>
