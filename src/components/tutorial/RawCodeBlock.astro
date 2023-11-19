@@ -13,7 +13,13 @@ const code = html.replace(/<p>|<\/p>/g, "")
 ---
 
 <div>
-  {title && <div data-rehype-pretty-code-title>{title}</div>}
+  {
+    title && (
+      <div class="flex" data-rehype-pretty-code-title>
+        {title}
+      </div>
+    )
+  }
   <pre class="_raw-code-block">
 <code>```{lang} {options}
 <Fragment set:text={code} />
