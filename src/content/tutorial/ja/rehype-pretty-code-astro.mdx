@@ -1,0 +1,261 @@
+---
+title: Rehype Pretty CodeをAstroで使う
+date: "2023-11-16"
+description: Astroへの導入からダークモード対応まで
+tags:
+  - Markdown
+  - MDX
+  - rehype
+  - unified
+  - Astro
+  - CSS
+---
+
+当サイトは[Astro](https://astro.build/)製だが、コードブロックのシンタックスハイライトは[Astroビルドインの機能](https://docs.astro.build/ja/guides/markdown-content/#%E3%82%B7%E3%83%B3%E3%82%BF%E3%83%83%E3%82%AF%E3%82%B9%E3%83%8F%E3%82%A4%E3%83%A9%E3%82%A4%E3%83%88)ではなく、Rehype Pretty Codeというrehypeプラグインを使っている。
+
+- [Rehype Pretty Code](https://rehype-pretty-code.netlify.app/)
+
+Rehype Pretty Codeは、[Shiki](https://github.com/shikijs/shiki)のシンタックスハイライトをMarkdown/MDXに簡単に適用できるプラグインだが、カスタマイズ性が非常に高い。
+
+簡単なMarkdown拡張記法によって、ブロック全体、行ごと、特定の単語ごと、etc.にクラスを付与してくれるので、それを元に自分で好きなスタイルを当てることができる。
+さらに、Visitor hooksという機能を使うことで、ASTを直接操作して、好きなようにHTMLを加工することもできる。
+
+当サイトで導入した範囲にはなるが、今回から数回に分けて、Rehype Pretty Codeの活用法をチュートリアル形式で解説していきたい。
+
+## Astroサイトへの導入
+
+### インストール
+
+`rehype-pretty-code`と`shiki`を、`npm`なり`yarn`なりでインストール。
+
+```bash
+npm install rehype-pretty-code shiki
+```
+
+### `astro.config.mjs`への設定
+
+```js
+import { defineConfig } from "astro/config"
+import rehypePrettyCode from "rehype-pretty-code"
+
+const prettyCodeOptions = {
+  /** これから追加していく */
+}
+
+export default defineConfig(
+  /** @type {import('astro').AstroUserConfig} */ {
+    markdown: {
+      // Astroビルドインのシンタックスハイライト機能を無効化
+      syntaxHighlight: false,
+      // 代わりにRehype Pretty Codeを使う
+      rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]]
+    }
+  }
+)
+```
+
+## 最低限のスタイリング
+
+ここまでの設定だけで、Markdown/MDXのコードブロックにシンタックスハイライトが適用されるようになる。
+
+<RawCodeBlock lang="言語名" title="md/MDXのコードブロックの記法">
+  コード
+</RawCodeBlock>
+
+import img_defaultStyle from "$/assets/tutorial/rehype-pretty-code-astro/default-style.png"
+
+<FigureBox src={img_defaultStyle} caption="SVGコードの表示例（言語名はhtmlに設定）" />
+
+ハイライトされたコードブロックのHTML出力はこんな感じ。
+
+```html {4,11-12,16-17} title="生成されたHTML"
+<div data-rehype-pretty-code-fragment>
+  <pre
+    class="github-dark-dimmed"
+    style="background-color: #22272e"
+    tabindex="0"
+    data-language="html"
+    data-theme="default"
+  >
+    <code data-language="html" data-theme="default" style="display: grid;">
+      <span data-line>
+        <span style="color: #ADBAC7"><</span>
+        <span style="color: #8DDB8C">svg</span>
+        <!-- and 17 more children -->
+      </span>
+      <span data-line>
+        <span style="color: #ADBAC7">  <</span>
+        <span style="color: #8DDB8C">defs</span>
+        <!-- and 1 more children -->
+      </span>
+      <!-- and 10 more children -->
+    </code>
+  </pre>
+</div>
+```
+
+Rehype Pretty Codeによって自動生成されるHTMLは、`data-rehype-pretty-code-fragment`属性が付与された要素の中に吐き出される。
+
+また、テーマに応じた背景色とトークンごとの文字色が、`style`属性で直接指定されていることがわかる。
+
+Rehype Pretty Codeが自動的に指定するスタイルは基本的に色だけなので、レイアウトは自分で指定する必要がある。
+`pre`要素のスタイルを何も指定しない状態だと、たとえば狭い画面ではコードがはみ出してしまう。
+
+import img_overflow from "$/assets/tutorial/rehype-pretty-code-astro/overflow.png"
+
+<FigureBox src={img_overflow} />
+
+そこで、次のような簡単なスタイルを当てておく。
+
+```css
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap");
+
+pre,
+code {
+  font-family: "Red Hat Mono", monospace;
+}
+
+pre {
+  padding-block: 0.8em;
+  padding-inline: 1em;
+  margin: 0;
+  overflow-x: auto;
+  border-radius: 0.3em;
+  line-height: 1.7;
+}
+```
+
+import img_styledDefaultTheme from "$/assets/tutorial/rehype-pretty-code-astro/default-theme.png"
+
+<FigureBox src={img_styledDefaultTheme} />
+
+パッと見よさそうだが、実はまだ問題がある。
+
+`pre`要素に`padding-inline`を指定しても、長いコードでは限界までスクロールした右の端に余白が設定されないのだ。
+
+import img_notWorkingPaddingRight from "$/assets/tutorial/rehype-pretty-code-astro/not-working-padding-right.png"
+
+<FigureBox src={img_notWorkingPaddingRight} />
+
+そこで、`padding-inline`の指定は`pre`要素ではなく、各行を描画する`span[data-line]`要素に対して行うようにする。
+
+```css
+pre {
+  padding-block: 0.8em;
+  padding-inline: 0;
+  /** ...略... */
+}
+
+pre > code > [data-line] {
+  padding-inline: 1em;
+}
+```
+
+import img_workingPaddingRight from "$/assets/tutorial/rehype-pretty-code-astro/working-padding-right.png"
+
+<FigureBox src={img_workingPaddingRight} />
+
+## テーマの適用
+
+### `theme`オプション
+
+`theme`オプションには、シンタックスハイライトのテーマを指定する。
+
+[Shiki公式で用意されているテーマ](https://unpkg.com/browse/shiki@0.14.2/themes/)ならなんでも使えるはず。
+
+```js
+const prettyCodeOptions = {
+  // これがデフォルト
+  theme: "github-dark-dimmed"
+}
+```
+
+### ダークモードとライトモードに応じたテーマ切り替え
+
+ダークモードとライトモードで異なるテーマを使いたい場合は、`theme`オプションを次のようなオブジェクト形式で指定する。
+
+当サイトの指定はこんな感じ。
+
+```js
+const prettyCodeOptions = {
+  theme: {
+    dark: "material-theme-darker",
+    light: "material-theme-lighter"
+  }
+}
+```
+
+このように設定すると、`[data-rehype-pretty-code-fragment]`要素内に、ライトモード用のHTMLとダークモード用のHTMLが両方生成される。
+
+import img_darkAndLight from "$/assets/tutorial/rehype-pretty-code-astro/dark-and-light.png"
+
+<FigureBox src={img_darkAndLight} caption="ダーク/ライト両方のブロックが表示されてしまっている" />
+
+```html {7,22} title="生成されたHTML"
+<div data-rehype-pretty-code-fragment>
+  <pre
+    class="material-theme-darker"
+    style="background-color: #212121"
+    tabindex="0"
+    data-language="html"
+    data-theme="dark"
+  >
+    <code data-language="html" data-theme="dark" style="display: grid;">
+      <span data-line>
+        <span style="color: #89DDFF"><</span>
+        <!-- and 26 more children -->
+      </span>
+      <!-- and 11 more children -->
+    </code>
+  </pre>
+  <pre
+    class="material-theme-lighter"
+    style="background-color: #FAFAFA"
+    tabindex="0"
+    data-language="html"
+    data-theme="light"
+  >
+    <code data-language="html" data-theme="light" style="display: grid;">
+      <span data-line>
+        <span style="color: #39ADB5"><</span>
+        <!-- and 26 more children -->
+      </span>
+      <!-- and 11 more children -->
+    </code>
+  </pre>
+</div>
+```
+
+各`pre`要素や、その配下の`code`要素には、`data-theme`属性が付与されている。
+
+実際にユーザ側の表示設定に合わせてテーマを切り替えるには、`data-theme`属性の値に応じてテーマを切り替えるCSSを書く必要がある。
+
+```css
+/** ダークモードなら、ライトモード用のHTMLは非表示に */
+@media (prefers-color-scheme: dark) {
+  [data-rehype-pretty-code-fragment] [data-theme="light"] {
+    display: none;
+  }
+}
+
+/** ライトモード or 未指定なら、ダークモード用のHTMLは非表示に */
+@media (prefers-color-scheme: light), (prefers-color-scheme: no-preference) {
+  [data-rehype-pretty-code-fragment] [data-theme="dark"] {
+    display: none;
+  }
+}
+```
+
+import img_light from "$/assets/tutorial/rehype-pretty-code-astro/light.png"
+
+<FigureBox src={img_light} caption="ライトモードの場合の表示" />
+
+import img_dark from "$/assets/tutorial/rehype-pretty-code-astro/dark.png"
+
+<FigureBox src={img_dark} caption="ダークモードの場合の表示" />
+
+## Next Step
+
+Rehype Pretty Codeでは、行番号の表示や、特定の行のハイライトも簡単に実現でき、スタイルをフルカスタマイズできる。
+
+- (Coming Soon...) Rehype Pretty Codeで行番号表示と行ハイライト
