@@ -1,0 +1,50 @@
+---
+interface Props {
+  lang: string
+  options?: string
+  title?: string
+}
+
+const { lang, options = "", title } = Astro.props
+
+const html = await Astro.slots.render("default")
+// pタグを削除
+const code = html.replace(/<p>|<\/p>/g, "")
+---
+
+<div>
+  {title && <div data-rehype-pretty-code-title>{title}</div>}
+  <pre class="_raw-code-block">
+<code>```{lang} {options}
+<Fragment set:text={code} />
+```</code>
+</pre>
+</div>
+
+<style>
+  pre._raw-code-block {
+    all: revert;
+
+    font-size: 0.9rem;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", "Zen Kaku Gothic New";
+
+    height: fit-content;
+    padding-block-start: 0.8em;
+    padding-block-end: 0;
+    padding-inline: 1.5em;
+    margin: 0;
+    overflow-x: auto;
+    border-radius: 0.3em;
+    line-height: 1.7;
+
+    background-color: var(--pretty-light-bg);
+  }
+
+  :global(.dark) pre._raw-code-block {
+    background-color: var(--pretty-dark-bg);
+  }
+
+  :global(.dark) [data-rehype-pretty-code-title] {
+    --_pretty-title-border: var(--pretty-dark-title-border);
+  }
+</style>
