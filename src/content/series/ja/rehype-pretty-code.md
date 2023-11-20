@@ -1,6 +1,7 @@
 ---
 articles:
   - ja/rehype-pretty-code-astro
+  - ja/rehype-pretty-code-line-numbers
 ---
 
 当サイトは[Astro](https://astro.build/)製だが、コードブロックのシンタックスハイライトは[Astroビルドインの機能](https://docs.astro.build/ja/guides/markdown-content/#%E3%82%B7%E3%83%B3%E3%82%BF%E3%83%83%E3%82%AF%E3%82%B9%E3%83%8F%E3%82%A4%E3%83%A9%E3%82%A4%E3%83%88)ではなく、Rehype Pretty Codeというrehypeプラグインを使っている。
