@@ -1,6 +1,7 @@
 ---
 import { buildPageUrlFor } from "$/utils/i18n/slug"
 import type { SeriesArticleSlug, SeriesArticles } from "$/utils/tutorial"
+import ComingSoonTitle from "./ComingSoonTitle.astro"
 
 interface Props {
   current: SeriesArticleSlug
@@ -22,7 +23,11 @@ const getTutorialPageUrl = buildPageUrlFor("tutorial")
       <ul>
         {nextArticles.map((page) => (
           <li>
-            <a href={getTutorialPageUrl(page.slug, lang)}>{page.data.title}</a>
+            {page.data.draft ? (
+              <ComingSoonTitle title={page.data.title} />
+            ) : (
+              <a href={getTutorialPageUrl(page.slug, lang)}>{page.data.title}</a>
+            )}
           </li>
         ))}
       </ul>
