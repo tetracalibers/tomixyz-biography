@@ -1,4 +1,4 @@
-import { z, defineCollection } from "astro:content"
+import { z, defineCollection, reference } from "astro:content"
 
 const pageCollection = defineCollection({
   schema: z.object({
@@ -23,7 +23,8 @@ const tutorialCollection = defineCollection({
       title: z.string().max(100, "The title length must be less than or equal to 100 chars"),
       description: z.string(),
       tags: z.array(z.string()).default([]),
-      date: z.string()
+      date: z.string(),
+      series: reference("series").optional()
     })
 })
 
@@ -54,10 +55,18 @@ const eventCollection = defineCollection({
     })
 })
 
+const seriesCollection = defineCollection({
+  schema: () =>
+    z.object({
+      articles: z.array(reference("tutorial"))
+    })
+})
+
 export const collections = {
   page: pageCollection,
   blog: blogCollection,
   tutorial: tutorialCollection,
   project: projectCollection,
-  event: eventCollection
+  event: eventCollection,
+  series: seriesCollection
 }

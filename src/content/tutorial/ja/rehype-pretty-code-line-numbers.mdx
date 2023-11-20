@@ -1,0 +1,201 @@
+---
+title: Rehype Pretty Codeで行番号表示
+date: "2023-11-21"
+description: Rehype Pretty Codeで実現するコードブロック表示のフルカスタマイズ
+series: ja/rehype-pretty-code
+tags:
+  - Markdown
+  - MDX
+  - rehype
+  - unified
+  - Rehype Pretty Code
+  - CSS
+---
+
+## `showLineNumbers`キーワードと`data-`属性
+
+Rehype Pretty CodeでMarkdown/MDXのコードブロックに行番号を表示するには、言語名の後に半角スペースを開けて`showLineNumbers`を追加する。
+
+<RawCodeBlock lang="言語名" options="showLineNumbers" title="md/MDXのコードブロックの記法">
+  コード
+</RawCodeBlock>
+
+`showLineNumbers`を加えることで、`code`要素に2つの`data-`属性が追加される。
+
+- `data-line-numbers`
+- `data-line-numbers-max-digits`
+
+`data-line-numbers`属性は行番号を表示する設定になっていることを表し、`data-line-numbers-max-digits`属性は行番号の最大桁数を値として持つ。
+
+```html {10,14} title="生成されたHTML"
+<div data-rehype-pretty-code-fragment>
+  <pre
+    class="material-theme-darker"
+    style="background-color: #212121"
+    tabindex="0"
+    data-language="html"
+    data-theme="dark"
+  >
+    <code
+      data-line-numbers
+      data-language="html"
+      data-theme="dark"
+      style="display: grid;"
+      data-line-numbers-max-digits="2"
+    >
+      <span data-line>
+        <span style="color: #89DDFF"><</span>
+        <span style="color: #F07178">svg</span>
+        <!-- and 25 more children -->
+      </span>
+      <span data-line>
+        <span style="color: #EEFFFF">  </span>
+        <span style="color: #89DDFF"><</span>
+        <!-- and 2 more children -->
+      </span>
+      <!-- and 10 more children -->
+    </code>
+  </pre>
+  <!-- and 1 more children -->
+</div>
+```
+
+## 行番号表示のためのCSS
+
+表示のフルカスタマイズを前提としているRehype Pretty Codeでは、設定に応じた`data-`属性を追加することで、独自のCSSを当てることができるようになっている。
+
+逆に言えば、`data-`属性が追加されても、自動で見た目が変わることはないので、行番号を表示するCSSは独自に書く必要がある。
+
+### CSSカウンターによる番号表示
+
+`code`要素が`data-line-numbers`属性を持つ場合には、各行を描画する`span[data-line]`要素に`before`擬似要素を追加して、[CSS カウンター](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_counter_styles/Using_CSS_counters)による行番号を表示するようにしよう。
+
+特定の行番号から開始したい場合（後述）に対応するため、`counter-reset`で指定するカウンター名は`line`にする必要がある。
+
+```css
+pre > code[data-line-numbers] {
+  /** lineカウンタの値を0に初期化 */
+  counter-reset: line;
+}
+
+/** 各行 */
+pre > code[data-line-numbers] > [data-line]::before {
+  /** lineカウンタの値をインクリメント（1増やす） */
+  counter-increment: line;
+  /** lineカウンタの値を表示する */
+  content: counter(line);
+}
+```
+
+import img_lineNumberStyle_1 from "$/assets/tutorial/rehype-pretty-code-line-numbers/line-number-style-step-1.png"
+
+<FigureBox src={img_lineNumberStyle_1} caption="CSSカウンターによる行番号表示" />
+
+行番号の左右の余白や、文字色を調整する。
+
+```css {5-7}
+pre > code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+
+  margin-inline-start: 0.5em;
+  margin-inline-end: 1em;
+  color: #7ca2dfad;
+}
+```
+
+import img_lineNumberStyle_2 from "$/assets/tutorial/rehype-pretty-code-line-numbers/line-number-style-step-2.png"
+
+<FigureBox src={img_lineNumberStyle_2} caption="余白と文字色を調整した" />
+
+### 複数桁への対応と右寄せ表示
+
+さらに、行番号が複数桁になる場合には、行番号の数字を右寄せにしたい。
+目指すのは次のような表示だ。
+
+import img_lineNumberStyle_3 from "$/assets/tutorial/rehype-pretty-code-line-numbers/line-number-style-step-3.png"
+
+<FigureBox src={img_lineNumberStyle_3} caption="行番号の数字を右寄せに" />
+
+桁数（`data-line-numbers-max-digits`属性の値）に応じた幅を確保し、`text-align: end;`で右寄せにする。
+
+`width`の指定で使用している`ch`単位は、その要素に適用されたフォントの文字`0`の幅を1とする相対単位である。
+つまり、`1ch`は数字1桁分の幅になるので、数字のみを含む要素の幅を指定したい場合に便利だ。
+
+```css
+pre > code[data-line-numbers] > [data-line]::before {
+  /** ...略... */
+
+  display: inline-block;
+  text-align: end;
+  width: 1ch;
+}
+
+pre > code[data-line-numbers-max-digits="2"] > [data-line]::before {
+  width: 2ch;
+}
+
+pre > code[data-line-numbers-max-digits="3"] > [data-line]::before {
+  width: 3ch;
+}
+```
+
+`data-line-numbers-max-digits`が`4`以上になる場合（1000行以上のコードを表示したい場合）は、同様の`width`指定を追加する必要がある。
+
+[型（単位）付き`attr`関数](https://developer.mozilla.org/ja/docs/Web/CSS/attr)が主要ブラウザでサポートされたら、次のような感じで簡単に書けるようになるかもしれない。（`ch`単位がサポートされるかは怪しいが）
+
+```css
+pre > code[data-line-numbers-max-digits] {
+  /** attr(属性名 単位, 属性が指定されていなかった場合のデフォルト値) */
+  --line-numbers-width: attr(data-line-numbers-max-digits ch, 1ch);
+}
+
+pre > code[data-line-numbers] > [data-line]::before {
+  width: var(--line-numbers-width);
+}
+```
+
+## 任意の行番号から始める
+
+`showLineNumbers{開始番号}`と指定することで、行番号を任意の数字から始めることもできる。
+
+<RawCodeBlock lang="言語名" options="showLineNumbers{3}" title="md/MDXのコードブロックの記法">
+  コード
+</RawCodeBlock>
+
+たとえば、`showLineNumbers{3}`と指定することで、行番号のカウントを`3`から始めるためのCSS指定`counter-set: line 2;`が追加される。
+
+```html {11} title="生成されたHTML"
+<div data-rehype-pretty-code-fragment>
+  <pre
+    class="material-theme-darker"
+    style="background-color: #212121"
+    tabindex="0"
+    data-language="html"
+    data-theme="dark"
+  >
+    <code
+      data-line-numbers
+      style="counter-set: line 2; display: grid;"
+      data-language="html"
+      data-theme="dark"
+      data-line-numbers-max-digits="2"
+    >
+      <span data-line>
+        <span style="color: #89DDFF"><</span>
+        <!-- and 26 more children -->
+      </span>
+      <!-- and 11 more children -->
+    </code>
+  </pre>
+  <!-- and 1 more children -->
+</div>
+```
+
+`counter-set: line 2;`によって、`line`カウンタの値が`2`に設定される。
+
+その後、行が描画されるたびに、先ほど書いた`counter-increment: line;`によって`line`カウンタの値がインクリメントされるため、行番号が`3`から始まることになる。
+
+import img_lineNumberCustomStart from "$/assets/tutorial/rehype-pretty-code-line-numbers/line-number-custom-start.png"
+
+<FigureBox src={img_lineNumberCustomStart} />

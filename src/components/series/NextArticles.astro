@@ -1,0 +1,31 @@
+---
+import { buildPageUrlFor } from "$/utils/i18n/slug"
+import type { SeriesArticleSlug, SeriesArticles } from "$/utils/tutorial"
+
+interface Props {
+  current: SeriesArticleSlug
+  series: SeriesArticles
+  lang: string
+}
+
+const { series, current, lang } = Astro.props
+
+const nextArticles = series.getNextArticles(current)
+
+const getTutorialPageUrl = buildPageUrlFor("tutorial")
+---
+
+{
+  nextArticles.length > 0 && (
+    <>
+      <h2>Next Step</h2>
+      <ul>
+        {nextArticles.map((page) => (
+          <li>
+            <a href={getTutorialPageUrl(page.slug, lang)}>{page.data.title}</a>
+          </li>
+        ))}
+      </ul>
+    </>
+  )
+}
