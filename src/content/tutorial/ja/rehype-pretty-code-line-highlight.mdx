@@ -1,0 +1,196 @@
+---
+title: Rehype Pretty Codeで特定の行をハイライト表示
+date: "2023-11-22"
+description: Rehype Pretty Codeで実現するコードブロック表示のフルカスタマイズ
+series: ja/rehype-pretty-code
+draft: true
+tags:
+  - Markdown
+  - MDX
+  - rehype
+  - unified
+  - Rehype Pretty Code
+  - CSS
+---
+
+## 特定の行をハイライト
+
+<RawCodeBlock lang="言語名" options="showLineNumbers {2}" title="md/MDXのコードブロックの記法">
+  コード
+</RawCodeBlock>
+
+`{2}`を追加すると、2行目を描画する`span[data-line]`要素に`data-highlighted-line`属性が追加される。
+
+```html {14} title="生成されたHTML"
+<div data-rehype-pretty-code-fragment>
+  <pre
+    class="material-theme-darker"
+    style="background-color: #212121"
+    tabindex="0"
+    data-language="html"
+    data-theme="dark"
+  >
+    <code data-line-numbers data-language="html" data-theme="dark" style="display: grid;" data-line-numbers-max-digits="2">
+      <span data-line>
+        <span style="color: #89DDFF"><</span>
+        <!-- and 26 more children -->
+      </span>
+      <span data-line data-highlighted-line>
+        <span style="color: #EEFFFF">  </span>
+        <!-- and 3 more children -->
+      </span>
+      <span data-line>
+        <span style="color: #EEFFFF">    </span>
+        <!-- and 9 more children -->
+      </span>
+      <!-- and 9 more children -->
+    </code>
+  </pre>
+  <!-- and 1 more children -->
+</div>
+```
+
+`{start-end}`という形式で範囲指定を行うこともできる。
+たとえば、`{2-4}`を追加すると、2,3,4行目を描画する`span[data-line]`要素にそれぞれ`data-highlighted-line`属性が追加される。
+
+<RawCodeBlock lang="言語名" options="showLineNumbers {2-4}" title="md/MDXのコードブロックの記法">
+  コード
+</RawCodeBlock>
+
+```html {14,18,22} title="生成されたHTML"
+<div data-rehype-pretty-code-fragment>
+  <pre
+    class="material-theme-darker"
+    style="background-color: #212121"
+    tabindex="0"
+    data-language="html"
+    data-theme="dark"
+  >
+    <code data-line-numbers data-language="html" data-theme="dark" style="display: grid;" data-line-numbers-max-digits="2">
+      <span data-line>
+        <span style="color: #89DDFF"><</span>
+        <!-- and 26 more children -->
+      </span>
+      <span data-line data-highlighted-line>
+        <span style="color: #EEFFFF">  </span>
+        <!-- and 3 more children -->
+      </span>
+      <span data-line data-highlighted-line>
+        <span style="color: #EEFFFF">    </span>
+        <!-- and 9 more children -->
+      </span>
+      <span data-line data-highlighted-line>
+        <span style="color: #EEFFFF">      </span>
+        <!-- and 16 more children -->
+      </span>
+      <span data-line>
+        <span style="color: #EEFFFF">      </span>
+        <!-- and 3 more children -->
+      </span>
+      <!-- and 7 more children -->
+    </code>
+  </pre>
+  <!-- and 1 more children -->
+</div>
+```
+
+複数範囲をハイライトしたい場合は、`,`で区切って並べる。
+たとえば、`{2-4,6}`を追加すると、2,3,4,6行目を描画する`span[data-line]`要素にそれぞれ`data-highlighted-line`属性が追加される。
+
+<RawCodeBlock lang="言語名" options="showLineNumbers {2-4,6}" title="md/MDXのコードブロックの記法">
+  コード
+</RawCodeBlock>
+
+```html {14,18,22,30} title="生成されたHTML"
+<div data-rehype-pretty-code-fragment>
+  <pre
+    class="material-theme-darker"
+    style="background-color: #212121"
+    tabindex="0"
+    data-language="html"
+    data-theme="dark"
+  >
+    <code data-line-numbers data-language="html" data-theme="dark" style="display: grid;" data-line-numbers-max-digits="2">
+      <span data-line>
+        <span style="color: #89DDFF"><</span>
+        <!-- and 26 more children -->
+      </span>
+      <span data-line data-highlighted-line>
+        <span style="color: #EEFFFF">  </span>
+        <!-- and 3 more children -->
+      </span>
+      <span data-line data-highlighted-line>
+        <span style="color: #EEFFFF">    </span>
+        <!-- and 9 more children -->
+      </span>
+      <span data-line data-highlighted-line>
+        <span style="color: #EEFFFF">      </span>
+        <!-- and 16 more children -->
+      </span>
+      <span data-line>
+        <span style="color: #EEFFFF">      </span>
+        <!-- and 3 more children -->
+      </span>
+      <span data-line data-highlighted-line>
+        <span style="color: #EEFFFF">        </span>
+        <!-- and 4 more children -->
+      </span>
+      <span data-line>
+        <span style="color: #EEFFFF">        </span>
+        <!-- and 10 more children -->
+      </span>
+      <!-- and 5 more children -->
+    </code>
+  </pre>
+  <!-- and 1 more children -->
+</div>
+```
+
+これまでと同じく、この時点では見た目は変わっていないので、`data-highlighted-line`属性をセレクタとして、独自のCSSを当てる必要がある。
+
+ここでは一例として、こんな感じの見た目を目指す。
+
+import img_lineHighlight_light from "$/assets/tutorial/rehype-pretty-code-line-highlight/line-highlight-light.png"
+
+<FigureBox src={img_lineHighlight_light} caption="ライトモードの場合" />
+
+import img_lineHighlight_dark from "$/assets/tutorial/rehype-pretty-code-line-highlight/line-highlight-dark.png"
+
+<FigureBox src={img_lineHighlight_dark} caption="ダークモードの場合" />
+
+まずは、`span[data-line]`要素に指定していた`padding-inline: 1em;`を、次のような指定に置き換える。
+
+```css {2-3}
+pre > code > [data-line] {
+  padding-inline-start: 0.5em;
+  border-inline-start: 0.5em solid transparent;
+  padding-inline-end: 1em;
+}
+```
+
+左端の余白（`padding-inline-start`）を半分にし、残り半分は`border`の領域に割り当てている。
+
+ハイライトされている行`span[data-highlighted-line]`では、この`border`の色と、背景色を設定するようにする。
+
+```css
+pre > code[data-theme="light"] > [data-highlighted-line] {
+  background-color: rgba(206, 253, 255, 0.45);
+  border-color: #f6c6ea;
+}
+pre > code[data-theme="dark"] > [data-highlighted-line] {
+  background-color: rgb(74, 76, 94);
+  border-color: #b2a4ff;
+}
+```
+
+これだけでも強調表示としては十分だが、ハイライトされていない行を薄く表示することで、より対比を際立たせることもできる。
+
+```css
+pre > code:has([data-highlighted-line]) > :not([data-highlighted-line]) {
+  opacity: 0.5;
+}
+```
+
+そもそもハイライトされている行があるかどうかを、`code:has([data-highlighted-line])`で判定している。（この判定がないと、ハイライト表示がないコードブロックではすべての行が薄く表示されてしまう。）
+
+そして、ハイライトされている行を含む場合のみ、ハイライトされていない行`:not([data-highlighted-line])`の`opacity`を下げている。
