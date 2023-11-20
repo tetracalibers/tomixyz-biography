@@ -5,6 +5,7 @@ import type { CollectionEntry } from "astro:content"
 import TocList from "./TocList.astro"
 import type { SeriesArticles } from "$/utils/tutorial"
 import Icon from "astro-icon"
+import ComingSoonTitle from "$components/series/ComingSoonTitle.astro"
 
 interface Props {
   headings: MarkdownHeading[]
@@ -50,7 +51,16 @@ const aboutTitle = {
             ) : (
               <li>
                 <h3>
-                  <a href={getTutorialPageUrl(article.slug, lang)}>{article.data.title}</a>
+                  {article.data.draft ? (
+                    <ComingSoonTitle title={article.data.title} />
+                  ) : (
+                    <a
+                      href={getTutorialPageUrl(article.slug, lang)}
+                      class="underline underline-offset-4 decoration-1 decoration-dotted"
+                    >
+                      {article.data.title}
+                    </a>
+                  )}
                 </h3>
               </li>
             )
