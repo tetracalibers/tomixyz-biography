@@ -5,7 +5,7 @@ import { getCollection } from "astro:content"
 const category = "Tutorial"
 
 export async function getStaticPaths() {
-  const blogs = await getCollection("tutorial")
+  const blogs = await getCollection("tutorial", (entry) => !entry.data.draft)
 
   return blogs.map((blog) => {
     const [lang, slug] = blog.slug.split("/")
