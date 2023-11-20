@@ -12,7 +12,7 @@ import FigureBox from "$/components/image-wrapper/FigureBox.astro"
 import RawCodeBlock from "$/components/tutorial/RawCodeBlock.astro"
 
 export async function getStaticPaths() {
-  const collection = await getCollection("tutorial")
+  const collection = await getCollection("tutorial", (entry) => !entry.data.draft)
   return i18nPaths(collection)
 }
 
