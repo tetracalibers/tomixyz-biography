@@ -8,7 +8,7 @@ const category = "Skill Tags"
 
 export async function getStaticPaths() {
   const projects = await getCollection("project")
-  const tutorials = await getCollection("tutorial")
+  const tutorials = await getCollection("tutorial", (entry) => !entry.data.draft)
   const targets = [...projects, ...tutorials]
 
   const tags = new Set<string>()
