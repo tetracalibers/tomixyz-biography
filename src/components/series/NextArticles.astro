@@ -1,18 +1,16 @@
 ---
-import { SITE } from "$/config"
-import { buildPageUrlFor, getLangSlug, splitPath } from "$/utils/i18n/slug"
+import { buildPageUrlFor } from "$/utils/i18n/slug"
 import type { SeriesArticleSlug, SeriesArticles } from "$/utils/tutorial"
 
 interface Props {
   current: SeriesArticleSlug
   series: SeriesArticles
+  lang: string
 }
 
-const { series, current } = Astro.props
+const { series, current, lang } = Astro.props
 
 const nextArticles = series.getNextArticles(current)
-
-const lang = getLangSlug(splitPath(Astro.url.pathname)) ?? SITE.defaultLang
 
 const getTutorialPageUrl = buildPageUrlFor("tutorial")
 ---

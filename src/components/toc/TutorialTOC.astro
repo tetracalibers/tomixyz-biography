@@ -1,6 +1,5 @@
 ---
-import { SITE } from "$/config"
-import { buildPageUrlFor, getLangSlug, splitPath } from "$/utils/i18n/slug"
+import { buildPageUrlFor } from "$/utils/i18n/slug"
 import type { MarkdownHeading } from "astro"
 import type { CollectionEntry } from "astro:content"
 import TocList from "./TocList.astro"
@@ -11,11 +10,10 @@ interface Props {
   headings: MarkdownHeading[]
   current: CollectionEntry<"tutorial">["slug"]
   series?: SeriesArticles
+  lang: string
 }
 
-const { headings, current, series } = Astro.props
-
-const lang = getLangSlug(splitPath(Astro.url.pathname)) ?? SITE.defaultLang
+const { headings, current, series, lang } = Astro.props
 
 const getTutorialPageUrl = buildPageUrlFor("tutorial")
 
