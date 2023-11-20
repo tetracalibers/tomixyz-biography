@@ -24,7 +24,8 @@ const tutorialCollection = defineCollection({
       description: z.string(),
       tags: z.array(z.string()).default([]),
       date: z.string(),
-      series: reference("series").optional()
+      series: reference("series").optional(),
+      draft: z.boolean().default(false)
     })
 })
 
