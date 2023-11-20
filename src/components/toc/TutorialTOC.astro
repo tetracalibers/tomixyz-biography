@@ -1,0 +1,89 @@
+---
+import { SITE } from "$/config"
+import { buildPageUrlFor, getLangSlug, splitPath } from "$/utils/i18n/slug"
+import type { MarkdownHeading } from "astro"
+import type { CollectionEntry } from "astro:content"
+import TocList from "./TocList.astro"
+import type { SeriesArticles } from "$/utils/tutorial"
+import Icon from "astro-icon"
+
+interface Props {
+  headings: MarkdownHeading[]
+  current: CollectionEntry<"tutorial">["slug"]
+  series?: SeriesArticles
+}
+
+const { headings, current, series } = Astro.props
+
+const lang = getLangSlug(splitPath(Astro.url.pathname)) ?? SITE.defaultLang
+
+const getTutorialPageUrl = buildPageUrlFor("tutorial")
+
+const aboutTitle = {
+  en: "About the Series",
+  ja: "このシリーズについて"
+}
+---
+
+<nav class="_toc flex flex-col gap-6 items-start p-6 sm:p-8 sm:mx-6 text-slate-600 dark:text-slate-100">
+  <h2 class="text-xl uppercase text-slate-500 dark:text-slate-200">Contents</h2>
+  {
+    series ? (
+      <>
+        <details open={series.isFirstArticle(current)}>
+          <summary>{aboutTitle[lang]}</summary>
+          <div class="prose text-slate-600 dark:text-slate-100 prose-a:text-slate-600 prose-a:dark:text-slate-100 text-sm md:text-base leading-loose max-w-none mt-4 pb-4 prose-a:underline-offset-4 prose-a:decoration-1 prose-a:decoration-dotted border-b border-t-0 border-dotted w-full border-slate-300 dark:border-slate-400">
+            <series.SummaryContent />
+          </div>
+        </details>
+        <hr />
+        <ul class="flex flex-col gap-4">
+          {series.articles.map((article) =>
+            article.slug === current ? (
+              <li class="flex flex-col gap-4">
+                <h3 class="_current font-bold">
+                  <Icon class="_icon" name="arcticons/current-activity" size="20" aria-hidden="true" />
+                  {article.data.title}
+                </h3>
+                <div class="pl-3 ml-1 border-l border-slate-300 dark:border-slate-400">
+                  <TocList headings={headings} />
+                </div>
+              </li>
+            ) : (
+              <li>
+                <h3>
+                  <a href={getTutorialPageUrl(article.slug, lang)}>{article.data.title}</a>
+                </h3>
+              </li>
+            )
+          )}
+        </ul>
+      </>
+    ) : (
+      <TocList headings={headings} />
+    )
+  }
+</nav>
+
+<style>
+  ._toc {
+    backdrop-filter: saturate(200%);
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    border: 1px solid rgba(209, 213, 219, 0.3);
+  }
+
+  :global(.dark) ._toc {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  ._current {
+    position: relative;
+  }
+  ._current > ._icon {
+    position: absolute;
+    top: 0;
+    left: calc(0.75rem * -0.5);
+    opacity: 0.4;
+  }
+</style>

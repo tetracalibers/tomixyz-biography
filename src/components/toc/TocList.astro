@@ -1,0 +1,37 @@
+---
+import type { MarkdownHeading } from "astro"
+
+interface Props {
+  headings: MarkdownHeading[]
+}
+
+const { headings } = Astro.props
+---
+
+{
+  headings.length > 0 && (
+    <ul class="flex flex-col gap-2 w-fit">
+      {headings.map((heading) => (
+        <li>
+          <a href={`#${heading.slug}`} class="flex gap-4" class:list={["_heading-link", `_depth-${heading.depth}`]}>
+            {heading.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  ._heading-link::before {
+    flex-shrink: 0;
+    width: 2ch;
+    text-align: end;
+  }
+  ._depth-2::before {
+    content: "##";
+  }
+  ._depth-3::before {
+    content: "-";
+  }
+</style>
