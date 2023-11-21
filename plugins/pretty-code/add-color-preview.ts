@@ -87,6 +87,20 @@ const convertSpaceToElement = (token: { value: string; node: Element }, index: n
   $parent.splice(index, 0, $space)
 }
 
+// color preview用のspanを追加
+const addColorPreviewElement = (color: string, $token: Element) => {
+  const colorPreview: Element = {
+    type: "element",
+    tagName: "span",
+    properties: {
+      "data-color-preview": color,
+      style: `background-color: ${color};`
+    },
+    children: []
+  }
+  $token.children.unshift(colorPreview)
+}
+
 export const addColorPreview = (element: LineElement) => {
   const tokens = element.children
 
@@ -121,17 +135,6 @@ export const addColorPreview = (element: LineElement) => {
     }
 
     convertSpaceToElement({ value: raw, node: token }, i, tokens)
-
-    // color preview用のspanを追加
-    const colorPreview: Element = {
-      type: "element",
-      tagName: "span",
-      properties: {
-        "data-color-preview": color,
-        style: `background-color: ${color};`
-      },
-      children: []
-    }
-    token.children.unshift(colorPreview)
+    addColorPreviewElement(color, token)
   })
 }
