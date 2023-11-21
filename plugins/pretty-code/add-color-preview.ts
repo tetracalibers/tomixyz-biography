@@ -67,6 +67,26 @@ const walkValidateHTMLColorRgb = (tokens: ElementContent[], rgbOrRgba: string, i
   return color
 }
 
+// テキストノード中の先頭のスペースを、span要素に変換する
+const convertSpaceToElement = (token: { value: string; node: Element }, index: number, $parent: ElementContent[]) => {
+  if (!token.value.startsWith(" ")) return
+
+  const $token = token.node
+  if ($token.children[0].type !== "text") return
+
+  // 先頭がスペースの場合は、テキストノードからスペースを削除しておく
+  $token.children[0].value = token.value.trim()
+
+  // トークン要素の前にスペース用の要素を追加
+  const $space: Element = {
+    type: "element",
+    tagName: "span",
+    properties: {},
+    children: [{ type: "text", value: " " }]
+  }
+  $parent.splice(index, 0, $space)
+}
+
 export const addColorPreview = (element: LineElement) => {
   const tokens = element.children
 
@@ -100,26 +120,7 @@ export const addColorPreview = (element: LineElement) => {
       if (!validateHTMLColorName(value)) return
     }
 
-    if (raw.startsWith(" ")) {
-      if (token.children[0].type === "text") {
-        // 先頭がスペースの場合は、テキストノードからスペースを削除しておく
-        token.children[0].value = value
-
-        // トークン要素の前にスペース用の要素を追加
-        const space: Element = {
-          type: "element",
-          tagName: "span",
-          properties: {},
-          children: [
-            {
-              type: "text",
-              value: " "
-            }
-          ]
-        }
-        tokens.splice(i, 0, space)
-      }
-    }
+    convertSpaceToElement({ value: raw, node: token }, i, tokens)
 
     // color preview用のspanを追加
     const colorPreview: Element = {
