@@ -90,25 +90,80 @@ const convertSpaceToElement = (token: string, $token: Element, index: number, $p
   $parent.splice(index, 0, $space)
 }
 
-// color preview用のspanを追加
-const prependColorPreviewElement = (color: string, $token: Element) => {
-  const colorPreview: Element = {
+// color preview用のspanを作成
+const createColorPreviewElement = (color: string) => {
+  const $colorPreview: Element = {
     type: "element",
     tagName: "span",
     properties: {
       "data-color-preview": color,
       style: `background-color: ${color};`
     },
-    children: []
+    children: [{ type: "text", value: "" }]
   }
-  $token.children.unshift(colorPreview)
+  return $colorPreview
+}
+
+// color preview用のspanを追加
+const prependColorPreviewElement = (color: string, $token: Element) => {
+  const $color = createColorPreviewElement(color)
+  $token.children.unshift($color)
+}
+
+// 色コードとそうでない部分を分割し、間に色プレビュー用のspanを追加する
+const insertColorPreviewElementWithSplit = (
+  color: string,
+  colorStart: number,
+  token: string,
+  $token: Element,
+  index: number,
+  $parent: ElementContent[]
+) => {
+  const colorEnd = colorStart + color.length
+
+  const beforeColor = token.slice(0, colorStart)
+  const afterColor = token.slice(colorEnd)
+
+  const newElements: Element[] = []
+
+  if (beforeColor.length > 0) {
+    newElements.push({
+      type: "element",
+      tagName: "span",
+      properties: $token.properties,
+      children: [{ type: "text", value: beforeColor }]
+    })
+  }
+
+  newElements.push({
+    type: "element",
+    tagName: "span",
+    properties: $token.properties,
+    children: [createColorPreviewElement(color), { type: "text", value: token.slice(colorStart) }]
+  })
+
+  if (afterColor.length > 0) {
+    newElements.push({
+      type: "element",
+      tagName: "span",
+      properties: $token.properties,
+      children: [{ type: "text", value: afterColor }]
+    })
+  }
+
+  $parent.splice(index, 1, ...newElements)
 }
 
 type MatchResult =
   | { type: "INVALID"; color: null }
   | {
-      type: "TOKEN_IS_COLOR" | "TOKEN_HAS_COLOR" | "MERGED_TOKEN_IS_COLOR"
+      type: "TOKEN_IS_COLOR" | "MERGED_TOKEN_IS_COLOR"
       color: string
+    }
+  | {
+      type: "TOKEN_HAS_COLOR"
+      color: string
+      start: number
     }
 
 const matchMaybeHexToken = (token: string, index: number, $parent: ElementContent[]): MatchResult => {
@@ -149,6 +204,50 @@ const matchMaybeColorNameToken = (token: string): MatchResult => {
   return { type: "INVALID", color: null }
 }
 
+// hexを含んでいるかもしれないトークンを判定する
+const matchMaybeTokenHasHex = (token: string): MatchResult => {
+  const foundMaybeHex = token.match(/#[a-fA-F0-9]{3,8}/)
+
+  if (!foundMaybeHex) {
+    return { type: "INVALID", color: null }
+  }
+
+  const [maybeHex] = foundMaybeHex
+  const maybeHexIdx = foundMaybeHex.index
+
+  if (maybeHexIdx === undefined) {
+    return { type: "INVALID", color: null }
+  }
+
+  if (validateHTMLColorHex(maybeHex)) {
+    return { type: "TOKEN_HAS_COLOR", color: maybeHex, start: maybeHexIdx }
+  }
+
+  return { type: "INVALID", color: null }
+}
+
+// rgbかrgbaを含んでいるかもしれないトークンを判定する
+const matchMaybeTokenHasRgb = (token: string): MatchResult => {
+  const foundMaybeRgb = token.match(/rgba?\([0-9, ?]+\)/)
+
+  if (!foundMaybeRgb) {
+    return { type: "INVALID", color: null }
+  }
+
+  const [maybeRgb] = foundMaybeRgb
+  const maybeRgbIdx = foundMaybeRgb.index
+
+  if (maybeRgbIdx === undefined) {
+    return { type: "INVALID", color: null }
+  }
+
+  if (validateHTMLColorRgb(maybeRgb)) {
+    return { type: "TOKEN_HAS_COLOR", color: maybeRgb, start: maybeRgbIdx }
+  }
+
+  return { type: "INVALID", color: null }
+}
+
 export const addColorPreview = (element: LineElement) => {
   const tokens = element.children
 
@@ -173,7 +272,14 @@ export const addColorPreview = (element: LineElement) => {
     }
 
     // トークン中に色コードが含まれる場合に実行する関数
-    const onTokenHasColorCode = (color: string) => {}
+    const onTokenHasColorCode = (color: string, start: number) => {
+      if (start === 0) {
+        convertSpaceToElement(raw, token, i, tokens)
+        prependColorPreviewElement(color, token)
+        return
+      }
+      insertColorPreviewElementWithSplit(color, start, raw, token, i, tokens)
+    }
 
     let result: MatchResult = { type: "INVALID", color: null }
 
@@ -181,6 +287,10 @@ export const addColorPreview = (element: LineElement) => {
       result = matchMaybeHexToken(value, i, tokens)
     } else if (value.startsWith("rgb")) {
       result = matchMaybeRgbToken(value, i, tokens)
+    } else if (value.includes("#")) {
+      result = matchMaybeTokenHasHex(value)
+    } else if (value.includes("rgb")) {
+      result = matchMaybeTokenHasRgb(value)
     } else {
       result = matchMaybeColorNameToken(value)
     }
@@ -190,7 +300,7 @@ export const addColorPreview = (element: LineElement) => {
         onTokenIsColorCode(result.color)
         break
       case "TOKEN_HAS_COLOR":
-        onTokenHasColorCode(result.color)
+        onTokenHasColorCode(result.color, result.start)
         break
       case "MERGED_TOKEN_IS_COLOR":
         onMergedTokenIsColorCode(result.color)
