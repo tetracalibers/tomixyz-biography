@@ -87,7 +87,7 @@ const convertSpaceToElement = (token: string, $token: Element, index: number, $p
 }
 
 // color preview用のspanを追加
-const addColorPreviewElement = (color: string, $token: Element) => {
+const prependColorPreviewElement = (color: string, $token: Element) => {
   const colorPreview: Element = {
     type: "element",
     tagName: "span",
@@ -134,6 +134,6 @@ export const addColorPreview = (element: LineElement) => {
     }
 
     convertSpaceToElement(raw, token, i, tokens)
-    addColorPreviewElement(color, token)
+    prependColorPreviewElement(color, token)
   })
 }
