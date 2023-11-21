@@ -15,10 +15,14 @@ const tokenValue = (node: ElementContent) => {
   return tokenValueWithRaw(node)?.value ?? null
 }
 
+const isHexLength = (str: string) => {
+  return [3, 4, 6, 8].includes(str.length)
+}
+
 const walkValidateHTMLColorHex = (tokens: ElementContent[], i: number) => {
   const next = tokenValue(tokens[i + 1])
   if (next === null) return null
-  if (![3, 6, 8].includes(next.length)) return null
+  if (!isHexLength(next)) return null
   const color = "#" + next
   if (!validateHTMLColorHex(color)) return null
   return color
