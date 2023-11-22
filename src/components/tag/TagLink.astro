@@ -1,0 +1,42 @@
+---
+interface Props {
+  href: string
+  small?: boolean
+}
+
+const { href, small } = Astro.props
+
+const hue = Math.floor(Math.random() * 360) + "deg"
+---
+
+<a
+  href={href}
+  class:list={[
+    "_tag inline-block text-theme-secondary dark:text-white",
+    small ? "rounded-br-xl rounded-tl-xl text-md px-2 py-0" : "rounded-br-3xl rounded-tl-3xl text-xl px-4 py-1"
+  ]}
+>
+  <slot />
+</a>
+
+<style define:vars={{ hue, "dark-twinkle-width": small ? "0.5rem" : "1rem" }}>
+  ._tag {
+    --twinkle-width: 24%;
+    background-image: repeating-linear-gradient(
+      225deg,
+      rgba(191, 228, 255, 0.1) var(--twinkle-width),
+      rgba(234, 239, 242, 0.3) 5%,
+      rgba(206, 206, 255, 0.6) 55.07%,
+      rgba(223, 209, 249, 0.4) 77%,
+      rgba(230, 227, 245, 0.1) 93%,
+      rgba(234, 239, 242, 0.1) 100%
+    );
+    filter: hue-rotate(var(--hue));
+  }
+
+  :global(.dark) ._tag {
+    --twinkle-width: var(--dark-twinkle-width);
+    filter: hue-rotate(var(--hue)) saturate(1.5) contrast(1.2);
+    mix-blend-mode: hard-light;
+  }
+</style>
