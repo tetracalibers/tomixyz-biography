@@ -1,20 +1,24 @@
 ---
 import { tagToSlug } from "$/utils/tag"
-import { SITE } from "$/config"
 import TagLink from "$components/tag/TagLink.astro"
+import { buildPageUrlFor } from "$/utils/i18n/slug"
 
 interface Props {
   tags: string[]
+  lang: string
 }
 
-const { tags } = Astro.props
+const { tags, lang } = Astro.props
+
+const buildPageUrl = buildPageUrlFor("tags")
+const pageUrlFromTagName = (tagName: string) => buildPageUrl(tagToSlug(tagName), lang)
 ---
 
 <div class="inline-flex flex-wrap gap-x-2 gap-y-3 justify-center sm:justify-start">
   {
     tags.length > 0 &&
       tags.map((tag) => (
-        <TagLink href={`${SITE.base}/tags/${tagToSlug(tag)}`} small>
+        <TagLink href={pageUrlFromTagName(tag)} small>
           {tag}
         </TagLink>
       ))

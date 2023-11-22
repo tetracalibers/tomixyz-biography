@@ -31,7 +31,7 @@ const { content, ogimage, lang = "ja" } = Astro.props
     <ArticleHeaderBlock>
       <ArticleHeaderContentBlock slot="content">
         <Fragment slot="heading">
-          <TagList tags={content.tags} />
+          <TagList tags={content.tags} lang={lang} />
           <ArticleTitle title={content.title} overflow="fade" />
           <ArticleSummary summary={content.description} />
         </Fragment>
