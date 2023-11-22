@@ -1,6 +1,4 @@
 ---
-import LeadingTrimText from "$/components/text/LeadingTrimText.astro"
-
 interface Props {
   href: string
   title: string
@@ -14,7 +12,7 @@ const hue = Math.floor(Math.random() * 360) + "deg"
 <a
   href={href}
   title={title}
-  class="_tag drop-shadow rounded-br-xl rounded-tl-xl inline-block text-md px-2 py-0 text-theme-secondary dark:text-theme-dark-primary"
+  class="_tag rounded-br-xl rounded-tl-xl inline-block text-md px-2 py-0 text-theme-secondary dark:text-theme-dark-primary"
 >
   <slot />
 </a>
