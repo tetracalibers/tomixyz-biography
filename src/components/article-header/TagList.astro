@@ -1,7 +1,7 @@
 ---
 import { tagToSlug } from "$/utils/tag"
 import { SITE } from "$/config"
-import Tag from "$components/article-header/Tag.astro"
+import TagLink from "$components/tag/TagLink.astro"
 
 interface Props {
   tags: string[]
@@ -14,9 +14,9 @@ const { tags } = Astro.props
   {
     tags.length > 0 &&
       tags.map((tag) => (
-        <Tag href={`${SITE.base}/tags/${tagToSlug(tag)}`} title={tag}>
+        <TagLink href={`${SITE.base}/tags/${tagToSlug(tag)}`} small>
           {tag}
-        </Tag>
+        </TagLink>
       ))
   }
 </div>
