@@ -1,6 +1,7 @@
 import type { Element, ElementContent } from "hast"
 import type { LineElement } from "rehype-pretty-code"
-import * as validateColorPkg from "validate-color"
+import validateColorPkg from "validate-color"
+// @ts-ignore
 const { validateHTMLColorHex, validateHTMLColorName, validateHTMLColorRgb } = validateColorPkg
 
 const tokenValueWithRaw = (node: ElementContent) => {
