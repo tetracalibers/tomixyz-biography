@@ -42,8 +42,5 @@
     "text-to-svg": "^3.1.5",
     "typescript": "^5.4.3",
     "validate-color": "^2.2.4"
-  },
-  "dependencies": {
-    "@astrojs/markdoc": "0.9.2"
   }
 }
