@@ -74,10 +74,6 @@ export default defineConfig(
         alias: {
           $: path.resolve(__dirname, "./src")
         }
-      },
-      optimizeDeps: {
-        allowNodeBuiltins: true,
-        exclude: ["@resvg/resvg-js-darwin-x64"]
       }
     }
   }
