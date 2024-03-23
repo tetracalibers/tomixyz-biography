@@ -33,3 +33,7 @@
 }
 @tailwind components;
 @tailwind utilities;
+
+[data-icon] > symbol {
+  overflow: visible;
+}

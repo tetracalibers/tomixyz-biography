@@ -16,9 +16,11 @@ tags:
 
 Rehype Pretty CodeでMarkdown/MDXのコードブロックに行番号を表示するには、言語名の後に半角スペースを開けて`showLineNumbers`を追加する。
 
-<RawCodeBlock lang="言語名" options="showLineNumbers" title="md/MDXのコードブロックの記法">
-  コード
-</RawCodeBlock>
+````md title="md/MDXのコードブロックの記法"
+```言語名 showLineNumbers
+コード
+```
+````
 
 `showLineNumbers`を加えることで、`code`要素に2つの`data-`属性が追加される。
 
@@ -159,9 +161,11 @@ pre > code[data-line-numbers] > [data-line]::before {
 
 `showLineNumbers{開始番号}`と指定することで、行番号を任意の数字から始めることもできる。
 
-<RawCodeBlock lang="言語名" options="showLineNumbers{3}" title="md/MDXのコードブロックの記法">
-  コード
-</RawCodeBlock>
+````md title="md/MDXのコードブロックの記法"
+```言語名 showLineNumbers{3}
+コード
+```
+````
 
 たとえば、`showLineNumbers{3}`と指定することで、行番号のカウントを`3`から始めるためのCSS指定`counter-set: line 2;`が追加される。
 

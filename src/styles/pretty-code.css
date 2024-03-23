@@ -1,30 +1,30 @@
 /* switch between light/dark theme */
 
-html:not(.dark) [data-rehype-pretty-code-fragment] [data-theme="dark"] {
-  display: none;
-}
-
-html.dark [data-rehype-pretty-code-fragment] [data-theme="light"] {
-  display: none;
-}
-
-/* background color */
-
 :root {
   --pretty-light-bg: #fafafa;
   --pretty-dark-bg: #212121;
 }
 
-[data-rehype-pretty-code-fragment] > pre[data-theme="light"] {
+pre[data-theme*=" "],
+code[data-theme*=" "] {
   background-color: var(--pretty-light-bg);
 }
-[data-rehype-pretty-code-fragment] > pre[data-theme="dark"] {
+
+code[data-theme*=" "] span {
+  color: var(--shiki-light);
+}
+
+html.dark :is(pre[data-theme*=" "], code[data-theme*=" "]) {
   background-color: var(--pretty-dark-bg);
+}
+
+html.dark code[data-theme*=" "] span {
+  color: var(--shiki-dark);
 }
 
 /* layout */
 
-div[data-rehype-pretty-code-fragment] {
+[data-rehype-pretty-code-figure] {
   margin-block: 1.7em;
 
   /** for title */
@@ -32,7 +32,7 @@ div[data-rehype-pretty-code-fragment] {
   flex-direction: column;
 }
 
-div[data-rehype-pretty-code-fragment] > pre {
+[data-rehype-pretty-code-figure] > pre {
   padding-block: 0.8em;
   padding-inline: 0;
   margin: 0;
@@ -52,11 +52,11 @@ pre > code > [data-line] {
   border-inline-start: 0.5em solid transparent;
 }
 
-pre > code[data-theme="light"] > [data-highlighted-line] {
+pre > code > [data-highlighted-line] {
   background-color: rgb(206 253 255 / 45%);
   border-color: #f6c6ea;
 }
-pre > code[data-theme="dark"] > [data-highlighted-line] {
+html.dark pre > code > [data-highlighted-line] {
   background-color: rgb(74, 76, 94);
   border-color: #b2a4ff;
 }
@@ -105,7 +105,7 @@ div[data-rehype-pretty-code-title] + pre {
 
   width: fit-content;
 
-  padding-block: 0;
+  padding-block: 0.3em;
   padding-inline: 0.7em;
 
   border-top-left-radius: 0.3em;
@@ -131,7 +131,7 @@ div[data-rehype-pretty-code-title] + pre {
   border-top: 3px solid var(--_pretty-title-border);
   border-right: 3px solid var(--_pretty-title-border);
 }
-[data-rehype-pretty-code-title][data-theme="dark"] {
+html.dark [data-rehype-pretty-code-title] {
   --_pretty-title-border: var(--pretty-dark-title-border);
 }
 
