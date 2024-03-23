@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-icon"
+import { Icon } from "astro-icon/components"
 
 interface Props {
   url: string
@@ -11,6 +11,6 @@ const { url, icon, label } = Astro.props
 ---
 
 <a class="flex font-bold" href={url}>
-  <Icon name={icon} size="30" />
+  <Icon name={icon} size={30} />
   {label}
 </a>

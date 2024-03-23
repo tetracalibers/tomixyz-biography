@@ -1,7 +1,7 @@
 ---
 import { SITE } from "$/config"
 import ModeSwitcherBtn from "./ModeSwitcherBtn.svelte"
-import { Icon } from "astro-icon"
+import { Icon } from "astro-icon/components"
 import { getLangSlug, splitPath } from "$/utils/i18n/slug"
 import LanguageSwitcher from "./LanguageSwitcher.astro"
 
@@ -18,17 +18,17 @@ const topUrl = `${SITE.base}/${slugLang ?? ""}`
       <ul class="header__ref-list">
         <li>
           <a href="https://www.npmjs.com/~tomixy" title="npm">
-            <Icon name="ri/npmjs-line" size="23" />
+            <Icon name="ri/npmjs-line" size={23} />
           </a>
         </li>
         <li>
           <a href={SITE.githubUrl} title="GitHub">
-            <Icon name="mingcute/github-line" size="24" />
+            <Icon name="mingcute/github-line" size={24} />
           </a>
         </li>
         <li>
           <a href={"https://twitter.com/" + SITE.authorTwitter} title="Twitter">
-            <Icon name="humbleicons/brand-twitter" size="24" />
+            <Icon name="humbleicons/brand-twitter" size={24} />
           </a>
         </li>
       </ul>

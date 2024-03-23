@@ -9,7 +9,6 @@ import { i18nPaths } from "$/utils/i18n/routing/article-page"
 import TutorialLayout from "$/layouts/tutorial.astro"
 import DemoArea from "$/components/tutorial/DemoArea.astro"
 import FigureBox from "$/components/image-wrapper/FigureBox.astro"
-import RawCodeBlock from "$/components/tutorial/RawCodeBlock.astro"
 
 export async function getStaticPaths() {
   const collection = await getCollection("tutorial", (entry) => !entry.data.draft)
@@ -38,8 +37,7 @@ const ogimage = `/og-image/${lang}/tutorial/${slug}.png`
       YTVideoEmbed,
       Tabs,
       DemoArea,
-      FigureBox,
-      RawCodeBlock
+      FigureBox
     }}
   />
 </TutorialLayout>

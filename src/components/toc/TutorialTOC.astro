@@ -4,7 +4,7 @@ import type { MarkdownHeading } from "astro"
 import type { CollectionEntry } from "astro:content"
 import TocList from "./TocList.astro"
 import type { SeriesArticles } from "$/utils/tutorial"
-import Icon from "astro-icon"
+import { Icon } from "astro-icon/components"
 import ComingSoonTitle from "$components/series/ComingSoonTitle.astro"
 
 interface Props {
@@ -41,7 +41,7 @@ const aboutTitle = {
             article.slug === current ? (
               <li class="flex flex-col gap-4">
                 <h3 class="_current font-bold">
-                  <Icon class="_icon" name="arcticons/current-activity" size="20" aria-hidden="true" />
+                  <Icon class="_icon" name="arcticons/current-activity" size={20} aria-hidden="true" />
                   {article.data.title}
                 </h3>
                 <div class="pl-3 ml-1 border-l border-slate-300 dark:border-slate-400">
