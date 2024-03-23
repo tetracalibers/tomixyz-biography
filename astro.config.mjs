@@ -61,7 +61,6 @@ export default defineConfig(
     integrations: [
       icon(),
       mdx(),
-      // markdoc(), // disabled now due to an issue with Vercel builds
       svelte(),
       tailwind({
         config: {
