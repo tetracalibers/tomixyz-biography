@@ -28,24 +28,24 @@ const { content, ogimage, lang = "ja" } = Astro.props
   </head>
   <MainLayout>
     <ArticleHeaderBlock>
-      <ArticleHeaderContentBlock slot="content">
-        <Fragment slot="heading">
+      <ArticleHeaderContentBlock slot='content'>
+        <Fragment slot='heading'>
           <ArticleTitle title={content.title} />
           <ArticleSummary summary={content.description} />
         </Fragment>
-        <ArticleMetaBlock slot="meta">
+        <ArticleMetaBlock slot='meta'>
           <IconLinkList
             links={[
               { url: content.url, icon: "line-md/external-link-rounded", label: "Info" },
               { url: content.slide, icon: "bx/slideshow", label: "Slide" },
-              { url: content.archive, icon: "majesticons/article-search", label: "Archive" },
+              { url: content.archive, icon: "majesticons/article-search", label: "Article" },
               { url: content.github, icon: "lucide/github", label: "GitHub" }
             ]}
           />
           <PublishDate date={content.date} />
         </ArticleMetaBlock>
       </ArticleHeaderContentBlock>
-      <CoverImage slot="image" src={content.image} alt={content.title} />
+      <CoverImage slot='image' src={content.image} alt={content.title} />
     </ArticleHeaderBlock>
     <Prose>
       <slot />
