@@ -7,42 +7,52 @@ import AvatarImage from "$components/image-wrapper/AvatarImage.astro"
 import PublishDate from "$components/article-header/PublishDate.astro"
 import Prose from "$components/Prose.astro"
 import TagList from "$components/article-header/TagList.astro"
-import TableOfContents from "$components/toc/TableOfContents.astro"
 import type { MarkdownHeading } from "astro"
+import TutorialTOC from "$components/toc/TutorialTOC.astro"
+import NextArticles from "$components/series/NextArticles.astro"
+import { collectSeriesArticles } from "$/utils/tutorial"
 
 interface Props {
-  content: CollectionEntry<"tutorial">["data"]
+  content: CollectionEntry<"tutorial">
   ogimage?: string
   lang?: string
   headings: MarkdownHeading[]
 }
 const { content, ogimage, lang = "ja", headings } = Astro.props
 
+const { data, slug } = content
+const { title, tags, description, date, series: _series } = data
+
 const AUTHOR_NAME = SITE.author
+
+const series = _series ? await collectSeriesArticles(_series.slug) : undefined
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
-    <BaseHead {...content} image={ogimage} title={content.title ? `${SITE.title} | ${content.title}` : SITE.title} />
+    <BaseHead {...data} image={ogimage} title={title ? `${SITE.title} | ${title}` : SITE.title} />
   </head>
   <MainLayout>
     <div class="flex flex-col gap-8">
       <div class="py-4 mb-1 text-center md:text-left flex flex-col gap-8">
-        <h1 class="post__title">{content.title}</h1>
-        <p class="text-gray-500 dark:text-gray-100">{content.description}</p>
-        <TagList tags={content.tags} />
+        <h1 class="post__title">{title}</h1>
+        <p class="text-gray-500 dark:text-gray-100">{description}</p>
+        <TagList tags={tags} lang={lang} />
         <div class="post__desc flex flex-row gap-2">
           <AvatarImage className="avatar" />
           <div class="flex flex-col border-l-2 pl-2">
             <span class="post__author">{AUTHOR_NAME}</span>
-            <PublishDate date={content.date} />
+            <PublishDate date={date} />
           </div>
         </div>
       </div>
-      <TableOfContents headings={headings} />
+      <TutorialTOC headings={headings} current={slug} series={series} lang={lang} />
       <Prose>
-        <div class="post__content"><slot /></div>
+        <div class="post__content">
+          <slot />
+          {series && <NextArticles current={slug} series={series} lang={lang} />}
+        </div>
       </Prose>
     </div>
   </MainLayout>

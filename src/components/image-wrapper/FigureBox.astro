@@ -1,0 +1,75 @@
+---
+import { Image } from "astro:assets"
+
+interface Props {
+  src: ImageMetadata
+  caption?: string
+  alt?: string
+}
+
+const { src, alt = "", caption } = Astro.props
+---
+
+<figure class="_figure-box w-full bg-slate-300/[.3] dark:bg-white/[.3] relative">
+  {caption && <figcaption class="_caption">{caption}</figcaption>}
+  <Image src={src} alt={alt} />
+</figure>
+
+<style>
+  ._figure-box {
+    --_title-border: #6e85b7;
+    --_padding: clamp(0.2rem, 2.5vw, 0.75rem);
+
+    padding: var(--_padding);
+    display: flex;
+    flex-direction: column;
+  }
+  :global(.dark) ._figure-box {
+    --_title-border: #94b3fd;
+  }
+
+  ._figure-box > ._caption {
+    display: inline-flex;
+    align-items: center;
+
+    width: fit-content;
+
+    margin-block-start: calc(var(--_padding) * -1);
+    margin-inline-start: calc(var(--_padding) * -1 + -6px);
+    margin-inline-end: calc(var(--_padding) * -1);
+
+    padding-block: 0.3em;
+    padding-inline: 0.7em;
+
+    position: relative;
+    top: 0;
+
+    font-weight: bold;
+    font-size: clamp(0.6rem, 2.9vw, 0.875rem);
+
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--_title-border);
+
+    border-top-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+
+    color: var(--_title-border);
+    background-color: #eef1ff;
+  }
+
+  :global(html.dark) ._caption {
+    background: linear-gradient(90deg, rgb(49, 54, 90), rgba(15, 23, 42, 0.5));
+    filter: saturate(1.5);
+  }
+
+  ._caption::before {
+    position: absolute;
+    top: calc(100% + 1px);
+    left: -1px;
+    content: "";
+    border: 3px solid transparent;
+    border-top: 3px solid var(--_title-border);
+    border-right: 3px solid var(--_title-border);
+  }
+</style>

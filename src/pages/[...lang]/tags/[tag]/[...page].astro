@@ -14,7 +14,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const projects = await getCollection("project")
   const projectsByLang = groupByLang<"project">(projects)
 
-  const tutorials = await getCollection("tutorial")
+  const tutorials = await getCollection("tutorial", (entry) => !entry.data.draft)
   const tutorialsByLang = groupByLang<"tutorial">(tutorials)
 
   const tags = SITE.langs.reduce<{ [lang: string]: string[] }>((acc, lang) => {

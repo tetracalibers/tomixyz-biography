@@ -6,6 +6,7 @@ import type { GetStaticPaths } from "astro"
 import { groupByLang } from "$/utils/i18n/collection"
 import { buildPageUrlFor } from "$/utils/i18n/slug"
 import { SITE } from "$/config"
+import TagLink from "$components/tag/TagLink.astro"
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const projects = await getCollection("project")
@@ -19,7 +20,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const tutorials = tutorialsByLang.get(lang) ?? []
     return {
       ...acc,
-      [lang]: collectTags(projects, tutorials).sort()
+      [lang]: collectTags(projects, tutorials).sort((a, b) => a.localeCompare(b))
     }
   }, {})
 
@@ -47,24 +48,13 @@ const pageUrlFromTagName = (tagName: string) => buildPageUrl(tagToSlug(tagName),
 ---
 
 <DefaultPageLayout content={{ title, description, ogimage }} lang={lang}>
-  <ul class="tag-list">
+  <ul class="list-none flex gap-3 flex-wrap">
     {
       tags.map((tag) => (
         <li>
-          <a class="tag" href={pageUrlFromTagName(tag)} title={`View posts tagged under "${tag}"`}>
-            {tag}
-          </a>
+          <TagLink href={pageUrlFromTagName(tag)}>{tag}</TagLink>
         </li>
       ))
     }
   </ul>
 </DefaultPageLayout>
-
-<style>
-  .tag-list {
-    @apply list-none flex gap-2 flex-wrap;
-  }
-  .tag {
-    @apply shadow-md dark:shadow-white dark:shadow-sm inline-block text-xl px-4 py-1 rounded-full text-theme-secondary dark:text-theme-dark-primary hover:bg-white dark:hover:bg-opacity-5 dark:hover:shadow-none;
-  }
-</style>

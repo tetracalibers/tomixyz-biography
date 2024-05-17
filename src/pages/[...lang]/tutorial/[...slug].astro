@@ -1,16 +1,12 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content"
-import Callout from "$/components/mdoc/Callout.astro"
-import Link from "$/components/mdoc/Link.astro"
-import TweetEmbed from "$/components/mdoc/TweetEmbed.astro"
-import YTVideoEmbed from "$/components/mdoc/YTVideoEmbed.astro"
-import Tabs from "$/components/mdoc/Tabs/Tabs.astro"
 import { i18nPaths } from "$/utils/i18n/routing/article-page"
 import TutorialLayout from "$/layouts/tutorial.astro"
 import DemoArea from "$/components/tutorial/DemoArea.astro"
+import FigureBox from "$/components/image-wrapper/FigureBox.astro"
 
 export async function getStaticPaths() {
-  const collection = await getCollection("tutorial")
+  const collection = await getCollection("tutorial", (entry) => !entry.data.draft)
   return i18nPaths(collection)
 }
 
@@ -27,15 +23,11 @@ const { Content, headings } = await page.render()
 const ogimage = `/og-image/${lang}/tutorial/${slug}.png`
 ---
 
-<TutorialLayout content={page.data} ogimage={ogimage} lang={lang} headings={headings}>
+<TutorialLayout content={page} ogimage={ogimage} lang={lang} headings={headings}>
   <Content
     components={{
-      Callout,
-      Link,
-      TweetEmbed,
-      YTVideoEmbed,
-      Tabs,
-      DemoArea
+      DemoArea,
+      FigureBox
     }}
   />
 </TutorialLayout>
