@@ -10,5 +10,24 @@ tags:
   - GLSL
   - Svelte
   - SvelteKit
-description: "WebGL + GLSLによる画像加工アプリ"
+description: "WebGLとGLSLによる画像加工アプリ"
 ---
+
+WebGLとGLSLによる画像加工アプリ。
+
+元々、画像処理を勉強しており、特にNPR（Non-photorealistic rendering、簡単にいえば絵画風加工）のアルゴリズムを研究していた。
+WebGLとGLSLで試作を重ねるうちに、簡単に操作できる画像加工アプリとして形にしたいと思うようになった。
+
+アプリはSvelteKitで実装し、次の4つの画像加工機能を搭載している。
+
+- デッサン風加工
+- 色鉛筆画風加工
+- ステンドグラス風加工
+- モザイク処理
+
+それぞれの画像加工フィルタは、すべてGLSLでフルスクラッチ実装。
+GLSLをWeb上で動作させるためのコードは、自作のWebGLラッパーライブラリをベースに実装している。
+
+機能や実装の詳細を解説したスライドは、下記リンクより閲覧できる。
+
+- [「GLSLで画像加工 ひたすらピクセルをいじりたい」](https://tetracalibers.github.io/devcamp-2023-10-LT/with-note/)
