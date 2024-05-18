@@ -1,0 +1,26 @@
+---
+import FigureBox from "./FigureBox.astro"
+
+interface Props {
+  src: ImageMetadata
+  caption?: string
+  alt?: string
+}
+
+const { src, alt = "", caption } = Astro.props
+---
+
+<div class='_content-and-image-wrapper'>
+  <slot />
+  <FigureBox caption={caption} src={src} alt={alt} />
+</div>
+
+<style>
+  :global(:not(:where(p, :has(img))) +) ._content-and-image-wrapper {
+    margin-block: 0 !important;
+  }
+
+  ._content-and-image-wrapper :global(> figure) {
+    margin-block: 0;
+  }
+</style>
