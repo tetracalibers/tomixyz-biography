@@ -34,7 +34,7 @@ const { grid = true, fill = true } = Astro.props
     margin-block-start: 3em;
     margin-block-end: 0;
   }
-  .prose :global(> *:has(img) + *) {
+  .prose :global(> *:has(img) + *:not(:where(h1, h2, h3, h4, h5, h6))) {
     margin-block-start: 3em;
     margin-block-end: 0;
   }
@@ -50,7 +50,7 @@ const { grid = true, fill = true } = Astro.props
     margin-top: 0;
   }
 
-  .prose > :global(:where(h1, h2, h3, h4, h5, h6)):first-child {
+  :where(.prose > :global(:where(h1, h2, h3, h4, h5, h6)):first-child) {
     margin-top: 0;
   }
 

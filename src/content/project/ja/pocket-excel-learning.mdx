@@ -1,0 +1,86 @@
+---
+title: Pocket Excel Learning
+date: "2024-02-11"
+image: ../../../assets/projects/pocket-excel-learning/question-remove-string-2.png
+url: https://tetracalibers.github.io/pocket-excel-learning
+github: https://github.com/tetracalibers/pocket-excel-learning
+tags:
+  - Astro
+  - React
+  - MDX
+  - Svelte
+  - Excel
+description: "実際に操作できるデモを組み込んだExcel関数学習サイト"
+---
+
+import HStack from "$/components/placement/HStack.astro"
+import FluidImage from "$/components/gallery/FluidImage.astro"
+import FigureBox from "$/components/image-wrapper/FigureBox.astro"
+import ContentWithImage from "$/components/image-wrapper/ContentWithImage.astro"
+
+import img_QuestionsTop from "../../../assets/projects/pocket-excel-learning/questions-top.png"
+import img_QuestionPageTitleAndToc from "../../../assets/projects/pocket-excel-learning/question-page-title-and-toc.png"
+import img_FnPopup from "../../../assets/projects/pocket-excel-learning/fn-popup.png"
+import img_FunctionsTop from "../../../assets/projects/pocket-excel-learning/functions-top.png"
+import img_Vloopup from "../../../assets/projects/pocket-excel-learning/vlookup.png"
+import img_TopicBoolean from "../../../assets/projects/pocket-excel-learning/topic-boolean.png"
+
+Webサイト上で動作するスプレッドシートUIを組み込み、実際に関数を実行しながら学ぶことができる、Excel関数の学習サイト。
+
+## セル操作、数式の編集や実行に対応したデモ
+
+スプレッドシートUIは、[Handsontable](https://handsontable.com/)というライブラリで構築。
+セルをダブルクリックすることで数式エディタに切り替わり、[HyperFormula](https://hyperformula.handsontable.com/)というヘッドレススプレッドシートとの連携によって、入力した数式が値に反映されるデモを実現している。
+ドラッグ操作によるセルのコピーなども再現されており、実際の操作を練習することができる。
+
+## 「問題集」ページ
+
+- [Questions - pocket-excel-learning](https://tetracalibers.github.io/pocket-excel-learning/question/)
+
+<ContentWithImage src={img_QuestionsTop}>
+
+問題一覧ページでは、難易度や使用する関数を明示。
+練習したい関数ごとに、挫折しづらい順序で取り組む問題を選択することができる。（※問題は随時追加予定）
+
+</ContentWithImage>
+
+<ContentWithImage src={img_QuestionPageTitleAndToc}>
+
+各問題ページは、「Question」と「Answer」の二章構成。
+「Answer」の章では、関数を使って数式を組み立てる思考の手順を、できる限り細かい単位で解説するように心がけている。
+
+</ContentWithImage>
+
+<ContentWithImage src={img_FnPopup}>
+
+『この関数なんだったっけ？』と感じたら、関数名をクリック。
+シグネチャや返り値を確認しながら読み進めることができ、「もっと読む」で詳細な解説（関数ごとのリファレンスページ）にアクセスすることも可能。
+
+</ContentWithImage>
+
+## 「関数リファレンス」ページ
+
+- [Functions - pocket-excel-learning](https://tetracalibers.github.io/pocket-excel-learning/fn/)
+
+<ContentWithImage src={img_FunctionsTop}>
+
+関数一覧ページでは、関数のシグネチャを一覧で確認することができる。
+
+</ContentWithImage>
+
+{/* prettier-ignore */}
+<ContentWithImage src={img_Vloopup}>
+
+各ページでは、シグネチャの詳細と実行結果を簡潔にまとめている。
+
+</ContentWithImage>
+
+## 「知っておきたいトピック」ページ
+
+- [Topics - pocket-excel-learning](https://tetracalibers.github.io/pocket-excel-learning/topic/)
+
+<ContentWithImage src={img_TopicBoolean}>
+
+論理式とはなにか？ワイルドカードとは？など、Excel関数の学習で避けては通れないプログラミングの基礎知識も解説。
+
+</ContentWithImage>
