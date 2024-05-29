@@ -25,6 +25,6 @@ export const parseHtmlColor = (str: string): ParseResult[] => {
   return [...str.matchAll(REGEX_COLOR)].map((result) => ({
     color: result[0],
     start: result.index,
-    end: result.index + result[0].length
+    end: result.index + result[0].length - 1
   }))
 }

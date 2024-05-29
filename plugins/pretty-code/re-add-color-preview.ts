@@ -18,7 +18,8 @@ export const addColorPreview = (lineSpan: LineElement) => {
 
   const tokensMap = tokenSpans.reduce<{ text: string; start: number; end: number }[]>((acc, tokenSpan) => {
     const text = toString(tokenSpan)
-    const prevEnd = acc[acc.length - 1]?.end ?? 0
+    // prevEnd は 0 始まりにしたいので、初期値は -1 にしておく
+    const prevEnd = acc[acc.length - 1]?.end ?? -1
     return [
       ...acc,
       {
@@ -29,14 +30,10 @@ export const addColorPreview = (lineSpan: LineElement) => {
     ]
   }, [])
 
-  console.log(tokensMap)
-
   const tokens = tokensMap.map(({ text }) => text)
 
   const matchedList = parseHtmlColor(tokens.join(""))
   if (matchedList.length === 0) return
-
-  console.log(matchedList)
 
   for (const matched of matchedList) {
     // matched.indexがtokensMapのどの[start, end]範囲に入るかを探す
@@ -45,10 +42,8 @@ export const addColorPreview = (lineSpan: LineElement) => {
 
     const token = tokensMap[matchedIndex]
 
-    console.log(matched.color, token.text)
-
     const isContained = matched.start >= token.start && matched.end <= token.end
-    const isSeparated = matched.start === token.start && matched.end > token.end
+    const isSeparated = matched.start >= token.start && matched.end > token.end
 
     if (isContained) {
       // 色コードとそうでない部分を分割し、間に色プレビュー用のspanを追加する
@@ -56,7 +51,7 @@ export const addColorPreview = (lineSpan: LineElement) => {
 
       // matched.startもmatched.endも、行全体の中でのindexなので、
       // token内のindexに変換するために、token.startを引いている
-      const beforeText = token.text.slice(0, matched.start - token.start + 1)
+      const beforeText = token.text.slice(0, matched.start - token.start)
       const afterText = token.text.slice(matched.end - token.start + 1)
 
       const elements = [
