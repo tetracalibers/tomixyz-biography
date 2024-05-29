@@ -8,7 +8,7 @@ import icon from "astro-icon"
 import { defineConfig } from "astro/config"
 import remarkBreaks from "remark-breaks"
 import rehypePrettyCode from "rehype-pretty-code"
-import { addColorPreview } from "./plugins/pretty-code/add-color-preview"
+import { addColorPreview } from "./plugins/pretty-code/re-add-color-preview"
 import remarkMath from "remark-math"
 import rehypeKatex from "rehype-katex"
 const __filename = fileURLToPath(import.meta.url)

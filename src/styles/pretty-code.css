@@ -148,7 +148,7 @@ html.dark [data-rehype-pretty-code-title] {
   width: var(--preview-box-size);
   height: var(--preview-box-size);
   margin-inline-end: 3.5px;
-  vertical-align: middle;
+  vertical-align: baseline;
   position: relative;
 
   /** light/dark両対応するための二重ボーダー */
