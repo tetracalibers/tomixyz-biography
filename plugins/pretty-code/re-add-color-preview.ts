@@ -42,10 +42,10 @@ export const addColorPreview = (lineSpan: LineElement) => {
     const isSeparated = color.start >= token.start && color.end > token.end
 
     if (isContained) {
-      // 色コードとそうでない部分を分割し、間に色プレビュー用のspanを追加する
+      // --- 色コードとそうでない部分を分割し、間に色プレビュー用のspanを追加する
 
-      // color.startもcolor.endも、行全体の中でのindexなので、
-      // token内のindexに変換するために、token.startを引いている
+      // color.startもcolor.endも、lineText全体の中でのindexなので、
+      // token.text内のindexに変換するために、token.startを引いている
       const beforeText = token.text.slice(0, color.start - token.start)
       const afterText = token.text.slice(color.end - token.start + 1)
 
@@ -70,7 +70,7 @@ export const addColorPreview = (lineSpan: LineElement) => {
     }
 
     if (isSeparated) {
-      // 色コードが始まる要素の前に色プレビュー用のspanを追加する
+      // --- 色コードが始まる要素の前に色プレビュー用のspanを追加する
 
       const elements = [
         {
