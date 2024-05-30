@@ -23,9 +23,9 @@ export const addColorPreview = (lineSpan: LineElement) => {
     return [...acc, { text, start, end: start + text.length - 1 }]
   }, [])
 
-  const tokens = tokensMap.map(({ text }) => text)
+  const lineText = tokensMap.map(({ text }) => text).join("")
 
-  const matchedList = parseHtmlColor(tokens.join(""))
+  const matchedList = parseHtmlColor(lineText)
   if (matchedList.length === 0) return
 
   for (const matched of matchedList) {
