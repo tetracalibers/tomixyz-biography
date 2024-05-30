@@ -18,14 +18,14 @@ export const addColorPreview = (lineSpan: LineElement) => {
 
   const tokensMap = tokenSpans.reduce<{ text: string; start: number; end: number }[]>((acc, tokenSpan) => {
     const text = toString(tokenSpan)
-    // prevEnd は 0 始まりにしたいので、初期値は -1 にしておく
-    const prevEnd = acc[acc.length - 1]?.end ?? -1
+    const prev = acc[acc.length - 1]
+    const start = prev ? prev.end + 1 : 0
     return [
       ...acc,
       {
         text,
-        start: prevEnd + 1,
-        end: prevEnd + text.length
+        start,
+        end: start + text.length - 1
       }
     ]
   }, [])
