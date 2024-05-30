@@ -44,7 +44,7 @@ export const addColorPreview = (lineSpan: LineElement) => {
     if (isContained) {
       // 色コードとそうでない部分を分割し、間に色プレビュー用のspanを追加する
 
-      // matched.startもmatched.endも、行全体の中でのindexなので、
+      // color.startもcolor.endも、行全体の中でのindexなので、
       // token内のindexに変換するために、token.startを引いている
       const beforeText = token.text.slice(0, color.start - token.start)
       const afterText = token.text.slice(color.end - token.start + 1)
