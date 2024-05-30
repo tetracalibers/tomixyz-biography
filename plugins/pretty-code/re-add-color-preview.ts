@@ -64,7 +64,7 @@ export const addColorPreview = (lineSpan: LineElement) => {
         }
       ]
 
-      lineSpan.children.splice(tokenIndex, 1, ...elements)
+      tokenSpans.splice(tokenIndex, 1, ...elements)
 
       return
     }
@@ -86,7 +86,8 @@ export const addColorPreview = (lineSpan: LineElement) => {
           children: [createText(token.text.trim())]
         }
       ]
-      lineSpan.children.splice(tokenIndex, 1, ...elements)
+
+      tokenSpans.splice(tokenIndex, 1, ...elements)
     }
   }
 }
