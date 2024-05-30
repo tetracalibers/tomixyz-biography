@@ -20,14 +20,7 @@ export const addColorPreview = (lineSpan: LineElement) => {
     const text = toString(tokenSpan)
     const prev = acc[acc.length - 1]
     const start = prev ? prev.end + 1 : 0
-    return [
-      ...acc,
-      {
-        text,
-        start,
-        end: start + text.length - 1
-      }
-    ]
+    return [...acc, { text, start, end: start + text.length - 1 }]
   }, [])
 
   const tokens = tokensMap.map(({ text }) => text)
