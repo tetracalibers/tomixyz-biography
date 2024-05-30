@@ -17,13 +17,13 @@ const REGEX_COLOR = new RegExp(
 )
 
 interface ParseResult {
-  color: string
+  code: string
   start: number
   end: number
 }
 export const parseHtmlColor = (str: string): ParseResult[] => {
   return [...str.matchAll(REGEX_COLOR)].map((result) => ({
-    color: result[0],
+    code: result[0],
     start: result.index,
     end: result.index + result[0].length - 1
   }))

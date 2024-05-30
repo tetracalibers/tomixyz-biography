@@ -27,43 +27,44 @@ export const addColorPreview = (lineSpan: LineElement) => {
 
   const lineText = tokensMap.map(({ text }) => text).join("")
 
-  const matchedList = parseHtmlColor(lineText)
-  if (matchedList.length === 0) return
+  const colorList = parseHtmlColor(lineText)
+  if (colorList.length === 0) return
 
-  for (const matched of matchedList) {
-    // matched.indexがtokensMapのどの[start, end]範囲に入るかを探す
-    const matchedIndex = tokensMap.findIndex(({ start, end }) => matched.start >= start && matched.start <= end)
-    if (matchedIndex === -1) continue
+  for (const color of colorList) {
+    // color.startがtokensMapのどの[start, end]範囲に入るかを探す
+    const tokenIndex = tokensMap.findIndex(({ start, end }) => color.start >= start && color.start <= end)
+    if (tokenIndex === -1) continue
 
-    const token = tokensMap[matchedIndex]
+    const token = tokensMap[tokenIndex]
+    const tokenSpan = tokenSpans[tokenIndex]
 
-    const isContained = matched.start >= token.start && matched.end <= token.end
-    const isSeparated = matched.start >= token.start && matched.end > token.end
+    const isContained = color.start >= token.start && color.end <= token.end
+    const isSeparated = color.start >= token.start && color.end > token.end
 
     if (isContained) {
       // 色コードとそうでない部分を分割し、間に色プレビュー用のspanを追加する
 
       // matched.startもmatched.endも、行全体の中でのindexなので、
       // token内のindexに変換するために、token.startを引いている
-      const beforeText = token.text.slice(0, matched.start - token.start)
-      const afterText = token.text.slice(matched.end - token.start + 1)
+      const beforeText = token.text.slice(0, color.start - token.start)
+      const afterText = token.text.slice(color.end - token.start + 1)
 
       const elements = [
         {
-          ...tokenSpans[matchedIndex],
+          ...tokenSpan,
           children: [createText(beforeText)]
         },
         {
-          ...tokenSpans[matchedIndex],
-          children: [createColorPreviewElement(matched.color), createText(matched.color)]
+          ...tokenSpan,
+          children: [createColorPreviewElement(color.code), createText(color.code)]
         },
         {
-          ...tokenSpans[matchedIndex],
+          ...tokenSpan,
           children: [createText(afterText)]
         }
       ]
 
-      lineSpan.children.splice(matchedIndex, 1, ...elements)
+      lineSpan.children.splice(tokenIndex, 1, ...elements)
 
       return
     }
@@ -73,19 +74,19 @@ export const addColorPreview = (lineSpan: LineElement) => {
 
       const elements = [
         {
-          ...tokenSpans[matchedIndex],
+          ...tokenSpan,
           children: [createText(token.text.startsWith(" ") ? " " : "")]
         },
         {
-          ...tokenSpans[matchedIndex],
-          children: [createColorPreviewElement(matched.color)]
+          ...tokenSpan,
+          children: [createColorPreviewElement(color.code)]
         },
         {
-          ...tokenSpans[matchedIndex],
+          ...tokenSpan,
           children: [createText(token.text.trim())]
         }
       ]
-      lineSpan.children.splice(matchedIndex, 1, ...elements)
+      lineSpan.children.splice(tokenIndex, 1, ...elements)
     }
   }
 }
