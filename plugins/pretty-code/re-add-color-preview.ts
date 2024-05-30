@@ -1,5 +1,5 @@
 import type { LineElement } from "rehype-pretty-code"
-import type { Element } from "hast"
+import type { Element, ElementContent } from "hast"
 import { toString } from "hast-util-to-string" // need install
 import { parseHtmlColor } from "./colors-regex"
 
@@ -12,6 +12,8 @@ const createColorPreviewElement = (color: string): Element => ({
   },
   children: [{ type: "text", value: "" }]
 })
+
+const createText = (text: string): ElementContent => ({ type: "text", value: text })
 
 export const addColorPreview = (lineSpan: LineElement) => {
   const tokenSpans = lineSpan.children
@@ -50,15 +52,15 @@ export const addColorPreview = (lineSpan: LineElement) => {
       const elements = [
         {
           ...tokenSpans[matchedIndex],
-          children: [{ type: "text", value: beforeText }]
+          children: [createText(beforeText)]
         },
         {
           ...tokenSpans[matchedIndex],
-          children: [colorPreviewElement, { type: "text", value: matched.color }]
+          children: [colorPreviewElement, createText(matched.color)]
         },
         {
           ...tokenSpans[matchedIndex],
-          children: [{ type: "text", value: afterText }]
+          children: [createText(afterText)]
         }
       ]
 
@@ -73,7 +75,7 @@ export const addColorPreview = (lineSpan: LineElement) => {
       const elements = [
         {
           ...tokenSpans[matchedIndex],
-          children: [{ type: "text", value: token.text.startsWith(" ") ? " " : "" }]
+          children: [createText(token.text.startsWith(" ") ? " " : "")]
         },
         {
           ...tokenSpans[matchedIndex],
@@ -81,7 +83,7 @@ export const addColorPreview = (lineSpan: LineElement) => {
         },
         {
           ...tokenSpans[matchedIndex],
-          children: [{ type: "text", value: token.text.trim() }]
+          children: [createText(token.text.trim())]
         }
       ]
       lineSpan.children.splice(matchedIndex, 1, ...elements)
