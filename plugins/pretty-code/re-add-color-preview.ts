@@ -42,7 +42,6 @@ export const addColorPreview = (lineSpan: LineElement) => {
 
     if (isContained) {
       // 色コードとそうでない部分を分割し、間に色プレビュー用のspanを追加する
-      const colorPreviewElement = createColorPreviewElement(matched.color)
 
       // matched.startもmatched.endも、行全体の中でのindexなので、
       // token内のindexに変換するために、token.startを引いている
@@ -56,7 +55,7 @@ export const addColorPreview = (lineSpan: LineElement) => {
         },
         {
           ...tokenSpans[matchedIndex],
-          children: [colorPreviewElement, createText(matched.color)]
+          children: [createColorPreviewElement(matched.color), createText(matched.color)]
         },
         {
           ...tokenSpans[matchedIndex],
@@ -71,7 +70,7 @@ export const addColorPreview = (lineSpan: LineElement) => {
 
     if (isSeparated) {
       // 色コードが始まる要素の前に色プレビュー用のspanを追加する
-      const colorPreviewElement = createColorPreviewElement(matched.color)
+
       const elements = [
         {
           ...tokenSpans[matchedIndex],
@@ -79,7 +78,7 @@ export const addColorPreview = (lineSpan: LineElement) => {
         },
         {
           ...tokenSpans[matchedIndex],
-          children: [colorPreviewElement]
+          children: [createColorPreviewElement(matched.color)]
         },
         {
           ...tokenSpans[matchedIndex],
