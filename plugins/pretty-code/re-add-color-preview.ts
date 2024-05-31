@@ -39,9 +39,9 @@ export const addColorPreview = (lineSpan: LineElement) => {
     const tokenSpan = tokenSpans[tokenIndex]
 
     const isContained = color.end <= token.end
-    const isSeparated = color.end > token.end
 
     if (isContained) {
+      // --- 色コードの全体が1つのトークン内にある場合
       // --- 色コードとそうでない部分を分割し、間に色プレビュー用のspanを追加する
 
       // color.startもcolor.endも、lineText全体の中でのindexなので、
@@ -65,11 +65,8 @@ export const addColorPreview = (lineSpan: LineElement) => {
       ]
 
       tokenSpans.splice(tokenIndex, 1, ...elements)
-
-      return
-    }
-
-    if (isSeparated) {
+    } else {
+      // --- 色コードが複数トークンにまたがっている場合
       // --- 色コードが始まる要素の前に色プレビュー用のspanを追加する
 
       const elements = [
