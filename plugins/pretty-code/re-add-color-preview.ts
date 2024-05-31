@@ -18,24 +18,24 @@ const createText = (text: string): ElementContent => ({ type: "text", value: tex
 export const addColorPreview = (lineSpan: LineElement) => {
   const tokenSpans = lineSpan.children
 
-  const tokensMap = tokenSpans.reduce<{ text: string; start: number; end: number }[]>((acc, tokenSpan) => {
+  const tokens = tokenSpans.reduce<{ text: string; start: number; end: number }[]>((acc, tokenSpan) => {
     const text = toString(tokenSpan)
     const prev = acc[acc.length - 1]
     const start = prev ? prev.end + 1 : 0
     return [...acc, { text, start, end: start + text.length - 1 }]
   }, [])
 
-  const lineText = tokensMap.map(({ text }) => text).join("")
+  const lineText = tokens.map(({ text }) => text).join("")
 
   const colorList = parseHtmlColor(lineText)
   if (colorList.length === 0) return
 
   for (const color of colorList) {
     // color.startがtokensMapのどの[start, end]範囲に入るかを探す
-    const tokenIndex = tokensMap.findIndex(({ start, end }) => color.start >= start && color.start <= end)
+    const tokenIndex = tokens.findIndex(({ start, end }) => color.start >= start && color.start <= end)
     if (tokenIndex === -1) continue
 
-    const token = tokensMap[tokenIndex]
+    const token = tokens[tokenIndex]
     const tokenSpan = tokenSpans[tokenIndex]
 
     const isContained = color.end <= token.end
