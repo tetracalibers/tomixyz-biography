@@ -13,7 +13,10 @@ const createColorPreviewElement = (color: string): Element => ({
   children: [{ type: "text", value: "" }]
 })
 
-const createText = (text: string): ElementContent => ({ type: "text", value: text })
+const createText = (text: string): ElementContent => ({
+  type: "text",
+  value: text
+})
 
 export const addColorPreview = (lineSpan: LineElement) => {
   const tokenSpans = lineSpan.children
@@ -31,7 +34,7 @@ export const addColorPreview = (lineSpan: LineElement) => {
   if (colors.length === 0) return
 
   for (const color of colors) {
-    // color.startがtokensMapのどの[start, end]範囲に入るかを探す
+    // color.startがtokensのどの[start, end]範囲に入るかを探す
     const tokenIndex = tokens.findIndex(({ start, end }) => color.start >= start && color.start <= end)
     if (tokenIndex === -1) continue
 
