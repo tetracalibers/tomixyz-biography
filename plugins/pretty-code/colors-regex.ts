@@ -21,7 +21,7 @@ interface ParseResult {
   start: number
   end: number
 }
-export const parseHtmlColor = (str: string): ParseResult[] => {
+export const getHtmlColors = (str: string): ParseResult[] => {
   return [...str.matchAll(REGEX_COLOR)].map((result) => ({
     code: result[0],
     start: result.index,

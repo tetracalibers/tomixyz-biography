@@ -1,7 +1,7 @@
 import type { LineElement } from "rehype-pretty-code"
 import type { Element, ElementContent } from "hast"
 import { toString } from "hast-util-to-string" // need install
-import { parseHtmlColor } from "./colors-regex"
+import { getHtmlColors } from "./colors-regex"
 
 const createColorPreviewElement = (color: string): Element => ({
   type: "element",
@@ -27,7 +27,7 @@ export const addColorPreview = (lineSpan: LineElement) => {
 
   const lineText = tokens.map(({ text }) => text).join("")
 
-  const colors = parseHtmlColor(lineText)
+  const colors = getHtmlColors(lineText)
   if (colors.length === 0) return
 
   for (const color of colors) {
