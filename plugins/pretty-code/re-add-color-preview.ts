@@ -27,10 +27,10 @@ export const addColorPreview = (lineSpan: LineElement) => {
 
   const lineText = tokens.map(({ text }) => text).join("")
 
-  const colorList = parseHtmlColor(lineText)
-  if (colorList.length === 0) return
+  const colors = parseHtmlColor(lineText)
+  if (colors.length === 0) return
 
-  for (const color of colorList) {
+  for (const color of colors) {
     // color.startがtokensMapのどの[start, end]範囲に入るかを探す
     const tokenIndex = tokens.findIndex(({ start, end }) => color.start >= start && color.start <= end)
     if (tokenIndex === -1) continue
