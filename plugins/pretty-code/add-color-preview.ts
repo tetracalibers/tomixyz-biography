@@ -1,6 +1,6 @@
 import type { LineElement } from "rehype-pretty-code"
 import type { Element, ElementContent } from "hast"
-import { toString } from "hast-util-to-string" // need install
+import { toString } from "hast-util-to-string"
 import { getHtmlColors } from "./colors-regex"
 
 const createColorPreviewElement = (color: string): Element => ({
