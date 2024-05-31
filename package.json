@@ -37,7 +37,6 @@
     "tailwindcss": "^3.4.1",
     "tailwindcss-hyphens": "^0.1.0",
     "text-to-svg": "^3.1.5",
-    "typescript": "^5.4.3",
-    "validate-color": "^2.2.4"
+    "typescript": "^5.4.3"
   }
 }
