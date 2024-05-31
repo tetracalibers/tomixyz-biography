@@ -38,8 +38,8 @@ export const addColorPreview = (lineSpan: LineElement) => {
     const token = tokensMap[tokenIndex]
     const tokenSpan = tokenSpans[tokenIndex]
 
-    const isContained = color.start >= token.start && color.end <= token.end
-    const isSeparated = color.start >= token.start && color.end > token.end
+    const isContained = color.end <= token.end
+    const isSeparated = color.end > token.end
 
     if (isContained) {
       // --- 色コードとそうでない部分を分割し、間に色プレビュー用のspanを追加する
