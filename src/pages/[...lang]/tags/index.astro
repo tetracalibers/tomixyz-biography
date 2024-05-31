@@ -12,7 +12,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const projects = await getCollection("project")
   const projectsByLang = groupByLang<"project">(projects)
 
-  const tutorials = await getCollection("tutorial")
+  const tutorials = await getCollection("tutorial", (entry) => !entry.data.draft)
   const tutorialsByLang = groupByLang<"tutorial">(tutorials)
 
   const tags = SITE.langs.reduce<{ [lang: string]: string[] }>((acc, lang) => {
@@ -48,7 +48,7 @@ const pageUrlFromTagName = (tagName: string) => buildPageUrl(tagToSlug(tagName),
 ---
 
 <DefaultPageLayout content={{ title, description, ogimage }} lang={lang}>
-  <ul class="list-none flex gap-3 flex-wrap">
+  <ul class='list-none flex gap-3 flex-wrap'>
     {
       tags.map((tag) => (
         <li>
