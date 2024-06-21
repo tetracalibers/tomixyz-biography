@@ -1,13 +1,8 @@
 /* switch between light/dark theme */
 
-:root {
-  --pretty-light-bg: #fafafa;
-  --pretty-dark-bg: #212121;
-}
-
 pre[data-theme*=" "],
 code[data-theme*=" "] {
-  background-color: var(--pretty-light-bg);
+  background-color: var(--shiki-light-bg);
 }
 
 code[data-theme*=" "] span {
@@ -15,7 +10,7 @@ code[data-theme*=" "] span {
 }
 
 html.dark :is(pre[data-theme*=" "], code[data-theme*=" "]) {
-  background-color: var(--pretty-dark-bg);
+  background-color: var(--shiki-dark-bg);
 }
 
 html.dark code[data-theme*=" "] span {
@@ -24,7 +19,7 @@ html.dark code[data-theme*=" "] span {
 
 /* layout */
 
-[data-rehype-pretty-code-figure] {
+[data-rehype-pretty-code-figure]:has(> pre) {
   margin-block: 1.7em;
 
   /** for title */
@@ -44,6 +39,14 @@ html.dark code[data-theme*=" "] span {
 pre > code > [data-line] {
   padding-inline-start: 0.5em;
   padding-inline-end: 1em;
+}
+
+/** word highlight */
+[data-highlighted-chars] {
+  background: none;
+  border: 1px solid #c2c2c4;
+  padding: 1px 3px;
+  border-radius: 4px;
 }
 
 /** line highlight */
@@ -67,9 +70,10 @@ pre > code:has([data-highlighted-line]) > :not([data-highlighted-line]) {
 
 /** show line numbers */
 
-pre > code > [data-line]::before {
+pre > code[data-line-numbers] > [data-line]::before {
   content: "";
   display: inline-block;
+  margin-inline-end: 1em;
   width: 1ch;
   text-align: right;
 }
@@ -83,11 +87,10 @@ pre > code[data-line-numbers-max-digits="3"] > [data-line]::before {
 pre > code[data-line-numbers] {
   counter-reset: line;
 }
-pre > code[data-line-numbers] > [data-line]::before {
+pre > code[data-line-numbers] > [data-line]:not(.error)::before {
   counter-increment: line;
   content: counter(line);
 
-  margin-inline-end: 1em;
   color: #7ca2dfad;
 }
 
@@ -133,6 +136,25 @@ div[data-rehype-pretty-code-title] + pre {
 }
 html.dark [data-rehype-pretty-code-title] {
   --_pretty-title-border: var(--pretty-dark-title-border);
+}
+
+/** error */
+
+pre > code .highlighted.error {
+  background-color: rgba(244, 63, 94, 0.14);
+  position: relative;
+}
+pre > code .highlighted.error::after {
+  content: "[ERROR]";
+  color: #f43f5e;
+  font-weight: bold;
+  position: absolute;
+  inset: 0;
+  text-align: end;
+  padding-inline-end: 0.5em;
+}
+pre > code .highlighted.error:has(+ .highlighted.error)::after {
+  content: "";
 }
 
 /** color preview */

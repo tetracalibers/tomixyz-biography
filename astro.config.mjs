@@ -9,6 +9,7 @@ import { defineConfig } from "astro/config"
 import remarkBreaks from "remark-breaks"
 import rehypePrettyCode from "rehype-pretty-code"
 import { addColorPreview } from "./plugins/pretty-code/add-color-preview"
+import { transformerNotationErrorLevel } from "@shikijs/transformers"
 import remarkMath from "remark-math"
 import rehypeKatex from "rehype-katex"
 const __filename = fileURLToPath(import.meta.url)
@@ -28,10 +29,10 @@ const __dirname = dirname(__filename)
 
 const prettyCodeOptions = {
   theme: {
-    dark: "material-theme-darker",
-    light: "material-theme-lighter"
+    dark: "synthwave-84",
+    light: "snazzy-light"
   },
-  keepBackground: false,
+  transformers: [transformerNotationErrorLevel()],
   onVisitLine(element) {
     addColorPreview(element)
   }

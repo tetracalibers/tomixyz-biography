@@ -6,7 +6,12 @@ import DemoArea from "$/components/tutorial/DemoArea.astro"
 import FigureBox from "$/components/image-wrapper/FigureBox.astro"
 
 export async function getStaticPaths() {
-  const collection = await getCollection("tutorial", (entry) => !entry.data.draft)
+  const filterPublic = (entry: CollectionEntry<"tutorial">) => {
+    if (import.meta.env.DEV) return true
+    return !entry.data.draft
+  }
+
+  const collection = await getCollection("tutorial", filterPublic)
   return i18nPaths(collection)
 }
 
