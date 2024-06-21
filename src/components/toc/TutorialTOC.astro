@@ -29,7 +29,7 @@ const aboutTitle = {
   {
     series ? (
       <>
-        <details open={series.isFirstArticle(current)}>
+        <details open={series.isFirstArticle(current)} class="w-full">
           <summary>{aboutTitle[lang]}</summary>
           <div class="prose text-slate-600 dark:text-slate-100 prose-a:text-slate-600 prose-a:dark:text-slate-100 text-sm md:text-base leading-loose max-w-none mt-4 pb-4 prose-a:underline-offset-4 prose-a:decoration-1 prose-a:decoration-dotted border-b border-t-0 border-dotted w-full border-slate-300 dark:border-slate-400">
             <series.SummaryContent />
