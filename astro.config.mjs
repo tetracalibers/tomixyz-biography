@@ -28,8 +28,8 @@ const __dirname = dirname(__filename)
 
 const prettyCodeOptions = {
   theme: {
-    dark: "material-theme-darker",
-    light: "material-theme-lighter"
+    dark: "synthwave-84",
+    light: "snazzy-light"
   },
   keepBackground: false,
   transformers: [transformerNotationErrorLevel()],
