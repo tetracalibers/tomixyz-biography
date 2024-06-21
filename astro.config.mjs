@@ -32,6 +32,7 @@ const prettyCodeOptions = {
     light: "material-theme-lighter"
   },
   keepBackground: false,
+  transformers: [transformerNotationErrorLevel()],
   onVisitLine(element) {
     addColorPreview(element)
   }
