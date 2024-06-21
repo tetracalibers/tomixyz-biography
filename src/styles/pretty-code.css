@@ -62,9 +62,10 @@ pre > code:has([data-highlighted-line]) > :not([data-highlighted-line]) {
 
 /** show line numbers */
 
-pre > code > [data-line]::before {
+pre > code[data-line-numbers] > [data-line]::before {
   content: "";
   display: inline-block;
+  margin-inline-end: 1em;
   width: 1ch;
   text-align: right;
 }
@@ -78,11 +79,10 @@ pre > code[data-line-numbers-max-digits="3"] > [data-line]::before {
 pre > code[data-line-numbers] {
   counter-reset: line;
 }
-pre > code[data-line-numbers] > [data-line]::before {
+pre > code[data-line-numbers] > [data-line]:not(.error)::before {
   counter-increment: line;
   content: counter(line);
 
-  margin-inline-end: 1em;
   color: #7ca2dfad;
 }
 
