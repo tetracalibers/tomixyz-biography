@@ -41,6 +41,14 @@ pre > code > [data-line] {
   padding-inline-end: 1em;
 }
 
+/** word highlight */
+[data-highlighted-chars] {
+  background: none;
+  border: 1px solid #c2c2c4;
+  padding: 1px 3px;
+  border-radius: 4px;
+}
+
 /** line highlight */
 
 pre > code > [data-line] {
