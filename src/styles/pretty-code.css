@@ -19,7 +19,7 @@ html.dark code[data-theme*=" "] span {
 
 /* layout */
 
-[data-rehype-pretty-code-figure] {
+[data-rehype-pretty-code-figure]:has(> pre) {
   margin-block: 1.7em;
 
   /** for title */
