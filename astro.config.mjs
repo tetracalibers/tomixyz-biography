@@ -31,7 +31,6 @@ const prettyCodeOptions = {
     dark: "synthwave-84",
     light: "snazzy-light"
   },
-  keepBackground: false,
   transformers: [transformerNotationErrorLevel()],
   onVisitLine(element) {
     addColorPreview(element)
