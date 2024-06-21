@@ -31,7 +31,12 @@ const series = _series ? await collectSeriesArticles(_series.slug) : undefined
 <!doctype html>
 <html lang={lang}>
   <head>
-    <BaseHead {...data} image={ogimage} title={title ? `${SITE.title} | ${title}` : SITE.title} />
+    <BaseHead
+      {...data}
+      image={ogimage}
+      title={title ? `${SITE.title} | ${title}` : SITE.title}
+      noindex={content.data.private}
+    />
   </head>
   <MainLayout>
     <div class="flex flex-col gap-8">
