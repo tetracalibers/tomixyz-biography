@@ -1,0 +1,484 @@
+---
+title: リファレンスカウントポインタ
+date: "2024-06-22"
+description: TODO
+private: true
+series: ja/rust-concept
+tags:
+  - Rust
+---
+
+## 例：関数内の共通の値を2つの構造体にセットする
+
+### 関数内のローカル変数は関数の外では使えない
+
+以下のコードでは、`setdata`の中で得られた値`number`を2つの構造体`DataA`、`DataB`で共有するため、値のリファレンスをそれぞれの構造体のフィールドにセットしている。
+
+しかし、関数の実行終了とともに破棄されるローカル変数のリファレンス`&number`を関数の外で使おうとしているため、コンパイルエラーとなる。
+
+```rs title="❌ 関数内の共通の値を2つの構造体にセットする" showLineNumbers
+struct DataA<'a> {
+  number_a: Option<&'a i32>,
+}
+
+struct DataB<'a> {
+  number_b: Option<&'a i32>,
+}
+
+// `number` does not live long enough // [!code error]
+fn setdata(data_a: &mut DataA, data_b: &mut DataB, value: i32) {
+  let number = value + 10;
+  data_a.number_a = Some(&number);
+  //                     ^^^^^^^ borrowed value does not live long enough // [!code error]
+  data_b.number_b = Some(&number);
+}
+
+fn main() {
+  // 初期化されていない値の参照を作ろうとするとエラーになるため、
+  // 何かしらの初期値を指定した上で宣言する必要がある（ここではNoneとする）
+  let mut data_a_1 = DataA { number_a: None };
+  let mut data_b_1 = DataB { number_b: None };
+  let mut data_a_2 = DataA { number_a: None };
+  let mut data_b_2 = DataB { number_b: None };
+
+  setdata(&mut data_a_1, &mut data_b_1, 1);
+  setdata(&mut data_a_2, &mut data_b_2, 2);
+
+  println!(
+    "to be 11, 11: {}, {}",
+    data_a_1.number_a.unwrap(),
+    data_b_1.number_b.unwrap()
+  );
+  println!(
+    "to be 12, 12: {}, {}",
+    data_a_2.number_a.unwrap(),
+    data_b_2.number_b.unwrap()
+  );
+}
+```
+
+仮にコンパイルエラーにならないとしても、このコードは意図した動作にはならない。
+
+1. `number`はスタック領域に配置され、`setdata`のスコープが終了するとそのメモリは解放される
+2. そのリファレンスが指すメモリを`println!`で参照するときには、すでに別のデータが格納されてしまっている
+
+コンパイルエラーは、このような不正なメモリアクセスを防いでくれている。
+
+### 関数の外で値を共有するにはヒープ領域に配置する
+
+```rs title="setdata関数を再度見つめる" showLineNumbers{9}
+fn setdata(data_a: &mut DataA, data_b: &mut DataB, value: i32) {
+  let number = value + 10;
+  data_a.number_a = Some(&number);
+  data_b.number_b = Some(&number);
+}
+```
+
+スタック領域のアドレスAに`number`の値が配置されているとすると、`&number`はアドレスAそのものを指す。
+つまり、`data_a.number_a`や`data_b.number_b`はどちらも、`Some(アドレスA)`を表していることになる。
+
+`setdata`のスコープが終了すると、`number`のメモリは解放されるため、アドレスAには値がない状態になる。
+解放後のアドレスA領域へのアクセスを防止するために、先ほどの例ではコンパイルエラーになった。
+
+ここで、関数実行後には解放されてしまう`number`に値を持たせるのではなく、
+
+1. 値はヒープ領域に持たせる
+2. `number`には値そのものではなく、ヒープ領域へのポインタを持たせる
+
+ようにすれば、関数実行後もヒープ領域に値は保持される。
+関数実行後、`number`に束縛されたポインタ（ヒープ領域のメモリアドレス）は消えてしまうが、`data_a.number_a`や`data_b.number_b`に同じメモリアドレスを持たせているため、ヒープ領域にある値へのアクセスは関数実行後も可能になる。
+
+C言語であれば、このような発想でコードを書き換えることで、意図した動作が得られるが、Rustでは…
+
+```rs title="❌ 関数内の共通の値を2つの構造体にセットする（Box使用）" showLineNumbers /Box::new(value + 10)/
+struct DataA<'a> {
+  number_a: Option<&'a i32>,
+}
+
+struct DataB<'a> {
+  number_b: Option<&'a i32>,
+}
+
+// `number` does not live long enough // [!code error]
+fn setdata(data_a: &mut DataA, data_b: &mut DataB, value: i32) {
+  let number = Box::new(value + 10);
+  data_a.number_a = Some(&number);
+  //                     ^^^^^^^ borrowed value does not live long enough // [!code error]
+  data_b.number_b = Some(&number);
+}
+
+// ... 省略 ...
+```
+
+関数の実行終了とともに破棄されるローカル変数のリファレンス`&number`を関数の外で使おうとしていることに変わりはないため、コンパイルエラーのままとなる。
+
+これを回避するためには、返却する値に所有権を持たせれば良いが、1つの値（共通に持たせたい値）に対して2つの変数が所有権を持つことはできない。
+
+## Rc型による値の共有
+
+所有権のルールを守りつつも、1つの値に対して2つの変数が所有権を持てるように見せかけるために使うものが`Rc<T>`型で、**リファレンスカウントポインタ**と呼ばれるもの。
+
+```rs title="✅ 関数内の共通の値を2つの構造体にセットする（Rc使用）" showLineNumbers /Rc<i32>/ /Rc::new(value + 10)/ /Rc::clone(&number)/
+use std::rc::Rc;
+
+struct DataA<'a> {
+  number_a: Option<Rc<i32>>,
+}
+
+struct DataB<'a> {
+  number_b: Option<Rc<i32>>,
+}
+
+fn setdata(data_a: &mut DataA, data_b: &mut DataB, value: i32) {
+  let number = Rc::new(value + 10);
+  data_a.number_a = Some(Rc::clone(&number));
+  data_b.number_b = Some(Rc::clone(&number));
+}
+
+// ... 省略 ...
+```
+
+### Rc型とBox型
+
+```rs title="1という値をBox型で包む"
+let x = Box::new(1);
+```
+
+```rs title="1という値をRc型で包む"
+let x = std::rc::Rc::new(1);
+```
+
+上の2つのコードの内部では、どちらも、
+
+1. `1`という値をヒープ領域に配置
+2. それを指し示すポインタと関連データをスタック領域に配置
+3. このスタック領域の値を変数`x`に束縛
+
+という操作が行われている。
+
+`Rc<T>`型と`Box<T>`型の違いは、`clone`メソッドを呼んだときの挙動にある。
+
+### Box型のclone
+
+`Box<T>`型の場合、`clone()`が呼ばれると、
+
+1. ヒープ領域に配置されたデータのコピーを新しく別のヒープ領域に作成
+2. スタック領域にはコピーしたヒープ領域へのポインタとそのサイズを格納した新しい値を作成
+
+という操作が行われる。
+
+### Rc型のclone
+
+`Rc<T>`型の場合、`clone()`が呼ばれると、
+
+1. ヒープ領域にあるデータのコピーはしない
+2. スタック領域には元のヒープ領域へのポインタとサイズを格納した新しい値を作成
+
+という挙動になる。
+
+つまり、`clone()`を実行すると、ヒープ領域のデータが複数の`Rc<T>`型の変数で共有されることになる。
+
+### いつメモリを解放するのか？
+
+データを複数の変数で共有してしまうと、「値が束縛されている変数のスコープが終わったら」ヒープ領域のデータも含めて削除する、という判断が難しくなる。
+
+データを共有しつつメモリ管理を成り立たせるため、`Rc<T>`型の内部では、**参照された数のカウンタ**を管理している。
+
+- `clone()`が呼ばれて同じヒープ領域を指し示す`Rc<T>`型の値を束縛している変数が1つ増えたら、
+  1. カウンタをインクリメント
+- `Rc<T>`型の値を束縛している変数のスコープが終わったら、
+  1. カウンタをデクリメント
+  2. スタック領域にある`Rc<T>`型の値（ポインタと関連データ）をメモリから破棄
+- カウンタが`0`になったら、
+  1. ヒープ領域のデータを解放
+
+これは、変数のガベージコレクションのやり方と同じ、**リファレンスカウント**と呼ばれる方法。
+
+この仕組みによって、1つの変数が1つの値の所有権を持つという原則を保持しつつ、その値の参照先を同じにすることによって、複数の変数が1つの値の所有権を持っているかのように見せかけることができている。
+
+### cloneの負荷と推奨記法
+
+- 一般の型の値に対する`clone`は、負荷が大きくメモリも消費するため、可能な限り使用せずに済ませるべき
+- `Rc::clone`はリファレンスカウンタを増やすだけなので負荷は非常に軽く、頻繁に呼び出しても実行速度に影響するものではない
+
+負荷の大きい`clone`とは違うことを明示するため、`Rc<T>`型の値に対する`clone`は、
+
+```rs title="一般的なcloneの記法"
+let y = x.clone();
+```
+
+ではなく、
+
+```rs title="Rc型のcloneの推奨記法"
+let y = Rc::clone(&x);
+```
+
+と書くことが推奨されている。
+
+### 値の一部が所有権を失う操作
+
+`Rc<T>`型の値が指し示す値が構造体などの複合型である場合、その要素の所有権を失うような動作は許容されない。
+
+```rs title="❌ Rc型の中の変数を取り出す" showLineNumbers
+use std::rc::Rc;
+
+struct TestA {
+  data_i32: i32,
+  data_string: String,
+}
+
+// cannot move out of an `Rc` // [!code error]
+fn main() {
+  let x = Rc::new(TestA {
+    data_i32: 1,
+    data_string: String::from("hello"),
+  });
+
+  let data_i32 = x.data_i32;
+  let data_string = x.data_string;
+  //                ^^^^^^^^^^^^^ // [!code error]
+  // move occurs because value has type `String`, // [!code error]
+  // which does not implement the `Copy` trait // [!code error]
+  // -> 値がString型なので所有権の移動が発生した // [!code error]
+
+  println!("{}, {}", data_i32, data_string);
+}
+```
+
+`Copy`トレイトが実装されている型の値であれば、コピーによって値の束縛が行われ、所有権を失うことはない。
+
+`Copy`トレイトが実装されていない型の場合は、リファレンスを使って所有権の移動が起こらないようにする必要がある。
+
+```rs title="✅ Rc型の中の変数をリファレンスとして取り出す" showLineNumbers{8} /&x/
+fn main() {
+  let x = Rc::new(TestA {
+    data_i32: 1,
+    data_string: String::from("hello"),
+  });
+
+  let data_i32 = &x.data_i32;
+  let data_string = &x.data_string;
+
+  println!("{}, {}", data_i32, data_string);
+}
+```
+
+## 例：データ同士を関連づけるデータ構造
+
+### 初めから子を持たせる
+
+`node1`と`node2`は、`node3`を子に持つようなデータ構造を考える。
+
+あるノードが複数のノードから子ノードとして参照され得ることから、`Rc<T>{:rs}`型を使うことを考える。
+
+```rs title="✅ 子ノードをたどる" showLineNumbers
+use std::rc::Rc;
+
+struct Node {
+  data: i32,
+  child: Option<Rc<Node>>
+}
+
+fn print_link(start_node: Rc<Node>) {
+  let mut p = start_node;
+
+  loop {
+    println!("{}", p.data);
+
+    if p.child.is_none() {
+      break;
+    }
+
+    p = Rc::clone(p.child.as_ref().unwrap());
+  }
+}
+
+fn main() {
+  let node3 = Rc::new(Node {
+    data: 3,
+    child: None,
+  });
+
+  let node1 = Rc::new(Node {
+    data: 1,
+    child: Some(Rc::clone(&node3)),
+  });
+  let node2 = Rc::new(Node {
+    data: 2,
+    child: Some(Rc::clone(&node3)),
+  });
+
+  println!("link from node1");
+  print_link(Rc::clone(&node1));
+
+  println!("link from node2");
+  print_link(Rc::clone(&node2));
+}
+```
+
+18行目では、`p.child{:rs}`が持つ所有権を失わないように、`as_ref(){:rs}`メソッドを使っている。
+
+ここでの`as_ref(){:rs}`は、`&Option<Rc<Node>>{:rs}`を`Option<&Rc<Node>>{:rs}`に変換するもの。
+`Option{:rs}`の中身をリファレンスにすることで、`unwrap(){:rs}`しても所有権の移動が起きないようにする。
+
+```rs showLineNumbers{18}
+    p = Rc::clone(p.child.as_ref().unwrap());
+```
+
+`p.child.as_ref().unwrap(){:rs}`は`&Rc<Node>{:rs}`型の値であり、これを`Rc::clone(){:rs}`を適用して`p`に束縛すれば、`p`は所有権を持った`Rc<Node>{:rs}`型の変数となり、`loop{:rs}`のブロックの外に出ても値を参照できる。
+そして、その`p`を次のループで使うことになる。
+
+### 後から子を設定する
+
+`node1`と`node2`を作った後に、`node3`を子ノードとして`node1`と`node2`のデータを更新するようにしてみる。
+
+```rs title="❌ 子ノードをたどる（後から子ノードを設定）" showLineNumbers{22}
+// canot assign to data in an `Rc` // [!code error]
+// -> Rcの中のデータに割り当てができない // [!code error]
+fn main() {
+  let node1 = Rc::new(Node {
+    data: 1,
+    child: None,
+  });
+  let node2 = Rc::new(Node {
+    data: 3,
+    child: None,
+  });
+  let node2 = Rc::new(Node {
+    data: 3,
+    child: None,
+  });
+
+  node1.child = Some(Rc::clone(&node3));
+//^^^^^^^^^^^ cannot assign // [!code error]
+  node2.child = Some(Rc::clone(&node3));
+
+  println!("link from node1");
+  print_link(Rc::clone(&node1));
+
+  println!("link from node2");
+  print_link(Rc::clone(&node2));
+}
+```
+
+`Rc<T>{:rs}`型のデータは**イミュータブル**で変更ができないため、コンパイルエラーとなる。
+
+## RefCell型による内部ミュータビリティの実現
+
+`RefCell<T>{:rs}`型は**内部ミュータビリティ**を実現するもので、イミュータブルなリファレンスを一時的にミュータブルなリファレンスにすることができる。
+
+```rs title="✅ 子ノードをたどる（後から子ノードを設定）" showLineNumbers {19-20,38-40} /RefCell<Node>/ /p.borrow()/ /RefCell::new/ /node1.borrow_mut()/ /node2.borrow_mut()/
+use std::cell::RefCell;
+use std::rc::Rc;
+
+struct Node {
+  data: i32,
+  child: Option<Rc<RefCell<Node>>>
+}
+
+fn print_link(start_node: Rc<RefCell<Node>>) {
+  let mut p = start_node;
+
+  loop {
+    println!("{}", p.borrow().data);
+
+    if p.borrow().child.is_none() {
+      break;
+    }
+
+    let ptmp = Rc::clone(p.borrow().child.as_ref().unwrap());
+    p = ptmp;
+  }
+}
+
+fn main() {
+  let node1 = Rc::new(RefCell::new(Node {
+    data: 1,
+    child: None,
+  }));
+  let node2 = Rc::new(RefCell::new(Node {
+    data: 3,
+    child: None,
+  }));
+  let node2 = Rc::new(RefCell::new(Node {
+    data: 3,
+    child: None,
+  }));
+
+  // borrow_mut()を使ってミュータブルなリファレンスを一時的に得る
+  node1.borrow_mut().child = Some(Rc::clone(&node3));
+  node2.borrow_mut().child = Some(Rc::clone(&node3));
+
+  println!("link from node1");
+  print_link(Rc::clone(&node1));
+
+  println!("link from node2");
+  print_link(Rc::clone(&node2));
+}
+```
+
+19-20行目では、次回のループ処理のために`p`を更新している。
+
+```rs showLineNumbers{19}
+    let ptmp = Rc::clone(p.borrow().child.as_ref().unwrap());
+    p = ptmp;
+```
+
+この部分を、次のように1行で書くことはできない。
+
+```rs showLineNumbers{19}
+    p = Rc::clone(p.borrow().child.as_ref().unwrap());
+    // cannot assign to `p` because it is borrowed // [!code error]
+    // -> pは借用されているので値を割り当てることはできない // [!code error]
+```
+
+この1行のコードは、次のコードと等価であり、
+
+```rs showLineNumbers{19} /q/
+    let q = p.borrow();
+    p = Rc::clone(q.child.as_ref().unwrap());
+    // cannot assign to `p` because it is borrowed // [!code error]
+    // -> pは借用されているので値を割り当てることはできない // [!code error]
+```
+
+`p`の借用のスコープの中にいる状態で、`p`の値を更新しようとしているため、コンパイルエラーになっている。
+
+そのため、`p`に束縛したい値を別の一時的な変数`ptmp`に束縛した上で、借用のスコープが終わった次の行で`p`に束縛する必要がある。
+
+```rs showLineNumbers{19}
+    let ptmp = Rc::clone(p.borrow().child.as_ref().unwrap());
+    p = ptmp;
+```
+
+このように書けば、19行目で`p`の借用のスコープが終わるため、20行目では問題なく`p`を更新できる。
+
+## Rc型の循環参照
+
+`Rc<T>{:rs}`型のようにリファレンスカウンタを用いてメモリの解放を決める方式では、循環参照が生じたときにメモリリークが発生する。
+
+```rs title="🔥 Rc型の循環参照によってメモリリークが発生する" showLineNumbers
+use std::cell::RefCell;
+use std::rc::Rc;
+
+#[allow(dead_code)]
+struct Node {
+  data: i32,
+  child: Option<Rc<RefCell<Node>>>,
+}
+
+fn main() {
+  loop {
+    let node1 = Rc::new(RefCell::new(Node {
+      data: 1,
+      child: None,
+    }));
+    let node2 = Rc::new(RefCell::new(Node {
+      data: 2,
+      child: None,
+    }));
+
+    node1.borrow_mut().child = Some(Rc::clone(&node2));
+    node2.borrow_mut().child = Some(Rc::clone(&node1));
+  }
+}
+```

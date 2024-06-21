@@ -1,0 +1,145 @@
+---
+title: Rustの配列・タプル・スライス・ベクター
+date: "2024-06-19"
+description: TODO
+private: true
+series: ja/rust-concept
+tags:
+  - Rust
+---
+
+## 配列型
+
+- 固定長
+- 型は`[要素の型; 要素数]`で表記
+- 異なる変数型を混ぜることはできない
+
+```rs title="✅ 配列の定義、走査、要素へのアクセス" showLineNumbers
+fn main() {
+  // [i32; 4]型と推論される
+  let ary = [0, 1, 2];
+
+  // 各要素について処理したい場合はforループが使える
+  for el_ref in ary {
+    // el_refは&i32型（リファレンス）
+    println!("{}", el_ref);
+  }
+
+  // インデックス番号は0始まり
+  println!("{}, {}, {}", ary[0], ary[1], ary[2]);
+}
+```
+
+## タプル
+
+- 異なる型を要素とすることができる
+- 繰り返し処理には不向き（イテレータが実装されていない）
+
+Rustでは、繰り返す要素を返すイテレータは同じ型の値を順に返していくものなので、タプルにはイテレータが実装されていない。
+
+```rs title="✅ タプルの定義、要素へのアクセス" showLineNumbers
+fn main() {
+  let tup = (1, 2.5, true);
+
+  // インデックス番号は0始まり
+  println!("{}, {}, {}", tup.0, tup.1, tup.2);
+}
+```
+
+## スライス
+
+### 配列の一部を参照する
+
+配列の一部を参照するには**スライス**と呼ばれる型を使う。
+
+- スライスはリファレンス（別に実体があるものに対する「ビュー」を与えている）
+- `T`型の配列`[T; N]`のスライスの型は`&[T]`型
+
+```rs title="✅ スライスの生成と走査" showLineNumbers /&ary[0..2]/
+fn main() {
+  let ary = [0, 1, 2, 3];
+  let ary_sliced = &ary[0..2];
+
+  for el in ary_sliced {
+    println!("{}", el);
+  }
+}
+```
+
+### レンジ記法
+
+| レンジ表記 | 意味                |
+| ---------- | ------------------- |
+| `i..j`     | `i`から`j`未満まで  |
+| `i..=j`    | `i`から`j`以下まで  |
+| `..j`      | 最初から`j`未満まで |
+| `i..`      | `i`から最後まで     |
+| `..`       | 最初から最後まで    |
+
+### メモリに確保する大きさの決定
+
+スライス`&[T]`は、
+
+- スライスの先頭に対応する値のメモリアドレス（コンパイル時に確定する）
+- スライスの長さ（実行時に動的に決定する）
+
+の2つのデータを持ったもの。
+
+`&[T]`に対してデリファレンスをした値の要素数（スライスの長さ）はコンパイル時には決まらず、実行時に動的に決まることになる。
+
+### ローカル変数としてのスライス
+
+関数内のみにスコープを持つローカル変数は、コンパイル時にメモリに確保する大きさが決まる必要がある（`Sized`トレイトを実装している必要がある）。
+
+```rs title="❌ ローカル変数としてのスライスの&を省略することはできない" showLineNumbers /ary[0..2]/
+// the size for values of type `[{integer}]` // [!code error]
+// cannot be known at compilation time // [!code error]
+// -> integer型の値のサイズがコンパイル時にはわからない // [!code error]
+fn main() {
+  let ary = [0, 1, 2, 3];
+  let ary_sliced = ary[0..2];
+  //  ^^^^^^^^^^ doesn't have a size known at compilation time // [!code error]
+  // help: the trait `Sized` is not implemented for `[{integer}]` // [!code error]
+  // note: all local variables must have a statically known size // [!code error]
+
+  for el in ary_sliced {
+    println!("{}", el);
+  }
+}
+```
+
+- `ary[0..2]`は`[i32]`型と解釈され、要素数が実行時に動的に決まる型
+  - `[i32]`は配列型ではない（配列型`[i32; N]`は要素数`N`が決まっている）
+
+## ベクター型
+
+- 可変長
+- `Vec<T>`型は`Index`トレイトを実装しているため、`[]`を使ってインデックス番号でアクセスできる
+- `Vec<T>`型のリファレンス`&Vec<T>`型は、スライス`&[T]`型と同じ
+
+```rs title="✅ ベクターの定義、変更、スライス" showLineNumbers
+fn main() {
+  let mut v = vec![0, 1, 2, 3];
+
+  // 可変長なので要素の追加ができる
+  v.push(10);
+  println!("after push: {:?}", v);
+
+  // 配列と同様に[n]で要素にアクセスできる
+  v[2] += 10;
+  println!("after v[2] += 10: {:?}", v);
+
+  // スライスによって部分列を取り出すことができる
+  println!("&v[3..] = {:?}", &v[3..]);
+}
+```
+
+型を明示すれば、初期要素を与えずに初期化することもできる。
+
+```rs title="初期要素を与えずにベクターを初期化 - 1"
+let mut v: Vec<i32> = Vec::new();
+```
+
+```rs title="初期要素を与えずにベクターを初期化 - 2"
+let mut v = Vec::<i32>::new();
+```
