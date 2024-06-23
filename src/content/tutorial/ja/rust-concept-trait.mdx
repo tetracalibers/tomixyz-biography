@@ -418,6 +418,7 @@ impl IAbs for i32 {
 ```rs title="❌ IAbsトレイトの定義（デフォルト実装を提供）" showLineNumbers
 trait IAbs {
   type Output;
+
   fn iabs(self) -> <Self as IAbs>::Output {
     if self >= (0_i8).into() {
       self.try_into().unwrap()
@@ -456,7 +457,10 @@ impl IAbs for i64 {
 
 「値のサイズが決まっている」ことに対応するトレイトが`Sized{:rs}`トレイトであり、関数の引数になる型は`Sized{:rs}`トレイトを実装している必要がある。
 
-```rs title="❌ iabsメソッドの定義（Sizedトレイトをトレイト境界に追加した）" showLineNumbers{2} {2} /Sized/
+```rs title="❌ Sizedトレイトを引数の型のトレイト境界に追加した" showLineNumbers {5} /Sized/
+trait IAbs {
+  type Output;
+
   fn iabs(self) -> <Self as IAbs>::Output
     where Self: Sized
   {
@@ -466,20 +470,46 @@ impl IAbs for i64 {
       (-self).try_into().unwrap()
     }
   }
+}
 ```
 
 一部の例外（トレイトオブジェクトなど）を除き、`Sized{:rs}`トレイトは暗黙に実装される。
 独自に定義した構造体なども、フィールドの型がすべて`Sized{:rs}`トレイトを実装していれば、自動的に`Sized{:rs}`トレイトが実装される。
 
-### 他の型を自らの型に変換する
+### 大小比較とPartialOrdトレイト
+
+絶対値の計算では、`0`との大小比較によって処理を分岐する。
+
+そのため、`Self{:rs}`型は大小比較が可能な型、つまり`PartialOrd{:rs}`トレイトを実装した型である必要がある。
+
+```rs title="❌ PartialOrdトレイトを引数の型のトレイト境界に追加した" showLineNumbers {5} /PartialOrd/
+trait IAbs {
+  type Output;
+
+  fn iabs(self) -> <Self as IAbs>::Output
+    where Self: Sized + PartialOrd
+  {
+    if self >= (0_i8).into() {
+      self.try_into().unwrap()
+    } else {
+      (-self).try_into().unwrap()
+    }
+  }
+}
+```
+
+### ある型からの変換とFromトレイト
 
 大小比較をする際に、比較対象の2つの型を合わせておく必要がある。
 
 まずは`0{:rs}`と比較する必要があるため、`into(){:rs}`メソッドによって`i8{:rs}`型の`0{:rs}`を`Self{:rs}`型の`0{:rs}`に変換している。
 
-```rs title="❌ iabsメソッドの定義" showLineNumbers{2} {4} /(0_i8).into()/
+```rs title="❌ 現時点でのIAbsトレイト" showLineNumbers {7} /(0_i8).into()/
+trait IAbs {
+  type Output;
+
   fn iabs(self) -> <Self as IAbs>::Output
-    where Self: Sized
+    where Self: Sized + PartialOrd
   {
     if self >= (0_i8).into() {
       self.try_into().unwrap()
@@ -487,13 +517,17 @@ impl IAbs for i64 {
       (-self).try_into().unwrap()
     }
   }
+}
 ```
 
 このとき、`Self{:rs}`型を`i8{:rs}`型から変換する`into(){:rs}`メソッドが使えることを保証するために、「`i8{:rs}`型からの変換」という動作に対応する`From<i8>{:rs}`トレイトを`Self{:rs}`のトレイト境界に加える必要がある。
 
-```rs title="❌ iabsメソッドの定義（From<i8>トレイトをトレイト境界に追加した）" showLineNumbers{2} {2} /From<i8>/
+```rs title="❌ From<i8>トレイトを引数の型のトレイト境界に追加した" showLineNumbers {5} /From<i8>/
+trait IAbs {
+  type Output;
+
   fn iabs(self) -> <Self as IAbs>::Output
-    where Self: Sized + From<i8>
+    where Self: Sized + PartialOrd + From<i8>
   {
     if self >= (0_i8).into() {
       self.try_into().unwrap()
@@ -501,9 +535,191 @@ impl IAbs for i64 {
       (-self).try_into().unwrap()
     }
   }
+}
 ```
 
 `i8{:rs}`型よりも表現ビット数が大きい`i16{:rs}`型、`i32{:rs}`型、`i64{:rs}`型は、情報損失なく`i8{:rs}`型からの変換が可能である。
 つまり、`i16{:rs}`型、`i32{:rs}`型、`i64{:rs}`型には`From<i8>{:rs}`トレイトが実装されていて、このトレイト境界を満たしている。
 
-### 自らを他の型に変換する
+### ある型への変換とTryIntoトレイト
+
+`0`以上の場合には引数`self{:rs}`の値をそのまま返すが、型としては返り値の型`<Self as IAbs>::Output{:rs}`に変換した上で返す必要がある。
+
+```rs title="❌ 現時点でのIAbsトレイト" showLineNumbers {8}
+trait IAbs {
+  type Output;
+
+  fn iabs(self) -> <Self as IAbs>::Output
+    where Self: Sized + PartialOrd + From<i8>
+  {
+    if self >= (0_i8).into() {
+      self.try_into().unwrap()
+    } else {
+      (-self).try_into().unwrap()
+    }
+  }
+}
+```
+
+「自らを他の型`T{:rs}`に変換する」動作に対応するトレイトとして`Into<T>{:rs}`や`TryInto<T>{:rs}`がある。
+
+- `Into<T>{:rs}`：変換の失敗がない場合に実装
+- `TryInto<T>{:rs}`：失敗する可能性がある場合に実装
+
+整数型から異なる整数型への変換では、`TryInto<T>{:rs}`が実装されている。
+
+今回は`<Self as IAbs>::Output{:rs}`型への変換を可能にしたいため、`Self{:rs}`のトレイト境界に`TryInto<<Self as IAbs>::Output>{:rs}`を追加する。
+
+```rs title="❌ TryIntoトレイトを引数の型のトレイト境界に追加した" showLineNumbers {1,7} /TryInto<<Self as IAbs>::Output>/
+use std::convert::TryInto;
+
+trait IAbs {
+  type Output;
+
+  fn iabs(self) -> <Self as IAbs>::Output
+    where Self: Sized + PartialOrd + From<i8> + TryInto<<Self as IAbs>::Output>
+  {
+    if self >= (0_i8).into() {
+      self.try_into().unwrap()
+    } else {
+      (-self).try_into().unwrap()
+    }
+  }
+}
+```
+
+### 負の数への変換とNegトレイト
+
+`0`未満の場合には、引数`self{:rs}`の値を`-1`倍したものを返す。
+
+```rs title="❌ 現時点でのIAbsトレイト" showLineNumbers {12} /-self/
+use std::convert::TryInto;
+
+trait IAbs {
+  type Output;
+
+  fn iabs(self) -> <Self as IAbs>::Output
+    where Self: Sized + PartialOrd + From<i8> + TryInto<<Self as IAbs>::Output>
+  {
+    if self >= (0_i8).into() {
+      self.try_into().unwrap()
+    } else {
+      (-self).try_into().unwrap()
+    }
+  }
+}
+```
+
+`-self{:rs}`という演算は、「負の数にする」という動作に対応する`Neg{:rs}`トレイトに実装されたメソッドによって行われる。
+
+そのため、`Self{:rs}`型は`Neg{:rs}`トレイトを実装している必要がある。
+
+```rs title="❌ Negトレイトを引数の型のトレイト境界に追加した" showLineNumbers {1,8} /Neg/2
+use std::ops::Neg;
+use std::convert::TryInto;
+
+trait IAbs {
+  type Output;
+
+  fn iabs(self) -> <Self as IAbs>::Output
+    where Self: Sized + PartialOrd + Neg + From<i8> + TryInto<<Self as IAbs>::Output>
+  {
+    if self >= (0_i8).into() {
+      self.try_into().unwrap()
+    } else {
+      (-self).try_into().unwrap()
+    }
+  }
+}
+```
+
+ここで、`-1`倍した値`-self{:rs}`は、`<Self as Neg>::Output{:rs}`型になっている。
+
+`-1`倍した値を関数の返却値とするには、`<Self as Neg>::Output{:rs}`型から、`<Self as IAbs>::Output{:rs}`型に変換する必要がある。
+
+つまり、`<Self as IAbs>::Output{:rs}`型には、「`<Self as Neg>::Output{:rs}`型から作ることができる」という条件が必要になる。
+
+「`<Self as Neg>::Output{:rs}`型から作る」という動作に対応するトレイトは`TryFrom<<Self as Neg>::Output>{:rs}`であり、これを`<Self as IAbs>::Output{:rs}`のトレイト境界として指定する。
+
+```rs title="❌ TryFromトレイトを返却値の型のトレイト境界に追加した" showLineNumbers {2,11} /TryFrom<<Self as Neg>::Output>/
+use std::ops::Neg;
+use std::convert::TryFrom;
+use std::convert::TryInto;
+
+trait IAbs {
+  type Output;
+
+  fn iabs(self) -> <Self as IAbs>::Output
+    where
+      Self: Sized + PartialOrd + Neg + From<i8> + TryInto<<Self as IAbs>::Output>,
+      <Self as IAbs>::Output: TryFrom<<Self as Neg>::Output>
+  {
+    if self >= (0_i8).into() {
+      self.try_into().unwrap()
+    } else {
+      (-self).try_into().unwrap()
+    }
+  }
+}
+```
+
+### unwrapとDebugトレイト
+
+`try_into(){:rs}`メソッドの返却値は`Result{:rs}`型であるため、`Ok(){:rs}`の場合の値を取り出すために、`unwrap(){:rs}`メソッドを使っている。
+
+```rs title="❌ 現状のIAbsトレイト" showLineNumbers /.unwrap()/ {14,16}
+use std::ops::Neg;
+use std::convert::TryFrom;
+use std::convert::TryInto;
+
+trait IAbs {
+  type Output;
+
+  fn iabs(self) -> <Self as IAbs>::Output
+    where
+      Self: Sized + PartialOrd + Neg + From<i8> + TryInto<<Self as IAbs>::Output>,
+      <Self as IAbs>::Output: TryFrom<<Self as Neg>::Output>
+  {
+    if self >= (0_i8).into() {
+      self.try_into().unwrap()
+    } else {
+      (-self).try_into().unwrap()
+    }
+  }
+}
+```
+
+仮に`Result{:rs}`型の値の中身がエラーの場合、`unwrap(){:rs}`はそのエラーを出力する必要がある。
+そのため、`unwrap(){:rs}`が正しく動作するためには、`Result<T, E>{:rs}`型の`E{:rs}`型には`Debug{:rs}`トレイトが実装されている必要がある。
+
+- `0`以上の場合のエラー：
+  - `<Self as TryInto<<Self as IAbs>::Output>>::Error{:rs}`
+- `0`未満の場合のエラー：
+  - `<<Self as IAbs>::Output as TryFrom<<Self as Neg>::Output>>::Error{:rs}`
+
+```rs title="✅ Debugトレイトを2種類のエラー型のトレイト境界に追加した" showLineNumbers {4,13-14} /Debug/2-3
+use std::ops::Neg;
+use std::convert::TryFrom;
+use std::convert::TryInto;
+use std::fmt::Debug;
+
+trait IAbs {
+  type Output;
+
+  fn iabs(self) -> <Self as IAbs>::Output
+    where
+      Self: Sized + PartialOrd + Neg + From<i8> + TryInto<<Self as IAbs>::Output>,
+      <Self as IAbs>::Output: TryFrom<<Self as Neg>::Output>,
+      <Self as TryInto<<Self as IAbs>::Output>>::Error: Debug,
+      <<Self as IAbs>::Output as TryFrom<<Self as Neg>::Output>>::Error: Debug
+  {
+    if self >= (0_i8).into() {
+      self.try_into().unwrap()
+    } else {
+      (-self).try_into().unwrap()
+    }
+  }
+}
+```
+
+これでようやく、コンパイルできるようになる🎉
