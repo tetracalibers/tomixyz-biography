@@ -1,0 +1,509 @@
+---
+title: ジェネリクスとトレイトによる抽象化
+date: "2024-06-23"
+description: TODO
+private: true
+series: ja/rust-concept
+tags:
+  - Rust
+---
+
+## 同名のメソッドを持つ異なる型
+
+```rs title="✅ 面積を求めるメソッドを持つ長方形と直角三角形" showLineNumbers
+struct Rectangle {
+  width: f64,
+  height: f64
+}
+
+impl Rectangle {
+  fn calc_area(&self) -> f64 {
+    self.width * self.height
+  }
+}
+
+struct RightTriangle {
+  width: f64,
+  height: f64
+}
+
+impl RightTriangle {
+  fn calc_area(&self) -> f64 {
+    self.width * self.height * 0.5
+  }
+}
+
+fn area(x: &Rectangle) -> f64 {
+  x.calc_area()
+}
+
+fn main() {
+  let rect = Rectangle { width: 1.0, height: 2.0 };
+  println!("{}", area(&rect));
+}
+```
+
+### ジェネリクス
+
+先ほどのコードの`area(){:rs}`関数では、`RightTrianle{:rs}`を受け付けることができない。
+
+`RightTrianle{:rs}`に対しても`area(){:rs}`関数を使えるように、修正を試みる。
+
+```rs title="❓ area関数をジェネリクスを使って書き換え" showLineNumbers{23} /<T>/
+fn area<T>(x: &T) -> f64 {
+  x.calc_area()
+}
+```
+
+`T{:rs}`は一般的な型を示す**型パラメータ**。
+
+型やライフタイムパラメータを固定せずにパラメータ化して構造体や関数・メソッドを定義することを **ジェネリクス（generics）** という。
+genericには「一般化された」という意味があり、任意の型で使える一般化されたもの、と解釈できる。
+
+### ジェネリクスの型に制約が必要な場合
+
+しかし、先ほどの修正版`area(){:rs}`関数は、次のようにコンパイルエラーとなる。
+
+```rs title="❌ ジェネリクスを使ったarea関数はコンパイルエラーに" showLineNumbers{23}
+fn area<T>(x: &T) -> f64 {
+  x.calc_area()
+//  ^^^^^^^^^ method not found in `&T` // [!code error]
+}
+```
+
+すべての型が`calc_area(){:rs}`というメソッドを持っているわけではないため、型パラメータ`T{:rs}`はメソッド`calc_area(){:rs}`が実装されている型に制限する必要がある。
+
+### トレイト
+
+ある動作に関連するメソッドを列挙したものを**トレイト**という。
+トレイトを定義することで、`T{:rs}`をそこで列挙されたメソッドを実装している型に制限することができる。
+
+```rs title="「面積を求める」という動作に必要なメソッドを列挙したトレイト"
+trait CalcArea {
+  fn calc_area(&self) -> f64;
+}
+```
+
+- **型`T`はトレイト`A`を満たす**：
+  - ある型`T`がトレイト`A`で列挙されたメソッドをすべて実装している
+- **型`T`に対してトレイト`A`を実装する**：
+  - 型`T`がトレイト`A`を満たすように、トレイト`A`が要求するメソッドを型`T`に対して実装する
+
+```rs title="トレイトを長方形と直角三角形に実装" /impl CalcArea for/
+impl CalcArea for Rectangle {
+  fn calc_area(&self) -> f64 {
+    self.width * self.height
+  }
+}
+
+impl CalcArea for RightTriangle {
+  fn calc_area(&self) -> f64 {
+    self.width * self.height * 0.5
+  }
+}
+```
+
+### トレイト境界
+
+ここまでの実装で、`area(){:rs}`関数の型パラメータ`T{:rs}`に、「`CalcArea{:rs}`トレイトを実装している型」という条件を課すことができる。
+
+```rs title="✅ area関数の型パラメータに制約を追加 - 1" /<T: CalcArea>/
+fn area<T: CalcArea>(x: &T) -> f64 {
+  x.calc_area()
+}
+```
+
+型パラメータに加える「トレイトを満たしている」という条件のことを**トレイト境界**と呼ぶ。
+
+- 型`T`がトレイト`A`を満たしていることを示すとき、`<T>{:rs}`の代わりに`<T: A>{:rs}`と書く
+- 満たすべきトレイトが複数ある場合は、`<T: A + B + C>{:rs}`のように書く
+
+トレイト境界の記述には、`where{:rs}`キーワードを使うこともできる。
+
+```rs title="✅ area関数の型パラメータに制約を追加 - 2" /where T: CalcArea/
+fn area<T>(x: &T) -> f64
+  where T: CalcArea
+{
+  x.calc_area()
+}
+```
+
+## 既存のトレイトの新しい型への実装
+
+```rs title="❌ 独自の型に対して加算や大小比較の演算子を使いたい…" showLineNumbers
+#[derive(Debug, Clone, Copy)]
+struct Point2d {
+  x: f64,
+  y: f64,
+}
+
+fn main() {
+  let p1 = Point2d { x: 3.0, y: 4.0 };
+  let p2 = Point2d { x: 6.0, y: 8.0 };
+  let p3 = Point2d { x: 4.0, y: 3.0 };
+
+  // Point2dに対して+演算子を使う（今はまだエラーに…）
+  println!("p1 + p2 : {:?}", p1 + p2);
+
+  // Point2dに対して大小比較の演算子を使う（今はまだエラーに…）
+  println!("p1 > p2 ? : {}", p1 > p2);
+  println!("p1 == p3 ? : {}", p1 == p3);
+}
+```
+
+### 加算演算子を使えるようにするトレイト
+
+各種整数型や浮動小数点型は、「加算」という動作に対応する`Add{:rs}`トレイトを実装している。
+
+- [std::ops::Add](https://doc.rust-lang.org/std/ops/trait.Add.html)
+
+```rs title="Addトレイトの定義（公式ドキュメントから引用）"
+pub trait Add<Rhs = Self> {
+    type Output;
+
+    // Required method
+    fn add(self, rhs: Rhs) -> Self::Output;
+}
+```
+
+`Add{:rs}`トレイトは、`Output`という関連型を持ち、`add(){:rs}`というメソッドを実装する必要がある。
+`a + b{:rs}`という演算は、`a.add(b){:rs}`を`+{:rs}`演算子を使って表示したものである。
+
+### 例：独自の型で加算を可能にする
+
+```rs title="✅ 独自の型に対してAddトレイトを実装" showLineNumbers {1,9-18}
+use std::ops::Add;
+
+#[derive(Debug, Clone, Copy)]
+struct Point2d {
+  x: f64,
+  y: f64,
+}
+
+impl Add for Point2d {
+  type Output = Self;
+
+  fn add(self, rhs: Self) -> <Self as Add>::Output {
+    Self {
+      x: self.x + rhs.x,
+      y: self.y + rhs.y,
+    }
+  }
+}
+
+fn main() {
+  let p1 = Point2d { x: 3.0, y: 4.0 };
+  let p2 = Point2d { x: 6.0, y: 8.0 };
+
+  // Point2dに対して+演算子を使う
+  println!("p1 + p2 : {:?}", p1 + p2);
+}
+```
+
+### 大小比較ができるようにするトレイト
+
+`Eq{:rs}`と`Ord{:rs}`、または`PartialEq{:rs}`と`PartialOrd{:rs}`というトレイトを実装した型は、自分の型の値同士で大小比較が可能になる。
+
+- `Eq{:rs}`、`PartialEq{:rs}`：「等しいかどうか判定する」という動作に対応するトレイト
+- `Ord{:rs}`、`PartialOrd{:rs}`：「大小を比較する」という動作に対応するトレイト
+
+`i32{:rs}`などの整数型には`Partial`なしの`Eq{:rs}`、`Ord{:rs}`トレイトが実装されている。
+`f64{:rs}`などの浮動小数点型には、`Partial`つきの`PartialEq{:rs}`、`PartialOrd{:rs}`トレイトが実装されている。
+
+- `Partial`なし：比較が必ずできる（失敗しない）型に対して実装する
+- `Partial`つき：比較ができない場合がある型に対して実装する
+
+浮動小数点型の場合は`NaN{:rs}`との比較ができないため、後者の`Partial`つきのトレイトが実装されている。
+
+### トレイトのデフォルト実装
+
+`PartialEq{:rs}`トレイトは、次のように定義されている。
+
+- [std::cmp::PartialEq](https://doc.rust-lang.org/std/cmp/trait.PartialEq.html)
+
+```rs title="PartialEqトレイトの定義（公式ドキュメントから引用）"
+pub trait PartialEq<Rhs = Self>
+where
+    Rhs: ?Sized,
+{
+    // Required method
+    fn eq(&self, other: &Rhs) -> bool;
+
+    // Provided method
+    fn ne(&self, other: &Rhs) -> bool { ... }
+}
+```
+
+- `Required method`：デフォルト実装がなく、実装必須（実装が要求されている）
+- `Provided method`：デフォルト実装があり、上書きは任意（実装が提供されている）
+
+トレイト定義では、メソッドのデフォルト実装を定義することもでき、`ne(){:rs}`メソッドにはデフォルトの実装が存在する。
+
+```rs title="PartialEqのソースコード（抜粋）"
+pub trait PartialEq<Rhs: ?Sized = Self> {
+    /// This method tests for `self` and `other` values to be equal, and is used
+    /// by `==`.
+    fn eq(&self, other: &Rhs) -> bool;
+
+    /// This method tests for `!=`. The default implementation is almost always
+    /// sufficient, and should not be overridden without very good reason.
+    fn ne(&self, other: &Rhs) -> bool {
+        !self.eq(other)
+    }
+}
+```
+
+デフォルト実装が提供されているメソッドは、特に動作を上書きする必要がなければ、新しく定義した型に対して改めて実装する必要はない。
+
+### サブトレイトとスーパートレイト
+
+`PartialOrd{:rs}`トレイトは、次のように定義されている。
+
+- [std::cmp::PartialOrd](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html)
+
+```rs title="PartialOrdトレイトの定義（公式ドキュメントから引用）"
+pub trait PartialOrd<Rhs = Self>: PartialEq<Rhs>
+where
+    Rhs: ?Sized,
+{
+    // Required method
+    fn partial_cmp(&self, other: &Rhs) -> Option<Ordering>;
+
+    // Provided methods
+    fn lt(&self, other: &Rhs) -> bool { ... }
+    fn le(&self, other: &Rhs) -> bool { ... }
+    fn gt(&self, other: &Rhs) -> bool { ... }
+    fn ge(&self, other: &Rhs) -> bool { ... }
+}
+```
+
+最初の行では、`trait PartialOrd<Rhs = Self>: PartialEq<Rhs>{:rs}`と宣言されている。
+
+この行が示す`PartialOrd{:rs}`と`PartialEq{:rs}`の関係は、次のように形容される。
+
+- `PartialOrd{:rs}`は`PartialEq{:rs}`のサブトレイトである
+- `PartialEq{:rs}`は`PartialOrd{:rs}`のスーパートレイトである
+
+サブトレイトは、次のようにスーパートレイトに依存している。
+
+- 実装する立場では：
+  - ある型が`PartialOrd{:rs}`トレイトを満たすためには、そのスーパートレイト`PartialEq{:rs}`も実装する必要がある
+- 利用する立場では：
+  - ある型のトレイト境界に`PartialOrd{:rs}`を含めれば、その型は`PartialEq{:rs}`も実装していることを意味する
+
+### 例：独自の型で大小比較を可能にする
+
+```rs title="✅ 独自の型に対してPartialEq・PartialOrdトレイトを実装" showLineNumbers {1,16-26,28-38}
+use std::cmp::{PartialEq, PartialOrd, Ordering};
+
+#[derive(Debug, Clone, Copy)]
+struct Point2d {
+  x: f64,
+  y: f64,
+}
+
+impl Point2d {
+  // 原点からの距離の2乗を計算
+  fn distance_sq(&self) -> f64 {
+    self.x.powi(2) + self.y.powi(2)
+  }
+}
+
+impl PartialEq for Point2d {
+  // distance_sqの大小を、Point2dの大小とする
+  fn eq(&self, other: &Self) -> bool {
+    // どちらもf64型の値となる
+    let dist_self_sq = self.distance_sq();
+    let dist_other_sq = other.distance_sq();
+
+    // 既存のf64に対するeqで比較
+    dist_self_sq.eq(&dist_other_sq)
+  }
+}
+
+impl PartialOrd for Point2d {
+  // distance_sqの大小を、Point2dの大小とする
+  fn partial_cmp(&self, other: &Self) -> bool {
+    // どちらもf64型の値となる
+    let dist_self_sq = self.distance_sq();
+    let dist_other_sq = other.distance_sq();
+
+    // 既存のf64に対するpartial_cmpで比較
+    dist_self_sq.partial_cmp(&dist_other_sq)
+  }
+}
+
+fn main() {
+  let p1 = Point2d { x: 3.0, y: 4.0 };
+  let p2 = Point2d { x: 6.0, y: 8.0 };
+  let p3 = Point2d { x: 4.0, y: 3.0 };
+
+  // Point2dに対して大小比較の演算子を使う
+  println!("p1 > p2 ? : {}", p1 > p2);
+  println!("p1 == p3 ? : {}", p1 == p3);
+}
+```
+
+## 従属する型パラメータの表現
+
+### 例：一方が決まれば他方が決まる2つの型パラメータ
+
+整数の絶対値を計算する`IAbs{:rs}`トレイトを定義し、そのメソッド`iabs(){:rs}`は符号つき整数を入力として「同じサイズの」符号なし整数を返却するものとする。
+
+```rs title="✅ IAbsトレイトの定義とi32型への実装" showLineNumbers /<T, S>/ /<i32, u32>/
+trait IAbs<T, S> {
+  fn iabs(self) -> S;
+}
+
+impl IAbs<i32, u32> for i32 {
+  fn iabs(self) -> u32 {
+    if self >= 0 {
+      self as u32
+    } else {
+      -self as u32
+    }
+  }
+}
+```
+
+`i32{:rs}`と`u32{:rs}`は「同じサイズの」という定義を満たしている。
+
+逆にいえば、「同じサイズの」という定義により、`T{:rs}`が`i32{:rs}`であれば`S{:rs}`が`u32{:rs}`であることが従属的に決まる。
+
+しかし、この`T{:rs}`と`S{:rs}`の関係性を、`IAbs{:rs}`トレイトの定義では表現できていない。
+たとえば、`T{:rs}`が`i32{:rs}`のときに`S{:rs}`を`f64{:rs}`にするような、意図しない実装を禁止できていないことになる。
+
+### 関連型の指定を要求する
+
+独立した型パラメータと従属する型パラメータをトレイトに組み込むために、**関連型**が必要になる。
+
+```rs title="✅ IAbsトレイトの定義とi32型への実装（関連型を使用）" showLineNumbers {2,7} /<Self as IAbs>::Output/1
+trait IAbs {
+  type Output;
+  fn iabs(self) -> <Self as IAbs>::Output;
+}
+
+impl IAbs for i32 {
+  type Output = u32;
+  fn iabs(self) -> <Self as IAbs>::Output {
+    if self >= 0 {
+      self as <Self as IAbs>::Output
+    } else {
+      (-self) as <Self as IAbs>::Output
+    }
+  }
+}
+```
+
+`IAbs{:rs}`トレイトの定義に新たに追加された`type Output;{:rs}`は、トレイト実装時に返却値の型を関連型`Output`として定義することを要求している。
+そして、7行目では、`i32{:rs}`型に対する実装では`Output`が`u32{:rs}`になることを定義している。
+
+`<Self as IAbs>::Output{:rs}`という書式で、自分自身の型`Self{:rs}`に実装されている`IAbs{:rs}`トレイトの関連型`Output{:rs}`を参照できる。
+この関連型が返却値の型として定義されているため、`u32{:rs}`という具体的な型の指定は一箇所（7行目）にしか現れない。
+
+### 関連型があるトレイトの表記
+
+関連型があるトレイトは、関連型を指定することでトレイトが定まるため、トレイトを表記する際には関連型も併せて示す必要がある。
+
+関連型`Output`が`u32{:rs}`型である`IAbs{:rs}`トレイトは、`IAbs<Output=u32>{:rs}`と表記し、この表記はトレイト境界などで使われる。
+
+## 型変換とトレイト境界の組み立て
+
+### 例：関連型が異なる場合への対応
+
+`IAbs{:rs}`トレイトを他の整数型にも実装しようとすると、関連型`Output`が異なるだけで、`iabs(){:rs}`メソッドの実装はどの型もほぼ同様になる。
+
+マクロを使って繰り返しの実装に対応することもできるが、トレイトのデフォルト実装を工夫することでうまくまとめることもできる。
+
+```rs title="❌ IAbsトレイトの定義（デフォルト実装を提供）" showLineNumbers
+trait IAbs {
+  type Output;
+  fn iabs(self) -> <Self as IAbs>::Output {
+    if self >= (0_i8).into() {
+      self.try_into().unwrap()
+    } else {
+      (-self).try_into().unwrap()
+    }
+  }
+}
+```
+
+このように定義された`IAbs{:rs}`トレイトは、関連型を設定するだけで各整数型へ実装することができる。
+
+```rs title="IAbsトレイトの各整数型への実装" showLineNumbers{12}
+impl IAbs for i32 {
+  type Output = u32;
+}
+
+impl IAbs for i8 {
+  type Output = u8;
+}
+
+impl IAbs for i16 {
+  type Output = u16;
+}
+
+impl IAbs for i64 {
+  type Output = u64;
+}
+```
+
+しかし、現状の`iabs(){:rs}`メソッドは、トレイト境界が足りずコンパイルエラーとなる。
+
+### 関数の引数とSizedトレイト
+
+関数の引数など、スタック領域に配置される値はコンパイル時にサイズが決まっている必要がある。
+
+「値のサイズが決まっている」ことに対応するトレイトが`Sized{:rs}`トレイトであり、関数の引数になる型は`Sized{:rs}`トレイトを実装している必要がある。
+
+```rs title="❌ iabsメソッドの定義（Sizedトレイトをトレイト境界に追加した）" showLineNumbers{2} {2} /Sized/
+  fn iabs(self) -> <Self as IAbs>::Output
+    where Self: Sized
+  {
+    if self >= (0_i8).into() {
+      self.try_into().unwrap()
+    } else {
+      (-self).try_into().unwrap()
+    }
+  }
+```
+
+一部の例外（トレイトオブジェクトなど）を除き、`Sized{:rs}`トレイトは暗黙に実装される。
+独自に定義した構造体なども、フィールドの型がすべて`Sized{:rs}`トレイトを実装していれば、自動的に`Sized{:rs}`トレイトが実装される。
+
+### 他の型を自らの型に変換する
+
+大小比較をする際に、比較対象の2つの型を合わせておく必要がある。
+
+まずは`0{:rs}`と比較する必要があるため、`into(){:rs}`メソッドによって`i8{:rs}`型の`0{:rs}`を`Self{:rs}`型の`0{:rs}`に変換している。
+
+```rs title="❌ iabsメソッドの定義" showLineNumbers{2} {4} /(0_i8).into()/
+  fn iabs(self) -> <Self as IAbs>::Output
+    where Self: Sized
+  {
+    if self >= (0_i8).into() {
+      self.try_into().unwrap()
+    } else {
+      (-self).try_into().unwrap()
+    }
+  }
+```
+
+このとき、`Self{:rs}`型を`i8{:rs}`型から変換する`into(){:rs}`メソッドが使えることを保証するために、「`i8{:rs}`型からの変換」という動作に対応する`From<i8>{:rs}`トレイトを`Self{:rs}`のトレイト境界に加える必要がある。
+
+```rs title="❌ iabsメソッドの定義（From<i8>トレイトをトレイト境界に追加した）" showLineNumbers{2} {2} /From<i8>/
+  fn iabs(self) -> <Self as IAbs>::Output
+    where Self: Sized + From<i8>
+  {
+    if self >= (0_i8).into() {
+      self.try_into().unwrap()
+    } else {
+      (-self).try_into().unwrap()
+    }
+  }
+```
+
+`i8{:rs}`型よりも表現ビット数が大きい`i16{:rs}`型、`i32{:rs}`型、`i64{:rs}`型は、情報損失なく`i8{:rs}`型からの変換が可能である。
+つまり、`i16{:rs}`型、`i32{:rs}`型、`i64{:rs}`型には`From<i8>{:rs}`トレイトが実装されていて、このトレイト境界を満たしている。
+
+### 自らを他の型に変換する

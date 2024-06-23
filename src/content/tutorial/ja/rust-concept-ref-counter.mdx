@@ -341,10 +341,10 @@ fn main() {
     child: None,
   });
   let node2 = Rc::new(Node {
-    data: 3,
+    data: 2,
     child: None,
   });
-  let node2 = Rc::new(Node {
+  let node3 = Rc::new(Node {
     data: 3,
     child: None,
   });
@@ -397,10 +397,10 @@ fn main() {
     child: None,
   }));
   let node2 = Rc::new(RefCell::new(Node {
-    data: 3,
+    data: 2,
     child: None,
   }));
-  let node2 = Rc::new(RefCell::new(Node {
+  let node3 = Rc::new(RefCell::new(Node {
     data: 3,
     child: None,
   }));
@@ -452,7 +452,7 @@ fn main() {
 
 このように書けば、19行目で`p`の借用のスコープが終わるため、20行目では問題なく`p`を更新できる。
 
-## Rc型の循環参照
+## Rc型の循環参照によるメモリリーク
 
 `Rc<T>{:rs}`型のようにリファレンスカウンタを用いてメモリの解放を決める方式では、循環参照が生じたときにメモリリークが発生する。
 
@@ -482,3 +482,235 @@ fn main() {
   }
 }
 ```
+
+`node1{:rs}`の子ノードが`node2{:rs}`、`node2{:rs}`の子ノードが`node1{:rs}`と、ノードの親子関係が循環している。
+
+`loop{:rs}`が終わる直前で、`node1{:rs}`の`Rc<T>{:rs}`型が指し示すヒープ領域の値を参照しているのは、
+
+- `node1{:rs}`そのもの
+- `node2.child{:rs}`
+
+の2つあるため、リファレンスカウンタは`2`になる。
+同様に、`node2{:rs}`のリファレンスカウンタも`2`。
+
+`loop{:rs}`のブロックが1回終わると、
+
+1. `node1{:rs}`、`node2{:rs}`は破棄され、それぞれのヒープ領域のリファレンスカウンタは`1`減る
+2. しかし、お互いの参照は残っているので、両方のノードのリファレンスカウンタは`1`で、`0`にはならない
+3. ヒープ領域のメモリは解放されることなく、次のループが実行され、同じことが繰り返される
+
+このようにして、使われないメモリ領域が解放されずにメモリリークに陥る。
+
+## Weak型による弱結合
+
+### メモリリークの回避
+
+`Rc<T>{:rs}`型の値の間で循環参照が生じる可能性がある場合には、ノード間の関係付けに、`Weak<T>{:rs}`型による**弱結合**を使うことで、循環参照によるメモリリークを回避できる。
+
+```rs title="✅ Rc型の循環参照にWeak型を使うことでメモリリークを回避" showLineNumbers {21-22} /Weak<RefCell<Node>>/ /downgrade/
+use std::cell::RefCell;
+use std::rc::{Rc, Weak};
+
+#[allow(dead_code)]
+struct Node {
+  data: i32,
+  child: Option<Weak<RefCell<Node>>>,
+}
+
+fn main() {
+  loop {
+    let node1 = Rc::new(RefCell::new(Node {
+      data: 1,
+      child: None,
+    }));
+    let node2 = Rc::new(RefCell::new(Node {
+      data: 2,
+      child: None,
+    }));
+
+    node1.borrow_mut().child = Some(Rc::downgrade(&node2));
+    node2.borrow_mut().child = Some(Rc::downgrade(&node1));
+  }
+}
+```
+
+21-22行目では、`Rc::clone(){:rs}`の代わりに`Rc::downgrade(){:rs}`を使っている。
+
+### cloneとdowngrade
+
+`Rc::clone(){:rs}`は、正確には、
+
+1. 引数に指定した`Rc<T>{:rs}`型の値とそれが指し示すヒープ領域の**強結合**を増やす
+2. **強結合リファレンスカウンタ**を増加させる
+
+`Rc::downgrade(){:rs}`は、
+
+1. 引数に指定した`Rc<T>{:rs}`型の値とそれが指し示すヒープ領域の**弱結合**を増やす
+2. **弱結合リファレンスカウンタ**を増加させる
+
+というもので、弱結合と強結合は別に扱われる。
+
+`Rc<T>{:rs}`型の値が指し示すヒープ領域の**強**結合のリファレンスカウンタが`0`になると、**弱**結合リファレンスカウンタが`0`ではなくても、そのヒープ領域が解放される。
+
+```rs showLineNumbers{10}
+fn main() {
+  loop {
+    let node1 = Rc::new(RefCell::new(Node {
+      data: 1,
+      child: None,
+    }));
+    let node2 = Rc::new(RefCell::new(Node {
+      data: 2,
+      child: None,
+    }));
+
+    node1.borrow_mut().child = Some(Rc::downgrade(&node2));
+    node2.borrow_mut().child = Some(Rc::downgrade(&node1));
+  }
+}
+```
+
+`node1{:rs}`のヒープ領域を、
+
+- 強結合（`Rc::clone(){:rs}`）で参照しているのは`node1{:rs}`そのものだけ
+  - 強結合のリファレンスカウンタは`1`
+- 弱結合（`Rc::downgrade(){:rs}`）で参照しているのは`node2.child{:rs}`だけ
+  - 弱結合のリファレンスカウンタは`1`
+
+であり、`node2{:rs}`も同様。
+
+`loop{:rs}`のブロックが1回終わると、
+
+1. `node1{:rs}`、`node2{:rs}`は破棄され、それぞれのヒープ領域の強結合リファレンスカウンタは`1`減る
+2. その結果、両方のノードの強結合リファレンスカウンタは`0`になる
+3. ヒープ領域のメモリは解放される
+
+というようになり、メモリの使用量はほぼ一定に保たれる（メモリリークにはならない）。
+
+## Weak型とRc型の変換
+
+次のコード（※再掲）では、`node1{:rs}`と`node2{:rs}`がそれぞれ`node3{:rs}`を子として保持していた。
+
+```rs title="✅ 再掲：子ノードをたどる（後から子ノードを設定）" showLineNumbers {10,15,19,38-39} /Rc<RefCell<Node>>/1 /Rc::clone/1-3
+use std::cell::RefCell;
+use std::rc::Rc;
+
+struct Node {
+  data: i32,
+  child: Option<Rc<RefCell<Node>>>
+}
+
+fn print_link(start_node: Rc<RefCell<Node>>) {
+  let mut p = start_node;
+
+  loop {
+    println!("{}", p.borrow().data);
+
+    if p.borrow().child.is_none() {
+      break;
+    }
+
+    let ptmp = Rc::clone(p.borrow().child.as_ref().unwrap());
+    p = ptmp;
+  }
+}
+
+fn main() {
+  let node1 = Rc::new(RefCell::new(Node {
+    data: 1,
+    child: None,
+  }));
+  let node2 = Rc::new(RefCell::new(Node {
+    data: 2,
+    child: None,
+  }));
+  let node3 = Rc::new(RefCell::new(Node {
+    data: 3,
+    child: None,
+  }));
+
+  node1.borrow_mut().child = Some(Rc::clone(&node3));
+  node2.borrow_mut().child = Some(Rc::clone(&node3));
+
+  println!("link from node1");
+  print_link(Rc::clone(&node1));
+
+  println!("link from node2");
+  print_link(Rc::clone(&node2));
+}
+```
+
+このコードを書き換え、`node1{:rs}`の子ノードが`node2{:rs}`、`node2{:rs}`の子ノードが`node1{:rs}`と、ノードの親子関係が循環している場合を考える。
+
+```rs title="✅ 子ノードをたどる（循環参照を含む）" showLineNumbers {10,15-21,26,41-42} /Weak<RefCell<Node>>/1 /Rc::downgrade/ /Weak::upgrade/2
+use std::cell::RefCell;
+use std::rc::{Rc, Weak};
+
+struct Node {
+  data: i32,
+  child: Option<Weak<RefCell<Node>>>
+}
+
+fn print_link(start_node: Rc<RefCell<Node>>) {
+  let mut p = Rc::clone(&start_node);
+
+  loop {
+    println!("{}", p.borrow().data);
+
+    // 循環して戻ってきたときにループを終了させる条件を加えている
+    // start_nodeとchildのノードのメモリアドレスが同一の場合にも、ループを終了させるようにする
+    if p.borrow().child.is_none()
+      || Weak::upgrade(p.borrow().child.as_ref().unwrap())
+          .unwrap()
+          .as_ptr()
+          == start_node.as_ptr()
+    {
+      break;
+    }
+
+    let ptmp = Weak::upgrade(p.borrow().child.as_ref().unwrap()).unwrap();
+    p = ptmp;
+  }
+}
+
+fn main() {
+  let node1 = Rc::new(RefCell::new(Node {
+    data: 1,
+    child: None,
+  }));
+  let node2 = Rc::new(RefCell::new(Node {
+    data: 2,
+    child: None,
+  }));
+
+  node1.borrow_mut().child = Some(Rc::downgrade(&node2));
+  node2.borrow_mut().child = Some(Rc::downgrade(&node1));
+
+  println!("link from node1");
+  print_link(Rc::clone(&node1));
+
+  println!("link from node2");
+  print_link(Rc::clone(&node2));
+}
+```
+
+### Rc型からWeak型へ（downgrade）
+
+41-42行目では、`Rc::downgrade(){:rs}`によって`Rc<RefCell<Node>>{:rs}`型の値を`Weak<RefCell<Node>>{:rs}`型の値に変換した上で、`child`フィールドに格納している。
+
+### Weak型からRc型へ（upgrade）
+
+`ptmp{:rs}`の計算を比較してみると：
+
+```rs title="循環参照を含まないVer." showLineNumbers{19} /Rc::clone/
+let ptmp = Rc::clone(p.borrow().child.as_ref().unwrap());
+```
+
+```rs title="循環参照を含むVer." showLineNumbers{26} /Weak::upgrade/ /.unwrap()/2
+let ptmp = Weak::upgrade(p.borrow().child.as_ref().unwrap()).unwrap();
+```
+
+後者では、`child`の値を取り出すために、`Weak::upgrade(){:rs}`によって`Weak<RefCell<Node>>{:rs}`型の値を`Rc<RefCell<Node>>{:rs}`型の値に変換している。
+
+`Weak::upgrade(){:rs}`は、強結合カウンタがすでに`0`になってヒープ領域が解放され、値が失われている場合も想定して、`Option<Rc<RefCell<Node>>>{:rs}`型を返却する。
+そのため、`Option{:rs}`から`Some(){:rs}`の中身を取り出すための`unwrap(){:rs}`が追加されている。
