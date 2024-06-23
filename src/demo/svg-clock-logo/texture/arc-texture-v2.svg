@@ -1,0 +1,23 @@
+<svg width="600" height="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="noise">
+      <feTurbulence baseFrequency=".01" type="fractalNoise" numOctaves="3" />
+    </filter>
+    <g id="arc">
+      <circle cx="0" cy="0" r="32" fill="none" stroke-width="64" style="vector-effect: non-scaling-stroke" />
+    </g>
+    <g id="arcs">
+      <use href="#arc" />
+      <use href="#arc" transform="scale(5)" />
+      <use href="#arc" transform="scale(10)" />
+      <use href="#arc" transform="scale(15)" />
+      <use href="#arc" transform="scale(20)" />
+      <use href="#arc" transform="scale(25)" />
+    </g>
+  </defs>
+  <rect width="600" height="600" fill="black" filter="url(#noise)" />
+  <use href="#arcs" stroke="rgba(172, 57, 138, .6)" />
+  <use href="#arcs" stroke="rgba(206, 214, 67, .6)" transform="translate(600)" />
+  <use href="#arcs" stroke="rgba(87, 30, 128, 0.6)" transform="translate(0 600)" />
+  <use href="#arcs" stroke="rgba(79, 170, 227, 0.6)" transform="translate(600 600)" />
+</svg>
