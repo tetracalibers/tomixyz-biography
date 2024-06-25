@@ -1,0 +1,51 @@
+---
+title: デリファレンスとトレイト
+date: "2024-06-26"
+description: TODO
+private: true
+series: ja/rust-concept
+tags:
+  - Rust
+---
+
+## println!とリファレンス
+
+### 値でもリファレンスでも動作する仕組み
+
+`println!{:rs}`の第2引数以降に指定するのは、値でもリファレンスでもよい。
+
+```rs title="✅ 値でもリファレンスでも同じ結果になる" showLineNumbers
+fn main() {
+  let x = 1;
+  println!("{}", x);
+  println!("{}", &x);
+}
+```
+
+値でもリファレンスでもどちらでも使えるのは、`println!("{}", ...){:rs}`の第2引数以降の値の型が実装すべき`std::fmt::Display{:rs}`トレイトの実装に、次のようなものがあるからである。
+
+```rs title="&T型に対するDisplayトレイトの定義の一部"
+impl <'_, T> Display for &'_ T
+  where
+    T: Display + ?Sized
+```
+
+`T{:rs}`には`Display + ?Sized{:rs}`というトレイト境界がついているため、これは、`Display{:rs}`トレイトを実装している型`T{:rs}`のリファレンス`&T{:rs}`型に対する`Display{:rs}`トレイトの実装である。
+
+`_{:rs}`は**匿名ライフタイムパラメータ**と呼ばれるもので、ライフタイムパラメータを適切に推定してくれるものである。
+
+メソッドはマクロによって定義されているが、展開すると次のようになる。
+
+```rs title="&T型に対するDisplayトレイトの実装"
+impl<T: ?Sized + Display> Display for &T {
+  fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), std::fmt::Error> {
+    Display::fmt(&**self, f)
+  }
+}
+```
+
+### 再帰的なデリファレンス
+
+## Derefトレイト
+
+## デリファレンス型強制
