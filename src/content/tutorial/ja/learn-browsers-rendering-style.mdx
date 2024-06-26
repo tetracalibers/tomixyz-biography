@@ -1,0 +1,125 @@
+---
+title: "style # Render Treeの構築"
+date: "2024-06-14"
+description: TODO
+series: ja/learn-browsers-rendering
+tags:
+  - Browser
+  - HTML
+  - CSS
+---
+
+TODO: 宣言とはなにかを定義する
+TODO: ユーザーエージェントを定義する
+
+## DOM + CSSOM => Render Tree
+
+ここまでで、単なる文字列であったHTMLとCSSから、DOMとCSSOMというプログラムで扱いやすいオブジェクトを生成できるようになりました。
+
+しかし、現時点ではDOMとCSSOMはそれぞれ独立したデータ構造です。描画処理に進む前に、この2つを関係づける必要があります。
+
+というのも、そもそもCSSはセレクタによってHTML要素を特定し、そこにスタイルを割り当てる言語だからです。
+DOM内の一つの要素を描画しようとするたびに、いちいちCSSOMを走査して対応するスタイルを探し出すわけにはいきません。
+
+事前にDOMとCSSOMを走査して、要素ごとに適用されるスタイルをまとめたオブジェクトを用意しておけば、あとはそれに従って描画を行うだけで済みます。
+
+この「要素ごとに適用されるスタイルをまとめたオブジェクト」は、**Render Tree**と呼ばれます。
+
+## Styleプロセス
+
+Render Treeを構築する工程は、**Style**プロセスと呼ばれます。
+
+Styleプロセスで何をすべきかは、[CSS Cascading and Inheritance Level 5](https://www.w3.org/TR/css-cascade-5/)で定められていて、大きく3つの工程を踏むことになります。
+
+1. Filtering（マッチするプロパティを抽出）
+2. Cascading（プロパティの優先度を決定）
+3. Defaulting（指定されていないプロパティも含めすべての値を決定）
+
+## Filtering
+
+[Filtering](https://www.w3.org/TR/css-cascade-5/#filtering)は、各要素に適用されるすべての宣言を特定する工程です。
+
+宣言を要素に適用するかどうかは、次の条件を考慮して決定します。
+
+1. その宣言が書かれているスタイルシートが、現在のドキュメントに適用されているか？
+2. `@media`や`@support`等で書かれた条件にマッチするか？（[CSS Conditional Rules Module Level 3](https://www.w3.org/TR/css-conditional-3/)）
+3. その宣言のセレクタが要素にマッチするか？
+4. その宣言のプロパティが定義されている既知のプロパティか？
+5. その宣言の値がプロパティの構文として正しいか？
+
+### Declared Value
+
+このような判定によって絞り込まれたプロパティの値は、[Declared Value](https://www.w3.org/TR/css-cascade-5/#declared)と呼ばれます。
+
+各要素の各プロパティに対するDeclared Valueは、1つだけとは限りません。TODO: 以下、ちゃんと調べる
+
+- Declared Valueがゼロの場合は、Defaultingプロセスで初期値を設定します。
+- Declared Valueが多数の場合は、Cascadingプロセスでより優先度が高いものを選択します。
+
+## Cascading
+
+[Cascading](https://www.w3.org/TR/css-cascade-5/#cascading)は、プロパティを適用する順序を決定するために、優先度を計算してソートを行う工程です。
+
+宣言の優先順位を決定するこのプロセスはやや複雑で、ソートの基準としていろいろな概念が登場します。詳しくは[次回](TODO:ページ作って内部リンク)解説します。
+
+### Cascaded Value
+
+ソートした結果、最も優先度の高いものから順に適用されることになるため、例えばプロパティが重複している場合はどちらかが上書きされることになります。
+
+つまり、この工程で、衝突する複数の宣言から、実際に効力を持つ宣言が選択されることになり、その選択された宣言は[Cascaded Values](https://www.w3.org/TR/css-cascade-5/#cascaded)と呼ばれます。
+
+## Defaulting
+
+必ず何らかの値を指定しなければレイアウトが計算できないCSSプロパティもあります。
+例えば、`font-size`が決まらなければ、文字を配置することすらできないのです。
+
+とはいえ、CSSを書く際、すべての要素にすべてのプロパティを設定することはないでしょう。
+
+[Defaulting](https://www.w3.org/TR/css-cascade-5/#defaulting)は、値が欠けているCSSプロパティを含め、描画に必要なすべての値を算出する工程です。
+
+### Specified Values
+
+プロパティの値が欠けている場合、親ノードから値を継承できるプロパティは値を継承し、継承できない場合は初期値を設定します。
+
+このようなデフォルト値の設定により、すべての要素のすべてのプロパティに対して値が存在することが保証されます。
+
+ここまでで決まった値は、[Specified Values](https://www.w3.org/TR/css-cascade-5/#specified)と呼ばれます。
+
+### Computed Values
+
+Specified Valuesは、絶対値と相対値が混ざっている状態です。
+
+あまり負荷のかからない範囲で相対値を計算して、絶対値に変換したものを、[Computed Values](https://www.w3.org/TR/css-cascade-5/#computed)と呼びます。
+
+- 相対単位（`em`、`ex`、`vh`、`vw`）の値は、適切な基準サイズと掛け合わせて絶対値にする
+- 特定のキーワード（例：`smaller`、`bolder`）は、その定義に従って置き換えられる
+- 一部のプロパティのパーセンテージは、基準値（プロパティによって定義される）で掛け合わせる必要がある
+- 有効な相対URLは、絶対URLに解決される
+
+絶対値を計算するにあたって、ドキュメントのレイアウトを行ったり、ネットワークリクエストを解決したり、要素自身やその親以外から値を取得したりする必要がある場合は、ここでは計算せず相対値のままになります。
+
+### Used Values
+
+[Used Values](https://www.w3.org/TR/css-cascade-5/#used)は、Computed Valuesに含まれるすべての相対値を絶対値に変換したものです。
+
+例えば、`auto`も相対値の一つですが、`width: auto`と宣言された際の`width`の絶対値は、祖先のレイアウトを調べなければ算出できません。
+この場合、Computed Valuesでは`auto`のままですが、Used Valuesでは`px`などの絶対値に変換されたものになります。
+
+### Actual Values
+
+ユーザーエージェントの制約によってUsed Valueがそのままでは使用できない場合、値の調整が必要になります。
+
+例えば、ユーザーエージェントが整数ピクセル幅でのみボーダーをレンダリングできる場合、Used Valueを近似する必要があります。
+
+また、その環境で利用できるフォントによって、フォントサイズの調整が必要になる場合があります。
+
+[Actual Values](https://www.w3.org/TR/css-cascade-5/#actual)は、このような調整を行った値です。
+
+---
+
+## 参考リンク
+
+- [CSS Cascading and Inheritance Level 5](https://www.w3.org/TR/css-cascade-5/)
+
+- [レンダーツリーの構築 - web.dev](https://web.dev/articles/howbrowserswork?hl=ja#render_tree_construction)
+- [レンダリングツリーの構築、レイアウト、ペイント - web.dev](https://web.dev/articles/critical-rendering-path/render-tree-construction?hl=ja)
