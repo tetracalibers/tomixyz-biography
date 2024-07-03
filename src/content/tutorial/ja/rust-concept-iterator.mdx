@@ -1,0 +1,217 @@
+---
+title: イテレータ
+date: "2024-06-27"
+description: TODO
+private: true
+series: ja/rust-concept
+tags:
+  - Rust
+---
+
+## Iteratorトレイト
+
+**イテレータ**は、値の集まりから値を一つずつ順番に返すもので、繰り返し処理に使われる。
+
+Rustでは、`Iterator{:rs}`トレイトが実装されている型がイテレータになることができ、`next(){:rs}`メソッドを繰り返し呼ぶことで、値の集まりから順番に値を取り出せる。
+
+### 例：レンジ
+
+レンジ`start..end{:rs}`は`Iterator{:rs}`トレイトを実装している。
+
+```rs title="レンジに対してnextメソッドを呼ぶ" showLineNumbers
+fn main() {
+  let mut r = 1..3;
+
+  println!("{:?}". r.next()); // Some(1)
+  println!("{:?}". r.next()); // Some(2)
+  println!("{:?}". r.next()); // None
+}
+```
+
+- `next(){:rs}`は呼んだ値を変更するため、ミュータブルな値として束縛する必要がある
+- `next(){:rs}`は`Option{:rs}`型を返却する
+
+この例では、`next(){:rs}`を2回呼んでしまうと、イテレータとしてはもう返すものがなくなってしまうため、3回目の`next(){:rs}`では`None{:rs}`が返される。
+
+`next(){:rs}`によって返される`Option{:rs}`型が`None{:rs}`であるかを確認することで、イテレータがすべての値を返したかどうかがわかる。
+
+## IntoIteratorトレイト
+
+配列型`[T; N]{:rs}`やベクター型`Vec<T>{:rs}`には`IntoIterator{:rs}`トレイトが実装されている。
+
+### 値の列からイテレータを作る
+
+`IntoIterator{:rs}`トレイトが実装を要求する`into_iter(){:rs}`メソッドを使うことで、次のような`Iterator{:rs}`トレイトが実装されている型の値を作り出すことができる。
+
+- `[T; N]{:rs}`型からは`std::array::IntoIter<T, N>{:rs}`型
+- `Vec<T>{:rs}`型からは`std::vec::IntoIter<T>{:rs}`型
+
+`IntoIterator{:rs}`トレイトを実装していることによって、`[T; N]{:rs}`型や`Vec<T>`型の1つの値から、複数の独立なイテレータを作り出すことができる。
+
+### IntoIteratorトレイトの定義
+
+```rs title="IntoIteratorトレイトの定義"
+pub trait IntoIterator {
+  type Item;
+  type IntoIter: Iterator;
+  fn into_iter(self) -> Self::IntoIter;
+}
+```
+
+関連型によって`into_iter(){:rs}`の返却値の型を指定できるようにしているのは、
+
+- 値とリファレンスのどちらを返すのか
+- 返す値がリファレンスであるときに、リファレンスを通じて元の値を変更できるかどうか
+
+など、イテレータにいくつかの種類があるからである。
+
+### 例：ベクター型に対するイテレータ
+
+`Vec<T>{:rs}`型やそのリファレンス型には、3種類の`IntoIterator{:rs}`トレイトの実装がある。
+
+- `Vec<T>{:rs}`型の値の場合
+- `Vec<T>{:rs}`型のイミュータブルなリファレンスの場合
+- `Vec<T>{:rs}`型のミュータブルなリファレンスの場合
+
+それぞれ、イテレータが返すものも、値、イミュータブルなリファレンス、ミュータブルなリファレンスとなる。
+
+このように、どの型に対して`into_iter(){:rs}`メソッドでイテレータを作るかによって、イテレータが返すものが異なる。
+
+## forループとイテレータ
+
+```rs title="Rustのforループの構文"
+for x in values {
+  println!("do something");
+}
+```
+
+ここで、`values{:rs}`には、`IntoIterator{:rs}`を実装している型の値が入る。
+
+### forループの内部処理
+
+先ほどのforループの構文は、以下のコードと同じである。
+
+```rs title="forループの実体"
+{
+  let result = match IntoIterator::into_iter(values) {
+    mut iter => loop {
+      let next;
+      match iter.next() {
+        Some(val) => next = val,
+        None => break,
+      }
+      let x = next;
+      let () = { println!("do something"); };
+    },
+  };
+  result
+}
+```
+
+forループの内部では、
+
+1. `into_iter(){:rs}`メソッドでイテレータ`iter{:rs}`を作成する
+2. `iter{:rs}`から、ループで`next(){:rs}`メソッドを使って次々と値を取り出す
+3. `next(){:rs}`の返却値が`None{:rs}`であれば、そのループから飛び出す
+
+という処理が行われている。
+
+### forループと所有権の移動
+
+`Vec<T>{:rs}`型の値に対して`into_iter(){:rs}`を呼ぶと、所有権が移動してしまい、所有権が移動してしまい、元の変数にはアクセスできなくなる。
+
+```rs title="❌ into_iter()によって所有権が移動してしまう例" showLineNumbers
+// borrow of moved value: `vv` // [!code error]
+fn main() {
+  let vv = vec![1, 2, 3, 4];
+  let mut iter = vv.into_iter();
+  //                ----------- `vv` moved due to this method call // [!code error]
+
+  let x = iter.next().unwrap();
+  println!("{}", x);
+
+  let x = iter.next().unwrap();
+  println!("{}", x);
+
+  let x = vv[2];
+  //      ^^ value borrowed here after move // [!code error]
+  println!("{}", x);
+}
+```
+
+`into_iter(){:rs}`の呼び出しによって`vv{:rs}`が持っていた所有権は`iter{:rs}`に移動してしまい、何も値を所有していない状態になっている`vv{:rs}`を参照しようとしてエラーになっている。
+
+forループの中でも、`in{:rs}`の後ろに置く`values{:rs}`に対して`into_iter(){:rs}`が使われているため、`Vec<T>{:rs}`型の要素について繰り返し処理をする場合は、所有権の移動に注意する必要がある。
+
+```rs title="❌ forループでも所有権が移動してしまう例" showLineNumbers {8-11}
+fn main() {
+  let vv = vec![1, 2, 3, 4];
+
+  for ii in vv {
+    println!("{}", ii);
+  }
+
+  // エラーになる
+  for ii in vv {
+    println!("{}", ii);
+  }
+}
+```
+
+1回目のループで`vv{:rs}`の所有権がイテレータに移動してしまうため、`vv{:rs}`は何も値を所有していない。
+そのため、2回目のループは「所有権が移動した」としてコンパイルエラーとなる。
+
+所有権をループ変数に移動させないためには、値（`Vec<T>{:rs}`型の値）ではなく、リファレンス（`&Vec<T>{:rs}`型の値）を`in{:rs}`の後ろに与える必要がある。
+
+```rs title="✅ 所有権が移動しないようリファレンスを使う" showLineNumbers /&vv/
+fn main() {
+  let vv = vec![1, 2, 3, 4];
+
+  for ii in &vv {
+    println!("{}", ii);
+  }
+
+  for ii in &vv {
+    println!("{}", ii);
+  }
+}
+```
+
+## FromIteratorトレイト
+
+`IntoIterator{:rs}`トレイトの`into_iter(){:rs}`メソッドは、`Vec<T>{:rs}`型などの値の列からイテレータを作るものだった。
+逆に、イテレータから値の列を作る動作に対応するものとして`FromIterator{:rs}`トレイトがある。
+
+### イテレータから値の列を作る
+
+`FromIterator{:rs}`トレイトを実装している型では、イテレータからその型の値を作ることができる。
+
+`collect(){:rs}`メソッドは、イテレータから値を最初から最後まで取り出し、それらを要素とする`Vec<T>{:rs}`型などの値を作るメソッドである。
+その内部では、`FromIterator{:rs}`トレイトのメソッド`from_iter(){:rs}`が使われている。
+
+`collect(){:rs}`メソッドは、`Iterator{:rs}`トレイトを実装している型のメソッドなので、`chars(){:rs}`などのイテレータを返却するメソッドに続けて呼び出すこともできる。
+
+```rs title="✅ 文字を1文字ずつ分割してベクターに詰める" showLineNumbers /Vec<char>/
+fn main() {
+  let c = "あいうえお";
+  let c_vec = c.chars().collect::<Vec<char>>();
+  println!("{:?}", c_vec);
+}
+```
+
+`collect(){:rs}`メソッドを使う際は、`collect(){:rs}`を適用した結果、`FromIterator{:rs}`トレイトを実装しているどの型の値を作るのかを、何らかの方法で指定する必要がある。
+
+上のコードでは、`collect::<Vec<char>>(){:rs}`のように、`Vec<char>{:rs}`型の値にすることを指定している。
+
+ところで、`Vec{:rs}`型にすることは指定しないとわからないが、`chars(){:rs}`メソッドが`char{:rs}`型を返すことから、`char{:rs}`型の値の列であることは推論できる。
+このような場合、`char{:rs}`の部分を`_{:rs}`として、コンパイルに推論させることを求めることもできる。
+
+```rs showLineNumbers{3} /Vec<_>/
+  let c_vec = c.chars().collect::<Vec<_>>();
+```
+
+または、次のように束縛する値に型アノテーションを付けることで指定してもよい。
+
+```rs showLineNumbers{3} /Vec<_>/
+  let c_vec: Vec<_> = c.chars().collect();
+```
