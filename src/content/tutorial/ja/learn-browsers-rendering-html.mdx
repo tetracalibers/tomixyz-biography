@@ -1,0 +1,57 @@
+---
+title: "html # HTMLパーサーのアーキテクチャ"
+date: "2024-06-13"
+description: TODO
+private: true
+series: ja/learn-browsers-rendering
+tags:
+  - Browser
+  - HTML
+---
+
+## HTML => DOM
+
+HTMLドキュメントは、次のコンポーネントを経由して、DOMに変換されます。
+
+1. Network
+2. Byte Stream Decoder
+3. Input Stream Preprocessor
+4. Tokenizer
+5. Tree builder
+6. DOM
+
+この2つのうち、最も重要なのがTokenizerとTree builderで、この2つのコンポーネントをHTMLパーサーとして実装することにします。
+
+HTMLパーサーの入力は、時にはネットワークからではなく、`document.write(){:js}`APIによってスクリプトから入力されることもあります。
+しかし、このプロジェクトでは、簡略化のためにスクリプトからの入力は考慮しません。
+
+## HTMLパーサーの特徴
+
+HTMLはとても寛容な言語で、閉じタグが書かれていないなど、ある程度の不完全さを許容します。
+HTMLパーサーは、足りないものを自動的に補ってエラーから復帰する仕組みを備えています。
+
+このような事情もあって、HTMLパーサーのアルゴリズムはなかなかに複雑です。
+従来のパーサーで使われる手法を単純に適用できないため、HTML専用の解析アルゴリズムが仕様書に詳しく記載されています。
+
+- [parsing.html - HTML Living Standard](https://html.spec.whatwg.org/multipage/parsing.html)
+
+### ステートマシン
+
+HTMLの解析は、状態を切り替えながら、状態に応じた処理の実行を繰り返していくことで実現されます。
+
+HTMLパーサーの実装では、多数の状態変数が登場しますが、そもそもなぜ状態によって制御する必要があるのでしょうか？
+
+例えば、開始タグと終了タグの間で許容される文字と、タグ名（`<`と`>`の間）で許容される文字は異なります。
+そのため、1文字ずつ追いかけていく中で、最低限「今どこにいるのか」という文脈を表す情報が必要になります。この情報も、保持すべき状態の一つです。
+
+「開始タグが開いている」状態で読み進めていく中で、タグの終わり`>`を検出したら、「コンテンツデータ」の状態に切り替えます。
+このようにして「今どこにいるのか」という状態が変われば、そこに存在していい文字やエラーの基準も変わるため、適用する処理も切り替えるようになります。
+
+これは簡単な例えにすぎず、各状態の名称は細かく仕様で定められており、他にもさまざまな意味を持つ状態が登場します。
+
+---
+
+## 参考リンク
+
+- [parsing.html - HTML Living Standard](https://html.spec.whatwg.org/multipage/parsing.html)
+- [The HTML parser - htmlparser.info](https://htmlparser.info/parser/)

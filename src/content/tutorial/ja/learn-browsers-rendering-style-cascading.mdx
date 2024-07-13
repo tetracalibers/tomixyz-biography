@@ -1,0 +1,128 @@
+---
+title: "style ## Cascading"
+date: "2024-06-15"
+description: TODO
+private: true
+series: ja/learn-browsers-rendering
+tags:
+  - Browser
+  - CSS
+---
+
+Render Treeを構築するプロセスの中でも、[Cascading](https://www.w3.org/TR/css-cascade-5/#cascading)という処理について見ていきます。
+
+なお、この記事および実装プロジェクトでは、簡略化のため、次のコンセプトについては考慮しないことにします。
+
+- `@layer`によるカスケードレイヤー
+- Shadow DOMによるカプセル化
+- CSSアニメーション
+- CSSトランジション
+
+## Cascadeソートの基準
+
+Cascadeは、宣言の優先順位を決定するソートのアルゴリズムです。
+
+次のような概念をもとに、宣言の優先順位を計算します。
+
+- Cascading Origin（どんなスタイルシートから抽出された宣言か）
+- Importance（`!important`の有無）
+- Element-Attached Styles（`style`属性などで要素に直接付与された宣言かどうか）
+- Specificity（セレクタの詳細度）
+- Order of Appearance（宣言の登場順）
+
+## Cascading Origins
+
+[Cascading Origins](https://www.w3.org/TR/css-cascade-5/#cascading-origins)は、簡単にいえば、その宣言がどこに書かれていたか？という分類です。
+
+3つのOriginに分類され、優先度の高い順に並べると、次のようになります。
+
+1. `Author Origin`（開発者がHTMLとともに提供したCSS）
+2. `User Origin`（ブラウザ側のユーザーのカスタマイズによって追加されたCSS)
+3. `User-Agent Origin`（ブラウザがデフォルトで適用するCSS)
+
+### Author Origin
+
+Web開発者によって書かれたスタイルは、Author Originとして扱われます。
+
+HTMLの`style`タグなどでドキュメント内に含められたスタイルシートや、`link`タグなどで外部からリンクしたスタイルシートが該当します。
+
+### User Origin
+
+Webサイトの閲覧者のカスタマイズにより、ブラウザ側で追加されたスタイルは、User Originとして扱われます。
+
+例えば、ブラウザ拡張機能によって追加されたスタイルシートなどが該当します。
+
+### User-Agent Origin
+
+ブラウザが自動的に適用するデフォルトのスタイルは、User-Agent Originとして扱われます。
+
+## Importance
+
+`!important`の有無は、優先順位に大きく影響を及ぼします。
+
+`!important`つきの宣言は**重要な宣言**、`!important`がない宣言は**通常の宣言**と呼ばれます。
+
+### Originによる優先順位の逆転
+
+`!important`つきの宣言では、Originによる優先順位は次のように逆転します。（優先度の高い順）
+
+1. `User-Agent Origin` with `!important`
+2. `User Origin` with `!important`
+3. `Author Origin` with `!important`
+
+`!important`による優先順位の逆転によって、開発者が指定したCSSに関わらず、ユーザー側で見た目のカスタマイズを行うことができるようになります。
+例えば、読みづらい場合に大きなフォントを適用したり、視覚の特性や好みに応じて色の組み合わせを変更したりといったことが可能になるため、`!important`はドキュメントのアクセシビリティを向上させる一機能ともいえます。
+
+### 通常の宣言の上書き
+
+`!important`つきの宣言は、`!important`がない他のすべての宣言よりも優先されます。
+
+ここまでの話をまとめると、優先度の高い順は次のようになります。
+
+1. `User-Agent Origin` with `!important`
+2. `User Origin` with `!important`
+3. `Author Origin` with `!important`
+4. `Author Origin`
+5. `User Origin`
+6. `User-Agent Origin`
+
+## Element-Attached Styles
+
+Author Originの宣言のうち、`style`属性などで要素に直接付与された宣言は、CSSセレクタによって間接的に付与された宣言よりも優先されます。
+
+Author Originの宣言の優先順位だけを示すと、次のようになります。（優先度が高い順）
+
+1. `Author Origin` with `!important` in `style=""`
+2. `Author Origin` with `!important`
+3. `Author Origin` in `style=""`
+4. `Author Origin`
+
+## Specificity
+
+ここまでの基準で判定しても優先順位が決まらない場合、セレクタの詳細度を計算します。
+
+詳細度が高いほど、優先順位が高くなります。
+
+詳細度の計算は、[このシリーズの後の記事](TODO:記事ページ作ってリンク)で解説します。
+
+## Order of Appearance
+
+詳細度も一致してしまった場合は、宣言の登場順を優先順位とします。
+
+最後に登場した宣言が最も優先順位が高くなります。
+つまり、後に書かれた宣言は、前に書かれた宣言を上書きします。
+
+登場順を厳密に決定するためのルールは、次のようなものです。TODO: 各項目を噛み砕いて書き直す
+
+- スタイルシートは、最終的なCSSスタイルシートの順序で並べられます。
+- インポートされたスタイルシートからの宣言は、`@import`ルールの場所にスタイルシートが置き換えられたかのように順序付けられます。
+- 元のドキュメントによって独立してリンクされたスタイルシートからの宣言は、ホストドキュメントの言語によって決定されたリンク順に連結されたかのように扱われます。
+- `style`属性からの宣言は、その属性が現れる要素のドキュメント順に並べられ、すべてのスタイルシートの後に配置されます。
+
+---
+
+## 参考リンク
+
+- [CSS Cascading and Inheritance Level 5](https://www.w3.org/TR/css-cascade-5/)
+- [CSS カスケード入門 - mdn web docs](https://developer.mozilla.org/ja/docs/Web/CSS/Cascade)
+- [カスケード、詳細度、継承 - mdn web docs](https://developer.mozilla.org/ja/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance)
