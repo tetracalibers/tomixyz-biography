@@ -9,6 +9,7 @@ articles:
   - ja/rust-concept-dynamic
   - ja/rust-concept-deref
   - ja/rust-concept-iterator
+  - ja/rust-concept-closure
 ---
 
 [コンセプトから理解するRust](https://gihyo.jp/book/2022/978-4-297-12562-2)の読書ノート。
