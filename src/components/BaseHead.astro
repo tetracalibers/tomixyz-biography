@@ -3,6 +3,7 @@ import "@fontsource/fira-sans"
 import { SITE } from "$/config"
 import "../styles/global.css"
 import "../styles/pretty-code.css"
+import "../styles/link-preview.css"
 import "katex/dist/katex.min.css"
 import "../styles/custom-katex.css"
 
@@ -18,61 +19,61 @@ const { title = SITE.title, description, permalink, image, noindex } = Astro.pro
 const ogimage = image ? `${SITE.url}${image}` : `${SITE.url}/og-image.png`
 ---
 
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset='UTF-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1' />
 
 <title>{title}</title>
-<meta name="title" content={title} />
-{description && <meta name="description" content={description} />}
+<meta name='title' content={title} />
+{description && <meta name='description' content={description} />}
 
-<link rel="apple-touch-icon" sizes="180x180" href={SITE.base + "/apple-touch-icon.png"} />
-<link rel="icon" href={SITE.base + "/favicon.ico"} />
-<link rel="icon" type="image/png" sizes="32x32" href={SITE.base + "/favicon-32x32.png"} />
-<link rel="icon" type="image/png" sizes="16x16" href={SITE.base + "/favicon-16x16.png"} />
-<link rel="manifest" href={SITE.base + "/site.webmanifest"} />
+<link rel='apple-touch-icon' sizes='180x180' href={SITE.base + "/apple-touch-icon.png"} />
+<link rel='icon' href={SITE.base + "/favicon.ico"} />
+<link rel='icon' type='image/png' sizes='32x32' href={SITE.base + "/favicon-32x32.png"} />
+<link rel='icon' type='image/png' sizes='16x16' href={SITE.base + "/favicon-16x16.png"} />
+<link rel='manifest' href={SITE.base + "/site.webmanifest"} />
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="theme-color" content="#ffffff" />
+<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+<meta name='theme-color' content='#ffffff' />
 
-{noindex && <meta name="robots" content="noindex" />}
+{noindex && <meta name='robots' content='noindex' />}
 
 <!-- Font preloads -->
 <link
-  rel="preload"
+  rel='preload'
   href={SITE.base + "/fonts/AppleTsukuARdGothic-Regular-AlphaNum-01.otf"}
-  as="font"
-  type="font/otf"
+  as='font'
+  type='font/otf'
   crossorigin
 />
 <link
-  rel="preload"
+  rel='preload'
   href={SITE.base + "/fonts/AppleTsukuBRdGothic-Bold-AlphaNum-02.otf"}
-  as="font"
-  type="font/otf"
+  as='font'
+  type='font/otf'
   crossorigin
 />
 
 <!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel='preconnect' href='https://fonts.googleapis.com' />
+<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=Ysabeau+Office:ital,wght@0,300;1,300&family=Zen+Kaku+Gothic+New&display=swap"
-  rel="stylesheet"
+  href='https://fonts.googleapis.com/css2?family=Ysabeau+Office:ital,wght@0,300;1,300&family=Zen+Kaku+Gothic+New&display=swap'
+  rel='stylesheet'
 />
 
 <!-- Open Graph Tags (Facebook) -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content={title} />
-{permalink && <meta property="og:url" content={permalink} />}
-{description && <meta property="og:description" content={description} />}
-<meta property="og:image" content={ogimage} />
+<meta property='og:type' content='website' />
+<meta property='og:title' content={title} />
+{permalink && <meta property='og:url' content={permalink} />}
+{description && <meta property='og:description' content={description} />}
+<meta property='og:image' content={ogimage} />
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content={title} />
-{permalink && <meta property="twitter:url" content={permalink} />}
-{description && <meta property="twitter:description" content={description} />}
-<meta property="twitter:image" content={ogimage} />
+<meta property='twitter:card' content='summary_large_image' />
+<meta property='twitter:title' content={title} />
+{permalink && <meta property='twitter:url' content={permalink} />}
+{description && <meta property='twitter:description' content={description} />}
+<meta property='twitter:image' content={ogimage} />
 
 <script is:inline>
   const theme = (() => {
