@@ -5,14 +5,14 @@ import { LinkPreview } from "astro-embed"
 const { posts } = Astro.props
 ---
 
-<div class='grid gap-6 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] items-start not-prose'>
+<div class="grid gap-6 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] items-start not-prose">
   {
     posts.map((post) => (
-      <div class='grid gap-4 grid-cols-subgrid'>
-        <div class='flex gap-4 items-center'>
+      <div class="grid gap-4 grid-cols-subgrid">
+        <div class="flex gap-4 items-center">
           <PublishMonth date={post.date} />
-          <h2 class='mb-2 text-xl font-semibold text-theme-primary dark:text-theme-dark-primary'>
-            <a href={post.url} class='hover:underline'>
+          <h2 class="mb-2 text-xl font-semibold text-theme-primary dark:text-theme-dark-primary">
+            <a href={post.url} class="hover:underline">
               {post.title}
             </a>
           </h2>
