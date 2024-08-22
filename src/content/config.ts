@@ -70,11 +70,21 @@ const dailyCollection = defineCollection({
   })
 })
 
+const bookCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    url: z.string().url(),
+    toc: z.array(z.object({})).optional(), // TODO: APIレスポンスの構造により修正
+    started_at: z.coerce.date(),
+    finished_at: z.coerce.date().optional()
+  })
+})
+
 const wordCollection = defineCollection({
   type: "data",
   schema: z.object({
     date: z.coerce.date(),
-    book: z.string(),
+    book: reference("book").optional(),
     words: z.array(
       z.object({
         word: z.string(),
@@ -98,5 +108,6 @@ export const collections = {
   event: eventCollection,
   series: seriesCollection,
   daily: dailyCollection,
+  book: bookCollection,
   word: wordCollection
 }
