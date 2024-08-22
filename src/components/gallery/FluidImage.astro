@@ -4,12 +4,14 @@ interface Props {
   src: ImageMetadata
   alt?: string
   maxHeight?: number
+  optimization?: boolean
 }
 
-const { src, alt = "", maxHeight = 250 } = Astro.props
+const { src, alt = "", maxHeight = 250, optimization = true } = Astro.props
 ---
 
-<Image class="fluid-image" src={src} alt={alt} style={`--max-height: ${maxHeight}px`} />
+{optimization && <Image class='fluid-image' src={src} alt={alt} style={`--max-height: ${maxHeight}px`} />}
+{!optimization && <img class='fluid-image' src={src.src} />}
 
 <style>
   .fluid-image {

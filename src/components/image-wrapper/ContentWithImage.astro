@@ -5,14 +5,15 @@ interface Props {
   src: ImageMetadata
   caption?: string
   alt?: string
+  optimization?: boolean
 }
 
-const { src, alt = "", caption } = Astro.props
+const { src, alt = "", caption, optimization = true } = Astro.props
 ---
 
 <div class='_content-and-image-wrapper'>
   <slot />
-  <FigureBox caption={caption} src={src} alt={alt} />
+  <FigureBox caption={caption} src={src} alt={alt} optimization={optimization} />
 </div>
 
 <style>
