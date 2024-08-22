@@ -4,7 +4,8 @@ description: "書いたもの"
 ---
 
 import Prose from "$/components/Prose.astro"
-import MediaPreviewList from "$/components/preview/writing/WritingPreviewList.astro"
+import WritingPreviewList from "$/components/preview/writing/WritingPreviewList.astro"
+import MediaPreviewList from "$/components/preview/writing/MediaPreviewList.astro"
 
 <Prose grid={false} fill={false}>
 
@@ -60,7 +61,7 @@ import MediaPreviewList from "$/components/preview/writing/WritingPreviewList.as
 
 ## 発表スライド
 
-<MediaPreviewList
+<WritingPreviewList
   posts={[
     {
       title: "GLSLで画像加工 ひたすらピクセルをいじりたい",
@@ -84,7 +85,7 @@ import MediaPreviewList from "$/components/preview/writing/WritingPreviewList.as
 
 ## 講師として制作した教材
 
-<MediaPreviewList
+<WritingPreviewList
   posts={[
     {
       title: "HTML/CSS入門ノート",
@@ -103,7 +104,7 @@ import MediaPreviewList from "$/components/preview/writing/WritingPreviewList.as
 
 ## ノート
 
-<MediaPreviewList
+<WritingPreviewList
   posts={[
     {
       title: "Card Component Tutorial",
