@@ -27,11 +27,13 @@ const __dirname = dirname(__filename)
 
 // https://astro.build/config
 
+/** @type {import("rehype-pretty-code").Options} */
 const prettyCodeOptions = {
   theme: {
     dark: "synthwave-84",
     light: "snazzy-light"
   },
+  defaultLang: "plaintext",
   transformers: [transformerNotationErrorLevel()],
   onVisitLine(element) {
     addColorPreview(element)
