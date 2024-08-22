@@ -73,12 +73,18 @@ const dailyCollection = defineCollection({
 const wordCollection = defineCollection({
   type: "data",
   schema: z.object({
-    word: z.string(),
-    meaning: z.string(),
-    example_sentences: z.array(
+    date: z.coerce.date(),
+    book: z.string(),
+    words: z.array(
       z.object({
-        en: z.string(),
-        ja: z.string()
+        word: z.string(),
+        meaning: z.string(),
+        example_sentences: z.array(
+          z.object({
+            en: z.string(),
+            ja: z.string()
+          })
+        )
       })
     )
   })
