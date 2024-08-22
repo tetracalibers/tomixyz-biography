@@ -1,0 +1,49 @@
+---
+title: CodeGrid 12周年記念パーティー
+date: "2024-05-09"
+image: ../../../assets/events/codegrid-12th-party/tetris-codegrid.png
+archive: https://www.youtube.com/watch?v=adLpGIU1oSA
+github: https://github.com/codegrid/codegrid-12th-movie-opening
+tags:
+  - React
+  - Remotion
+description: "TODO"
+---
+
+{/* TODO: ArchiveではなくYouTubeリンクとしてフロントマターで指定できるように */}
+
+import { LinkPreview } from "astro-embed"
+import HStack from "$/components/placement/HStack.astro"
+import FluidImage from "$/components/gallery/FluidImage.astro"
+import FluidIframe from "$/components/gallery/FluidIframe.astro"
+import ContentWithImage from "$/components/image-wrapper/ContentWithImage.astro"
+import FigureBox from "$/components/image-wrapper/FigureBox.astro"
+
+import img_OpeningMoviewGif from "../../../assets/events/codegrid-12th-party/opening-movie.gif"
+
+2024年5月10日に開催されたCodeGrid12周年記念パーティーにスタッフとして出席。
+
+<LinkPreview id="https://www.codegrid.net/events/12/" />
+
+## 記念動画をYouTubeで公開中
+
+過去に何度も開催されたCodeGridパーティーだが、今回は初の試みとして、LTなどを収録したオリジナル動画を制作。
+
+<FluidIframe>
+  <iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/adLpGIU1oSA?si=_VwueJUTS7W4ct4S"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
+</FluidIframe>
+
+## テトリス風のオープニング制作を担当
+
+<ContentWithImage src={img_OpeningMoviewGif} optimization={false}>
+  私は動画の冒頭部分、テトリス風のCodeGridロゴムービーの制作を担当した。
+</ContentWithImage>
