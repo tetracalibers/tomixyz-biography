@@ -64,6 +64,12 @@ const seriesCollection = defineCollection({
     })
 })
 
+const dailyCollection = defineCollection({
+  schema: z.object({
+    tldr: z.string()
+  })
+})
+
 const wordCollection = defineCollection({
   type: "data",
   schema: z.object({
@@ -85,5 +91,6 @@ export const collections = {
   project: projectCollection,
   event: eventCollection,
   series: seriesCollection,
+  daily: dailyCollection,
   word: wordCollection
 }
