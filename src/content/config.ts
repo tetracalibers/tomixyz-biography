@@ -64,11 +64,26 @@ const seriesCollection = defineCollection({
     })
 })
 
+const wordCollection = defineCollection({
+  type: "data",
+  schema: z.object({
+    word: z.string(),
+    meaning: z.string(),
+    example_sentences: z.array(
+      z.object({
+        en: z.string(),
+        ja: z.string()
+      })
+    )
+  })
+})
+
 export const collections = {
   page: pageCollection,
   blog: blogCollection,
   tutorial: tutorialCollection,
   project: projectCollection,
   event: eventCollection,
-  series: seriesCollection
+  series: seriesCollection,
+  word: wordCollection
 }
