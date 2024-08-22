@@ -16,9 +16,9 @@ const { grid = true, fill = true } = Astro.props
     display: none;
   }
 
-  .prose:has(> *:only-child:empty) {
+  /* .prose:has(> *:only-child:empty) {
     display: none;
-  }
+  } */
 
   .prose :global(> *:only-child) {
     /** 子要素がoverflowしないように */
