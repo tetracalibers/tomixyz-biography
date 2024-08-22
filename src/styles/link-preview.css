@@ -12,5 +12,27 @@
 }
 
 .link-preview {
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.link-preview,
+.link-preview * {
+  border-bottom-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+}
+.link-preview__content {
+  gap: 0.4rem;
+}
+.link-preview__title {
+  color: rgb(100, 116, 139);
+  line-height: 1.5;
+}
+.link-preview__description {
+  line-height: 1.2;
+}
+
+html.dark .link-preview {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+html.dark .link-preview__title {
+  color: rgb(226, 232, 240);
 }
