@@ -1,0 +1,17 @@
+<div class='iframe-wrapper'>
+  <slot />
+</div>
+
+<style>
+  .iframe-wrapper {
+    padding-inline: clamp(0.2rem, 2.5vw, 0.75rem);
+  }
+
+  .iframe-wrapper :global(> iframe) {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    margin-inline: auto;
+  }
+</style>
