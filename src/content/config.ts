@@ -74,7 +74,7 @@ const bookCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     url: z.string().url(),
-    started_at: z.coerce.date().optional(),
+    started_at: z.coerce.date(),
     finished_at: z.coerce.date().optional()
   })
 })
