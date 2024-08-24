@@ -25,6 +25,10 @@ export const NAV_ITEMS: NavItems = {
     path: "/tutorial/",
     title: "tutorial"
   },
+  input: {
+    path: "/input/",
+    title: "input"
+  },
   tags: {
     path: "/tags/",
     title: "tags"
