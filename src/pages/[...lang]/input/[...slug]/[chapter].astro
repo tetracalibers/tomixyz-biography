@@ -2,6 +2,8 @@
 import { i18nPaths } from "$/utils/i18n/routing/article-page"
 import { getCollection, type CollectionEntry } from "astro:content"
 import BookChapterLayout from "$/layouts/book-chapter.astro"
+import { getEntry } from "astro:content"
+import WordTable from "$components/word/WordTable.astro"
 
 export async function getStaticPaths() {
   const chapters = await getCollection("book_chapter")
@@ -19,10 +21,24 @@ const { page, lang } = Astro.props
 const { slug, chapter } = Astro.params
 
 const { Content } = await page.render()
+const { word_ref } = page.data
+
+const words = await (async () => {
+  if (!word_ref) return null
+  return await getEntry("word", word_ref.id)
+})()
 
 const ogimage = `/og-image/${lang}/input/${slug}/${chapter}.png`
 ---
 
 <BookChapterLayout entry={page} ogimage={ogimage} lang={lang}>
   <Content />
+  {
+    words && (
+      <section class='grid gap-4'>
+        <h2 class='text-2xl font-semibold text-theme-primary dark:text-theme-dark-primary'>単語帳</h2>
+        <WordTable entry={words} />
+      </section>
+    )
+  }
 </BookChapterLayout>

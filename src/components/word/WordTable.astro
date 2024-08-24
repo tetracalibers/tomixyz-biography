@@ -1,0 +1,14 @@
+---
+import type { CollectionEntry } from "astro:content"
+
+interface Props {
+  entry: CollectionEntry<"word">
+}
+
+const { entry } = Astro.props
+const { words } = entry.data
+---
+
+<pre>
+  {JSON.stringify(words, null, 2)}
+</pre>
