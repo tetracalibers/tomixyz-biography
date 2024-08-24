@@ -72,6 +72,9 @@ export default defineConfig(
       }),
       sitemap()
     ],
+    devToolbar: {
+      enabled: false
+    },
     vite: {
       plugins: [],
       resolve: {
