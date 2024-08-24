@@ -1,0 +1,22 @@
+---
+import { i18nPaths } from "$/utils/i18n/routing/article-page"
+import { getCollection, type CollectionEntry } from "astro:content"
+
+export async function getStaticPaths() {
+  const chapters = await getCollection("book_chapter")
+  return chapters.flatMap((chap) => {
+    return i18nPaths([chap], { params: { chapter: chap.slug.split("/").at(-1)! } })
+  })
+}
+
+interface Props {
+  page: CollectionEntry<"book_chapter">
+  lang: string
+}
+
+const { page, lang } = Astro.props
+const { slug } = Astro.params
+---
+
+<p>{slug}</p>
+<p>{page.data}</p>
