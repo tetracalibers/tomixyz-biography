@@ -110,8 +110,8 @@ const bookTocCollection = defineCollection({
 const wordCollection = defineCollection({
   type: "data",
   schema: z.object({
-    date: z.coerce.date(),
-    book: reference("book").optional(),
+    book_ref: reference("book").optional(),
+    chapter: z.string(),
     words: z.array(
       z.object({
         word: z.string(),
