@@ -7,7 +7,7 @@ import { getEntry } from "astro:content"
 interface Props {
   bookId: string
   chapters: CollectionEntry<"book_chapter">[]
-  lang?: string
+  lang: string
 }
 
 const { bookId, chapters, lang } = Astro.props
