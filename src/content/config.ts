@@ -74,9 +74,15 @@ const bookCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     url: z.string().url(),
+    progress_ref: reference("book_progress").optional(),
     started_at: z.coerce.date(),
     finished_at: z.coerce.date().optional()
   })
+})
+
+const bookProgressCollection = defineCollection({
+  type: "data",
+  schema: z.record(z.union([z.boolean(), z.coerce.date()]))
 })
 
 const bookTocCollection = defineCollection({
@@ -121,5 +127,6 @@ export const collections = {
   daily: dailyCollection,
   book: bookCollection,
   book_toc: bookTocCollection,
+  book_progress: bookProgressCollection,
   word: wordCollection
 }
