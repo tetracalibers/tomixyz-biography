@@ -1,0 +1,146 @@
+{
+  "book": "compute-webgpu",
+  "date": "2024-08-22",
+  "words": [
+    {
+      "word": "put ... across",
+      "meaning": "伝える、理解させる",
+      "example_sentences": [
+        {
+          "en": "He managed to put his ideas across clearly during the design meeting.",
+          "ja": "彼はデザイン会議で自分のアイデアを明確に伝えることができました。"
+        },
+        {
+          "en": "The tutorial put across the complex concept in a way that beginners could understand.",
+          "ja": "そのチュートリアルは、初心者でも理解できるように複雑な概念を伝えました。"
+        }
+      ]
+    },
+    {
+      "word": "cut through",
+      "meaning": "切り抜ける、突破する",
+      "example_sentences": [
+        {
+          "en": "The new algorithm helps to cut through the noise in large datasets.",
+          "ja": "新しいアルゴリズムは、大規模なデータセットの中のノイズを切り抜けるのに役立ちます。"
+        },
+        {
+          "en": "Her unique design style cut through the competition and won the client’s approval.",
+          "ja": "彼女の独特なデザインスタイルは競争を切り抜け、クライアントの承認を得ました。"
+        }
+      ]
+    },
+    {
+      "word": "fairly",
+      "meaning": "かなり、公平に",
+      "example_sentences": [
+        {
+          "en": "The engine handles high-resolution textures fairly well.",
+          "ja": "エンジンは高解像度のテクスチャをかなりうまく処理します。"
+        },
+        {
+          "en": "He explained the process fairly, considering both the pros and cons.",
+          "ja": "彼はプロセスの利点と欠点の両方を考慮して、公平に説明しました。"
+        }
+      ]
+    },
+    {
+      "word": "inexperience",
+      "meaning": "経験不足",
+      "example_sentences": [
+        {
+          "en": "Her inexperience with the software caused some delays in the project.",
+          "ja": "彼女のソフトウェアに対する経験不足が、プロジェクトの遅れの原因となりました。"
+        },
+        {
+          "en": "Inexperience in coding can lead to inefficient and error-prone scripts.",
+          "ja": "コーディングにおける経験不足は、非効率でエラーが発生しやすいスクリプトにつながる可能性があります。"
+        }
+      ]
+    },
+    {
+      "word": "jump into",
+      "meaning": "飛び込む、取り掛かる",
+      "example_sentences": [
+        {
+          "en": "Before jumping into a new project, it's important to plan thoroughly.",
+          "ja": "新しいプロジェクトに飛び込む前に、徹底的に計画することが重要です。"
+        },
+        {
+          "en": "She jumped into learning the new software without hesitation.",
+          "ja": "彼女は躊躇せずに新しいソフトウェアの学習に取り掛かりました。"
+        }
+      ]
+    },
+    {
+      "word": "caution",
+      "meaning": "注意、慎重さ",
+      "example_sentences": [
+        {
+          "en": "You should proceed with caution when modifying the core engine code.",
+          "ja": "コアエンジンコードを変更する際は、慎重に進めるべきです。"
+        },
+        {
+          "en": "He approached the complex task with caution to avoid errors.",
+          "ja": "彼はエラーを避けるために、複雑な作業に慎重に取り組みました。"
+        }
+      ]
+    },
+    {
+      "word": "go back",
+      "meaning": "戻る、振り返る",
+      "example_sentences": [
+        {
+          "en": "We need to go back to the previous version to fix the issue.",
+          "ja": "問題を修正するために、前のバージョンに戻る必要があります。"
+        },
+        {
+          "en": "If you’re unsure, go back and review the original design documents.",
+          "ja": "不確かな場合は、元の設計文書に戻って確認してください。"
+        }
+      ]
+    },
+    {
+      "word": "get a feel",
+      "meaning": "感覚をつかむ、慣れる",
+      "example_sentences": [
+        {
+          "en": "It takes time to get a feel for the new animation tools.",
+          "ja": "新しいアニメーションツールに慣れるには時間がかかります。"
+        },
+        {
+          "en": "Once you get a feel for the workflow, the process becomes much smoother.",
+          "ja": "ワークフローの感覚をつかむと、プロセスはかなりスムーズになります。"
+        }
+      ]
+    },
+    {
+      "word": "jump out",
+      "meaning": "飛び出す、目立つ",
+      "example_sentences": [
+        {
+          "en": "The vibrant colors really jump out in this 3D rendering.",
+          "ja": "この3Dレンダリングでは、鮮やかな色が本当に目立ちます。"
+        },
+        {
+          "en": "His name jumped out at me from the credits list.",
+          "ja": "彼の名前がクレジットリストの中で目に飛び込んできました。"
+        }
+      ]
+    },
+    {
+      "word": "parachute",
+      "meaning": "パラシュート（比喩的に、危険や困難を回避する手段）",
+      "example_sentences": [
+        {
+          "en": "He always has a backup plan as a parachute in case the project goes wrong.",
+          "ja": "彼はプロジェクトがうまくいかない場合に備えて、常にバックアッププランを持っています。"
+        },
+        {
+          "en": "The company offered him a golden parachute when they downsized the team.",
+          "ja": "会社がチームを縮小した際、彼にはゴールデンパラシュートが提供されました。"
+        }
+      ]
+    }
+  ]
+}

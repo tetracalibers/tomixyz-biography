@@ -1,0 +1,146 @@
+{
+  "book": "compute-webgpu",
+  "date": "2024-08-22",
+  "words": [
+    {
+      "word": "synchronization",
+      "meaning": "同期、同調",
+      "example_sentences": [
+        {
+          "en": "Synchronization of the animation with the audio is crucial for a smooth user experience.",
+          "ja": "アニメーションとオーディオの同期は、スムーズなユーザー体験のために重要です。"
+        },
+        {
+          "en": "The team worked on the synchronization of the game servers to prevent any lag.",
+          "ja": "チームはラグを防ぐためにゲームサーバーの同期に取り組みました。"
+        }
+      ]
+    },
+    {
+      "word": "rich",
+      "meaning": "豊富な、充実した",
+      "example_sentences": [
+        {
+          "en": "The game engine offers a rich set of tools for creating realistic environments.",
+          "ja": "このゲームエンジンは、リアルな環境を作成するための充実したツールセットを提供します。"
+        },
+        {
+          "en": "A rich color palette was used to enhance the visual appeal of the 3D model.",
+          "ja": "3Dモデルの視覚的な魅力を高めるために、豊富なカラーパレットが使用されました。"
+        }
+      ]
+    },
+    {
+      "word": "functionality",
+      "meaning": "機能性、機能",
+      "example_sentences": [
+        {
+          "en": "The new plugin adds extra functionality to the rendering process.",
+          "ja": "新しいプラグインは、レンダリングプロセスに追加機能を提供します。"
+        },
+        {
+          "en": "We need to test the functionality of the shader before integrating it into the project.",
+          "ja": "プロジェクトに統合する前に、シェーダーの機能性をテストする必要があります。"
+        }
+      ]
+    },
+    {
+      "word": "essential",
+      "meaning": "不可欠な、重要な",
+      "example_sentences": [
+        {
+          "en": "Good lighting is essential for creating realistic 3D scenes.",
+          "ja": "リアルな3Dシーンを作成するには、適切な照明が不可欠です。"
+        },
+        {
+          "en": "It is essential to optimize the textures to reduce loading times.",
+          "ja": "読み込み時間を短縮するためには、テクスチャを最適化することが重要です。"
+        }
+      ]
+    },
+    {
+      "word": "effectively",
+      "meaning": "効果的に",
+      "example_sentences": [
+        {
+          "en": "The artist used shadows effectively to add depth to the character model.",
+          "ja": "アーティストはキャラクターモデルに深みを加えるために、影を効果的に使用しました。"
+        },
+        {
+          "en": "To manage resources effectively, we should implement level streaming.",
+          "ja": "リソースを効果的に管理するために、レベルストリーミングを実装するべきです。"
+        }
+      ]
+    },
+    {
+      "word": "tied",
+      "meaning": "結びついた、関連した",
+      "example_sentences": [
+        {
+          "en": "The texture quality is closely tied to the performance of the game.",
+          "ja": "テクスチャの品質はゲームのパフォーマンスに密接に関連しています。"
+        },
+        {
+          "en": "The success of the project is tied to the team's ability to meet deadlines.",
+          "ja": "プロジェクトの成功は、チームが締め切りを守る能力に結びついています。"
+        }
+      ]
+    },
+    {
+      "word": "solely",
+      "meaning": "単独で、ただ一人で",
+      "example_sentences": [
+        {
+          "en": "The lighting setup was designed solely by the lead artist.",
+          "ja": "照明設定はリードアーティストによって単独で設計されました。"
+        },
+        {
+          "en": "The tool was developed solely for use in the game engine.",
+          "ja": "このツールはゲームエンジンでの使用のためだけに開発されました。"
+        }
+      ]
+    },
+    {
+      "word": "intermediate",
+      "meaning": "中間の、中級の",
+      "example_sentences": [
+        {
+          "en": "This course is designed for intermediate users of the software.",
+          "ja": "このコースはソフトウェアの中級ユーザー向けに設計されています。"
+        },
+        {
+          "en": "The shader code requires intermediate knowledge of graphics programming.",
+          "ja": "シェーダーコードは、グラフィックスプログラミングの中級レベルの知識を必要とします。"
+        }
+      ]
+    },
+    {
+      "word": "critical",
+      "meaning": "非常に重要な、重大な",
+      "example_sentences": [
+        {
+          "en": "It's critical to test the game on multiple devices to ensure compatibility.",
+          "ja": "互換性を確保するために、複数のデバイスでゲームをテストすることが非常に重要です。"
+        },
+        {
+          "en": "The performance of the rendering engine is critical to the success of the project.",
+          "ja": "レンダリングエンジンの性能は、プロジェクトの成功にとって非常に重要です。"
+        }
+      ]
+    },
+    {
+      "word": "encapsulate",
+      "meaning": "カプセル化する、包み込む",
+      "example_sentences": [
+        {
+          "en": "The new class is designed to encapsulate all the rendering functions.",
+          "ja": "新しいクラスは、すべてのレンダリング機能をカプセル化するように設計されています。"
+        },
+        {
+          "en": "We encapsulate the settings into a single object for easier management.",
+          "ja": "設定をより簡単に管理するために、単一のオブジェクトにカプセル化します。"
+        }
+      ]
+    }
+  ]
+}

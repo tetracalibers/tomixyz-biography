@@ -1,0 +1,146 @@
+{
+  "book": "compute-webgpu",
+  "date": "2024-08-22",
+  "words": [
+    {
+      "word": "explicit",
+      "meaning": "明確な、はっきりとした",
+      "example_sentences": [
+        {
+          "en": "The shader's behavior was controlled by explicit parameters defined in the script.",
+          "ja": "シェーダーの動作は、スクリプト内で定義された明確なパラメーターによって制御されていました。"
+        },
+        {
+          "en": "It’s important to give explicit instructions when setting up the render pipeline.",
+          "ja": "レンダーパイプラインを設定する際には、明確な指示を出すことが重要です。"
+        }
+      ]
+    },
+    {
+      "word": "harness",
+      "meaning": "利用する、活用する",
+      "example_sentences": [
+        {
+          "en": "The team was able to harness the GPU’s power to accelerate rendering times.",
+          "ja": "チームはGPUの力を活用してレンダリング時間を短縮することができました。"
+        },
+        {
+          "en": "By harnessing machine learning algorithms, we improved the animation quality.",
+          "ja": "機械学習アルゴリズムを活用することで、アニメーションの品質を向上させました。"
+        }
+      ]
+    },
+    {
+      "word": "advanced",
+      "meaning": "高度な、先進的な",
+      "example_sentences": [
+        {
+          "en": "The advanced lighting techniques made the virtual environment more realistic.",
+          "ja": "高度な照明技術により、バーチャル環境がよりリアルになりました。"
+        },
+        {
+          "en": "The software offers advanced features for professional-grade rendering.",
+          "ja": "このソフトウェアは、プロフェッショナルなレンダリングのための高度な機能を提供します。"
+        }
+      ]
+    },
+    {
+      "word": "data-intensive",
+      "meaning": "データ集約型の、データを多く扱う",
+      "example_sentences": [
+        {
+          "en": "Rendering a large-scale simulation is a data-intensive process.",
+          "ja": "大規模なシミュレーションのレンダリングはデータ集約型のプロセスです。"
+        },
+        {
+          "en": "Data-intensive applications require optimized storage solutions.",
+          "ja": "データ集約型のアプリケーションには最適化されたストレージソリューションが必要です。"
+        }
+      ]
+    },
+    {
+      "word": "thing",
+      "meaning": "物、事、要素",
+      "example_sentences": [
+        {
+          "en": "One important thing to remember when rendering is to manage your resources efficiently.",
+          "ja": "レンダリングの際に覚えておくべき重要なことは、リソースを効率的に管理することです。"
+        },
+        {
+          "en": "The most challenging thing about this project is optimizing the performance.",
+          "ja": "このプロジェクトで最も難しいことは、パフォーマンスの最適化です。"
+        }
+      ]
+    },
+    {
+      "word": "powerful",
+      "meaning": "強力な、優れた",
+      "example_sentences": [
+        {
+          "en": "The software is equipped with powerful tools for complex 3D modeling.",
+          "ja": "このソフトウェアには、複雑な3Dモデリングのための強力なツールが装備されています。"
+        },
+        {
+          "en": "A powerful engine is required to run such high-end graphics smoothly.",
+          "ja": "このようなハイエンドのグラフィックスをスムーズに動作させるには、強力なエンジンが必要です。"
+        }
+      ]
+    },
+    {
+      "word": "beast",
+      "meaning": "（比喩的に）強力なもの、手強いもの",
+      "example_sentences": [
+        {
+          "en": "The new GPU is an absolute beast when it comes to handling real-time ray tracing.",
+          "ja": "新しいGPUは、リアルタイムのレイトレーシングを処理する際に絶対的に強力です。"
+        },
+        {
+          "en": "This software is a beast in terms of processing large datasets efficiently.",
+          "ja": "このソフトウェアは、大量のデータセットを効率的に処理する点で非常に強力です。"
+        }
+      ]
+    },
+    {
+      "word": "advantage",
+      "meaning": "利点、優位性",
+      "example_sentences": [
+        {
+          "en": "One advantage of using this engine is its ability to handle complex physics simulations.",
+          "ja": "このエンジンを使用する利点の一つは、複雑な物理シミュレーションを処理できることです。"
+        },
+        {
+          "en": "The main advantage of this technique is the significant reduction in render times.",
+          "ja": "この技術の主な利点は、レンダリング時間の大幅な短縮です。"
+        }
+      ]
+    },
+    {
+      "word": "work on",
+      "meaning": "取り組む、作業する",
+      "example_sentences": [
+        {
+          "en": "The team is currently working on optimizing the texture mapping process.",
+          "ja": "チームは現在、テクスチャマッピングプロセスの最適化に取り組んでいます。"
+        },
+        {
+          "en": "She worked on the character rigging for the new game.",
+          "ja": "彼女は新しいゲームのキャラクタリギングに取り組みました。"
+        }
+      ]
+    },
+    {
+      "word": "complicated",
+      "meaning": "複雑な、難解な",
+      "example_sentences": [
+        {
+          "en": "The shader code became more complicated as new features were added.",
+          "ja": "新機能が追加されるにつれて、シェーダーコードがより複雑になりました。"
+        },
+        {
+          "en": "The animation process is complicated due to the need for multiple layers of detail.",
+          "ja": "複数のディテールレイヤーが必要なため、アニメーションプロセスが複雑です。"
+        }
+      ]
+    }
+  ]
+}

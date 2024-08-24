@@ -1,0 +1,146 @@
+{
+  "book": "wgpu-by-examples",
+  "date": "2024-08-18",
+  "words": [
+    {
+      "word": "accomplish",
+      "meaning": "成し遂げる、達成する",
+      "example_sentences": [
+        {
+          "en": "The team managed to accomplish the project ahead of the deadline.",
+          "ja": "チームは、期限前にプロジェクトを達成することができました。"
+        },
+        {
+          "en": "Using the new tool, you can accomplish complex tasks with greater efficiency.",
+          "ja": "新しいツールを使用すれば、複雑な作業をより効率的に成し遂げることができます。"
+        }
+      ]
+    },
+    {
+      "word": "spherical coordinate system",
+      "meaning": "球面座標系",
+      "example_sentences": [
+        {
+          "en": "In a spherical coordinate system, points are defined by their radius, polar angle, and azimuthal angle.",
+          "ja": "球面座標系では、点は半径、極角、および方位角で定義されます。"
+        },
+        {
+          "en": "The spherical coordinate system is commonly used for mapping objects on a sphere.",
+          "ja": "球面座標系は、球上のオブジェクトのマッピングによく使用されます。"
+        }
+      ]
+    },
+    {
+      "word": "denote",
+      "meaning": "示す、意味する",
+      "example_sentences": [
+        {
+          "en": "In the shader code, the variable 'u' denotes the texture's horizontal coordinate.",
+          "ja": "シェーダーコードでは、変数 'u' はテクスチャの水平座標を示します。"
+        },
+        {
+          "en": "The color blue is often used to denote water in 3D models.",
+          "ja": "青色は、3Dモデルで水を示すためによく使用されます。"
+        }
+      ]
+    },
+    {
+      "word": "projection",
+      "meaning": "投影、プロジェクション",
+      "example_sentences": [
+        {
+          "en": "The projection matrix transforms 3D coordinates into 2D screen space.",
+          "ja": "投影行列は、3D座標を2Dスクリーンスペースに変換します。"
+        },
+        {
+          "en": "In mapping, different types of projection can be used to represent a 3D object on a 2D surface.",
+          "ja": "マッピングでは、3Dオブジェクトを2D表面に表現するために、さまざまな投影法が使用されます。"
+        }
+      ]
+    },
+    {
+      "word": "orient",
+      "meaning": "向ける、配置する",
+      "example_sentences": [
+        {
+          "en": "You need to orient the camera correctly to capture the desired view of the scene.",
+          "ja": "シーンの希望するビューをキャプチャするために、カメラを正しく向ける必要があります。"
+        },
+        {
+          "en": "The model was oriented towards the light source to create dramatic shadows.",
+          "ja": "ドラマチックな影を作るために、モデルは光源に向けられました。"
+        }
+      ]
+    },
+    {
+      "word": "conventional",
+      "meaning": "従来の、一般的な",
+      "example_sentences": [
+        {
+          "en": "Conventional rendering techniques may not be sufficient for real-time applications.",
+          "ja": "従来のレンダリング技術では、リアルタイムアプリケーションには不十分な場合があります。"
+        },
+        {
+          "en": "The design follows a conventional approach, making it easy to understand and implement.",
+          "ja": "このデザインは従来のアプローチに従っており、理解と実装が容易です。"
+        }
+      ]
+    },
+    {
+      "word": "swap",
+      "meaning": "交換する、入れ替える",
+      "example_sentences": [
+        {
+          "en": "You can swap the positions of the two objects to see how it affects the composition.",
+          "ja": "2つのオブジェクトの位置を入れ替えて、それが構図にどのように影響するかを確認できます。"
+        },
+        {
+          "en": "The team decided to swap out the old textures for higher resolution versions.",
+          "ja": "チームは、古いテクスチャを高解像度版に入れ替えることを決定しました。"
+        }
+      ]
+    },
+    {
+      "word": "consistent",
+      "meaning": "一貫した、矛盾のない",
+      "example_sentences": [
+        {
+          "en": "Ensure that the lighting is consistent across all scenes to maintain visual coherence.",
+          "ja": "視覚的な一貫性を保つために、すべてのシーンで照明が一貫していることを確認してください。"
+        },
+        {
+          "en": "The model's texture mapping must be consistent to avoid visible seams.",
+          "ja": "目に見える継ぎ目を避けるために、モデルのテクスチャマッピングは一貫している必要があります。"
+        }
+      ]
+    },
+    {
+      "word": "obtain",
+      "meaning": "得る、入手する",
+      "example_sentences": [
+        {
+          "en": "You can obtain the latest version of the software from the official website.",
+          "ja": "最新バージョンのソフトウェアは公式ウェブサイトから入手できます。"
+        },
+        {
+          "en": "High-quality renders can be obtained by adjusting the render settings appropriately.",
+          "ja": "レンダリング設定を適切に調整することで、高品質のレンダリングを得ることができます。"
+        }
+      ]
+    },
+    {
+      "word": "longitude",
+      "meaning": "経度",
+      "example_sentences": [
+        {
+          "en": "In the spherical coordinate system, longitude is the angle measured from the reference meridian.",
+          "ja": "球面座標系では、経度は基準子午線から測定される角度です。"
+        },
+        {
+          "en": "The texture was mapped onto the sphere by adjusting its latitude and longitude coordinates.",
+          "ja": "テクスチャは、緯度と経度の座標を調整して球体にマッピングされました。"
+        }
+      ]
+    }
+  ]
+}

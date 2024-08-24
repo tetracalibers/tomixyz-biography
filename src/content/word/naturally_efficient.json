@@ -1,0 +1,146 @@
+{
+  "book": "compute-webgpu",
+  "date": "2024-08-21",
+  "words": [
+    {
+      "word": "naturally",
+      "meaning": "自然に、当然",
+      "example_sentences": [
+        {
+          "en": "The light naturally falls off as it moves farther from the source.",
+          "ja": "光は、光源から離れるにつれて自然に減衰します。"
+        },
+        {
+          "en": "The model's movements appear naturally lifelike thanks to advanced animation techniques.",
+          "ja": "高度なアニメーション技術のおかげで、モデルの動きが自然でリアルに見えます。"
+        }
+      ]
+    },
+    {
+      "word": "accelerate",
+      "meaning": "加速する、促進する",
+      "example_sentences": [
+        {
+          "en": "Using a GPU can significantly accelerate the rendering process.",
+          "ja": "GPUを使用することで、レンダリングプロセスを大幅に加速できます。"
+        },
+        {
+          "en": "To accelerate the workflow, shortcuts and automation tools were implemented.",
+          "ja": "ワークフローを加速するために、ショートカットや自動化ツールが導入されました。"
+        }
+      ]
+    },
+    {
+      "word": "utilize",
+      "meaning": "利用する、活用する",
+      "example_sentences": [
+        {
+          "en": "The software allows you to fully utilize your hardware's capabilities for optimal performance.",
+          "ja": "このソフトウェアは、最適なパフォーマンスを得るためにハードウェアの能力を十分に活用することができます。"
+        },
+        {
+          "en": "The team utilized a variety of tools to streamline the design process.",
+          "ja": "チームは、デザインプロセスを合理化するためにさまざまなツールを活用しました。"
+        }
+      ]
+    },
+    {
+      "word": "organization",
+      "meaning": "組織、整理",
+      "example_sentences": [
+        {
+          "en": "Proper organization of assets in the project folder is crucial for efficient workflow.",
+          "ja": "プロジェクトフォルダ内のアセットを適切に整理することは、効率的なワークフローにとって重要です。"
+        },
+        {
+          "en": "The organization of the team's workflow was key to meeting the tight deadline.",
+          "ja": "チームのワークフローの整理が、厳しい締め切りを守るための鍵となりました。"
+        }
+      ]
+    },
+    {
+      "word": "manageable",
+      "meaning": "管理しやすい、処理しやすい",
+      "example_sentences": [
+        {
+          "en": "The model was simplified to a more manageable size for faster rendering.",
+          "ja": "モデルが簡素化され、より管理しやすいサイズになり、レンダリングが速くなりました。"
+        },
+        {
+          "en": "Dividing the project into smaller, manageable tasks helped the team stay on track.",
+          "ja": "プロジェクトをより小さな管理しやすいタスクに分割することで、チームは順調に進めることができました。"
+        }
+      ]
+    },
+    {
+      "word": "thought of",
+      "meaning": "考えられている、思われる",
+      "example_sentences": [
+        {
+          "en": "The new design is thought of as more user-friendly compared to the previous version.",
+          "ja": "新しいデザインは、前のバージョンに比べてよりユーザーフレンドリーであると考えられています。"
+        },
+        {
+          "en": "He is thought of as one of the most skilled 3D artists in the industry.",
+          "ja": "彼は業界で最も熟練した3Dアーティストの一人と考えられています。"
+        }
+      ]
+    },
+    {
+      "word": "team",
+      "meaning": "チーム、団体",
+      "example_sentences": [
+        {
+          "en": "The team collaborated closely to ensure the project was completed on time.",
+          "ja": "チームは密に協力して、プロジェクトを予定通りに完了させました。"
+        },
+        {
+          "en": "The design team worked on refining the model's textures and materials.",
+          "ja": "デザインチームは、モデルのテクスチャとマテリアルの改良に取り組みました。"
+        }
+      ]
+    },
+    {
+      "word": "compose",
+      "meaning": "構成する、作成する",
+      "example_sentences": [
+        {
+          "en": "The scene was composed of several layers to achieve the desired visual effect.",
+          "ja": "希望する視覚効果を得るために、シーンはいくつかのレイヤーで構成されました。"
+        },
+        {
+          "en": "The model is composed of multiple elements, each with its own texture map.",
+          "ja": "モデルは、各自にテクスチャマップが付いた複数の要素で構成されています。"
+        }
+      ]
+    },
+    {
+      "word": "ensure",
+      "meaning": "確実にする、保証する",
+      "example_sentences": [
+        {
+          "en": "To ensure consistency, the same lighting setup was used throughout the project.",
+          "ja": "一貫性を確保するために、プロジェクト全体で同じ照明設定が使用されました。"
+        },
+        {
+          "en": "Quality checks were performed regularly to ensure the final output met the client's standards.",
+          "ja": "最終出力がクライアントの基準を満たしていることを確認するために、品質チェックが定期的に行われました。"
+        }
+      ]
+    },
+    {
+      "word": "efficient",
+      "meaning": "効率的な、無駄のない",
+      "example_sentences": [
+        {
+          "en": "The new rendering engine is highly efficient, reducing processing time by half.",
+          "ja": "新しいレンダリングエンジンは非常に効率的で、処理時間を半分に短縮します。"
+        },
+        {
+          "en": "An efficient workflow is key to completing large projects on schedule.",
+          "ja": "効率的なワークフローは、大規模なプロジェクトを予定通りに完了するための鍵です。"
+        }
+      ]
+    }
+  ]
+}

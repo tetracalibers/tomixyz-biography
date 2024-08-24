@@ -1,0 +1,146 @@
+{
+  "book": "wgpu-by-examples",
+  "date": "2024-08-18",
+  "words": [
+    {
+      "word": "occur",
+      "meaning": "発生する、起こる",
+      "example_sentences": [
+        {
+          "en": "Artifacts may occur if the texture resolution is too low.",
+          "ja": "テクスチャの解像度が低すぎると、アーティファクトが発生することがあります。"
+        },
+        {
+          "en": "A crash could occur if the software is not updated regularly.",
+          "ja": "ソフトウェアが定期的に更新されていないと、クラッシュが発生する可能性があります。"
+        }
+      ]
+    },
+    {
+      "word": "mathematically",
+      "meaning": "数学的に",
+      "example_sentences": [
+        {
+          "en": "The lighting effects are calculated mathematically to ensure realism.",
+          "ja": "リアルさを確保するために、照明効果は数学的に計算されています。"
+        },
+        {
+          "en": "Mathematically complex algorithms are used to simulate fluid dynamics in the animation.",
+          "ja": "アニメーションで流体力学をシミュレートするために、数学的に複雑なアルゴリズムが使用されています。"
+        }
+      ]
+    },
+    {
+      "word": "continuous",
+      "meaning": "連続的な",
+      "example_sentences": [
+        {
+          "en": "The animation uses a continuous motion path to create a smooth transition.",
+          "ja": "アニメーションはスムーズな移行を作成するために、連続的な動きのパスを使用しています。"
+        },
+        {
+          "en": "Continuous updates to the software ensure that it remains compatible with new technologies.",
+          "ja": "ソフトウェアの継続的なアップデートにより、新しい技術との互換性が保たれています。"
+        }
+      ]
+    },
+    {
+      "word": "signal",
+      "meaning": "信号、シグナル",
+      "example_sentences": [
+        {
+          "en": "The audio signal was processed to remove noise before being added to the animation.",
+          "ja": "アニメーションに追加される前に、音声信号はノイズを除去するために処理されました。"
+        },
+        {
+          "en": "A weak signal from the device caused the data transfer to fail.",
+          "ja": "デバイスからの信号が弱かったため、データ転送に失敗しました。"
+        }
+      ]
+    },
+    {
+      "word": "discrete",
+      "meaning": "離散的な、個別の",
+      "example_sentences": [
+        {
+          "en": "The animation is composed of discrete frames that are played in sequence.",
+          "ja": "アニメーションは、順番に再生される個別のフレームで構成されています。"
+        },
+        {
+          "en": "In digital systems, data is represented by discrete values rather than continuous signals.",
+          "ja": "デジタルシステムでは、データは連続的な信号ではなく離散的な値で表されます。"
+        }
+      ]
+    },
+    {
+      "word": "mitigate",
+      "meaning": "軽減する、和らげる",
+      "example_sentences": [
+        {
+          "en": "To mitigate the impact of high memory usage, consider optimizing your textures.",
+          "ja": "高いメモリ使用量の影響を軽減するために、テクスチャを最適化することを検討してください。"
+        },
+        {
+          "en": "Adding more samples can help mitigate noise in the final render.",
+          "ja": "サンプルを増やすことで、最終レンダリングのノイズを軽減できます。"
+        }
+      ]
+    },
+    {
+      "word": "jagged",
+      "meaning": "ギザギザの、鋭い",
+      "example_sentences": [
+        {
+          "en": "The low resolution caused the edges of the model to appear jagged.",
+          "ja": "低解像度のために、モデルのエッジがギザギザに見えました。"
+        },
+        {
+          "en": "Increase the anti-aliasing to reduce the jagged appearance of the lines.",
+          "ja": "アンチエイリアスを増やして、線のギザギザを減らしてください。"
+        }
+      ]
+    },
+    {
+      "word": "noticeable",
+      "meaning": "目立つ、顕著な",
+      "example_sentences": [
+        {
+          "en": "There was a noticeable improvement in render speed after the update.",
+          "ja": "アップデート後、レンダリング速度に顕著な改善が見られました。"
+        },
+        {
+          "en": "The difference between the two textures is noticeable even at a distance.",
+          "ja": "2つのテクスチャの違いは、距離があっても目立ちます。"
+        }
+      ]
+    },
+    {
+      "word": "cost-effective",
+      "meaning": "費用対効果の高い",
+      "example_sentences": [
+        {
+          "en": "Using open-source software is a cost-effective solution for small studios.",
+          "ja": "オープンソースソフトウェアの使用は、小規模スタジオにとって費用対効果の高いソリューションです。"
+        },
+        {
+          "en": "A cloud-based rendering service can be a cost-effective alternative to upgrading hardware.",
+          "ja": "クラウドベースのレンダリングサービスは、ハードウェアをアップグレードする費用対効果の高い代替手段になり得ます。"
+        }
+      ]
+    },
+    {
+      "word": "along",
+      "meaning": "〜に沿って、共に",
+      "example_sentences": [
+        {
+          "en": "Move the camera along the path to create a smooth panning shot.",
+          "ja": "滑らかなパンショットを作るために、カメラをパスに沿って移動させます。"
+        },
+        {
+          "en": "The team worked along with the client to meet the project deadlines.",
+          "ja": "チームは、プロジェクトの締め切りを守るためにクライアントと共に作業しました。"
+        }
+      ]
+    }
+  ]
+}

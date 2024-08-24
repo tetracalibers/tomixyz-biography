@@ -1,0 +1,146 @@
+{
+  "book": "wgpu-by-examples",
+  "date": "2024-08-18",
+  "words": [
+    {
+      "word": "void",
+      "meaning": "無効な、中空の、空っぽの",
+      "example_sentences": [
+        {
+          "en": "The function returns a void value, indicating that it does not produce any output.",
+          "ja": "この関数はvoid値を返し、出力を生成しないことを示しています。"
+        },
+        {
+          "en": "The 3D model had a void in the center, which caused issues during rendering.",
+          "ja": "その3Dモデルは中央に空洞があり、レンダリング中に問題を引き起こしました。"
+        }
+      ]
+    },
+    {
+      "word": "therefore",
+      "meaning": "したがって、そのため",
+      "example_sentences": [
+        {
+          "en": "The file was corrupted, therefore, it could not be imported into the project.",
+          "ja": "ファイルが破損していたため、そのプロジェクトにインポートできませんでした。"
+        },
+        {
+          "en": "The lighting was overexposed, therefore the shadows were barely visible.",
+          "ja": "照明が露出オーバーだったため、影がほとんど見えませんでした。"
+        }
+      ]
+    },
+    {
+      "word": "imply",
+      "meaning": "示唆する、暗示する",
+      "example_sentences": [
+        {
+          "en": "A low frame rate may imply that the scene is too complex for real-time rendering.",
+          "ja": "フレームレートが低いことは、シーンがリアルタイムレンダリングには複雑すぎることを示唆しているかもしれません。"
+        },
+        {
+          "en": "The use of certain textures can imply a specific surface material, such as metal or wood.",
+          "ja": "特定のテクスチャを使用することで、金属や木材などの特定の表面素材を暗示することができます。"
+        }
+      ]
+    },
+    {
+      "word": "constraint",
+      "meaning": "制約、拘束",
+      "example_sentences": [
+        {
+          "en": "Adding a constraint to the rigging helps control the movement of the character.",
+          "ja": "リギングに制約を追加することで、キャラクターの動きを制御するのに役立ちます。"
+        },
+        {
+          "en": "The project faced time constraints, so the team had to prioritize tasks.",
+          "ja": "プロジェクトには時間的制約があったため、チームはタスクに優先順位を付ける必要がありました。"
+        }
+      ]
+    },
+    {
+      "word": "either",
+      "meaning": "どちらか、いずれか",
+      "example_sentences": [
+        {
+          "en": "You can choose either the CPU or GPU for rendering, depending on the task.",
+          "ja": "タスクに応じて、CPUまたはGPUのいずれかをレンダリングに選択できます。"
+        },
+        {
+          "en": "Either of the two methods can be used to achieve similar results.",
+          "ja": "2つの方法のいずれかを使用して、同様の結果を得ることができます。"
+        }
+      ]
+    },
+    {
+      "word": "alternatively",
+      "meaning": "あるいは、代わりに",
+      "example_sentences": [
+        {
+          "en": "You can render the scene using ray tracing; alternatively, you can use rasterization for faster results.",
+          "ja": "シーンをレイトレーシングでレンダリングするか、あるいはより速い結果を得るためにラスタライズを使用することもできます。"
+        },
+        {
+          "en": "The textures can be baked into the model; alternatively, you can use real-time shaders.",
+          "ja": "テクスチャはモデルにベイクすることができますが、代わりにリアルタイムシェーダーを使用することもできます。"
+        }
+      ]
+    },
+    {
+      "word": "then",
+      "meaning": "それから、次に",
+      "example_sentences": [
+        {
+          "en": "Apply the base color first, then add the details using a texture map.",
+          "ja": "最初にベースカラーを適用し、それからテクスチャマップを使用して詳細を追加します。"
+        },
+        {
+          "en": "Render the scene in low resolution first, then increase the resolution for the final render.",
+          "ja": "最初に低解像度でシーンをレンダリングし、それから最終レンダリングのために解像度を上げます。"
+        }
+      ]
+    },
+    {
+      "word": "consist of",
+      "meaning": "〜で構成されている",
+      "example_sentences": [
+        {
+          "en": "The environment consists of multiple layers, including terrain, foliage, and buildings.",
+          "ja": "環境は、地形、草木、建物など複数のレイヤーで構成されています。"
+        },
+        {
+          "en": "The final render consists of several passes, such as diffuse, specular, and ambient occlusion.",
+          "ja": "最終レンダリングは、ディフューズ、スペキュラー、アンビエントオクルージョンなど、いくつかのパスで構成されています。"
+        }
+      ]
+    },
+    {
+      "word": "any further",
+      "meaning": "これ以上の、それ以上の",
+      "example_sentences": [
+        {
+          "en": "If there are any further changes to the project, please notify the team immediately.",
+          "ja": "プロジェクトにこれ以上の変更がある場合は、直ちにチームに通知してください。"
+        },
+        {
+          "en": "The model does not require any further adjustments before rendering.",
+          "ja": "モデルはレンダリング前にこれ以上の調整を必要としません。"
+        }
+      ]
+    },
+    {
+      "word": "jaggedness",
+      "meaning": "ギザギザ、鋭さ",
+      "example_sentences": [
+        {
+          "en": "The jaggedness in the edge of the object is due to low anti-aliasing settings.",
+          "ja": "オブジェクトのエッジのギザギザは、アンチエイリアス設定が低いためです。"
+        },
+        {
+          "en": "Increase the sample count to reduce the jaggedness in the final render.",
+          "ja": "最終レンダリングでのギザギザを減らすために、サンプル数を増やしてください。"
+        }
+      ]
+    }
+  ]
+}

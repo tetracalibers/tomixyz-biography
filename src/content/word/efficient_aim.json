@@ -1,0 +1,146 @@
+{
+  "book": "wgpu-by-examples",
+  "date": "2024-08-18",
+  "words": [
+    {
+      "word": "efficient",
+      "meaning": "効率的な",
+      "example_sentences": [
+        {
+          "en": "Using an efficient algorithm can greatly reduce rendering times.",
+          "ja": "効率的なアルゴリズムを使用することで、レンダリング時間を大幅に短縮できます。"
+        },
+        {
+          "en": "The new tool allows for more efficient asset management across multiple projects.",
+          "ja": "新しいツールは、複数のプロジェクトにわたるより効率的なアセット管理を可能にします。"
+        }
+      ]
+    },
+    {
+      "word": "duplicate",
+      "meaning": "複製する、コピーする",
+      "example_sentences": [
+        {
+          "en": "You can duplicate the object to create multiple instances in the scene.",
+          "ja": "オブジェクトを複製して、シーン内に複数のインスタンスを作成できます。"
+        },
+        {
+          "en": "The texture was duplicated and applied to several different models.",
+          "ja": "テクスチャが複製され、複数の異なるモデルに適用されました。"
+        }
+      ]
+    },
+    {
+      "word": "significantly",
+      "meaning": "著しく、大幅に",
+      "example_sentences": [
+        {
+          "en": "The update significantly improved the software’s rendering speed.",
+          "ja": "アップデートにより、ソフトウェアのレンダリング速度が著しく向上しました。"
+        },
+        {
+          "en": "Reducing the polygon count can significantly decrease load times.",
+          "ja": "ポリゴン数を減らすと、ロード時間が大幅に短縮される可能性があります。"
+        }
+      ]
+    },
+    {
+      "word": "increase",
+      "meaning": "増加する、増やす",
+      "example_sentences": [
+        {
+          "en": "Increasing the resolution will improve image quality but may slow down rendering.",
+          "ja": "解像度を上げると画像品質は向上しますが、レンダリングが遅くなる可能性があります。"
+        },
+        {
+          "en": "The team decided to increase the number of light sources to achieve better shadows.",
+          "ja": "チームは、より良い影を得るために光源の数を増やすことを決定しました。"
+        }
+      ]
+    },
+    {
+      "word": "consumption",
+      "meaning": "消費、使用量",
+      "example_sentences": [
+        {
+          "en": "Optimizing textures can reduce memory consumption during rendering.",
+          "ja": "テクスチャを最適化すると、レンダリング中のメモリ使用量を減らすことができます。"
+        },
+        {
+          "en": "High-resolution assets can lead to increased GPU consumption.",
+          "ja": "高解像度のアセットは、GPUの使用量を増加させる可能性があります。"
+        }
+      ]
+    },
+    {
+      "word": "unlit",
+      "meaning": "照明されていない、無照明の",
+      "example_sentences": [
+        {
+          "en": "The object appeared unlit in the scene, giving it a flat, unrealistic look.",
+          "ja": "そのオブジェクトはシーン内で無照明に見え、平坦で非現実的な外観になっていました。"
+        },
+        {
+          "en": "Switching to an unlit shader can improve performance in certain scenarios.",
+          "ja": "無照明シェーダーに切り替えることで、特定のシナリオでパフォーマンスが向上することがあります。"
+        }
+      ]
+    },
+    {
+      "word": "workaround",
+      "meaning": "回避策、対処法",
+      "example_sentences": [
+        {
+          "en": "The team developed a workaround to fix the rendering bug without delaying the project.",
+          "ja": "チームは、プロジェクトの遅延を避けるために、レンダリングバグを修正する回避策を考案しました。"
+        },
+        {
+          "en": "A simple workaround is to reduce the texture size to avoid memory issues.",
+          "ja": "簡単な回避策として、テクスチャサイズを縮小してメモリ問題を回避する方法があります。"
+        }
+      ]
+    },
+    {
+      "word": "manipulate",
+      "meaning": "操作する、扱う",
+      "example_sentences": [
+        {
+          "en": "You can manipulate the model's vertices to achieve the desired shape.",
+          "ja": "モデルの頂点を操作して、希望する形状を得ることができます。"
+        },
+        {
+          "en": "The script allows you to manipulate multiple objects simultaneously.",
+          "ja": "このスクリプトを使用すると、複数のオブジェクトを同時に操作できます。"
+        }
+      ]
+    },
+    {
+      "word": "serve",
+      "meaning": "役立つ、奉仕する",
+      "example_sentences": [
+        {
+          "en": "The placeholder object serves as a reference for the final model.",
+          "ja": "プレースホルダーオブジェクトは、最終モデルの参照として役立ちます。"
+        },
+        {
+          "en": "The script serves to automate repetitive tasks in the workflow.",
+          "ja": "このスクリプトは、ワークフロー内の反復作業を自動化するのに役立ちます。"
+        }
+      ]
+    },
+    {
+      "word": "aim",
+      "meaning": "目的、目指す",
+      "example_sentences": [
+        {
+          "en": "The project aims to create a photorealistic environment for the game.",
+          "ja": "このプロジェクトは、ゲームのためにフォトリアルな環境を作り出すことを目指しています。"
+        },
+        {
+          "en": "The aim of the optimization is to reduce render times without sacrificing quality.",
+          "ja": "最適化の目的は、品質を犠牲にすることなくレンダリング時間を短縮することです。"
+        }
+      ]
+    }
+  ]
+}

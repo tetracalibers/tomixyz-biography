@@ -1,0 +1,146 @@
+{
+  "book": "compute-webgpu",
+  "date": "2024-08-21",
+  "words": [
+    {
+      "word": "leverage",
+      "meaning": "活用する、利用する",
+      "example_sentences": [
+        {
+          "en": "The team was able to leverage the power of the new GPU to accelerate rendering times.",
+          "ja": "チームは新しいGPUのパワーを活用して、レンダリング時間を短縮しました。"
+        },
+        {
+          "en": "By leveraging existing assets, the project was completed ahead of schedule.",
+          "ja": "既存のアセットを活用することで、プロジェクトは予定より早く完了しました。"
+        }
+      ]
+    },
+    {
+      "word": "delve",
+      "meaning": "掘り下げて調査する、深く探る",
+      "example_sentences": [
+        {
+          "en": "The developers delved into the code to identify the source of the rendering bug.",
+          "ja": "開発者たちは、レンダリングバグの原因を特定するためにコードを掘り下げて調査しました。"
+        },
+        {
+          "en": "To improve the lighting system, the team delved into advanced shading techniques.",
+          "ja": "照明システムを改善するために、チームは高度なシェーディング技術を深く探りました。"
+        }
+      ]
+    },
+    {
+      "word": "harnessed",
+      "meaning": "利用された、活用された",
+      "example_sentences": [
+        {
+          "en": "The power of machine learning was harnessed to create more realistic animations.",
+          "ja": "よりリアルなアニメーションを作成するために、機械学習の力が活用されました。"
+        },
+        {
+          "en": "Renewable energy sources were harnessed to reduce the carbon footprint of the data center.",
+          "ja": "データセンターのカーボンフットプリントを削減するために、再生可能エネルギー源が利用されました。"
+        }
+      ]
+    },
+    {
+      "word": "excellent",
+      "meaning": "優れた、素晴らしい",
+      "example_sentences": [
+        {
+          "en": "The software provides excellent tools for creating high-quality visual effects.",
+          "ja": "このソフトウェアは、高品質な視覚効果を作成するための優れたツールを提供します。"
+        },
+        {
+          "en": "The final render was excellent, with detailed textures and realistic lighting.",
+          "ja": "最終レンダリングは、詳細なテクスチャとリアルな照明で素晴らしいものでした。"
+        }
+      ]
+    },
+    {
+      "word": "handling",
+      "meaning": "処理、取り扱い",
+      "example_sentences": [
+        {
+          "en": "The software is capable of handling large datasets without any performance issues.",
+          "ja": "このソフトウェアは、大規模なデータセットを問題なく処理できます。"
+        },
+        {
+          "en": "Proper handling of textures is crucial for maintaining high render quality.",
+          "ja": "レンダリング品質を維持するためには、テクスチャの適切な処理が重要です。"
+        }
+      ]
+    },
+    {
+      "word": "variety",
+      "meaning": "多様性、種類",
+      "example_sentences": [
+        {
+          "en": "The software supports a wide variety of file formats, making it versatile for different projects.",
+          "ja": "このソフトウェアは幅広い種類のファイル形式をサポートしており、さまざまなプロジェクトに適しています。"
+        },
+        {
+          "en": "A variety of lighting options were tested to achieve the desired effect.",
+          "ja": "希望する効果を得るために、さまざまな照明オプションがテストされました。"
+        }
+      ]
+    },
+    {
+      "word": "fall short in",
+      "meaning": "〜において不足する、〜において及ばない",
+      "example_sentences": [
+        {
+          "en": "While the software excels in rendering speed, it falls short in user interface design.",
+          "ja": "このソフトウェアはレンダリング速度に優れていますが、ユーザーインターフェイスのデザインにおいては及ばない部分があります。"
+        },
+        {
+          "en": "The model's texturing is well-done, but it falls short in terms of lighting realism.",
+          "ja": "モデルのテクスチャリングはよくできていますが、照明のリアリズムにおいては不足しています。"
+        }
+      ]
+    },
+    {
+      "word": "highly",
+      "meaning": "非常に、大いに",
+      "example_sentences": [
+        {
+          "en": "The new feature is highly effective for optimizing complex scenes.",
+          "ja": "この新機能は、複雑なシーンを最適化するために非常に効果的です。"
+        },
+        {
+          "en": "The software is highly recommended for professionals in the field of 3D modeling.",
+          "ja": "このソフトウェアは、3Dモデリングの分野で活躍するプロフェッショナルに強くお勧めします。"
+        }
+      ]
+    },
+    {
+      "word": "parallelizable",
+      "meaning": "並列化できる",
+      "example_sentences": [
+        {
+          "en": "The rendering tasks are highly parallelizable, making them suitable for multi-core processors.",
+          "ja": "レンダリングタスクは非常に並列化できるため、マルチコアプロセッサに適しています。"
+        },
+        {
+          "en": "By breaking down the computation into smaller parallelizable units, the processing time was greatly reduced.",
+          "ja": "計算を小さな並列化可能なユニットに分割することで、処理時間が大幅に短縮されました。"
+        }
+      ]
+    },
+    {
+      "word": "operation",
+      "meaning": "操作、運用",
+      "example_sentences": [
+        {
+          "en": "The software's operations are intuitive, making it easy for new users to get started.",
+          "ja": "このソフトウェアの操作は直感的で、新しいユーザーでも簡単に始められます。"
+        },
+        {
+          "en": "Optimizing the operation of the rendering engine resulted in faster processing times.",
+          "ja": "レンダリングエンジンの運用を最適化した結果、処理時間が短縮されました。"
+        }
+      ]
+    }
+  ]
+}

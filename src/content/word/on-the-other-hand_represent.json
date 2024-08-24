@@ -1,0 +1,146 @@
+{
+  "book": "wgpu-by-examples",
+  "date": "2024-08-18",
+  "words": [
+    {
+      "word": "on the other hand",
+      "meaning": "一方で",
+      "example_sentences": [
+        {
+          "en": "Ray tracing provides realistic lighting; on the other hand, it requires significant computational power.",
+          "ja": "レイトレーシングはリアルな照明を提供しますが、一方でかなりの計算能力を必要とします。"
+        },
+        {
+          "en": "High-resolution textures offer great detail; on the other hand, they can increase load times.",
+          "ja": "高解像度のテクスチャは詳細を提供しますが、一方で読み込み時間が長くなることがあります。"
+        }
+      ]
+    },
+    {
+      "word": "arbitrary",
+      "meaning": "任意の、恣意的な",
+      "example_sentences": [
+        {
+          "en": "The script allows you to assign arbitrary values to the object's properties.",
+          "ja": "このスクリプトを使用すると、オブジェクトのプロパティに任意の値を割り当てることができます。"
+        },
+        {
+          "en": "Avoid using arbitrary units when working with precise measurements.",
+          "ja": "正確な測定を行う際には、任意の単位の使用を避けてください。"
+        }
+      ]
+    },
+    {
+      "word": "versatile",
+      "meaning": "多用途の、柔軟な",
+      "example_sentences": [
+        {
+          "en": "The new render engine is versatile, supporting multiple lighting models.",
+          "ja": "新しいレンダーエンジンは多用途で、複数のライティングモデルをサポートしています。"
+        },
+        {
+          "en": "Blender is a versatile tool used for everything from modeling to animation.",
+          "ja": "Blenderは、モデリングからアニメーションまで、さまざまな用途に使用できる柔軟なツールです。"
+        }
+      ]
+    },
+    {
+      "word": "grant",
+      "meaning": "与える、許可する",
+      "example_sentences": [
+        {
+          "en": "The admin needs to grant access to the new asset library.",
+          "ja": "管理者は、新しいアセットライブラリへのアクセスを許可する必要があります。"
+        },
+        {
+          "en": "The software license grants users the right to create commercial projects.",
+          "ja": "このソフトウェアライセンスは、商業プロジェクトを作成する権利をユーザーに与えます。"
+        }
+      ]
+    },
+    {
+      "word": "perform",
+      "meaning": "実行する、行う",
+      "example_sentences": [
+        {
+          "en": "The script can perform multiple operations on the mesh simultaneously.",
+          "ja": "このスクリプトは、メッシュに対して複数の操作を同時に実行することができます。"
+        },
+        {
+          "en": "Before exporting, perform a final check of all textures and animations.",
+          "ja": "エクスポート前に、すべてのテクスチャとアニメーションの最終確認を行ってください。"
+        }
+      ]
+    },
+    {
+      "word": "determine",
+      "meaning": "決定する、特定する",
+      "example_sentences": [
+        {
+          "en": "It's important to determine the correct shader settings for the material.",
+          "ja": "マテリアルに適したシェーダー設定を決定することが重要です。"
+        },
+        {
+          "en": "The algorithm will determine the optimal path for the animation.",
+          "ja": "アルゴリズムは、アニメーションの最適なパスを決定します。"
+        }
+      ]
+    },
+    {
+      "word": "whereas",
+      "meaning": "〜であるのに対して",
+      "example_sentences": [
+        {
+          "en": "The CPU handles logic processing, whereas the GPU is optimized for rendering tasks.",
+          "ja": "CPUはロジック処理を担当するのに対して、GPUはレンダリングタスクに最適化されています。"
+        },
+        {
+          "en": "This material is reflective, whereas the other one is matte.",
+          "ja": "このマテリアルは反射性があるのに対して、もう一方はマットです。"
+        }
+      ]
+    },
+    {
+      "word": "at least",
+      "meaning": "少なくとも",
+      "example_sentences": [
+        {
+          "en": "The render should take at least 30 minutes with these settings.",
+          "ja": "この設定では、レンダリングに少なくとも30分はかかるでしょう。"
+        },
+        {
+          "en": "Make sure to include at least three different light sources in the scene.",
+          "ja": "シーンには少なくとも3つの異なる光源を含めるようにしてください。"
+        }
+      ]
+    },
+    {
+      "word": "specify",
+      "meaning": "指定する、明記する",
+      "example_sentences": [
+        {
+          "en": "You need to specify the output resolution before starting the render.",
+          "ja": "レンダリングを開始する前に、出力解像度を指定する必要があります。"
+        },
+        {
+          "en": "Please specify the exact location for saving the exported files.",
+          "ja": "エクスポートされたファイルを保存する正確な場所を指定してください。"
+        }
+      ]
+    },
+    {
+      "word": "represent",
+      "meaning": "表す、表現する",
+      "example_sentences": [
+        {
+          "en": "The 3D model accurately represents the real-world object.",
+          "ja": "その3Dモデルは、実際の物体を正確に表しています。"
+        },
+        {
+          "en": "In the animation, colors are used to represent different levels of intensity.",
+          "ja": "アニメーションでは、異なる強度レベルを表現するために色が使用されています。"
+        }
+      ]
+    }
+  ]
+}

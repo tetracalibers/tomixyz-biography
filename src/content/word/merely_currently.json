@@ -1,0 +1,146 @@
+{
+  "book": "wgpu-by-examples",
+  "date": "2024-08-18",
+  "words": [
+    {
+      "word": "merely",
+      "meaning": "単に、ただ",
+      "example_sentences": [
+        {
+          "en": "The shader merely affects the surface color and not the underlying geometry.",
+          "ja": "シェーダーは単に表面の色に影響を与えるだけで、基になるジオメトリには影響を与えません。"
+        },
+        {
+          "en": "This setting merely changes the texture resolution, not the overall quality.",
+          "ja": "この設定は、単にテクスチャの解像度を変更するだけで、全体的な品質には影響しません。"
+        }
+      ]
+    },
+    {
+      "word": "as previously mentioned",
+      "meaning": "前述の通り",
+      "example_sentences": [
+        {
+          "en": "As previously mentioned, using high-resolution textures can impact performance.",
+          "ja": "前述の通り、高解像度テクスチャの使用はパフォーマンスに影響を与える可能性があります。"
+        },
+        {
+          "en": "The project will require additional resources, as previously mentioned.",
+          "ja": "前述の通り、このプロジェクトには追加のリソースが必要です。"
+        }
+      ]
+    },
+    {
+      "word": "frequently",
+      "meaning": "頻繁に",
+      "example_sentences": [
+        {
+          "en": "This tool is frequently used in animation pipelines for character rigging.",
+          "ja": "このツールは、キャラクターのリギングにおいてアニメーションパイプラインで頻繁に使用されます。"
+        },
+        {
+          "en": "Errors frequently occur when exporting models with complex geometry.",
+          "ja": "複雑なジオメトリを持つモデルをエクスポートする際に、エラーが頻繁に発生します。"
+        }
+      ]
+    },
+    {
+      "word": "streamline",
+      "meaning": "効率化する",
+      "example_sentences": [
+        {
+          "en": "We need to streamline the rendering process to meet the deadline.",
+          "ja": "期限に間に合うように、レンダリングプロセスを効率化する必要があります。"
+        },
+        {
+          "en": "The new tool helps streamline asset management across multiple projects.",
+          "ja": "新しいツールは、複数のプロジェクトにわたるアセット管理を効率化するのに役立ちます。"
+        }
+      ]
+    },
+    {
+      "word": "leverage",
+      "meaning": "活用する",
+      "example_sentences": [
+        {
+          "en": "The studio plans to leverage real-time rendering technology for faster feedback.",
+          "ja": "スタジオは、より迅速なフィードバックのためにリアルタイムレンダリング技術を活用する計画です。"
+        },
+        {
+          "en": "You can leverage existing assets to speed up the production process.",
+          "ja": "既存のアセットを活用して、制作プロセスをスピードアップすることができます。"
+        }
+      ]
+    },
+    {
+      "word": "commonly",
+      "meaning": "一般的に",
+      "example_sentences": [
+        {
+          "en": "Ambient occlusion is commonly used to add depth to 3D scenes.",
+          "ja": "アンビエントオクルージョンは、3Dシーンに奥行きを加えるために一般的に使用されます。"
+        },
+        {
+          "en": "This type of texture is commonly applied to achieve a realistic metal look.",
+          "ja": "このタイプのテクスチャは、リアルな金属の見た目を実現するために一般的に適用されます。"
+        }
+      ]
+    },
+    {
+      "word": "provide",
+      "meaning": "提供する",
+      "example_sentences": [
+        {
+          "en": "The software provides a variety of tools for 3D modeling and animation.",
+          "ja": "このソフトウェアは、3Dモデリングとアニメーションのためのさまざまなツールを提供します。"
+        },
+        {
+          "en": "Please provide the final assets by the end of the week.",
+          "ja": "今週末までに最終的なアセットを提供してください。"
+        }
+      ]
+    },
+    {
+      "word": "vary",
+      "meaning": "異なる、変化する",
+      "example_sentences": [
+        {
+          "en": "Rendering times can vary depending on the complexity of the scene.",
+          "ja": "レンダリング時間は、シーンの複雑さに応じて変わることがあります。"
+        },
+        {
+          "en": "The results may vary slightly based on the lighting conditions.",
+          "ja": "結果は、照明条件に基づいてわずかに異なる場合があります。"
+        }
+      ]
+    },
+    {
+      "word": "proceed",
+      "meaning": "進む、続行する",
+      "example_sentences": [
+        {
+          "en": "Once the assets are ready, we can proceed with the final render.",
+          "ja": "アセットが準備できたら、最終レンダリングを続行することができます。"
+        },
+        {
+          "en": "After fixing the errors, you can proceed with the export process.",
+          "ja": "エラーを修正した後、エクスポートプロセスを続行できます。"
+        }
+      ]
+    },
+    {
+      "word": "currently",
+      "meaning": "現在",
+      "example_sentences": [
+        {
+          "en": "The team is currently working on improving the animation pipeline.",
+          "ja": "チームは現在、アニメーションパイプラインの改善に取り組んでいます。"
+        },
+        {
+          "en": "This feature is currently available in the latest software update.",
+          "ja": "この機能は、最新のソフトウェアアップデートで現在利用可能です。"
+        }
+      ]
+    }
+  ]
+}

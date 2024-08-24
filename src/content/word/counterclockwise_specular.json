@@ -1,0 +1,146 @@
+{
+  "book": "wgpu-by-examples",
+  "date": "2024-08-19",
+  "words": [
+    {
+      "word": "counterclockwise",
+      "meaning": "反時計回りに",
+      "example_sentences": [
+        {
+          "en": "The object was rotated counterclockwise to align with the reference image.",
+          "ja": "オブジェクトは、参照画像に合わせるために反時計回りに回転されました。"
+        },
+        {
+          "en": "To achieve the desired animation effect, the gears were animated to turn counterclockwise.",
+          "ja": "希望するアニメーション効果を得るために、ギアは反時計回りに回転するようにアニメーション化されました。"
+        }
+      ]
+    },
+    {
+      "word": "intensity",
+      "meaning": "強度、光度",
+      "example_sentences": [
+        {
+          "en": "Increasing the light intensity helped illuminate the darker areas of the scene.",
+          "ja": "光の強度を上げることで、シーンの暗い部分が照らされました。"
+        },
+        {
+          "en": "The intensity of the reflection can be adjusted in the material settings.",
+          "ja": "反射の強度は、マテリアル設定で調整できます。"
+        }
+      ]
+    },
+    {
+      "word": "exceed",
+      "meaning": "超える、上回る",
+      "example_sentences": [
+        {
+          "en": "The render time should not exceed the project's allocated time frame.",
+          "ja": "レンダリング時間は、プロジェクトに割り当てられた時間枠を超えてはなりません。"
+        },
+        {
+          "en": "The polygon count of the model exceeds the recommended limit, which may affect performance.",
+          "ja": "モデルのポリゴン数が推奨限界を超えているため、パフォーマンスに影響を与える可能性があります。"
+        }
+      ]
+    },
+    {
+      "word": "individually",
+      "meaning": "個別に、個々に",
+      "example_sentences": [
+        {
+          "en": "Each texture map was adjusted individually to achieve the desired effect.",
+          "ja": "希望する効果を得るために、各テクスチャマップが個別に調整されました。"
+        },
+        {
+          "en": "The objects were rendered individually before being combined into the final scene.",
+          "ja": "オブジェクトは、最終的なシーンに組み込まれる前に個別にレンダリングされました。"
+        }
+      ]
+    },
+    {
+      "word": "combination",
+      "meaning": "組み合わせ、結合",
+      "example_sentences": [
+        {
+          "en": "The final look of the material is achieved through a combination of diffuse and specular maps.",
+          "ja": "マテリアルの最終的な見た目は、ディフューズマップとスペキュラーマップの組み合わせによって実現されます。"
+        },
+        {
+          "en": "A combination of lighting techniques was used to create a realistic atmosphere.",
+          "ja": "リアルな雰囲気を作り出すために、照明技術の組み合わせが使用されました。"
+        }
+      ]
+    },
+    {
+      "word": "unpleasant",
+      "meaning": "不快な、嫌な",
+      "example_sentences": [
+        {
+          "en": "The harsh lighting created unpleasant shadows on the model's surface.",
+          "ja": "強い照明が、モデルの表面に不快な影を作り出しました。"
+        },
+        {
+          "en": "The color scheme was adjusted to remove the unpleasant contrast between the elements.",
+          "ja": "要素間の不快なコントラストを除去するために、カラースキームが調整されました。"
+        }
+      ]
+    },
+    {
+      "word": "artifact",
+      "meaning": "アーティファクト（レンダリングやデジタル処理の際に発生する不要なノイズや歪み）",
+      "example_sentences": [
+        {
+          "en": "Artifacts appeared in the render due to incorrect texture mapping.",
+          "ja": "不正確なテクスチャマッピングのために、レンダリングにアーティファクトが現れました。"
+        },
+        {
+          "en": "Reducing the compression of the image files helped minimize artifacts in the final output.",
+          "ja": "画像ファイルの圧縮を減らすことで、最終出力におけるアーティファクトを最小限に抑えることができました。"
+        }
+      ]
+    },
+    {
+      "word": "diffuse",
+      "meaning": "拡散する、ディフューズ（光が均一に広がること）",
+      "example_sentences": [
+        {
+          "en": "The diffuse map controls how the surface of the object interacts with light.",
+          "ja": "ディフューズマップは、オブジェクトの表面が光とどのように相互作用するかを制御します。"
+        },
+        {
+          "en": "The light was diffused to create a softer and more natural look in the scene.",
+          "ja": "シーンに柔らかく自然な見た目を作り出すために、光が拡散されました。"
+        }
+      ]
+    },
+    {
+      "word": "uniform",
+      "meaning": "均一な、統一された",
+      "example_sentences": [
+        {
+          "en": "The lighting was adjusted to provide uniform illumination across the entire model.",
+          "ja": "照明は、モデル全体に均一な照明を提供するように調整されました。"
+        },
+        {
+          "en": "Ensure that the texture is applied uniformly to avoid visible seams.",
+          "ja": "目に見える継ぎ目を避けるために、テクスチャが均一に適用されていることを確認してください。"
+        }
+      ]
+    },
+    {
+      "word": "specular",
+      "meaning": "鏡面反射の、スペキュラー",
+      "example_sentences": [
+        {
+          "en": "The specular map defines the shininess and reflectivity of the surface.",
+          "ja": "スペキュラーマップは、表面の光沢と反射率を定義します。"
+        },
+        {
+          "en": "Increasing the specular value makes the surface appear more shiny and reflective.",
+          "ja": "スペキュラー値を上げると、表面がより光沢があり、反射性が高く見えます。"
+        }
+      ]
+    }
+  ]
+}

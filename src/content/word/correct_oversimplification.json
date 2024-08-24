@@ -1,0 +1,146 @@
+{
+  "book": "compute-webgpu",
+  "date": "2024-08-22",
+  "words": [
+    {
+      "word": "correct",
+      "meaning": "正しい、正確な",
+      "example_sentences": [
+        {
+          "en": "It's crucial to use the correct texture resolution for high-quality renders.",
+          "ja": "高品質なレンダリングのためには、正しいテクスチャ解像度を使用することが重要です。"
+        },
+        {
+          "en": "Make sure the code is correct before committing it to the repository.",
+          "ja": "リポジトリにコミットする前に、コードが正しいか確認してください。"
+        }
+      ]
+    },
+    {
+      "word": "elephant",
+      "meaning": "象（比喩的に、大きくて扱いにくいもの）",
+      "example_sentences": [
+        {
+          "en": "The legacy codebase is like an elephant; it's massive and hard to manage.",
+          "ja": "レガシーコードベースは象のようなもので、巨大で管理が難しいです。"
+        },
+        {
+          "en": "Optimizing the game engine feels like trying to eat an elephant—it's best done one bite at a time.",
+          "ja": "ゲームエンジンの最適化は象を食べるようなもので、一口ずつ進めるのがベストです。"
+        }
+      ]
+    },
+    {
+      "word": "lots and lots",
+      "meaning": "たくさんの、大量の",
+      "example_sentences": [
+        {
+          "en": "The scene required lots and lots of assets to create a realistic environment.",
+          "ja": "そのシーンでは、リアルな環境を作成するために大量のアセットが必要でした。"
+        },
+        {
+          "en": "There are lots and lots of variables to consider when optimizing the render pipeline.",
+          "ja": "レンダーパイプラインを最適化する際には、考慮すべき変数がたくさんあります。"
+        }
+      ]
+    },
+    {
+      "word": "less",
+      "meaning": "より少ない、少し",
+      "example_sentences": [
+        {
+          "en": "Using less complex shaders can significantly improve rendering performance.",
+          "ja": "より複雑でないシェーダーを使用することで、レンダリング性能が大幅に向上します。"
+        },
+        {
+          "en": "The new update requires less memory, which is ideal for older hardware.",
+          "ja": "新しいアップデートはより少ないメモリを必要とするため、古いハードウェアには理想的です。"
+        }
+      ]
+    },
+    {
+      "word": "overtask",
+      "meaning": "過度に負担をかける",
+      "example_sentences": [
+        {
+          "en": "Running multiple high-resolution simulations simultaneously can overtask the CPU.",
+          "ja": "複数の高解像度シミュレーションを同時に実行すると、CPUに過度の負担がかかる可能性があります。"
+        },
+        {
+          "en": "The engine was overtasked with too many processes, leading to performance issues.",
+          "ja": "エンジンは過度に多くのプロセスに負担がかかり、パフォーマンスの問題が発生しました。"
+        }
+      ]
+    },
+    {
+      "word": "parallel aspect",
+      "meaning": "並行している側面、並行性",
+      "example_sentences": [
+        {
+          "en": "The parallel aspect of the rendering process allows multiple frames to be processed simultaneously.",
+          "ja": "レンダリングプロセスの並行性により、複数のフレームを同時に処理できます。"
+        },
+        {
+          "en": "Handling the parallel aspects of the simulation requires careful thread management.",
+          "ja": "シミュレーションの並行性を処理するには、スレッド管理を慎重に行う必要があります。"
+        }
+      ]
+    },
+    {
+      "word": "million times",
+      "meaning": "何百万回も、非常に多くの回数",
+      "example_sentences": [
+        {
+          "en": "We've optimized this script a million times to make it run faster.",
+          "ja": "このスクリプトを何百万回も最適化して、実行速度を向上させました。"
+        },
+        {
+          "en": "Rendering the same scene over a million times can help identify subtle issues.",
+          "ja": "同じシーンを何百万回もレンダリングすることで、微妙な問題を特定できます。"
+        }
+      ]
+    },
+    {
+      "word": "again and again",
+      "meaning": "何度も何度も、繰り返し",
+      "example_sentences": [
+        {
+          "en": "The artist had to adjust the texture settings again and again to achieve the desired effect.",
+          "ja": "アーティストは、望む効果を得るために何度も何度もテクスチャ設定を調整する必要がありました。"
+        },
+        {
+          "en": "The simulation crashed again and again until the memory leak was fixed.",
+          "ja": "メモリリークが修正されるまで、シミュレーションは何度も何度もクラッシュしました。"
+        }
+      ]
+    },
+    {
+      "word": "a bit of",
+      "meaning": "少しの、わずかな",
+      "example_sentences": [
+        {
+          "en": "The shader needs a bit of tweaking to get the lighting just right.",
+          "ja": "シェーダーには、照明を正確に合わせるために少し調整が必要です。"
+        },
+        {
+          "en": "With a bit of optimization, the script will run more efficiently.",
+          "ja": "少しの最適化で、このスクリプトはより効率的に動作するでしょう。"
+        }
+      ]
+    },
+    {
+      "word": "oversimplification",
+      "meaning": "過度な単純化",
+      "example_sentences": [
+        {
+          "en": "Calling it just a ‘rendering issue’ is an oversimplification of the problem.",
+          "ja": "これを単なる「レンダリングの問題」と呼ぶのは、問題の過度な単純化です。"
+        },
+        {
+          "en": "The explanation was an oversimplification that didn’t address the real challenges of the project.",
+          "ja": "その説明は、プロジェクトの本当の課題に触れない過度な単純化でした。"
+        }
+      ]
+    }
+  ]
+}

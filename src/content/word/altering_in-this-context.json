@@ -1,0 +1,146 @@
+{
+  "book": "wgpu-by-examples",
+  "date": "2024-08-18",
+  "words": [
+    {
+      "word": "altering",
+      "meaning": "変更する、改変する",
+      "example_sentences": [
+        {
+          "en": "Altering the material properties can drastically change the appearance of the model.",
+          "ja": "マテリアルの特性を変更すると、モデルの外観が劇的に変わることがあります。"
+        },
+        {
+          "en": "The team is considering altering the lighting setup to improve the scene's mood.",
+          "ja": "チームは、シーンの雰囲気を改善するために照明設定を変更することを検討しています。"
+        }
+      ]
+    },
+    {
+      "word": "on the other hand",
+      "meaning": "一方で",
+      "example_sentences": [
+        {
+          "en": "Ray tracing provides realistic lighting effects; on the other hand, it is computationally expensive.",
+          "ja": "レイトレーシングはリアルな照明効果を提供しますが、一方で計算コストが高いです。"
+        },
+        {
+          "en": "High-resolution textures improve visual quality; on the other hand, they increase memory usage.",
+          "ja": "高解像度のテクスチャは視覚品質を向上させますが、一方でメモリ使用量を増加させます。"
+        }
+      ]
+    },
+    {
+      "word": "nearly",
+      "meaning": "ほぼ、ほとんど",
+      "example_sentences": [
+        {
+          "en": "The render is nearly complete; only a few details remain to be adjusted.",
+          "ja": "レンダリングはほぼ完了しており、調整が必要な細部がいくつか残っています。"
+        },
+        {
+          "en": "The two models are nearly identical, with only minor differences in texture.",
+          "ja": "2つのモデルはほぼ同一で、テクスチャにわずかな違いがあるだけです。"
+        }
+      ]
+    },
+    {
+      "word": "specification",
+      "meaning": "仕様、詳細",
+      "example_sentences": [
+        {
+          "en": "Ensure that the model meets the project's technical specification before submission.",
+          "ja": "提出前に、モデルがプロジェクトの技術仕様を満たしていることを確認してください。"
+        },
+        {
+          "en": "The software's minimum hardware specification must be met to run the application smoothly.",
+          "ja": "ソフトウェアの最小ハードウェア仕様を満たす必要があり、スムーズにアプリケーションを実行できます。"
+        }
+      ]
+    },
+    {
+      "word": "radii",
+      "meaning": "半径の複数形",
+      "example_sentences": [
+        {
+          "en": "The spherical object has different radii at various points to create an irregular shape.",
+          "ja": "球体のオブジェクトは、不規則な形状を作り出すためにさまざまな点で異なる半径を持っています。"
+        },
+        {
+          "en": "Adjusting the radii of the curves can help in achieving a smoother surface.",
+          "ja": "曲線の半径を調整することで、より滑らかな表面を得ることができます。"
+        }
+      ]
+    },
+    {
+      "word": "cylindrical",
+      "meaning": "円柱の、円筒形の",
+      "example_sentences": [
+        {
+          "en": "The cylindrical shape of the object makes it ideal for simulating pipes or tubes.",
+          "ja": "オブジェクトの円柱形は、パイプやチューブのシミュレーションに理想的です。"
+        },
+        {
+          "en": "In a cylindrical coordinate system, points are defined by their radius, angle, and height.",
+          "ja": "円柱座標系では、点は半径、角度、および高さによって定義されます。"
+        }
+      ]
+    },
+    {
+      "word": "differ",
+      "meaning": "異なる、違う",
+      "example_sentences": [
+        {
+          "en": "The two textures differ in resolution, which affects the overall quality of the render.",
+          "ja": "2つのテクスチャは解像度が異なり、それがレンダリング全体の品質に影響を与えます。"
+        },
+        {
+          "en": "Lighting setups may differ depending on the desired mood of the scene.",
+          "ja": "照明設定は、シーンの希望するムードに応じて異なる場合があります。"
+        }
+      ]
+    },
+    {
+      "word": "slightly",
+      "meaning": "わずかに、少し",
+      "example_sentences": [
+        {
+          "en": "The new version of the software is slightly faster than the previous one.",
+          "ja": "ソフトウェアの新しいバージョンは、前のバージョンよりもわずかに高速です。"
+        },
+        {
+          "en": "The object's position was slightly adjusted to improve the composition.",
+          "ja": "構図を改善するために、オブジェクトの位置がわずかに調整されました。"
+        }
+      ]
+    },
+    {
+      "word": "convenience",
+      "meaning": "便利さ、利便性",
+      "example_sentences": [
+        {
+          "en": "For convenience, all the assets were organized into clearly labeled folders.",
+          "ja": "利便性のため、すべてのアセットは明確にラベル付けされたフォルダに整理されました。"
+        },
+        {
+          "en": "The software includes shortcuts to enhance user convenience during editing.",
+          "ja": "このソフトウェアには、編集中のユーザーの利便性を高めるためのショートカットが含まれています。"
+        }
+      ]
+    },
+    {
+      "word": "in this context",
+      "meaning": "この文脈では、この場合",
+      "example_sentences": [
+        {
+          "en": "In this context, the term 'shader' refers specifically to a fragment shader.",
+          "ja": "この文脈では、「シェーダー」という用語は特にフラグメントシェーダーを指します。"
+        },
+        {
+          "en": "In this context, 'real-time rendering' means rendering that happens instantaneously as the user interacts with the scene.",
+          "ja": "この文脈では、「リアルタイムレンダリング」はユーザーがシーンと対話する際に即座に行われるレンダリングを意味します。"
+        }
+      ]
+    }
+  ]
+}

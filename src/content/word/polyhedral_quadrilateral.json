@@ -1,0 +1,146 @@
+{
+  "book": "wgpu-by-examples",
+  "date": "2024-08-19",
+  "words": [
+    {
+      "word": "polyhedral",
+      "meaning": "多面体の",
+      "example_sentences": [
+        {
+          "en": "The polyhedral structure of the object makes it ideal for low-poly modeling.",
+          "ja": "オブジェクトの多面体構造は、ローポリモデリングに最適です。"
+        },
+        {
+          "en": "Polyhedral meshes are often used in simulations to approximate complex shapes.",
+          "ja": "複雑な形状を近似するために、多面体メッシュがシミュレーションでよく使用されます。"
+        }
+      ]
+    },
+    {
+      "word": "simply",
+      "meaning": "単に、簡単に",
+      "example_sentences": [
+        {
+          "en": "You can simply drag and drop the texture onto the model to apply it.",
+          "ja": "テクスチャをモデルにドラッグアンドドロップするだけで、簡単に適用できます。"
+        },
+        {
+          "en": "Simply increasing the light intensity will make the scene brighter.",
+          "ja": "光の強度を単に上げるだけで、シーンが明るくなります。"
+        }
+      ]
+    },
+    {
+      "word": "outward",
+      "meaning": "外向きに、外側へ",
+      "example_sentences": [
+        {
+          "en": "The object's normals were adjusted to point outward for proper shading.",
+          "ja": "オブジェクトの法線は、適切なシェーディングのために外向きに調整されました。"
+        },
+        {
+          "en": "The outward facing surfaces reflect light differently than the inward ones.",
+          "ja": "外向きの表面は、内向きの表面とは異なる光の反射をします。"
+        }
+      ]
+    },
+    {
+      "word": "respective",
+      "meaning": "それぞれの、各自の",
+      "example_sentences": [
+        {
+          "en": "Each object was assigned its respective material based on the design requirements.",
+          "ja": "各オブジェクトには、デザイン要件に基づいてそれぞれのマテリアルが割り当てられました。"
+        },
+        {
+          "en": "The textures were applied to their respective layers to ensure proper alignment.",
+          "ja": "テクスチャは、適切に整列させるためにそれぞれのレイヤーに適用されました。"
+        }
+      ]
+    },
+    {
+      "word": "oriented",
+      "meaning": "向けられた、配向された",
+      "example_sentences": [
+        {
+          "en": "The model was oriented to face the main light source for better illumination.",
+          "ja": "モデルは、より良い照明を得るためにメインの光源に向けられました。"
+        },
+        {
+          "en": "The camera was oriented to capture the best angle of the scene.",
+          "ja": "シーンの最良の角度をキャプチャするために、カメラが向けられました。"
+        }
+      ]
+    },
+    {
+      "word": "toward",
+      "meaning": "〜に向かって",
+      "example_sentences": [
+        {
+          "en": "The character was positioned facing toward the light to create dramatic shadows.",
+          "ja": "キャラクターは、劇的な影を作るために光に向かって配置されました。"
+        },
+        {
+          "en": "Move the camera slightly toward the left to capture more of the background.",
+          "ja": "カメラを少し左に動かして、背景をより多くキャプチャします。"
+        }
+      ]
+    },
+    {
+      "word": "expressed",
+      "meaning": "表現された、表された",
+      "example_sentences": [
+        {
+          "en": "The texture's detail was expressed through high-resolution mapping.",
+          "ja": "テクスチャの詳細は、高解像度のマッピングによって表現されました。"
+        },
+        {
+          "en": "The model's complexity is expressed by the number of polygons it contains.",
+          "ja": "モデルの複雑さは、含まれるポリゴンの数によって表されます。"
+        }
+      ]
+    },
+    {
+      "word": "weighted face",
+      "meaning": "重み付けされた面",
+      "example_sentences": [
+        {
+          "en": "The weighted face was used to prioritize certain polygons during the rendering process.",
+          "ja": "レンダリングプロセス中に特定のポリゴンに優先順位を付けるために、重み付けされた面が使用されました。"
+        },
+        {
+          "en": "Adjusting the weighted face of the model can improve the accuracy of the simulation.",
+          "ja": "モデルの重み付けされた面を調整することで、シミュレーションの精度を向上させることができます。"
+        }
+      ]
+    },
+    {
+      "word": "proportional",
+      "meaning": "比例した、釣り合った",
+      "example_sentences": [
+        {
+          "en": "The size of the texture should be proportional to the size of the model for best results.",
+          "ja": "最良の結果を得るために、テクスチャのサイズはモデルのサイズに比例しているべきです。"
+        },
+        {
+          "en": "The render time is often proportional to the complexity of the scene.",
+          "ja": "レンダリング時間は、シーンの複雑さに比例することが多いです。"
+        }
+      ]
+    },
+    {
+      "word": "quadrilateral",
+      "meaning": "四辺形、四角形",
+      "example_sentences": [
+        {
+          "en": "The mesh was composed of quadrilateral faces to simplify the modeling process.",
+          "ja": "メッシュは、モデリングプロセスを簡略化するために四辺形の面で構成されていました。"
+        },
+        {
+          "en": "Quadrilateral polygons are often used in modeling because they are easier to manipulate.",
+          "ja": "四辺形のポリゴンは操作が簡単なため、モデリングによく使用されます。"
+        }
+      ]
+    }
+  ]
+}

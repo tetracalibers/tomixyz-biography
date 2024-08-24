@@ -1,0 +1,146 @@
+{
+  "book": "compute-webgpu",
+  "date": "2024-08-22",
+  "words": [
+    {
+      "word": "specify",
+      "meaning": "明確に述べる、指定する",
+      "example_sentences": [
+        {
+          "en": "Please specify the resolution you want for the final render.",
+          "ja": "最終レンダリングに必要な解像度を指定してください。"
+        },
+        {
+          "en": "The script allows you to specify which textures to load at runtime.",
+          "ja": "このスクリプトでは、ランタイムでロードするテクスチャを指定することができます。"
+        }
+      ]
+    },
+    {
+      "word": "exotic",
+      "meaning": "異国風の、珍しい",
+      "example_sentences": [
+        {
+          "en": "The game features an exotic environment with lush jungles and ancient ruins.",
+          "ja": "このゲームには、豊かなジャングルや古代の遺跡がある異国風の環境が特徴です。"
+        },
+        {
+          "en": "He used exotic materials to create a unique texture for the model.",
+          "ja": "彼はモデルにユニークな質感を持たせるために珍しい素材を使用しました。"
+        }
+      ]
+    },
+    {
+      "word": "complicate",
+      "meaning": "複雑にする",
+      "example_sentences": [
+        {
+          "en": "Adding too many effects can complicate the rendering process.",
+          "ja": "エフェクトを追加しすぎると、レンダリングプロセスが複雑になります。"
+        },
+        {
+          "en": "The new feature might complicate the workflow if not implemented carefully.",
+          "ja": "慎重に実装しないと、新しい機能がワークフローを複雑にするかもしれません。"
+        }
+      ]
+    },
+    {
+      "word": "break ... up",
+      "meaning": "分割する、分解する",
+      "example_sentences": [
+        {
+          "en": "We need to break the project up into smaller, manageable tasks.",
+          "ja": "プロジェクトを、より小さく管理しやすいタスクに分割する必要があります。"
+        },
+        {
+          "en": "The data was broken up into chunks for easier processing.",
+          "ja": "データは、処理を容易にするためにチャンクに分割されました。"
+        }
+      ]
+    },
+    {
+      "word": "relieve",
+      "meaning": "和らげる、解放する",
+      "example_sentences": [
+        {
+          "en": "The new system architecture was designed to relieve the load on the server.",
+          "ja": "新しいシステムアーキテクチャは、サーバーの負荷を和らげるために設計されました。"
+        },
+        {
+          "en": "To relieve the pressure, we offloaded some tasks to a secondary processor.",
+          "ja": "負担を軽減するために、いくつかのタスクをセカンダリプロセッサにオフロードしました。"
+        }
+      ]
+    },
+    {
+      "word": "bottleneck",
+      "meaning": "ボトルネック、障害となる部分",
+      "example_sentences": [
+        {
+          "en": "The rendering engine is the main bottleneck in our current workflow.",
+          "ja": "レンダリングエンジンが、現在のワークフローの主なボトルネックです。"
+        },
+        {
+          "en": "We need to identify and resolve any bottlenecks to improve performance.",
+          "ja": "パフォーマンスを向上させるために、ボトルネックを特定して解決する必要があります。"
+        }
+      ]
+    },
+    {
+      "word": "handle",
+      "meaning": "扱う、処理する",
+      "example_sentences": [
+        {
+          "en": "The new framework can handle more complex animations without lag.",
+          "ja": "新しいフレームワークは、ラグなくより複雑なアニメーションを処理できます。"
+        },
+        {
+          "en": "Our server is capable of handling large amounts of data efficiently.",
+          "ja": "私たちのサーバーは、大量のデータを効率的に処理する能力があります。"
+        }
+      ]
+    },
+    {
+      "word": "hierarchy",
+      "meaning": "階層、ヒエラルキー",
+      "example_sentences": [
+        {
+          "en": "The object hierarchy in the scene helps organize the various elements.",
+          "ja": "シーン内のオブジェクト階層は、さまざまな要素を整理するのに役立ちます。"
+        },
+        {
+          "en": "Understanding the class hierarchy is essential for modifying the software.",
+          "ja": "ソフトウェアを変更するには、クラス階層を理解することが不可欠です。"
+        }
+      ]
+    },
+    {
+      "word": "accessible by",
+      "meaning": "～によってアクセス可能な",
+      "example_sentences": [
+        {
+          "en": "The data is accessible by all team members through the shared server.",
+          "ja": "データは、共有サーバーを通じてすべてのチームメンバーがアクセス可能です。"
+        },
+        {
+          "en": "This function is accessible by any module within the program.",
+          "ja": "この関数は、プログラム内のどのモジュールからもアクセス可能です。"
+        }
+      ]
+    },
+    {
+      "word": "latency",
+      "meaning": "遅延、レイテンシ",
+      "example_sentences": [
+        {
+          "en": "Reducing network latency is crucial for smooth multiplayer gameplay.",
+          "ja": "ネットワークの遅延を減らすことは、スムーズなマルチプレイヤーゲームプレイにとって重要です。"
+        },
+        {
+          "en": "The latency in data processing was minimized with the new update.",
+          "ja": "新しいアップデートにより、データ処理の遅延が最小限に抑えられました。"
+        }
+      ]
+    }
+  ]
+}

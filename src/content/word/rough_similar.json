@@ -1,0 +1,146 @@
+{
+  "book": "wgpu-by-examples",
+  "date": "2024-08-21",
+  "words": [
+    {
+      "word": "rough",
+      "meaning": "粗い、ざらざらした",
+      "example_sentences": [
+        {
+          "en": "The surface was intentionally made rough to create a more realistic texture.",
+          "ja": "表面を意図的に粗くして、よりリアルなテクスチャを作り出しました。"
+        },
+        {
+          "en": "A rough finish can scatter light in different directions, reducing sharp reflections.",
+          "ja": "粗い仕上げは光をさまざまな方向に散乱させ、鋭い反射を抑えることができます。"
+        }
+      ]
+    },
+    {
+      "word": "directional",
+      "meaning": "方向性のある、指向性の",
+      "example_sentences": [
+        {
+          "en": "Directional lighting was used to simulate sunlight coming from a specific angle.",
+          "ja": "特定の角度からの太陽光をシミュレートするために、方向性のある照明が使用されました。"
+        },
+        {
+          "en": "The directional light casts strong shadows, adding depth to the scene.",
+          "ja": "方向性のある光が強い影を落とし、シーンに深みを与えます。"
+        }
+      ]
+    },
+    {
+      "word": "emit",
+      "meaning": "放出する、発する",
+      "example_sentences": [
+        {
+          "en": "The light source was set to emit a soft glow, creating a warm atmosphere.",
+          "ja": "光源が柔らかな光を放出するように設定され、暖かい雰囲気を作り出しました。"
+        },
+        {
+          "en": "Certain materials can emit light, making them ideal for simulating neon signs.",
+          "ja": "特定のマテリアルは光を発することができ、ネオンサインのシミュレーションに最適です。"
+        }
+      ]
+    },
+    {
+      "word": "behave",
+      "meaning": "振る舞う、動作する",
+      "example_sentences": [
+        {
+          "en": "The particles in the simulation behave realistically when influenced by gravity.",
+          "ja": "シミュレーション内の粒子は、重力の影響を受けるとリアルに振る舞います。"
+        },
+        {
+          "en": "Different materials behave differently under various lighting conditions.",
+          "ja": "異なるマテリアルは、さまざまな照明条件下で異なる動作をします。"
+        }
+      ]
+    },
+    {
+      "word": "as though",
+      "meaning": "まるで〜のように",
+      "example_sentences": [
+        {
+          "en": "The rendering was so realistic it looked as though the scene was photographed.",
+          "ja": "レンダリングは非常にリアルで、シーンが写真のように見えました。"
+        },
+        {
+          "en": "The character moves as though it is weightless, adding a surreal quality to the animation.",
+          "ja": "キャラクターはまるで無重力であるかのように動き、アニメーションにシュールな質感を加えています。"
+        }
+      ]
+    },
+    {
+      "word": "parallel",
+      "meaning": "平行な、並行して",
+      "example_sentences": [
+        {
+          "en": "The camera was positioned parallel to the horizon to capture a balanced shot.",
+          "ja": "カメラは水平線に平行に配置され、バランスの取れたショットを撮影しました。"
+        },
+        {
+          "en": "The lines in the texture were aligned parallel to avoid distortion.",
+          "ja": "歪みを避けるために、テクスチャ内のラインは平行に整列されました。"
+        }
+      ]
+    },
+    {
+      "word": "daylight",
+      "meaning": "日光、自然光",
+      "example_sentences": [
+        {
+          "en": "The scene was lit with daylight to create a natural and realistic atmosphere.",
+          "ja": "シーンは日光で照らされ、自然でリアルな雰囲気を作り出しました。"
+        },
+        {
+          "en": "Daylight settings were used to simulate outdoor lighting conditions.",
+          "ja": "屋外の照明条件をシミュレートするために、日光の設定が使用されました。"
+        }
+      ]
+    },
+    {
+      "word": "for each",
+      "meaning": "それぞれに対して",
+      "example_sentences": [
+        {
+          "en": "Different materials were applied for each object in the scene.",
+          "ja": "シーン内の各オブジェクトに対して異なるマテリアルが適用されました。"
+        },
+        {
+          "en": "Lighting settings were customized for each camera angle to ensure consistency.",
+          "ja": "一貫性を確保するために、各カメラアングルに対して照明設定がカスタマイズされました。"
+        }
+      ]
+    },
+    {
+      "word": "no matter",
+      "meaning": "〜に関係なく、〜でも",
+      "example_sentences": [
+        {
+          "en": "No matter the resolution, the texture maintained its quality.",
+          "ja": "解像度に関係なく、テクスチャは品質を維持しました。"
+        },
+        {
+          "en": "The script works efficiently no matter how complex the scene is.",
+          "ja": "シーンがどれほど複雑であっても、そのスクリプトは効率的に動作します。"
+        }
+      ]
+    },
+    {
+      "word": "similar",
+      "meaning": "似ている、類似した",
+      "example_sentences": [
+        {
+          "en": "The two models have a similar design but differ in texture and material.",
+          "ja": "2つのモデルは似たデザインですが、テクスチャとマテリアルが異なります。"
+        },
+        {
+          "en": "The lighting setup was kept similar across different scenes to maintain consistency.",
+          "ja": "一貫性を保つために、異なるシーン間で照明設定は似たものに保たれました。"
+        }
+      ]
+    }
+  ]
+}

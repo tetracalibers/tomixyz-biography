@@ -1,0 +1,146 @@
+{
+  "book": "wgpu-by-examples",
+  "date": "2024-08-18",
+  "words": [
+    {
+      "word": "refer",
+      "meaning": "指す、言及する",
+      "example_sentences": [
+        {
+          "en": "The term 'vertex' refers to a point where two or more edges meet in a 3D model.",
+          "ja": "「頂点」という用語は、3Dモデルで2つ以上のエッジが交わる点を指します。"
+        },
+        {
+          "en": "In the documentation, 'render time' refers to the time it takes to complete the rendering process.",
+          "ja": "ドキュメントでは、「レンダリング時間」はレンダリングプロセスを完了するのにかかる時間を指します。"
+        }
+      ]
+    },
+    {
+      "word": "azimuthal",
+      "meaning": "方位の、方位角の",
+      "example_sentences": [
+        {
+          "en": "In spherical coordinates, the azimuthal angle defines the object's rotation around the vertical axis.",
+          "ja": "球面座標では、方位角は垂直軸を中心としたオブジェクトの回転を定義します。"
+        },
+        {
+          "en": "The azimuthal projection is often used in mapping to represent the Earth's surface.",
+          "ja": "方位角投影は、地球の表面を表すためにマッピングでよく使用されます。"
+        }
+      ]
+    },
+    {
+      "word": "depict",
+      "meaning": "描く、描写する",
+      "example_sentences": [
+        {
+          "en": "The artist used shading techniques to depict the object's texture realistically.",
+          "ja": "アーティストはシェーディング技術を使用して、オブジェクトのテクスチャをリアルに描写しました。"
+        },
+        {
+          "en": "The scene was carefully constructed to depict a realistic urban environment.",
+          "ja": "そのシーンは、リアルな都市環境を描写するために注意深く構築されました。"
+        }
+      ]
+    },
+    {
+      "word": "partitioning",
+      "meaning": "分割、区分",
+      "example_sentences": [
+        {
+          "en": "Partitioning the scene into different layers helps manage complex projects.",
+          "ja": "シーンを異なるレイヤーに分割することで、複雑なプロジェクトを管理しやすくなります。"
+        },
+        {
+          "en": "The software supports partitioning large datasets into smaller, more manageable parts.",
+          "ja": "このソフトウェアは、大規模なデータセットをより管理しやすい小さな部分に分割することをサポートしています。"
+        }
+      ]
+    },
+    {
+      "word": "specify",
+      "meaning": "指定する、明示する",
+      "example_sentences": [
+        {
+          "en": "You need to specify the output resolution before starting the rendering process.",
+          "ja": "レンダリングプロセスを開始する前に、出力解像度を指定する必要があります。"
+        },
+        {
+          "en": "Please specify the exact file path where the assets should be saved.",
+          "ja": "アセットを保存する正確なファイルパスを指定してください。"
+        }
+      ]
+    },
+    {
+      "word": "achieve",
+      "meaning": "達成する、成し遂げる",
+      "example_sentences": [
+        {
+          "en": "The team worked hard to achieve photorealistic rendering in the final product.",
+          "ja": "チームは最終製品でフォトリアリスティックなレンダリングを達成するために努力しました。"
+        },
+        {
+          "en": "Using advanced algorithms, the software can achieve high-quality results quickly.",
+          "ja": "高度なアルゴリズムを使用して、このソフトウェアは迅速に高品質の結果を達成できます。"
+        }
+      ]
+    },
+    {
+      "word": "construct",
+      "meaning": "構築する、作り上げる",
+      "example_sentences": [
+        {
+          "en": "The environment was carefully constructed to resemble a real-world cityscape.",
+          "ja": "環境は、実際の都市風景に似せるために注意深く構築されました。"
+        },
+        {
+          "en": "The 3D model was constructed from multiple geometric shapes.",
+          "ja": "その3Dモデルは、複数の幾何学的形状から構築されました。"
+        }
+      ]
+    },
+    {
+      "word": "since",
+      "meaning": "〜なので、〜以来",
+      "example_sentences": [
+        {
+          "en": "Since the lighting was not set up correctly, the render appeared too dark.",
+          "ja": "照明が正しく設定されていなかったため、レンダリングが暗すぎました。"
+        },
+        {
+          "en": "The software has been updated several times since its initial release.",
+          "ja": "このソフトウェアは、初回リリース以来、何度も更新されています。"
+        }
+      ]
+    },
+    {
+      "word": "alter",
+      "meaning": "変更する、変える",
+      "example_sentences": [
+        {
+          "en": "Altering the camera angle can dramatically change the composition of the scene.",
+          "ja": "カメラアングルを変更すると、シーンの構図が劇的に変わる可能性があります。"
+        },
+        {
+          "en": "The shader settings were altered to achieve a more realistic effect.",
+          "ja": "よりリアルな効果を得るために、シェーダー設定が変更されました。"
+        }
+      ]
+    },
+    {
+      "word": "manipulation",
+      "meaning": "操作、処理",
+      "example_sentences": [
+        {
+          "en": "The software allows for precise manipulation of 3D models.",
+          "ja": "このソフトウェアでは、3Dモデルを正確に操作することができます。"
+        },
+        {
+          "en": "The data manipulation process involved converting the file formats for compatibility.",
+          "ja": "データ操作プロセスには、互換性のためのファイル形式の変換が含まれていました。"
+        }
+      ]
+    }
+  ]
+}

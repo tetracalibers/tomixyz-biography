@@ -1,0 +1,146 @@
+{
+  "book": "wgpu-by-examples",
+  "date": "2024-08-18",
+  "words": [
+    {
+      "word": "correspond",
+      "meaning": "一致する、対応する",
+      "example_sentences": [
+        {
+          "en": "The UV coordinates correspond to the texture's position on the 3D model.",
+          "ja": "UV座標は、3Dモデル上のテクスチャの位置に対応しています。"
+        },
+        {
+          "en": "Each vertex in the model should correspond to a point in the texture map.",
+          "ja": "モデル内の各頂点は、テクスチャマップの点に対応する必要があります。"
+        }
+      ]
+    },
+    {
+      "word": "perspective",
+      "meaning": "視点、遠近法",
+      "example_sentences": [
+        {
+          "en": "Adjusting the camera's perspective can dramatically change the composition of the scene.",
+          "ja": "カメラの視点を調整すると、シーンの構図が劇的に変わることがあります。"
+        },
+        {
+          "en": "In 3D modeling, perspective view is often used to visualize depth and distance.",
+          "ja": "3Dモデリングでは、奥行きと距離を視覚化するために遠近法ビューがよく使用されます。"
+        }
+      ]
+    },
+    {
+      "word": "foreshortening",
+      "meaning": "遠近法による縮小、短縮法",
+      "example_sentences": [
+        {
+          "en": "Foreshortening is used in animation to create the illusion of depth.",
+          "ja": "アニメーションでは、奥行きの錯覚を生み出すために遠近法による縮小が使用されます。"
+        },
+        {
+          "en": "The artist applied foreshortening techniques to depict the character's outstretched arm.",
+          "ja": "アーティストは、キャラクターの伸ばした腕を描写するために遠近法による縮小技法を適用しました。"
+        }
+      ]
+    },
+    {
+      "word": "constant",
+      "meaning": "一定の、変わらない",
+      "example_sentences": [
+        {
+          "en": "The frame rate must remain constant to ensure smooth playback.",
+          "ja": "スムーズな再生を保証するために、フレームレートを一定に保つ必要があります。"
+        },
+        {
+          "en": "A constant light source was used to maintain uniform illumination throughout the scene.",
+          "ja": "シーン全体の均一な照明を維持するために、一定の光源が使用されました。"
+        }
+      ]
+    },
+    {
+      "word": "explicitly",
+      "meaning": "明確に、はっきりと",
+      "example_sentences": [
+        {
+          "en": "The instructions explicitly state how to set up the render parameters.",
+          "ja": "指示には、レンダリングパラメータの設定方法が明確に記載されています。"
+        },
+        {
+          "en": "Each texture must be explicitly linked to its corresponding material in the project.",
+          "ja": "各テクスチャは、プロジェクト内の対応するマテリアルに明確にリンクされている必要があります。"
+        }
+      ]
+    },
+    {
+      "word": "halfway",
+      "meaning": "途中で、中間で",
+      "example_sentences": [
+        {
+          "en": "The render was stopped halfway due to a system error.",
+          "ja": "レンダリングはシステムエラーのため途中で停止しました。"
+        },
+        {
+          "en": "Place the camera halfway between the subject and the background to achieve the desired composition.",
+          "ja": "希望する構図を得るために、カメラを被写体と背景の中間に配置してください。"
+        }
+      ]
+    },
+    {
+      "word": "combine",
+      "meaning": "組み合わせる、結合する",
+      "example_sentences": [
+        {
+          "en": "You can combine multiple textures to create a more detailed material.",
+          "ja": "複数のテクスチャを組み合わせて、より詳細なマテリアルを作成できます。"
+        },
+        {
+          "en": "The final animation was created by combining several motion capture recordings.",
+          "ja": "最終的なアニメーションは、いくつかのモーションキャプチャ録画を組み合わせて作成されました。"
+        }
+      ]
+    },
+    {
+      "word": "individual",
+      "meaning": "個々の、個別の",
+      "example_sentences": [
+        {
+          "en": "Each individual object in the scene has its own set of textures and materials.",
+          "ja": "シーン内の各個々のオブジェクトには、それぞれのテクスチャとマテリアルが設定されています。"
+        },
+        {
+          "en": "The animation consists of individual frames that are played in sequence.",
+          "ja": "アニメーションは、順番に再生される個々のフレームで構成されています。"
+        }
+      ]
+    },
+    {
+      "word": "commutative",
+      "meaning": "可換の、順序に依存しない",
+      "example_sentences": [
+        {
+          "en": "Matrix multiplication is not commutative, meaning the order of operations matters.",
+          "ja": "行列の掛け算は可換ではなく、操作の順序が重要です。"
+        },
+        {
+          "en": "In some calculations, the commutative property allows operations to be performed in any order.",
+          "ja": "一部の計算では、可換性により操作を任意の順序で行うことができます。"
+        }
+      ]
+    },
+    {
+      "word": "affect",
+      "meaning": "影響を与える",
+      "example_sentences": [
+        {
+          "en": "The lighting setup can greatly affect the mood of the scene.",
+          "ja": "照明設定はシーンのムードに大きな影響を与える可能性があります。"
+        },
+        {
+          "en": "Changes in texture resolution can affect the overall performance of the render.",
+          "ja": "テクスチャ解像度の変更は、レンダリング全体のパフォーマンスに影響を与えることがあります。"
+        }
+      ]
+    }
+  ]
+}

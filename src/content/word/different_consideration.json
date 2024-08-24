@@ -1,0 +1,146 @@
+{
+  "book": "wgpu-by-examples",
+  "date": "2024-08-19",
+  "words": [
+    {
+      "word": "different",
+      "meaning": "異なる、違う",
+      "example_sentences": [
+        {
+          "en": "The two models use different shading techniques to achieve their unique looks.",
+          "ja": "2つのモデルは、それぞれ独自の外観を実現するために異なるシェーディング技術を使用しています。"
+        },
+        {
+          "en": "Different lighting setups can drastically change the mood of a scene.",
+          "ja": "異なる照明設定は、シーンのムードを劇的に変えることがあります。"
+        }
+      ]
+    },
+    {
+      "word": "align with",
+      "meaning": "〜と一致させる、〜に合わせる",
+      "example_sentences": [
+        {
+          "en": "The camera angle was adjusted to align with the character's line of sight.",
+          "ja": "カメラの角度は、キャラクターの視線に合わせて調整されました。"
+        },
+        {
+          "en": "The textures were modified to align with the updated UV coordinates.",
+          "ja": "テクスチャは、更新されたUV座標に合わせて修正されました。"
+        }
+      ]
+    },
+    {
+      "word": "hence",
+      "meaning": "したがって、それゆえに",
+      "example_sentences": [
+        {
+          "en": "The model was too complex, hence the increased render time.",
+          "ja": "モデルが複雑すぎたため、それゆえにレンダリング時間が増加しました。"
+        },
+        {
+          "en": "The lighting was not properly set up, hence the unrealistic shadows.",
+          "ja": "照明が適切に設定されていなかったため、それゆえに非現実的な影が生じました。"
+        }
+      ]
+    },
+    {
+      "word": "comparable",
+      "meaning": "比較できる、同等の",
+      "example_sentences": [
+        {
+          "en": "The new rendering technique offers results comparable to traditional methods but with faster processing.",
+          "ja": "新しいレンダリング技術は、従来の方法と同等の結果を提供しますが、処理速度が速いです。"
+        },
+        {
+          "en": "The two models have comparable levels of detail, making them suitable for the same project.",
+          "ja": "2つのモデルは同等の詳細度を持っており、同じプロジェクトに適しています。"
+        }
+      ]
+    },
+    {
+      "word": "transformation",
+      "meaning": "変形、変換",
+      "example_sentences": [
+        {
+          "en": "The transformation matrix was used to rotate the object in 3D space.",
+          "ja": "オブジェクトを3D空間で回転させるために、変形行列が使用されました。"
+        },
+        {
+          "en": "Applying a transformation to the model allowed for easy repositioning within the scene.",
+          "ja": "モデルに変換を適用することで、シーン内で簡単に再配置できました。"
+        }
+      ]
+    },
+    {
+      "word": "necessary",
+      "meaning": "必要な、不可欠な",
+      "example_sentences": [
+        {
+          "en": "It is necessary to optimize the textures to reduce memory usage.",
+          "ja": "メモリ使用量を削減するためには、テクスチャを最適化する必要があります。"
+        },
+        {
+          "en": "Adjusting the lighting settings was necessary to achieve the desired effect.",
+          "ja": "希望する効果を得るためには、照明設定の調整が必要でした。"
+        }
+      ]
+    },
+    {
+      "word": "resulting",
+      "meaning": "結果として生じる、結果の",
+      "example_sentences": [
+        {
+          "en": "The resulting image was of higher quality due to the improved rendering techniques.",
+          "ja": "改良されたレンダリング技術のおかげで、結果として得られた画像の品質が向上しました。"
+        },
+        {
+          "en": "The model was scaled down, with the resulting size being more manageable.",
+          "ja": "モデルは縮小され、その結果、より管理しやすいサイズになりました。"
+        }
+      ]
+    },
+    {
+      "word": "non-uniform",
+      "meaning": "不均一な、一様でない",
+      "example_sentences": [
+        {
+          "en": "The texture mapping was non-uniform, leading to distortion in certain areas.",
+          "ja": "テクスチャマッピングが不均一で、特定の領域で歪みが生じました。"
+        },
+        {
+          "en": "Non-uniform scaling can cause stretching or compression of the model's geometry.",
+          "ja": "不均一なスケーリングは、モデルのジオメトリの伸びや圧縮を引き起こす可能性があります。"
+        }
+      ]
+    },
+    {
+      "word": "require",
+      "meaning": "必要とする、要求する",
+      "example_sentences": [
+        {
+          "en": "High-resolution rendering requires a powerful GPU to process efficiently.",
+          "ja": "高解像度のレンダリングには、効率的に処理するための強力なGPUが必要です。"
+        },
+        {
+          "en": "This project will require careful attention to detail to ensure accuracy.",
+          "ja": "このプロジェクトには、正確さを確保するために細部に注意を払う必要があります。"
+        }
+      ]
+    },
+    {
+      "word": "consideration",
+      "meaning": "考慮、検討",
+      "example_sentences": [
+        {
+          "en": "Proper consideration of lighting is essential for realistic rendering.",
+          "ja": "リアルなレンダリングを行うためには、照明を適切に考慮することが不可欠です。"
+        },
+        {
+          "en": "Texture resolution was a key consideration when optimizing the model for performance.",
+          "ja": "テクスチャの解像度は、パフォーマンス向上のためにモデルを最適化する際の重要な検討事項でした。"
+        }
+      ]
+    }
+  ]
+}

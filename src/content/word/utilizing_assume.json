@@ -1,0 +1,146 @@
+{
+  "book": "wgpu-by-examples",
+  "date": "2024-08-18",
+  "words": [
+    {
+      "word": "utilizing",
+      "meaning": "利用する",
+      "example_sentences": [
+        {
+          "en": "The studio is utilizing new AI tools to enhance the animation process.",
+          "ja": "スタジオはアニメーションプロセスを強化するために新しいAIツールを利用しています。"
+        },
+        {
+          "en": "Utilizing GPU acceleration can significantly reduce render times.",
+          "ja": "GPUアクセラレーションを利用することで、レンダリング時間を大幅に短縮できます。"
+        }
+      ]
+    },
+    {
+      "word": "during",
+      "meaning": "〜の間に",
+      "example_sentences": [
+        {
+          "en": "The rendering process may slow down during peak hours.",
+          "ja": "レンダリングプロセスはピーク時に遅くなることがあります。"
+        },
+        {
+          "en": "Make sure to save your work frequently during long editing sessions.",
+          "ja": "長時間の編集作業中は、頻繁に作業を保存するようにしてください。"
+        }
+      ]
+    },
+    {
+      "word": "consolidate",
+      "meaning": "統合する、強化する",
+      "example_sentences": [
+        {
+          "en": "We need to consolidate all assets into a single project folder for easier management.",
+          "ja": "管理を容易にするために、すべてのアセットを1つのプロジェクトフォルダに統合する必要があります。"
+        },
+        {
+          "en": "The update will consolidate several features to improve performance.",
+          "ja": "アップデートにより、いくつかの機能が統合され、パフォーマンスが向上します。"
+        }
+      ]
+    },
+    {
+      "word": "permit",
+      "meaning": "許可する、可能にする",
+      "example_sentences": [
+        {
+          "en": "The software permits real-time adjustments to the lighting setup.",
+          "ja": "このソフトウェアでは、照明設定のリアルタイム調整が可能です。"
+        },
+        {
+          "en": "Only authorized users are permitted to access the project files.",
+          "ja": "プロジェクトファイルにアクセスできるのは、許可されたユーザーのみです。"
+        }
+      ]
+    },
+    {
+      "word": "direct",
+      "meaning": "直接の、指示する",
+      "example_sentences": [
+        {
+          "en": "Direct input from the art director helped improve the final design.",
+          "ja": "アートディレクターからの直接の指示が、最終デザインの改善に役立ちました。"
+        },
+        {
+          "en": "You can direct the camera to focus on specific objects in the scene.",
+          "ja": "カメラを指示して、シーン内の特定のオブジェクトに焦点を合わせることができます。"
+        }
+      ]
+    },
+    {
+      "word": "comparison",
+      "meaning": "比較",
+      "example_sentences": [
+        {
+          "en": "A side-by-side comparison of the two renders shows a clear difference in quality.",
+          "ja": "2つのレンダリングを並べて比較すると、品質に明らかな違いが見られます。"
+        },
+        {
+          "en": "The comparison between the old and new textures highlights significant improvements.",
+          "ja": "旧テクスチャと新テクスチャの比較では、著しい改善が見られます。"
+        }
+      ]
+    },
+    {
+      "word": "primarily",
+      "meaning": "主に",
+      "example_sentences": [
+        {
+          "en": "The team is primarily focused on improving the animation pipeline.",
+          "ja": "チームは主にアニメーションパイプラインの改善に焦点を当てています。"
+        },
+        {
+          "en": "This tool is primarily used for creating realistic textures.",
+          "ja": "このツールは主にリアルなテクスチャを作成するために使用されます。"
+        }
+      ]
+    },
+    {
+      "word": "cylinder",
+      "meaning": "円柱",
+      "example_sentences": [
+        {
+          "en": "The 3D model consists of basic shapes, including a cylinder and a cube.",
+          "ja": "その3Dモデルは、円柱や立方体などの基本的な形状で構成されています。"
+        },
+        {
+          "en": "The character's arms were modeled as simple cylinders before adding details.",
+          "ja": "キャラクターの腕は、詳細を追加する前に単純な円柱としてモデリングされました。"
+        }
+      ]
+    },
+    {
+      "word": "tori",
+      "meaning": "トーラス、ドーナツ型",
+      "example_sentences": [
+        {
+          "en": "The 3D scene includes a tori shape to represent a ring structure.",
+          "ja": "その3Dシーンには、リング構造を表すためにトーラス形状が含まれています。"
+        },
+        {
+          "en": "A tori is often used in 3D modeling to create objects with a hollow center.",
+          "ja": "トーラスは、中心が空洞のオブジェクトを作成するために、3Dモデリングでよく使用されます。"
+        }
+      ]
+    },
+    {
+      "word": "assume",
+      "meaning": "仮定する、想定する",
+      "example_sentences": [
+        {
+          "en": "We assume the model's topology is clean before starting the rigging process.",
+          "ja": "リギングプロセスを開始する前に、モデルのトポロジーがクリーンであると仮定します。"
+        },
+        {
+          "en": "The algorithm assumes a constant frame rate when calculating the animation.",
+          "ja": "アルゴリズムは、アニメーションを計算する際に一定のフレームレートを想定しています。"
+        }
+      ]
+    }
+  ]
+}

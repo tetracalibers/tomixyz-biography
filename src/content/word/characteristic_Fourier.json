@@ -1,0 +1,146 @@
+{
+  "book": "compute-webgpu",
+  "date": "2024-08-21",
+  "words": [
+    {
+      "word": "characteristic",
+      "meaning": "特徴、特性",
+      "example_sentences": [
+        {
+          "en": "One characteristic of this material is its ability to absorb light, making it ideal for shadowed areas.",
+          "ja": "このマテリアルの特徴の一つは、光を吸収する能力があり、影のある部分に最適であることです。"
+        },
+        {
+          "en": "The characteristic smoothness of the surface was achieved using a high-quality texture map.",
+          "ja": "表面の特徴的な滑らかさは、高品質のテクスチャマップを使用して実現されました。"
+        }
+      ]
+    },
+    {
+      "word": "workload",
+      "meaning": "作業負荷、仕事量",
+      "example_sentences": [
+        {
+          "en": "The system handled the heavy workload efficiently, even with multiple tasks running simultaneously.",
+          "ja": "複数のタスクが同時に実行されていても、システムは重い作業負荷を効率的に処理しました。"
+        },
+        {
+          "en": "Optimizing the code reduced the workload on the CPU, improving overall performance.",
+          "ja": "コードの最適化により、CPUの負荷が軽減され、全体的なパフォーマンスが向上しました。"
+        }
+      ]
+    },
+    {
+      "word": "crucial",
+      "meaning": "非常に重要な、決定的な",
+      "example_sentences": [
+        {
+          "en": "Proper lighting is crucial for achieving realistic renders.",
+          "ja": "適切な照明は、リアルなレンダリングを実現するために非常に重要です。"
+        },
+        {
+          "en": "Accurate texture mapping is crucial to avoid visible seams in the model.",
+          "ja": "モデルに目立つ継ぎ目ができないようにするには、正確なテクスチャマッピングが重要です。"
+        }
+      ]
+    },
+    {
+      "word": "whether",
+      "meaning": "〜かどうか",
+      "example_sentences": [
+        {
+          "en": "We need to determine whether the current lighting setup is suitable for the scene.",
+          "ja": "現在の照明設定がシーンに適しているかどうかを判断する必要があります。"
+        },
+        {
+          "en": "Whether the model is viewed up close or from a distance, the details remain clear.",
+          "ja": "モデルが近くから見ても遠くから見ても、ディテールは明確なままです。"
+        }
+      ]
+    },
+    {
+      "word": "benefit",
+      "meaning": "利益、恩恵",
+      "example_sentences": [
+        {
+          "en": "One major benefit of this software is its ability to handle large scenes with ease.",
+          "ja": "このソフトウェアの主な利点の一つは、大規模なシーンを簡単に処理できることです。"
+        },
+        {
+          "en": "The new feature provides significant benefits in terms of render speed and quality.",
+          "ja": "この新機能は、レンダリング速度と品質の面で大きな恩恵をもたらします。"
+        }
+      ]
+    },
+    {
+      "word": "numerous",
+      "meaning": "多数の、多くの",
+      "example_sentences": [
+        {
+          "en": "The software includes numerous tools for creating detailed and complex models.",
+          "ja": "このソフトウェアには、詳細で複雑なモデルを作成するための多数のツールが含まれています。"
+        },
+        {
+          "en": "Numerous tests were conducted to ensure the stability of the new update.",
+          "ja": "新しいアップデートの安定性を確保するために、多くのテストが実施されました。"
+        }
+      ]
+    },
+    {
+      "word": "seem to",
+      "meaning": "〜のように見える、〜のようだ",
+      "example_sentences": [
+        {
+          "en": "The model seems to lack depth due to insufficient lighting.",
+          "ja": "照明が不十分なため、モデルには奥行きがないように見えます。"
+        },
+        {
+          "en": "The texture seems to be misaligned, creating visible seams on the surface.",
+          "ja": "テクスチャがずれているようで、表面に目立つ継ぎ目が生じています。"
+        }
+      ]
+    },
+    {
+      "word": "perfectly",
+      "meaning": "完全に、完璧に",
+      "example_sentences": [
+        {
+          "en": "The lighting was set up perfectly, enhancing the realism of the scene.",
+          "ja": "照明が完璧に設定され、シーンのリアリズムが向上しました。"
+        },
+        {
+          "en": "The model's textures align perfectly, with no visible seams or distortions.",
+          "ja": "モデルのテクスチャは完璧に整合しており、継ぎ目や歪みが見られません。"
+        }
+      ]
+    },
+    {
+      "word": "tailored",
+      "meaning": "特化した、調整された",
+      "example_sentences": [
+        {
+          "en": "The software's interface can be tailored to fit the specific needs of the user.",
+          "ja": "このソフトウェアのインターフェースは、ユーザーの特定のニーズに合わせて調整できます。"
+        },
+        {
+          "en": "The settings were tailored to optimize performance for the specific hardware configuration.",
+          "ja": "設定は、特定のハードウェア構成に合わせてパフォーマンスを最適化するように調整されました。"
+        }
+      ]
+    },
+    {
+      "word": "Fourier",
+      "meaning": "フーリエ（変換に関する数学的手法）",
+      "example_sentences": [
+        {
+          "en": "The Fourier transform was applied to analyze the frequency components of the signal.",
+          "ja": "信号の周波数成分を分析するためにフーリエ変換が適用されました。"
+        },
+        {
+          "en": "Using Fourier analysis, the software can decompose complex waveforms into simpler sine waves.",
+          "ja": "フーリエ解析を使用して、ソフトウェアは複雑な波形を単純な正弦波に分解できます。"
+        }
+      ]
+    }
+  ]
+}

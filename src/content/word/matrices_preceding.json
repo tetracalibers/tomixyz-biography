@@ -1,0 +1,146 @@
+{
+  "book": "wgpu-by-examples",
+  "date": "2024-08-20",
+  "words": [
+    {
+      "word": "matrices",
+      "meaning": "行列（matrixの複数形）",
+      "example_sentences": [
+        {
+          "en": "Matrices are often used in 3D graphics to perform transformations such as rotation and scaling.",
+          "ja": "行列は、回転やスケーリングなどの変換を行うために3Dグラフィックスでよく使用されます。"
+        },
+        {
+          "en": "Multiple matrices can be combined to create complex transformations in a single step.",
+          "ja": "複数の行列を組み合わせることで、1つのステップで複雑な変換を作成することができます。"
+        }
+      ]
+    },
+    {
+      "word": "computation",
+      "meaning": "計算、演算",
+      "example_sentences": [
+        {
+          "en": "The shader performs real-time computation to render the scene accurately.",
+          "ja": "シェーダーは、シーンを正確にレンダリングするためにリアルタイムで計算を行います。"
+        },
+        {
+          "en": "Optimizing the computation process can significantly reduce render times.",
+          "ja": "計算プロセスを最適化することで、レンダリング時間を大幅に短縮できます。"
+        }
+      ]
+    },
+    {
+      "word": "various",
+      "meaning": "さまざまな、いろいろな",
+      "example_sentences": [
+        {
+          "en": "Various techniques were used to achieve the desired visual effects in the animation.",
+          "ja": "アニメーションで希望する視覚効果を得るために、さまざまな技術が使用されました。"
+        },
+        {
+          "en": "The software supports various file formats, making it versatile for different projects.",
+          "ja": "このソフトウェアはさまざまなファイル形式をサポートしており、異なるプロジェクトに対して汎用性があります。"
+        }
+      ]
+    },
+    {
+      "word": "earlier",
+      "meaning": "以前に、早く",
+      "example_sentences": [
+        {
+          "en": "The issue was fixed in an earlier version of the software.",
+          "ja": "その問題は、ソフトウェアの以前のバージョンで修正されました。"
+        },
+        {
+          "en": "We tested the new feature earlier today and it worked as expected.",
+          "ja": "今日の早い段階で新機能をテストしたところ、期待通りに動作しました。"
+        }
+      ]
+    },
+    {
+      "word": "duplication",
+      "meaning": "重複、複製",
+      "example_sentences": [
+        {
+          "en": "Avoiding duplication of assets helps reduce the overall file size of the project.",
+          "ja": "アセットの重複を避けることで、プロジェクト全体のファイルサイズを削減できます。"
+        },
+        {
+          "en": "Duplication of geometry can be useful for creating multiple instances of an object.",
+          "ja": "ジオメトリの複製は、オブジェクトの複数のインスタンスを作成するのに役立ちます。"
+        }
+      ]
+    },
+    {
+      "word": "similarly",
+      "meaning": "同様に、似たように",
+      "example_sentences": [
+        {
+          "en": "The lighting in this scene was set up similarly to the previous one to maintain consistency.",
+          "ja": "このシーンの照明は、前のシーンと同様に設定され、一貫性が保たれています。"
+        },
+        {
+          "en": "Similarly, the texture mapping was adjusted to match the new UV layout.",
+          "ja": "同様に、テクスチャマッピングが新しいUVレイアウトに合わせて調整されました。"
+        }
+      ]
+    },
+    {
+      "word": "whenever",
+      "meaning": "〜する時はいつでも、〜するたびに",
+      "example_sentences": [
+        {
+          "en": "The software automatically saves your work whenever a major change is made.",
+          "ja": "大きな変更が行われるたびに、ソフトウェアは自動的に作業を保存します。"
+        },
+        {
+          "en": "You can adjust the camera angle whenever you need a different perspective.",
+          "ja": "異なる視点が必要なときはいつでも、カメラの角度を調整できます。"
+        }
+      ]
+    },
+    {
+      "word": "inversion",
+      "meaning": "反転、逆転",
+      "example_sentences": [
+        {
+          "en": "The inversion of the normals caused the shading to appear incorrect.",
+          "ja": "法線の反転により、シェーディングが正しく表示されなくなりました。"
+        },
+        {
+          "en": "Inversion of the color values can create a negative effect, which can be used for artistic purposes.",
+          "ja": "色値の反転によりネガティブ効果が生じ、これを芸術的な目的で使用することができます。"
+        }
+      ]
+    },
+    {
+      "word": "presented",
+      "meaning": "提示された、示された",
+      "example_sentences": [
+        {
+          "en": "The final render was presented to the client for approval.",
+          "ja": "最終レンダリングがクライアントに提示され、承認を受けました。"
+        },
+        {
+          "en": "The data was presented in a clear and organized manner for easy analysis.",
+          "ja": "データは、分析しやすいように明確で整理された形で提示されました。"
+        }
+      ]
+    },
+    {
+      "word": "preceding",
+      "meaning": "前の、先行する",
+      "example_sentences": [
+        {
+          "en": "The changes in the preceding version of the software affected the current project.",
+          "ja": "ソフトウェアの前バージョンでの変更が、現在のプロジェクトに影響を与えました。"
+        },
+        {
+          "en": "In the preceding chapter, we discussed the basics of texture mapping.",
+          "ja": "前の章では、テクスチャマッピングの基本について議論しました。"
+        }
+      ]
+    }
+  ]
+}
