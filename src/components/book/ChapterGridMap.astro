@@ -36,7 +36,7 @@ const progress_list = await (async () => {
   return parseProgressObj(progress.data)
 })()
 
-const builPageUrl = buildPageUrlFor("book")
+const builPageUrl = buildPageUrlFor("input")
 const chapterPageUrl = (chapter_numbers: string[]) => {
   const chapter_id = chapter_numbers.join("-")
   if (!chapterIdsHasPage.has(chapter_id)) return null
