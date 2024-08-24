@@ -1,0 +1,74 @@
+---
+import { buildPageUrlFor } from "$/utils/i18n/slug"
+import { Icon } from "astro-icon/components"
+import type { CollectionEntry } from "astro:content"
+import { getEntry } from "astro:content"
+
+interface Props {
+  bookId: string
+  chapters: CollectionEntry<"book_chapter">[]
+  lang?: string
+}
+
+const { bookId, chapters, lang } = Astro.props
+
+const chapterIdsHasPage = chapters.reduce((acc, entry) => {
+  acc.add(entry.slug.split("/").at(-1)!)
+  return acc
+}, new Set<string>())
+
+// { "section.chapter": status } to Map<section, Map<chapter, status>[]>
+const parseProgressObj = (status_obj: Record<string, boolean | Date>) => {
+  const status_map = new Map(Object.entries(status_obj))
+  return Array.from(status_map).reduce<Map<string, Map<string, boolean>>>((acc, [key, value]) => {
+    const [section, chapter] = key.split(".")
+    if (!acc.has(section)) {
+      acc.set(section, new Map())
+    }
+    acc.get(section)?.set(chapter, value !== false)
+    return acc
+  }, new Map())
+}
+
+const progress_list = await (async () => {
+  const progress = await getEntry("book_progress", bookId)
+  if (!progress) return new Map()
+  return parseProgressObj(progress.data)
+})()
+
+const builPageUrl = buildPageUrlFor("book")
+const chapterPageUrl = (chapter_numbers: string[]) => {
+  const chapter_id = chapter_numbers.join("-")
+  if (!chapterIdsHasPage.has(chapter_id)) return null
+  const slug = bookId + "/" + chapter_id
+  return builPageUrl(slug, lang)
+}
+---
+
+<div class='grid gap-2'>
+  {
+    Array.from(progress_list).map(([section, chap_status_map]) => (
+      <div class='drop-shadow-sm grid gap-[4px]'>
+        <h3 class='text-lg font-semibold text-slate-500 dark:text-theme-dark-primary'>ch {section}</h3>
+        <div class='flex flex-wrap gap-[4px]'>
+          {Array.from(chap_status_map).map(([chapter, done]) => (
+            <div class:list={["w-[32px] h-[32px] relative", { "bg-emerald-300": done }, { "bg-slate-200": !done }]}>
+              {[chapterPageUrl([section, chapter])].map((url) =>
+                url ? (
+                  <a
+                    href={url}
+                    class='absolute inset-0 border-2 border-emerald-300 text-emerald-600 grid place-items-center'
+                  >
+                    <Icon name='hugeicons/unlink-04' width={24} height={24} />
+                  </a>
+                ) : (
+                  ""
+                )
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    ))
+  }
+</div>
