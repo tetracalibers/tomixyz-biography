@@ -1,6 +1,7 @@
 ---
 import { i18nPaths } from "$/utils/i18n/routing/article-page"
 import { getCollection, type CollectionEntry } from "astro:content"
+import BookChapterLayout from "$/layouts/book-chapter.astro"
 
 export async function getStaticPaths() {
   const chapters = await getCollection("book_chapter")
@@ -15,8 +16,13 @@ interface Props {
 }
 
 const { page, lang } = Astro.props
-const { slug } = Astro.params
+const { slug, chapter } = Astro.params
+
+const { Content } = await page.render()
+
+const ogimage = `/og-image/${lang}/input/${slug}/${chapter}.png`
 ---
 
-<p>{slug}</p>
-<p>{page.data}</p>
+<BookChapterLayout entry={page} ogimage={ogimage} lang={lang}>
+  <Content />
+</BookChapterLayout>

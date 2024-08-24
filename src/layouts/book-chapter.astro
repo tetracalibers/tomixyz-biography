@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from "astro:content"
+import { SITE } from "$/config"
+import MainLayout from "$/components/MainLayout.astro"
+import BaseHead from "$/components/BaseHead.astro"
+
+interface Props {
+  entry: CollectionEntry<"book_chapter">
+  ogimage?: string
+  lang?: string
+}
+
+const { entry, ogimage, lang = "ja" } = Astro.props
+const { title } = entry.data
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <BaseHead image={ogimage} title={title ? `${SITE.title} | ${title}` : SITE.title} description='TODO' />
+  </head>
+  <MainLayout>
+    <div class='grid gap-8'>
+      <div class='py-4 mb-1 text-center md:text-left flex flex-col gap-8'>
+        <h1 class='text-5xl font-extrabold text-theme-primary dark:text-theme-dark-primary leading-normal'>
+          {title}
+        </h1>
+      </div>
+      <slot />
+    </div>
+  </MainLayout>
+</html>
