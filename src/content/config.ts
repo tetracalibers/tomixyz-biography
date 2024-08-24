@@ -74,10 +74,21 @@ const bookCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     url: z.string().url(),
-    toc: z.array(z.object({})).optional(), // TODO: APIレスポンスの構造により修正
-    started_at: z.coerce.date(),
+    started_at: z.coerce.date().optional(),
     finished_at: z.coerce.date().optional()
   })
+})
+
+const bookTocCollection = defineCollection({
+  type: "data",
+  schema: z.array(
+    z.object({
+      title: z.string(),
+      chapter: z.string(),
+      depth: z.number().int().nonnegative(),
+      done: z.boolean().default(false)
+    })
+  )
 })
 
 const wordCollection = defineCollection({
@@ -109,5 +120,6 @@ export const collections = {
   series: seriesCollection,
   daily: dailyCollection,
   book: bookCollection,
+  book_toc: bookTocCollection,
   word: wordCollection
 }
