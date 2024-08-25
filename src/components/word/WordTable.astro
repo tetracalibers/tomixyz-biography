@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content"
-import SvWordTable from "./table/SvWordTable.svelte"
+import { Code } from "astro-expressive-code/components"
 
 interface Props {
   entry: CollectionEntry<"word">
@@ -8,6 +8,17 @@ interface Props {
 
 const { entry } = Astro.props
 const { words } = entry.data
+
+//const mark = words.map((word) => new RegExp(`"en": "(${word.en})"`, "g"))
+const mark = words.map((word) => word.en)
+
+const collapse = (() => {
+  let result: [number, number][] = []
+  for (let i = 0; i < words.length; i++) {
+    result.push([6 + i * 14, 13 + i * 14])
+  }
+  return result.map((range) => range.join("-"))
+})()
 ---
 
-<SvWordTable words={words} client:visible />
+<Code code={JSON.stringify(words, null, 2)} lang="json" mark={mark} collapse={collapse} wrap />
