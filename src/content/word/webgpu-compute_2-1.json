@@ -3,8 +3,8 @@
   "chapter": "2.1",
   "words": [
     {
-      "word": "landscape",
-      "meaning": "風景、状況、分野",
+      "en": "landscape",
+      "ja": "風景、状況、分野",
       "example_sentences": [
         {
           "en": "The 3D model of the landscape was created to represent a realistic outdoor environment.",
@@ -17,8 +17,8 @@
       ]
     },
     {
-      "word": "significantly",
-      "meaning": "著しく、大幅に",
+      "en": "significantly",
+      "ja": "著しく、大幅に",
       "example_sentences": [
         {
           "en": "The rendering speed was significantly improved in the latest update.",
@@ -31,8 +31,8 @@
       ]
     },
     {
-      "word": "evolve",
-      "meaning": "進化する、発展する",
+      "en": "evolve",
+      "ja": "進化する、発展する",
       "example_sentences": [
         {
           "en": "The software has evolved over time, adding more features with each version.",
@@ -45,8 +45,8 @@
       ]
     },
     {
-      "word": "introduction",
-      "meaning": "導入、紹介",
+      "en": "introduction",
+      "ja": "導入、紹介",
       "example_sentences": [
         {
           "en": "The introduction of ray tracing has transformed the way realistic lighting is achieved.",
@@ -59,8 +59,8 @@
       ]
     },
     {
-      "word": "successor",
-      "meaning": "後継者、後継機",
+      "en": "successor",
+      "ja": "後継者、後継機",
       "example_sentences": [
         {
           "en": "The new software is the successor to the older, less advanced version.",
@@ -73,8 +73,8 @@
       ]
     },
     {
-      "word": "offer",
-      "meaning": "提供する、提示する",
+      "en": "offer",
+      "ja": "提供する、提示する",
       "example_sentences": [
         {
           "en": "The software offers a wide range of features for both beginners and professionals.",
@@ -87,8 +87,8 @@
       ]
     },
     {
-      "word": "enhance",
-      "meaning": "強化する、向上させる",
+      "en": "enhance",
+      "ja": "強化する、向上させる",
       "example_sentences": [
         {
           "en": "The texture was enhanced to make the surface details more prominent.",
@@ -101,8 +101,8 @@
       ]
     },
     {
-      "word": "sophisticate",
-      "meaning": "洗練する、高度にする",
+      "en": "sophisticate",
+      "ja": "洗練する、高度にする",
       "example_sentences": [
         {
           "en": "The graphics engine was further sophisticate to handle more complex scenes.",
@@ -115,8 +115,8 @@
       ]
     },
     {
-      "word": "capability",
-      "meaning": "能力、性能",
+      "en": "capability",
+      "ja": "能力、性能",
       "example_sentences": [
         {
           "en": "The new software has the capability to render photorealistic images in real-time.",
@@ -129,8 +129,8 @@
       ]
     },
     {
-      "word": "enabling",
-      "meaning": "可能にする、〜できるようにする",
+      "en": "enabling",
+      "ja": "可能にする、〜できるようにする",
       "example_sentences": [
         {
           "en": "The new plugin is enabling more complex animations to be created with ease.",
@@ -143,8 +143,8 @@
       ]
     },
     {
-      "word": "leverage",
-      "meaning": "活用する、利用する",
+      "en": "leverage",
+      "ja": "活用する、利用する",
       "example_sentences": [
         {
           "en": "The team was able to leverage the power of the new GPU to accelerate rendering times.",
@@ -157,8 +157,8 @@
       ]
     },
     {
-      "word": "delve",
-      "meaning": "掘り下げて調査する、深く探る",
+      "en": "delve",
+      "ja": "掘り下げて調査する、深く探る",
       "example_sentences": [
         {
           "en": "The developers delved into the code to identify the source of the rendering bug.",
@@ -171,8 +171,8 @@
       ]
     },
     {
-      "word": "harnessed",
-      "meaning": "利用された、活用された",
+      "en": "harnessed",
+      "ja": "利用された、活用された",
       "example_sentences": [
         {
           "en": "The power of machine learning was harnessed to create more realistic animations.",

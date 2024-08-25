@@ -1,10 +1,12 @@
 <script lang="ts">
-  import { createTable, Render, Subscribe } from "svelte-headless-table"
+  import { createRender, createTable, Render, Subscribe } from "svelte-headless-table"
+  import { addSubRows, addExpandedRows } from "svelte-headless-table/plugins"
   import { readable } from "svelte/store"
+  import ExpandIndicator from "./ExpandIndicator.svelte"
 
   interface Word {
-    word: string
-    meaning: string
+    en: string
+    ja: string
     example_sentences: {
       en: string
       ja: string
@@ -13,20 +15,34 @@
 
   export let words: Word[]
 
-  const table = createTable(readable(words))
+  const table = createTable(readable(words), {
+    sub: addSubRows({
+      children: "example_sentences"
+    }),
+    expand: addExpandedRows()
+  })
 
   const columns = table.createColumns([
-    table.column({
-      accessor: "word",
-      header: "Word"
+    table.display({
+      id: "expanded",
+      header: "",
+      cell: ({ row }, { pluginStates }) => {
+        const { isExpanded, canExpand, isAllSubRowsExpanded } = pluginStates.expand.getRowState(row)
+        return createRender(ExpandIndicator, {
+          depth: row.depth,
+          isExpanded,
+          canExpand,
+          isAllSubRowsExpanded
+        })
+      }
     }),
     table.column({
-      accessor: "meaning",
-      header: "Meaning"
+      accessor: "en",
+      header: "English"
     }),
     table.column({
-      accessor: "example_sentences",
-      header: "Example"
+      accessor: "ja",
+      header: "Japanese"
     })
   ])
 

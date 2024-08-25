@@ -114,8 +114,8 @@ const wordCollection = defineCollection({
     chapter: z.string(),
     words: z.array(
       z.object({
-        word: z.string(),
-        meaning: z.string(),
+        en: z.string(),
+        ja: z.string(),
         example_sentences: z.array(
           z.object({
             en: z.string(),
