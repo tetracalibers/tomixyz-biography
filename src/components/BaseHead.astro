@@ -76,6 +76,8 @@ const ogimage = image ? `${SITE.url}${image}` : `${SITE.url}/og-image.png`
 <meta property="twitter:image" content={ogimage} />
 
 <script is:inline>
+  import { EXP_CODE_THEME } from "$/config"
+
   const theme = (() => {
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
       return localStorage.getItem("theme")
@@ -88,7 +90,9 @@ const ogimage = image ? `${SITE.url}${image}` : `${SITE.url}/og-image.png`
 
   if (theme === "light") {
     document.documentElement.classList.remove("dark")
+    document.documentElement.setAttribute("data-theme", EXP_CODE_THEME.light)
   } else {
     document.documentElement.classList.add("dark")
+    document.documentElement.setAttribute("data-theme", EXP_CODE_THEME.dark)
   }
 </script>
