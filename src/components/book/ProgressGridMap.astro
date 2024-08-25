@@ -21,16 +21,16 @@ const parseProgressObj = (status_obj: Record<string, boolean | Date>) => {
 const section_map = parseProgressObj(progressObj)
 ---
 
-<div class='drop-shadow-sm flex flex-col flex-wrap max-h-[120px] w-fit p-[4px] gap-[4px]'>
+<div class="drop-shadow-sm flex flex-col flex-wrap max-h-[120px] w-fit p-[4px] gap-[4px]">
   {
     Array.from(section_map).map(([section, chap_status_map]) => (
       <>
-        <div class='text-slate-400 w-[16px] h-[16px] text-sm leading-none text-center'>{section}</div>
+        <div class="text-slate-400 w-[16px] h-[16px] text-sm leading-none text-center">{section}</div>
         {Array.from(chap_status_map).map(([_chapter, done]) =>
           done ? (
-            <div class='bg-emerald-300 w-[16px] h-[16px]' />
+            <div class="bg-emerald-300 w-[16px] h-[16px]" />
           ) : (
-            <div class='bg-slate-200 border w-[16px] h-[16px]' />
+            <div class="bg-slate-200 border w-[16px] h-[16px]" />
           )
         )}
       </>

@@ -17,12 +17,12 @@ const { title } = entry.data
 <!doctype html>
 <html lang={lang}>
   <head>
-    <BaseHead image={ogimage} title={title ? `${SITE.title} | ${title}` : SITE.title} description='TODO' />
+    <BaseHead image={ogimage} title={title ? `${SITE.title} | ${title}` : SITE.title} description="TODO" />
   </head>
   <MainLayout>
-    <div class='grid gap-8'>
-      <div class='py-4 mb-1 text-center md:text-left flex flex-col gap-8'>
-        <h1 class='text-5xl font-extrabold text-theme-primary dark:text-theme-dark-primary leading-normal'>
+    <div class="grid gap-8">
+      <div class="py-4 mb-1 text-center md:text-left flex flex-col gap-8">
+        <h1 class="text-5xl font-extrabold text-theme-primary dark:text-theme-dark-primary leading-normal">
           {title}
         </h1>
       </div>

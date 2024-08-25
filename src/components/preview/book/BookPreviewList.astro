@@ -17,6 +17,6 @@ const tocs = (await getCollection("book_toc")).reduce((acc, toc) => {
 const bookId = (slug: string) => slug.split("/").at(-1)!
 ---
 
-<div class='flex flex-col gap-12'>
+<div class="flex flex-col gap-12">
   {books.map((book) => <BookPreview book={book} lang={lang} toc={tocs.get(bookId(book.slug))} />)}
 </div>

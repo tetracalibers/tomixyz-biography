@@ -45,21 +45,21 @@ const chapterPageUrl = (chapter_numbers: string[]) => {
 }
 ---
 
-<div class='grid gap-2'>
+<div class="grid gap-2">
   {
     Array.from(progress_list).map(([section, chap_status_map]) => (
-      <div class='drop-shadow-sm grid gap-[4px]'>
-        <h3 class='text-lg font-semibold text-slate-500 dark:text-theme-dark-primary'>ch {section}</h3>
-        <div class='flex flex-wrap gap-[4px]'>
+      <div class="drop-shadow-sm grid gap-[4px]">
+        <h3 class="text-lg font-semibold text-slate-500 dark:text-theme-dark-primary">ch {section}</h3>
+        <div class="flex flex-wrap gap-[4px]">
           {Array.from(chap_status_map).map(([chapter, done]) => (
             <div class:list={["w-[32px] h-[32px] relative", { "bg-emerald-300": done }, { "bg-slate-200": !done }]}>
               {[chapterPageUrl([section, chapter])].map((url) =>
                 url ? (
                   <a
                     href={url}
-                    class='absolute inset-0 border-2 border-emerald-300 text-emerald-600 grid place-items-center'
+                    class="absolute inset-0 border-2 border-emerald-300 text-emerald-600 grid place-items-center"
                   >
-                    <Icon name='hugeicons/unlink-04' width={24} height={24} />
+                    <Icon name="hugeicons/unlink-04" width={24} height={24} />
                   </a>
                 ) : (
                   ""
