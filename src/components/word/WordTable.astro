@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content"
+import SvWordTable from "./table/SvWordTable.svelte"
 
 interface Props {
   entry: CollectionEntry<"word">
@@ -9,6 +10,4 @@ const { entry } = Astro.props
 const { words } = entry.data
 ---
 
-<pre>
-  {JSON.stringify(words, null, 2)}
-</pre>
+<SvWordTable words={words} client:visible />
