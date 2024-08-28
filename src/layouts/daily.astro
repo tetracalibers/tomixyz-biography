@@ -1,0 +1,36 @@
+---
+import type { CollectionEntry } from "astro:content"
+import { SITE } from "$/config"
+import MainLayout from "$/components/MainLayout.astro"
+import BaseHead from "$/components/BaseHead.astro"
+import Prose from "$components/Prose.astro"
+import { splitLangSlug } from "$/utils/i18n/collection"
+
+interface Props {
+  entry: CollectionEntry<"daily">
+  ogimage?: string
+  lang?: string
+}
+const { entry, ogimage, lang = "ja" } = Astro.props
+const { slug } = entry
+const { slug: date } = splitLangSlug(slug)
+
+const formatDate = (date: string) => {
+  return date.replaceAll("-", ".")
+}
+
+const title = formatDate(date)
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <BaseHead image={ogimage} title={title ? `${SITE.title} | ${title}` : SITE.title} description="TODO" />
+  </head>
+  <MainLayout>
+    <Prose fill={false}>
+      <h1 class="text-4xl font-extrabold text-theme-primary dark:text-theme-dark-primary leading-normal">{title}</h1>
+      <slot />
+    </Prose>
+  </MainLayout>
+</html>
