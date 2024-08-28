@@ -66,7 +66,7 @@ const seriesCollection = defineCollection({
 
 const dailyCollection = defineCollection({
   schema: z.object({
-    tldr: z.string()
+    tldr: z.string().optional()
   })
 })
 
