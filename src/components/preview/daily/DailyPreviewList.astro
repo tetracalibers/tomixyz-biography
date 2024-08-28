@@ -1,0 +1,15 @@
+---
+import { type CollectionEntry } from "astro:content"
+import DailyPreview from "./DailyPreview.astro"
+
+interface Props {
+  entries: CollectionEntry<"daily">[]
+  lang?: string
+}
+
+const { entries, lang } = Astro.props
+---
+
+<div class="grid gap-6 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] justify-center">
+  {entries.map((entry) => <DailyPreview entry={entry} lang={lang} />)}
+</div>
