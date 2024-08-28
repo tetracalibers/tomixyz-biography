@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content"
+import DefaultPageLayout from "$/layouts/default.astro"
+import Paginator from "$/components/Paginator.astro"
+import DailyPreviewList from "$components/preview/daily/DailyPreviewList.astro"
+import { i18nPaginate } from "$/utils/i18n/routing/preview-list-page"
+import { splitLangSlug } from "$/utils/i18n/collection"
+
+let title = "Daily"
+let i18nDescription = { ja: "個人的な活動日誌", en: "Journal to record the process" }
+
+export const getStaticPaths = async ({ paginate }) => {
+  const collection = (await getCollection("daily")).sort(
+    (a, b) => +new Date(splitLangSlug(b.slug).slug) - +new Date(splitLangSlug(a.slug).slug)
+  )
+  return i18nPaginate(collection, { paginate })
+}
+
+interface Props {
+  page: any
+  lang: string
+}
+
+const { page, lang } = Astro.props
+
+const ogimage = `/og-image/${lang}/daily.png`
+const description = i18nDescription[lang]
+---
+
+<DefaultPageLayout content={{ title, description, ogimage }} lang={lang}>
+  <DailyPreviewList entries={page.data} lang={lang} />
+  <Paginator page={page} />
+</DefaultPageLayout>
