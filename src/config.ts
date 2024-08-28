@@ -45,7 +45,7 @@ export const SITE = {
   title: "tomixy's biography",
   description: "",
   url: "https://tetracalibers.github.io/tomixyz-biography",
-  base: import.meta.env.CF_PAGES == 1 ? "/" : "/tomixyz-biography",
+  base: import.meta.env.CF_PAGES == 1 ? "" : "/tomixyz-biography",
   githubUrl: "https://github.com/tetracalibers",
   listDrafts: true,
   // YT video channel Id (used in media.astro)
