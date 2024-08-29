@@ -6,6 +6,13 @@ import remarkParse from "remark-parse"
 import remarkMdx from "remark-mdx"
 import { unified } from "unified"
 import { visit } from "unist-util-visit"
+import split from "mdast-util-split-by-heading"
+import { toHtml } from "hast-util-to-html"
+import { toHast } from "mdast-util-to-hast"
+import { mdxjs } from "micromark-extension-mdxjs"
+import { fromMarkdown } from "mdast-util-from-markdown"
+import { mdxFromMarkdown } from "mdast-util-mdx"
+import { toString } from "hast-util-to-string"
 
 async function extractFirstParagraph(mdxString: string) {
   const tree = unified().use(remarkParse).use(remarkMdx).parse(mdxString)
@@ -36,6 +43,16 @@ const pageUrl = builPageUrl(date, lang)
 const formatDate = (date: string) => {
   return date.replaceAll("-", ".")
 }
+
+const tree = fromMarkdown(entry.body, {
+  extensions: [mdxjs()],
+  mdastExtensions: [mdxFromMarkdown()]
+})
+const block_trees = split(tree, { splitDepth: 2 }).trees
+const blocks = block_trees.map((tree) => ({
+  html: toHtml(toHast(tree.children)),
+  title: toString(toHast(tree.title.children))
+}))
 ---
 
 <div class='_timeline-section-inner grid gap-6'>
@@ -45,14 +62,20 @@ const formatDate = (date: string) => {
     {formatDate(date)}
   </div>
   <div class='_row grid gap-8 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]'>
-    <div class='_timeline-box flex flex-col justify-between rounded-sm bg-white/10 border border-slate-300 shadow-sm'>
-      <div class='_box-title py-[5px] px-[15px]'></div>
-      <div class='_box-content flex flex-col gap-2 flex-1 py-[5px] px-[15px]'>
-        {extractFirstParagraph(entry.body)}
-      </div>
-      <div class='_box-footer text-end py-[5px] px-[15px]'>
-        <a class='hover:underline text-end' href={pageUrl}>read more...</a>
-      </div>
-    </div>
+    {
+      blocks.map((block) => (
+        <div class='_timeline-box flex flex-col justify-between rounded-sm bg-white/10 border border-slate-300 shadow-sm'>
+          <div class='_box-title py-[5px] px-[15px]'>
+            <h3>{block.title}</h3>
+          </div>
+          <div class='_box-content flex flex-col gap-2 flex-1 py-[5px] px-[15px]' set:html={block.html} />
+          <div class='_box-footer text-end py-[5px] px-[15px]'>
+            <a class='hover:underline text-end' href={pageUrl}>
+              read more...
+            </a>
+          </div>
+        </div>
+      ))
+    }
   </div>
 </div>
