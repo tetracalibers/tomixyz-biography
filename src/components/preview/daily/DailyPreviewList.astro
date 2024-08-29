@@ -26,17 +26,17 @@ const formatDate = (date: string) => {
 }
 ---
 
-<div class='_container text-theme-secondary dark:text-theme-dark-secondary'>
+<div class="_container text-theme-secondary dark:text-theme-dark-secondary">
   <div
     class='_timeline relative before:content-[""] before:absolute before:bg-indigo-200 before:w-[2px] before:h-[calc(100%+1.5em)] before:left-[14px] before:rounded-md'
   >
     {
       Array.from(entriesByMonth).map(([year_month, entries]) => (
-        <div class='_timeline-group grid gap-10'>
+        <div class="_timeline-group flex flex-col gap-10">
           <div class='_timeline-month relative inline-flex items-center gap-2 w-fit rounded-sm bg-indigo-100 border border-indigo-200 dark:text-theme-secondary py-1 pr-[15px] pl-2 before:content-[""] before:rotate-45 before:w-3 before:h-3 before:bg-indigo-300'>
             {formatDate(year_month)}
           </div>
-          <ul class='_timeline-list grid gap-8'>
+          <ul class="_timeline-list flex flex-col gap-8">
             {entries.map((entry) => (
               <li class='_timeline-section relative pl-[35px] before:content-[""] before:absolute before:w-4 before:bg-indigo-200 before:h-[1.5px] before:top-3 before:left-5 after:content-[""] after:absolute after:rotate-45 after:bg-indigo-300 after:w-2.5 after:h-2.5 after:top-[7px] after:left-2.5'>
                 <DailyPreview entry={entry} lang={lang} />
