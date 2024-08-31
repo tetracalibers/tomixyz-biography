@@ -1,51 +1,62 @@
 ---
 import { splitLangSlug } from "$/utils/i18n/collection"
-import { buildPageUrlFor } from "$/utils/i18n/slug"
 import type { CollectionEntry } from "astro:content"
-import remarkParse from "remark-parse"
-import remarkMdx from "remark-mdx"
-import { unified } from "unified"
-import { visit } from "unist-util-visit"
-
-async function extractFirstParagraph(mdxString: string) {
-  const tree = unified().use(remarkParse).use(remarkMdx).parse(mdxString)
-
-  let firstParagraphText = ""
-
-  visit(tree, "paragraph", (node) => {
-    if (!firstParagraphText) {
-      firstParagraphText = node.children.map((child) => child.value || "").join("")
-    }
-  })
-
-  return firstParagraphText
-}
 
 interface Props {
-  entry: CollectionEntry<"daily">
+  entry: CollectionEntry<"daily"> & { date: string; year: string; month: string; day: string }
   lang?: string
 }
 
 const { entry } = Astro.props
 
-const { slug: date, lang } = splitLangSlug(entry.slug)
-
-const builPageUrl = buildPageUrlFor("daily")
-const pageUrl = builPageUrl(date, lang)
+const { Content } = await entry.render()
+const { slug: date } = splitLangSlug(entry.slug)
 
 const formatDate = (date: string) => {
   return date.replaceAll("-", ".")
 }
 ---
 
-<div class="flex gap-6">
-  <div class="bg-fuchsia-100 max-w-[300px] p-4 grid gap-4">
-    <div>
-      <h2 class="text-xl font-semibold text-theme-primary dark:text-theme-dark-primary mb-2">
-        <a class="hover:underline" href={pageUrl}>{formatDate(date)}</a>
-      </h2>
-      <div class="text-sm">{extractFirstParagraph(entry.body)}</div>
+<div class="_timeline-section-inner flex flex-col gap-6">
+  <div
+    class="_timeline-date relative w-fit bg-purple-200 border border-purple-300 rounded-sm dark:text-theme-secondary py-0.5 px-[15px]"
+  >
+    {formatDate(date)}
+  </div>
+  <div class="_row flex flex-col gap-8">
+    <div
+      class="_timeline-box flex flex-col justify-between rounded-br-2xl bg-white/30 dark:bg-slate-300/20 border border-slate-300 shadow-sm"
+    >
+      <div class="_box-content flex flex-col gap-2 flex-1 p-4">
+        <div
+          class="prose dark:prose-dark max-w-full prose-sm prose-img:m-0 prose-img:max-w-full lg:prose-img:max-w-lg prose-a:underline-offset-[6px] prose-a:decoration-1 prose-a:decoration-dotted prose-a:break-all leading-loose tracking-wide"
+        >
+          <Content />
+        </div>
+      </div>
     </div>
-    <a class="hover:underline text-end" href={pageUrl}>read more...</a>
   </div>
 </div>
+
+<style>
+  ._box-content {
+    font-family: "Zen Maru Gothic", serif;
+  }
+
+  .prose :global(:not(pre, h1, h2, h3, h4, h5, h6) > code) {
+    color: inherit;
+    padding: 0.3em 0.5em;
+    background-color: rgba(210, 218, 255, 0.15);
+    border-radius: 1em;
+    font-weight: normal;
+  }
+  :global(.dark) .prose :global(:not(pre, h1, h2, h3, h4, h5, h6) > code) {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  .prose :global(:not(pre) > code)::before {
+    display: none;
+  }
+  .prose :global(:not(pre) > code)::after {
+    display: none;
+  }
+</style>
