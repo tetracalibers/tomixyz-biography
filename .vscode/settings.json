@@ -2,7 +2,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "files.associations": {
-    "*.mdx": "mdx"
+    "*.mdx": "markdown"
   },
   "prettier.documentSelectors": ["**/*.astro"],
   "[astro]": {
