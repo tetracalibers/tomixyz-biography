@@ -1,6 +1,5 @@
 ---
 import { splitLangSlug } from "$/utils/i18n/collection"
-import { buildPageUrlFor } from "$/utils/i18n/slug"
 import type { CollectionEntry } from "astro:content"
 
 interface Props {
@@ -11,10 +10,7 @@ interface Props {
 const { entry } = Astro.props
 
 const { Content } = await entry.render()
-const { slug: date, lang } = splitLangSlug(entry.slug)
-
-const builPageUrl = buildPageUrlFor("daily")
-const pageUrl = builPageUrl(date, lang)
+const { slug: date } = splitLangSlug(entry.slug)
 
 const formatDate = (date: string) => {
   return date.replaceAll("-", ".")
