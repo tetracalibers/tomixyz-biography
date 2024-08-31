@@ -25,6 +25,14 @@ export const NAV_ITEMS: NavItems = {
     path: "/tutorial/",
     title: "tutorial"
   },
+  daily: {
+    path: "/daily/",
+    title: "daily"
+  },
+  input: {
+    path: "/input/",
+    title: "input"
+  },
   tags: {
     path: "/tags/",
     title: "tags"
@@ -37,7 +45,7 @@ export const SITE = {
   title: "tomixy's biography",
   description: "",
   url: "https://tetracalibers.github.io/tomixyz-biography",
-  base: "/tomixyz-biography",
+  base: import.meta.env.CF_PAGES == 1 ? "" : "/tomixyz-biography",
   githubUrl: "https://github.com/tetracalibers",
   listDrafts: true,
   // YT video channel Id (used in media.astro)
@@ -55,3 +63,9 @@ export const SITE = {
 
 // Ink - Theme configuration
 export const PAGE_SIZE = 8
+
+// for expressive-code
+export const EXP_CODE_THEME = {
+  dark: "monokai",
+  light: "github-light"
+}

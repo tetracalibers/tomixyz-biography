@@ -12,6 +12,7 @@ import { addColorPreview } from "./plugins/pretty-code/add-color-preview"
 import { transformerNotationErrorLevel } from "@shikijs/transformers"
 import remarkMath from "remark-math"
 import rehypeKatex from "rehype-katex"
+import expressiveCode from "astro-expressive-code"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
@@ -24,8 +25,6 @@ const __dirname = dirname(__filename)
 // You can disable this by removing "@ts-check" and `@type` comments below.
 
 // @ts-check
-
-// https://astro.build/config
 
 /** @type {import("rehype-pretty-code").Options} */
 const prettyCodeOptions = {
@@ -47,14 +46,15 @@ export default defineConfig(
     // outDir: './dist',       // When running `astro build`, path to final static output
     // publicDir: './public',   // A folder of static files Astro will copy to the root. Useful for favicons, images, and other files that don’t need processing.
     site: "https://tetracalibers.github.io",
-    base: "/tomixyz-biography",
+    base: process.env.CF_PAGES == 1 ? "" : "/tomixyz-biography",
     trailingSlash: "ignore",
     scopedStyleStrategy: "where",
     server: {
       port: 3000
     },
     markdown: {
-      syntaxHighlight: false, // Disable syntax built-in syntax hightlighting from astro
+      syntaxHighlight: false,
+      // Disable syntax built-in syntax hightlighting from astro
       rehypePlugins: [
         [rehypeKatex, {}],
         [rehypePrettyCode, prettyCodeOptions]
@@ -63,6 +63,7 @@ export default defineConfig(
     },
     integrations: [
       icon(),
+      expressiveCode(),
       mdx(),
       svelte(),
       tailwind({
@@ -72,6 +73,9 @@ export default defineConfig(
       }),
       sitemap()
     ],
+    devToolbar: {
+      enabled: false
+    },
     vite: {
       plugins: [],
       resolve: {
