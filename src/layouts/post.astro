@@ -6,13 +6,16 @@ import BaseHead from "$/components/BaseHead.astro"
 import Prose from "$/components/Prose.astro"
 import AvatarImage from "$components/image-wrapper/AvatarImage.astro"
 import PublishDate from "$components/article-header/PublishDate.astro"
+import type { MarkdownHeading } from "astro"
+import TocList from "$components/toc/TocList.astro"
 
 interface Props {
+  headings: MarkdownHeading[]
   content: CollectionEntry<"blog">["data"]
   ogimage?: string
   lang?: string
 }
-const { content, ogimage, lang = "ja" } = Astro.props
+const { content, headings, ogimage, lang = "ja" } = Astro.props
 
 const AUTHOR_NAME = SITE.author
 ---
@@ -34,8 +37,12 @@ const AUTHOR_NAME = SITE.author
         </div>
       </div>
     </div>
+    <div class="_toc flex flex-col gap-6 items-start p-6 sm:p-8 sm:mx-6 text-slate-600 dark:text-slate-100">
+      <h2 class="text-xl uppercase text-slate-500 dark:text-slate-200">Contents</h2>
+      <TocList headings={headings} />
+    </div>
     <Prose>
-      <div class="post__content"><slot /></div>
+      <div class="post__content text-lg leading-loose"><slot /></div>
     </Prose>
   </MainLayout>
   <style>
@@ -68,6 +75,16 @@ const AUTHOR_NAME = SITE.author
 
       object-position: center;
       object-fit: contain;
+    }
+
+    ._toc {
+      backdrop-filter: saturate(200%);
+      background-color: rgba(255, 255, 255, 0.6);
+      border-radius: 12px;
+      border: 1px solid rgba(209, 213, 219, 0.3);
+    }
+    :global(.dark) ._toc {
+      background-color: rgba(255, 255, 255, 0.2);
     }
   </style>
 </html>
