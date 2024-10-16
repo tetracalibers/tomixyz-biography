@@ -14,7 +14,7 @@ const buildPageUrl = buildPageUrlFor("tags")
 const pageUrlFromTagName = (tagName: string) => buildPageUrl(tagToSlug(tagName), lang)
 ---
 
-<div class="inline-flex flex-wrap gap-x-2 gap-y-3 justify-center sm:justify-start">
+<div class="inline-flex flex-wrap gap-x-2 gap-y-3 justify-center md:justify-start">
   {
     tags.length > 0 &&
       tags.map((tag) => (
