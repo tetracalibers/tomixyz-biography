@@ -16,11 +16,11 @@ interface Props {
 const { page, lang } = Astro.props
 const { slug } = Astro.params
 
-const { Content } = await page.render()
+const { Content, headings } = await page.render()
 
 const ogimage = `/og-image/${lang}/blog/${slug}.png`
 ---
 
-<PostLayout content={page.data} ogimage={ogimage} lang={lang}>
+<PostLayout content={page.data} ogimage={ogimage} lang={lang} headings={headings}>
   <Content />
 </PostLayout>

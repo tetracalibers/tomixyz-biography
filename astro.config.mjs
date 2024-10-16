@@ -49,6 +49,9 @@ export default defineConfig(
     base: process.env.CF_PAGES == 1 ? "" : "/tomixyz-biography",
     trailingSlash: "ignore",
     scopedStyleStrategy: "where",
+    devToolbar: {
+      enabled: false
+    },
     server: {
       port: 3000
     },

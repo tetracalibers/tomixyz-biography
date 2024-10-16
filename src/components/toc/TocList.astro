@@ -6,12 +6,13 @@ interface Props {
 }
 
 const { headings } = Astro.props
+const showHeadings = headings.filter((heading) => heading.depth < 4)
 ---
 
 {
-  headings.length > 0 && (
+  showHeadings.length > 0 && (
     <ul class="flex flex-col gap-2 w-fit">
-      {headings.map((heading) => (
+      {showHeadings.map((heading) => (
         <li>
           <a href={`#${heading.slug}`} class="flex gap-4" class:list={["_heading-link", `_depth-${heading.depth}`]}>
             {heading.text}
