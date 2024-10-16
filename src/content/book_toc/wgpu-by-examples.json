@@ -1,0 +1,1452 @@
+[
+  {
+    "title": "Get Started",
+    "chapter": "1",
+    "depth": 0
+  },
+  {
+    "title": "Creating a Rust Application",
+    "chapter": "1.1",
+    "depth": 1
+  },
+  {
+    "title": "wgpu initialization",
+    "chapter": "1.2",
+    "depth": 1
+  },
+  {
+    "title": "wgpu Backends",
+    "chapter": "1.2.1",
+    "depth": 2
+  },
+  {
+    "title": "Surface",
+    "chapter": "1.2.2",
+    "depth": 2
+  },
+  {
+    "title": "wgpu Information",
+    "chapter": "1.3",
+    "depth": 1
+  },
+  {
+    "title": "wgpu Basics",
+    "chapter": "1.4",
+    "depth": 1
+  },
+  {
+    "title": "Render Pipelines",
+    "chapter": "1.4.1",
+    "depth": 2
+  },
+  {
+    "title": "Render Passes",
+    "chapter": "1.4.2",
+    "depth": 2
+  },
+  {
+    "title": "Triangle with Distinct Vertex Colors",
+    "chapter": "1.5",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "1.5.1",
+    "depth": 2
+  },
+  {
+    "title": "Common Code",
+    "chapter": "1.5.2",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "1.5.3",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "1.5.4",
+    "depth": 2
+  },
+  {
+    "title": "Triangle Primitives",
+    "chapter": "1.6",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "1.6.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "1.6.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "1.6.3",
+    "depth": 2
+  },
+  {
+    "title": "Create Triangle Using GPU Buffers",
+    "chapter": "1.7",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "1.7.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "1.7.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "1.7.3",
+    "depth": 2
+  },
+  {
+    "title": "Create Lines with MSAA",
+    "chapter": "1.8",
+    "depth": 1
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "1.8.1",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "1.8.2",
+    "depth": 2
+  },
+  {
+    "title": "3D Shapes and Wireframes",
+    "chapter": "2",
+    "depth": 0
+  },
+  {
+    "title": "Transformations",
+    "chapter": "2.1",
+    "depth": 1
+  },
+  {
+    "title": "Create 3D Cube",
+    "chapter": "2.2",
+    "depth": 1
+  },
+  {
+    "title": "Vertex Data",
+    "chapter": "2.2.1",
+    "depth": 2
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "2.2.2",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "2.2.3",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "2.2.4",
+    "depth": 2
+  },
+  {
+    "title": "Cube with Wireframe",
+    "chapter": "2.3",
+    "depth": 1
+  },
+  {
+    "title": "Shader code",
+    "chapter": "2.3.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "2.3.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "2.3.3",
+    "depth": 2
+  },
+  {
+    "title": "Sphere with Wireframe",
+    "chapter": "2.4",
+    "depth": 1
+  },
+  {
+    "title": "Vertex Data",
+    "chapter": "2.4.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "2.4.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "2.4.3",
+    "depth": 2
+  },
+  {
+    "title": "Cylinder with Wireframe",
+    "chapter": "2.5",
+    "depth": 1
+  },
+  {
+    "title": "Vertex Data",
+    "chapter": "2.5.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "2.5.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "2.5.3",
+    "depth": 2
+  },
+  {
+    "title": "Torus with Wireframe",
+    "chapter": "2.6",
+    "depth": 1
+  },
+  {
+    "title": "Vertex Data",
+    "chapter": "2.6.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "2.6.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "2.6.3",
+    "depth": 2
+  },
+  {
+    "title": "Lighting and Shading",
+    "chapter": "3",
+    "depth": 0
+  },
+  {
+    "title": "Light Components",
+    "chapter": "3.1",
+    "depth": 1
+  },
+  {
+    "title": "Normal Vectors",
+    "chapter": "3.2",
+    "depth": 1
+  },
+  {
+    "title": "Surface Normal of a Cube",
+    "chapter": "3.2.1",
+    "depth": 2
+  },
+  {
+    "title": "Surface Normal of a Sphere",
+    "chapter": "3.2.2",
+    "depth": 2
+  },
+  {
+    "title": "Surface Normal of a Cylinder",
+    "chapter": "3.2.3",
+    "depth": 2
+  },
+  {
+    "title": "Surface Normal of a Polyhedral Surface",
+    "chapter": "3.2.4",
+    "depth": 2
+  },
+  {
+    "title": "Blinn-Phong Light Model",
+    "chapter": "3.3",
+    "depth": 1
+  },
+  {
+    "title": "Diffuse Light",
+    "chapter": "3.3.1",
+    "depth": 2
+  },
+  {
+    "title": "Specular Light",
+    "chapter": "3.3.2",
+    "depth": 2
+  },
+  {
+    "title": "Normal Vector Transformation",
+    "chapter": "3.3.3",
+    "depth": 2
+  },
+  {
+    "title": "Shader with Blinn-Phong Model",
+    "chapter": "3.3.4",
+    "depth": 2
+  },
+  {
+    "title": "3D Shapes with Blinn-Phong Lighting",
+    "chapter": "3.4",
+    "depth": 1
+  },
+  {
+    "title": "Common Code",
+    "chapter": "3.4.1",
+    "depth": 2
+  },
+  {
+    "title": "Cube with Lighting",
+    "chapter": "3.4.2",
+    "depth": 2
+  },
+  {
+    "title": "Sphere with Lighting",
+    "chapter": "3.4.3",
+    "depth": 2
+  },
+  {
+    "title": "Torus with Lighting",
+    "chapter": "3.4.4",
+    "depth": 2
+  },
+  {
+    "title": "Directional Light",
+    "chapter": "3.5",
+    "depth": 1
+  },
+  {
+    "title": "Instanced Drawing",
+    "chapter": "3.5.1",
+    "depth": 2
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "3.5.2",
+    "depth": 2
+  },
+  {
+    "title": "Common Code",
+    "chapter": "3.5.3",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "3.5.4",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "3.5.5",
+    "depth": 2
+  },
+  {
+    "title": "Point Light",
+    "chapter": "3.6",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "3.6.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "3.6.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "3.6.3",
+    "depth": 2
+  },
+  {
+    "title": "Spotlight",
+    "chapter": "3.7",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "3.7.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "3.7.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "3.7.3",
+    "depth": 2
+  },
+  {
+    "title": "Soft Edge Spotlight",
+    "chapter": "3.8",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "3.8.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "3.8.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "3.8.3",
+    "depth": 2
+  },
+  {
+    "title": "Fog Effect",
+    "chapter": "3.9",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "3.9.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "3.9.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "3.9.3",
+    "depth": 2
+  },
+  {
+    "title": "Advanced Lighting",
+    "chapter": "4",
+    "depth": 0
+  },
+  {
+    "title": "Shadow Mapping",
+    "chapter": "4.1",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "4.1.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "4.1.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "4.1.3",
+    "depth": 2
+  },
+  {
+    "title": "Introduction to PBR",
+    "chapter": "4.2",
+    "depth": 1
+  },
+  {
+    "title": "Microfacet Model",
+    "chapter": "4.2.1",
+    "depth": 2
+  },
+  {
+    "title": "Bidirectional Reflectance Distribution Function",
+    "chapter": "4.2.2",
+    "depth": 2
+  },
+  {
+    "title": "Normal Distribution Function",
+    "chapter": "4.2.3",
+    "depth": 2
+  },
+  {
+    "title": "Geometry Function",
+    "chapter": "4.2.4",
+    "depth": 2
+  },
+  {
+    "title": "Fresnel Equation",
+    "chapter": "4.2.5",
+    "depth": 2
+  },
+  {
+    "title": "PBR Implementation",
+    "chapter": "4.3",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "4.3.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "4.3.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "4.3.3",
+    "depth": 2
+  },
+  {
+    "title": "Colormap and 3D Surfaces",
+    "chapter": "5",
+    "depth": 0
+  },
+  {
+    "title": "Color Models",
+    "chapter": "5.1",
+    "depth": 1
+  },
+  {
+    "title": "Colormap",
+    "chapter": "5.2",
+    "depth": 1
+  },
+  {
+    "title": "Colormap Data",
+    "chapter": "5.2.1",
+    "depth": 2
+  },
+  {
+    "title": "Color Interpolation",
+    "chapter": "5.2.2",
+    "depth": 2
+  },
+  {
+    "title": "Framerate and FPS",
+    "chapter": "5.3",
+    "depth": 1
+  },
+  {
+    "title": "Shaders with Lighting and Vertex Color",
+    "chapter": "5.4",
+    "depth": 1
+  },
+  {
+    "title": "Simple 3D Surfaces",
+    "chapter": "5.5",
+    "depth": 1
+  },
+  {
+    "title": "Vertex Data",
+    "chapter": "5.5.1",
+    "depth": 2
+  },
+  {
+    "title": "Math Functions for Simple surfaces",
+    "chapter": "5.5.2",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "5.5.3",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "5.5.4",
+    "depth": 2
+  },
+  {
+    "title": "Parametric 3D Surfaces",
+    "chapter": "5.6",
+    "depth": 1
+  },
+  {
+    "title": "Vertex Data",
+    "chapter": "5.6.1",
+    "depth": 2
+  },
+  {
+    "title": "Math Functions for Parametric Surfaces",
+    "chapter": "5.6.2",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "5.6.3",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "5.6.4",
+    "depth": 2
+  },
+  {
+    "title": "Multiple Surfaces",
+    "chapter": "5.7",
+    "depth": 1
+  },
+  {
+    "title": "Rendering Multiple Simple Surfaces",
+    "chapter": "5.7.1",
+    "depth": 2
+  },
+  {
+    "title": "Rendering Multiple Parametric Surfaces",
+    "chapter": "5.7.2",
+    "depth": 2
+  },
+  {
+    "title": "Textures",
+    "chapter": "6",
+    "depth": 0
+  },
+  {
+    "title": "Texture Coordinates",
+    "chapter": "6.1",
+    "depth": 1
+  },
+  {
+    "title": "Texture Mapping in wgpu",
+    "chapter": "6.2",
+    "depth": 1
+  },
+  {
+    "title": "Shaders with Texture",
+    "chapter": "6.3",
+    "depth": 1
+  },
+  {
+    "title": "Vertex Shader",
+    "chapter": "6.3.1",
+    "depth": 2
+  },
+  {
+    "title": "Fragment Shader",
+    "chapter": "6.3.2",
+    "depth": 2
+  },
+  {
+    "title": "Common Code",
+    "chapter": "6.4",
+    "depth": 1
+  },
+  {
+    "title": "Simple 3D Shapes",
+    "chapter": "6.5",
+    "depth": 1
+  },
+  {
+    "title": "Cube with Texture",
+    "chapter": "6.5.1",
+    "depth": 2
+  },
+  {
+    "title": "Sphere with Texture",
+    "chapter": "6.5.2",
+    "depth": 2
+  },
+  {
+    "title": "3D Surfaces",
+    "chapter": "6.6",
+    "depth": 1
+  },
+  {
+    "title": "Simple Surfaces with Texture",
+    "chapter": "6.6.1",
+    "depth": 2
+  },
+  {
+    "title": "Parametric Surfaces with Texture",
+    "chapter": "6.6.2",
+    "depth": 2
+  },
+  {
+    "title": "Cube with Multiple Textures",
+    "chapter": "6.7",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "6.7.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "6.7.2",
+    "depth": 2
+  },
+  {
+    "title": "Normal Mapping",
+    "chapter": "6.8",
+    "depth": 1
+  },
+  {
+    "title": "Calculating Tangents and Bitangents",
+    "chapter": "6.8.1",
+    "depth": 2
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "6.8.2",
+    "depth": 2
+  },
+  {
+    "title": "Cube with Normal Map",
+    "chapter": "6.8.3",
+    "depth": 2
+  },
+  {
+    "title": "Sphere with Normal Mapping",
+    "chapter": "6.8.4",
+    "depth": 2
+  },
+  {
+    "title": "Parallax Mapping",
+    "chapter": "6.9",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "6.9.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "6.9.2",
+    "depth": 2
+  },
+  {
+    "title": "Compute Shaders for Surface Generation",
+    "chapter": "7",
+    "depth": 0
+  },
+  {
+    "title": "Compute Shaders",
+    "chapter": "7.1",
+    "depth": 1
+  },
+  {
+    "title": "Compute Space and Workgroups",
+    "chapter": "7.1.1",
+    "depth": 2
+  },
+  {
+    "title": "Write and Read Buffer",
+    "chapter": "7.1.2",
+    "depth": 2
+  },
+  {
+    "title": "Simple 3D Surfaces",
+    "chapter": "7.2",
+    "depth": 1
+  },
+  {
+    "title": "Compute Shader for Generating Indices",
+    "chapter": "7.2.1",
+    "depth": 2
+  },
+  {
+    "title": "Shader Code for Math Functions",
+    "chapter": "7.2.2",
+    "depth": 2
+  },
+  {
+    "title": "Compute Shader for Vertex Data",
+    "chapter": "7.2.3",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "7.2.4",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "7.2.5",
+    "depth": 2
+  },
+  {
+    "title": "Parametric 3D Surfaces",
+    "chapter": "7.3",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code for Math Functions",
+    "chapter": "7.3.1",
+    "depth": 2
+  },
+  {
+    "title": "Compute Shader for Vertex Data",
+    "chapter": "7.3.2",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "7.3.3",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "7.3.4",
+    "depth": 2
+  },
+  {
+    "title": "Super Shapes",
+    "chapter": "7.4",
+    "depth": 1
+  },
+  {
+    "title": "Compute Shader for Vertex Data",
+    "chapter": "7.4.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "7.4.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "7.4.3",
+    "depth": 2
+  },
+  {
+    "title": "Procedural Terrains",
+    "chapter": "8",
+    "depth": 0
+  },
+  {
+    "title": "Noise Model",
+    "chapter": "8.1",
+    "depth": 1
+  },
+  {
+    "title": "Perlin Noise",
+    "chapter": "8.1.1",
+    "depth": 2
+  },
+  {
+    "title": "Noise Map",
+    "chapter": "8.1.2",
+    "depth": 2
+  },
+  {
+    "title": "Creating Terrains on CPU",
+    "chapter": "8.2",
+    "depth": 1
+  },
+  {
+    "title": "Terrain Data",
+    "chapter": "8.2.1",
+    "depth": 2
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "8.2.2",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "8.2.3",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "8.2.4",
+    "depth": 2
+  },
+  {
+    "title": "Water Level",
+    "chapter": "8.3",
+    "depth": 1
+  },
+  {
+    "title": "Colormap for Terrain",
+    "chapter": "8.3.1",
+    "depth": 2
+  },
+  {
+    "title": "Terrain Data with Water Level",
+    "chapter": "8.3.2",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "8.3.3",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "8.3.4",
+    "depth": 2
+  },
+  {
+    "title": "Terrain Chunks",
+    "chapter": "8.4",
+    "depth": 1
+  },
+  {
+    "title": "Level of Detail Algorithm",
+    "chapter": "8.4.1",
+    "depth": 2
+  },
+  {
+    "title": "Terrain Chunk Data",
+    "chapter": "8.4.2",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "8.4.3",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "8.4.4",
+    "depth": 2
+  },
+  {
+    "title": "Terrain Instances",
+    "chapter": "8.5",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "8.5.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "8.5.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "8.5.3",
+    "depth": 2
+  },
+  {
+    "title": "Multiple Terrain Chunks",
+    "chapter": "8.6",
+    "depth": 1
+  },
+  {
+    "title": "Implementation",
+    "chapter": "8.6.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "8.6.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "8.6.3",
+    "depth": 2
+  },
+  {
+    "title": "Terrain Animation",
+    "chapter": "8.7",
+    "depth": 1
+  },
+  {
+    "title": "Creating Terrain on GPU",
+    "chapter": "8.8",
+    "depth": 1
+  },
+  {
+    "title": "WGSL Code for Noise Model",
+    "chapter": "8.8.1",
+    "depth": 2
+  },
+  {
+    "title": "Compute Shader for Terrain data",
+    "chapter": "8.8.2",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "8.8.3",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "8.8.4",
+    "depth": 2
+  },
+  {
+    "title": "Creating Minecraft on GPU",
+    "chapter": "8.9",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "8.9.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "8.9.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "8.9.3",
+    "depth": 2
+  },
+  {
+    "title": "Marching Cubes",
+    "chapter": "9",
+    "depth": 0
+  },
+  {
+    "title": "Marching Cubes Algorithm",
+    "chapter": "9.1",
+    "depth": 1
+  },
+  {
+    "title": "Implicit 3D Surfaces",
+    "chapter": "9.2",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code for Implicit Functions",
+    "chapter": "9.2.1",
+    "depth": 2
+  },
+  {
+    "title": "Compute Shader for Values",
+    "chapter": "9.2.2",
+    "depth": 2
+  },
+  {
+    "title": "Compute Shader for Implicit Surfaces",
+    "chapter": "9.2.3",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "9.2.4",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "9.2.5",
+    "depth": 2
+  },
+  {
+    "title": "Metaballs",
+    "chapter": "9.3",
+    "depth": 1
+  },
+  {
+    "title": "Compute Shader for Values",
+    "chapter": "9.3.1",
+    "depth": 2
+  },
+  {
+    "title": "Compute Shader for Metaballs",
+    "chapter": "9.3.2",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "9.3.3",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "9.3.4",
+    "depth": 2
+  },
+  {
+    "title": "Voxel Terrains",
+    "chapter": "9.4",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code for 3D Noise",
+    "chapter": "9.4.1",
+    "depth": 2
+  },
+  {
+    "title": "Compute Shader for Values",
+    "chapter": "9.4.2",
+    "depth": 2
+  },
+  {
+    "title": "Compute Shader for Voxel Terrain",
+    "chapter": "9.4.3",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "9.4.4",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "9.4.5",
+    "depth": 2
+  },
+  {
+    "title": "Voxel Volcanoes",
+    "chapter": "9.5",
+    "depth": 1
+  },
+  {
+    "title": "Compute Shader for Values",
+    "chapter": "9.5.1",
+    "depth": 2
+  },
+  {
+    "title": "Compute Shader for Volcano",
+    "chapter": "9.5.2",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "9.5.3",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "9.5.4",
+    "depth": 2
+  },
+  {
+    "title": "Voxel Minecraft",
+    "chapter": "9.6",
+    "depth": 1
+  },
+  {
+    "title": "Vertex Shader",
+    "chapter": "9.6.1",
+    "depth": 2
+  },
+  {
+    "title": "Compute Shader for Minecraft",
+    "chapter": "9.6.2",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "9.6.3",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "9.6.4",
+    "depth": 2
+  },
+  {
+    "title": "Visualizing Complex Functions",
+    "chapter": "10",
+    "depth": 0
+  },
+  {
+    "title": "Surface Plots on CPU",
+    "chapter": "10.1",
+    "depth": 1
+  },
+  {
+    "title": "Complex Numbers in Rust",
+    "chapter": "10.1.1",
+    "depth": 2
+  },
+  {
+    "title": "Surface Data",
+    "chapter": "10.1.2",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "10.1.3",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "10.1.4",
+    "depth": 2
+  },
+  {
+    "title": "Surface Plots on GPU",
+    "chapter": "10.2",
+    "depth": 1
+  },
+  {
+    "title": "Complex Functions in Shader",
+    "chapter": "10.2.1",
+    "depth": 2
+  },
+  {
+    "title": "Compute Shader for Surface Data",
+    "chapter": "10.2.2",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "10.2.3",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "10.2.4",
+    "depth": 2
+  },
+  {
+    "title": "Domain Coloring",
+    "chapter": "10.3",
+    "depth": 1
+  },
+  {
+    "title": "Color Functions in Shader",
+    "chapter": "10.3.1",
+    "depth": 2
+  },
+  {
+    "title": "Compute Shader for Domain Coloring",
+    "chapter": "10.3.2",
+    "depth": 2
+  },
+  {
+    "title": "Render Shader",
+    "chapter": "10.3.3",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "10.3.4",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "10.3.5",
+    "depth": 2
+  },
+  {
+    "title": "Domain Coloring for Iterated Functions",
+    "chapter": "10.4",
+    "depth": 1
+  },
+  {
+    "title": "Compute Shader for iterated functions",
+    "chapter": "10.4.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "10.4.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "10.4.3",
+    "depth": 2
+  },
+  {
+    "title": "Particle System",
+    "chapter": "11",
+    "depth": 0
+  },
+  {
+    "title": "Compute Boids",
+    "chapter": "11.1",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "11.1.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "11.1.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "11.1.3",
+    "depth": 2
+  },
+  {
+    "title": "Particles under Gravity",
+    "chapter": "11.2",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "11.2.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "11.2.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "11.2.3",
+    "depth": 2
+  },
+  {
+    "title": "Firework Simulation",
+    "chapter": "11.3",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "11.3.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "11.3.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "11.3.3",
+    "depth": 2
+  },
+  {
+    "title": "Fire Simulation",
+    "chapter": "11.4",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "11.4.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "11.4.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "11.4.3",
+    "depth": 2
+  },
+  {
+    "title": "Gravity on a 2D Grid",
+    "chapter": "11.5",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "11.5.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "11.5.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "11.5.3",
+    "depth": 2
+  },
+  {
+    "title": "Electric Field",
+    "chapter": "11.6",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "11.6.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "11.6.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "11.6.3",
+    "depth": 2
+  },
+  {
+    "title": "Universe and Stars",
+    "chapter": "11.7",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "11.7.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "11.7.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "11.7.3",
+    "depth": 2
+  },
+  {
+    "title": "Text Rendering",
+    "chapter": "12",
+    "depth": 0
+  },
+  {
+    "title": "Bitmap Fonts",
+    "chapter": "12.1",
+    "depth": 1
+  },
+  {
+    "title": "Shader Code",
+    "chapter": "12.1.1",
+    "depth": 2
+  },
+  {
+    "title": "Rust Code",
+    "chapter": "12.1.2",
+    "depth": 2
+  },
+  {
+    "title": "Run Application",
+    "chapter": "12.1.3",
+    "depth": 2
+  },
+  {
+    "title": "Glyph Geometry",
+    "chapter": "12.2",
+    "depth": 1
+  },
+  {
+    "title": "Font Data",
+    "chapter": "12.2.1",
+    "depth": 2
+  },
+  {
+    "title": "2D Glyph Text",
+    "chapter": "12.2.2",
+    "depth": 2
+  },
+  {
+    "title": "3D Glyph Text",
+    "chapter": "12.2.3",
+    "depth": 2
+  }
+]
