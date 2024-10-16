@@ -27,13 +27,19 @@ const AUTHOR_NAME = SITE.author
   </head>
   <MainLayout>
     <div class="flex flex-col gap-8">
-      <div class="post__header flex flex-col gap-8">
-        <h1 class="post__title">{content.title}</h1>
+      <div class="py-4 mb-4 text-center md:text-left flex flex-col gap-8">
+        <h1 class="text-5xl leading-normal font-extrabold text-theme-primary dark:text-theme-dark-primary">
+          {content.title}
+        </h1>
         <p class="text-gray-500 dark:text-gray-100">{content.description}</p>
-        <div class="post__desc flex flex-row gap-2">
-          <AvatarImage className="avatar" />
+        <div
+          class="text-gray-500 dark:text-gray-100 flex justify-center text-left md:flex-none md:justify-start flex-row gap-2"
+        >
+          <AvatarImage
+            className="w-12 h-12 rounded-full object-cover p-1 border-2 border-solid border-theme-dark-primary dark:border-theme-primary"
+          />
           <div class="flex flex-col border-l-2 pl-2">
-            <span class="post__author">{AUTHOR_NAME}</span>
+            <span class="no-underline text-gray-500 dark:text-gray-100 hover:text-theme-primary">{AUTHOR_NAME}</span>
             <PublishDate date={content.date} />
           </div>
         </div>
@@ -43,28 +49,12 @@ const AUTHOR_NAME = SITE.author
         <TocList headings={headings} />
       </div>
       <Prose>
-        <div class="post__content text-lg leading-loose"><slot /></div>
+        <div class="_content text-lg leading-loose"><slot /></div>
       </Prose>
     </div>
   </MainLayout>
   <style>
-    .post__header {
-      @apply py-4 mb-4 text-center md:text-left;
-    }
-    .post__title {
-      @apply text-5xl font-extrabold text-theme-primary dark:text-theme-dark-primary;
-      line-height: 1.5;
-    }
-    .post__desc {
-      @apply text-gray-500 dark:text-gray-100 flex justify-center text-left md:flex-none md:justify-start;
-    }
-    .post__author {
-      @apply no-underline text-gray-500 dark:text-gray-100 hover:text-theme-primary;
-    }
-    .avatar {
-      @apply w-12 h-12 rounded-full object-cover p-1 border-2 border-solid border-theme-dark-primary dark:border-theme-primary;
-    }
-    .post__content :global(p > img) {
+    ._content :global(p > img) {
       --fluid-bp-320-600: calc((100vw - 320px) / (600 - 320));
       --__max-height: 300px;
       --__space: clamp(16px, (16px + (68 - 16) * var(--fluid-bp-320-600)), 68px);
