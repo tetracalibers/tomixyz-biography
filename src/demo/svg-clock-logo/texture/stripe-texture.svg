@@ -1,0 +1,18 @@
+<svg width="300" height="300" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="diagonalHatch" gradientUnits="userSpaceOnUse" x2="60" spreadMethod="repeat"
+      gradientTransform="rotate(-45)">
+      <stop offset="0" stop-color="rgba(172, 57, 138, 0.6)" />
+      <stop offset="0.33" stop-color="rgba(172, 57, 138, 0.6)" />
+      <stop offset="0.33" stop-color="rgba(87, 30, 128, 0.6)" />
+      <stop offset="0.67" stop-color="rgba(87, 30, 128, 0.6)" />
+      <stop offset="0.67" stop-color="rgba(79, 170, 227, 0.4)" />
+      <stop offset="1.0" stop-color="rgba(79, 170, 227, 0.4)" />
+    </linearGradient>
+    <filter id="T10">
+      <feTurbulence baseFrequency=".04" type="fractalNoise" />
+      <feComposite operator="arithmetic" in2="SourceGraphic" k1="1.5" k2="1.2" k3="2.5" />
+    </filter>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#diagonalHatch)" filter="url(#T10)" />
+</svg>
