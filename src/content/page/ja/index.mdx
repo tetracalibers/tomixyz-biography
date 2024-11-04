@@ -8,21 +8,23 @@ import Prose from "$/components/Prose.astro"
 import { Image } from "astro:assets"
 import img_tomixy from "../../../assets/profiles/pastel-tomixy_op.png"
 
-<Prose>
+<Prose grid={false}>
 
-2002年生まれ。
-
-高校在学中からフリーランスとしてWeb開発に携わり、卒業後は都内のIT企業にてフロントエンド・バックエンドともに設計・実装の主力となる傍らで、HTML・CSS・VBA・Laravelなどの勉強会講師を経験。
-
-2022年11月に[株式会社ピクセルグリッド](https://www.pxgrid.com/)に入社し、現在は末っ子フロントエンドエンジニアとして邁進している。
-
-<div class="author">
-  <Image src={img_tomixy} alt="tomixy" style="max-width: 160px;" />
+<div class="text-lg leading-loose px-[calc(max(2vw,2vw)*2.5)]">
+  2002年生まれ。
+  
+  高校在学中からフリーランスとしてWeb開発に携わり、卒業後は都内のIT企業にてフロントエンド・バックエンドともに設計・実装の主力となる傍らで、HTML・CSS・VBA・Laravelなどの勉強会講師を経験。
+  
+  2022年11月に[株式会社ピクセルグリッド](https://www.pxgrid.com/)に入社し、現在は末っ子フロントエンドエンジニアとして邁進している。
+  
+  <div class="author w-fit mx-auto">
+    <Image src={img_tomixy} alt="tomixy" style="max-width: 160px;" />
+  </div>
 </div>
 
 </Prose>
 
-<Prose fill={false} grid={false}>
+<Prose fill={false}>
 
 ## History
 
