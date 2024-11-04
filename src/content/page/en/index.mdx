@@ -8,25 +8,27 @@ import { Image } from "astro:assets"
 
 import img_tomixy from "../../../assets/profiles/pastel-tomixy_op.png"
 
-<Prose>
+<Prose grid={false}>
 
-I was born in 2002.
-
-I have been involved in web development since I was a high school student.
-After graduating from high school, I have been responsible for designing and implementing software in front-end and back-end engineering fields.
-I'm a training instructor as well as a leading developer.
-I led the study group in my previous company for HTML, CSS, VBA, and Laravel.
-
-I joined [PixelGrid Inc.](https://www.pxgrid.com/) in November 2022.
-I have been working as the youngest front-end developer at PixelGrid Inc.
-
-<div class="author">
-  <Image src={img_tomixy} alt="tomixy" style="max-width: 160px;" />
+<div class="px-[calc(2vw*2.5)]">
+  I was born in 2002.
+  
+  I have been involved in web development since I was a high school student.
+  After graduating from high school, I have been responsible for designing and implementing software in front-end and back-end engineering fields.
+  I'm a training instructor as well as a leading developer.
+  I led the study group in my previous company for HTML, CSS, VBA, and Laravel.
+  
+  I joined [PixelGrid Inc.](https://www.pxgrid.com/) in November 2022.
+  I have been working as the youngest front-end developer at PixelGrid Inc.
+  
+  <div class="author w-fit mx-auto">
+    <Image src={img_tomixy} alt="tomixy" style="max-width: 160px;" />
+  </div>
+  
 </div>
-
 </Prose>
 
-<Prose fill={false} grid={false}>
+<Prose fill={false}>
 
 ## History
 

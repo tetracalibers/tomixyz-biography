@@ -8,23 +8,40 @@ import Prose from "$/components/Prose.astro"
 import { Image } from "astro:assets"
 import img_tomixy from "../../../assets/profiles/pastel-tomixy_op.png"
 
-<Prose>
+<Prose grid={false}>
 
-2002年生まれ。
+<div class="text-lg leading-loose px-[calc(2vw*2.5)]">
+  2002年生まれ。
+  
+  高校時代に独学でプログラミングを始め、高校在学中からフリーランスとしてWeb開発に携わる。
+  卒業後は都内のIT企業にてフロントエンド・バックエンドともに設計・実装の主力となる傍らで、HTML・CSS・VBA・Laravelなどの勉強会講師も経験した。
 
-高校在学中からフリーランスとしてWeb開発に携わり、卒業後は都内のIT企業にてフロントエンド・バックエンドともに設計・実装の主力となる傍らで、HTML・CSS・VBA・Laravelなどの勉強会講師を経験。
+  次第にアクセシビリティやグラフィック表現に携わりたいという思いが強くなり、フロントエンドの道を選ぶ。
 
-2022年11月に[株式会社ピクセルグリッド](https://www.pxgrid.com/)に入社し、現在は末っ子フロントエンドエンジニアとして邁進している。
+  2022年11月に[株式会社ピクセルグリッド](https://www.pxgrid.com/)に入社し、現在は末っ子フロントエンドエンジニアとして邁進している。
 
-<div class="author">
-  <Image src={img_tomixy} alt="tomixy" style="max-width: 160px;" />
+  <div class="author w-fit mx-auto">
+    <Image src={img_tomixy} alt="tomixy" style="max-width: 160px;" />
+  </div>
 </div>
 
 </Prose>
 
-<Prose fill={false} grid={false}>
+<Prose>
 
-## History
+## 興味・関心
+
+Webクリエイティブに対して幅広い関心を抱くと同時に、その基盤となるレンダリングの仕組みを掘り下げることに情熱を注いでいます。
+
+その延長線として、CGや画像処理の領域にも関心があり、SVG、WebGL、WebGPU、シェーダー言語（GLSLやWGSL）を使ったグラフィック表現や画像加工アルゴリズムを研究することが趣味です。
+
+HTML、CSS、JavaScript、TypeScriptはもちろん、ブラウザの仕組みを知るための個人的な検証のため、Web開発を支えるツールでも採用されつつあるRustを触ることも多くあります。
+
+</Prose>
+
+<Prose fill={false}>
+
+## 経歴
 
 ### 2022年11月
 

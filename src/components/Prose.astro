@@ -89,11 +89,6 @@ const { grid = true, fill = true } = Astro.props
     margin-inline: -1rem;
   }
 
-  .prose.grid:has(*):lang(en) {
-    --px: 2vw;
-    --py: 2vh;
-  }
-
   .prose.grid:has(*)::before {
     content: "";
     position: absolute;
