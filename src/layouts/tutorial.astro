@@ -61,7 +61,7 @@ const series = _series ? await collectSeriesArticles(_series.slug) : undefined
       <TutorialTOC headings={headings} current={slug} series={series} lang={lang} />
       <Prose>
         <div class="_content">
-          <slot />
+          <div class="text-lg leading-loose"><slot /></div>
           {series && <NextArticles current={slug} series={series} lang={lang} />}
         </div>
       </Prose>

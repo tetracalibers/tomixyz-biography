@@ -1,0 +1,250 @@
+---
+title: wgpuで動かすシェーダーの世界（仮）
+date: "2024-10-22"
+description: TODO
+series: ja/wgpu-shader-world
+tags:
+  - Rust
+  - WebGPU
+  - wgpu
+  - WGSL
+---
+
+wgpuとは、WebGPUのAPIをRustで実装したGPUレンダリングライブラリです。
+
+## winitでウィンドウを立ち上げる
+
+### v30系のwinit
+
+## WebGPUとwgpuの違い
+
+WebGPUで登場する概念やAPIの形式は、wgpuでもほとんどそのまま実装されています。
+
+### wgpuはSurfaceで多様な描画先を表す
+
+Surfaceは、WebGPUにはない、wgpu特有の概念です。
+
+ブラウザで動作するWebGPUでは、レンダリングターゲットはcanvas要素となりますが、wgpuでは、さまざまな描画先をサポートしています。
+
+適切にコーディングすることで、OSが起動したウィンドウだけでなく、スマホにも対応したり、WebAssemblyとしてコンパイルしてWebページのcanvas要素に描画することもできます。
+
+そのため、wgpuには、抽象的にレンダリングターゲットを表す概念として、Surfaceがあります。
+
+### wgpuはInstance経由で初期化を行う
+
+WebGPUでは、`navigator.gpu`経由でデバイスを取得し、`canvas`から取得したコンテキストを使って、デバイスで使用するキャンバスを設定します。
+
+一方で、wgpuでは、`Instance`という形で、レンダリングに使うバックエンドを呼び出し、`Instance`経由でデバイスの取得などを行うことになります。
+
+初期化処理の比較を、順に見ていきましょう。
+
+#### レンダリングに使うバックエンドの呼び出し
+
+WebGPUを使用するためのスタート地点は、`navigator.gpu`で取得できる[GPU](https://developer.mozilla.org/ja/docs/Web/API/GPU)オブジェクトです。一方、wgpuを使用するためのスタート地点は`Instance`です。
+
+レンダリングに使われるバックエンドは、OSによって異なります。さまざまな環境で動かせるwgpuでは、まずは`Instance`の生成という形で、描画バックエンドの設定を行います。
+
+```rs
+let instance = Instance::new(InstanceDescriptor {
+  // Backends::all => Vulkan + Metal + DX12 + Browser WebGPU
+  // allとすることですべてのバックエンドから必要なものを選択してくれる
+  backends: Backends::all(),
+  ..Default::default()
+});
+```
+
+デフォルトは`Backends::all(){:rs}`であり、すべてのバックエンドから必要なものを選択してくれます。
+次のように書いても、意味は同じです。
+
+```rs
+let instance = wgpu::Instance::default();
+```
+
+また、特定のバックエンドを指定することもできます。
+
+```rs
+let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
+  backends: wgpu::Backends::DX12,
+  dx12_shader_compiler: Default::default(),
+});
+```
+
+#### レンダリングターゲットの取得（作成）
+
+WebGPUを使う場合は、HTMLページ上に配置した`canvas`要素にJSでアクセスすることになります。
+
+```html
+<canvas width="512" height="512"></canvas>
+<script type="module">
+  const canvas = document.querySelector("canvas");
+</script>
+```
+
+wgpuでは、描画先を表す`Surface`を、`Instance`から作成します。
+引数には、winitで生成した`Window`オブジェクトなど、具体的な描画先を指定することになります。
+
+```rs
+let surface = instance.create_surface(window).unwrap();
+```
+
+#### Adapterの取得
+
+WebGPU（wgpu）では、OSのネイティブグラフィックスAPIに`Adapter`経由でアクセスします。
+
+WebGPUでは、`navigator.gpu{:js}`から`Adapter`を取得することができます。
+
+```js
+const adapter = await navigator.gpu.requestAdapter();
+```
+
+wgpuでは、`Adapter`の取得も`Instance`から行います。
+描画先に適したグラフィックスAPIを呼び出すため、先ほど作った`Surface`を指定する必要があります。
+
+```rs
+let adapter = instance
+  .request_adapter(&wgpu::RequestAdapterOptions {
+    power_preference: wgpu::PowerPreference::default(),
+    compatible_surface: Some(&surface),
+    force_fallback_adapter: false,
+  })
+  .await
+  .expect("Failed to find an appropriate adapter");
+```
+
+#### Deviceの取得とQueueの作成
+
+#### レンダリングターゲットとデバイスの紐付け
+
+## 雛形コード
+
+```rust
+use std::{sync::Arc, time, iter};
+
+use anyhow::Result;
+use wgpu_helper::framework::v1::{App, Render};
+use wgpu_helper::wgpu_simplified as ws;
+use winit::{dpi::PhysicalSize, event::WindowEvent, window::Window};
+
+pub fn run(title: &str) -> Result<()> {
+  env_logger::init();
+  
+  let inputs = Inputs {
+    /**
+     * レンダリングに必須の初期化データ
+     *
+     * - Vertex data
+     * - Index data
+     * - sample_count for MSAA
+     *
+     * etc.
+     *
+     */
+  };
+
+  let initial = Initial {
+    /**
+     * 表示を制御するstateの初期値
+     * 
+     * - Camera
+     * - Light
+     * - Material
+     * - plot mode
+     * - velocity
+     *
+     * etc.
+     *
+     */
+  };
+
+  let mut app: App<State> = App::new(title, inputs, initial);
+  app.run()?;
+
+  Ok(())
+}
+
+pub struct Inputs {}
+
+struct Initial {}
+
+struct State<'a> {
+  // drawing context
+  ctx: ws::WgpuContext<'a>,
+
+  // model (vertex, index, etc.)
+  // uniform
+  // texture
+  // matrix
+  // etc.
+}
+
+impl<'a> Render for State<'a> {
+  type DrawData = Inputs;
+  type InitialState = Initial;
+
+  async fn new(
+    window: Arc<Window>,
+    inputs: &Inputs,
+    initial: &Initial,
+  ) -> Self {
+    let ctx = ws::WgpuContext::new(window, inputs.sample_count, None).await;
+
+    let vs_shader = ctx
+      .device
+      .create_shader_module(wgpu::include_wgsl!("./shader-vert.wgsl"));
+    let fs_shader = ctx
+      .device
+      .create_shader_module(wgpu::include_wgsl!("./shader-frag.wgsl"));
+
+    //
+    // 初期化
+    //
+
+    Self { ctx };
+  }
+
+  fn get_size(&self) -> PhysicalSize<u32> {
+    self.ctx.size
+  }
+
+  fn resize(&mut self, size: PhysicalSize<u32>) {
+    if size.width > 0 && size.height > 0 {
+      self.ctx.size = size;
+      self.ctx.config.width = size.width;
+      self.ctx.config.height = size.height;
+      self.ctx.surface.configure(&self.ctx.device, &self.ctx.config);
+
+      // more ...
+    }
+  }
+
+  fn process_event(&mut self, event: &WindowEvent) -> bool {
+    // ユーザ操作で発火したイベントごとの処理を記述
+    // 何らかのイベントを処理した場合にはtrueを返すように
+    false
+  }
+
+  fn update(&mut self, dt: time::Duration) {
+    // 毎フレーム描画前に呼び出される
+    // 必要に応じてstateの更新を行う
+  }
+
+  fn draw(&mut self) -> Result<(), wgpu::SurfaceError> {
+    let frame = self.ctx.surface.get_current_texture()?;
+    let view =
+      frame.texture.create_view(&wgpu::TextureViewDescriptor::default());
+
+    let mut encoder = self.ctx.device.create_command_encoder(
+      &wgpu::CommandEncoderDescriptor {
+        label: Some("Render Encoder"),
+      },
+    );
+
+    // render passによる描画処理
+
+    self.ctx.queue.submit(iter::once(encoder.finish()));
+    frame.present();
+
+    Ok(())
+  }
+}
+```
