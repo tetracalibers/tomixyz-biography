@@ -64,11 +64,80 @@ const seriesCollection = defineCollection({
     })
 })
 
+const dailyCollection = defineCollection({
+  schema: z.object({
+    tldr: z.string().optional()
+  })
+})
+
+const bookCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    url: z.string().url(),
+    progress_ref: reference("book_progress").optional(),
+    started_at: z.coerce.date(),
+    finished_at: z.coerce.date().optional(),
+    chapters: z.array(z.string()).default([])
+  })
+})
+
+const bookChapterCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    parents: z.array(z.string()).default([]),
+    book_ref: reference("book"),
+    word_ref: reference("word").optional()
+  })
+})
+
+const bookProgressCollection = defineCollection({
+  type: "data",
+  schema: z.record(z.union([z.boolean(), z.coerce.date()]))
+})
+
+const bookTocCollection = defineCollection({
+  type: "data",
+  schema: z.array(
+    z.object({
+      title: z.string(),
+      chapter: z.string(),
+      depth: z.number().int().nonnegative(),
+      done: z.boolean().default(false)
+    })
+  )
+})
+
+const wordCollection = defineCollection({
+  type: "data",
+  schema: z.object({
+    book_ref: reference("book").optional(),
+    chapter: z.string(),
+    words: z.array(
+      z.object({
+        en: z.string(),
+        ja: z.string(),
+        example_sentences: z.array(
+          z.object({
+            en: z.string(),
+            ja: z.string()
+          })
+        )
+      })
+    )
+  })
+})
+
 export const collections = {
   page: pageCollection,
   blog: blogCollection,
   tutorial: tutorialCollection,
   project: projectCollection,
   event: eventCollection,
-  series: seriesCollection
+  series: seriesCollection,
+  daily: dailyCollection,
+  book: bookCollection,
+  book_toc: bookTocCollection,
+  book_chapter: bookChapterCollection,
+  book_progress: bookProgressCollection,
+  word: wordCollection
 }

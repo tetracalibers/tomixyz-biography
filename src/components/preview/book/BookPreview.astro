@@ -1,0 +1,40 @@
+---
+import { splitLangSlug } from "$/utils/i18n/collection"
+import { buildPageUrlFor } from "$/utils/i18n/slug"
+import ProgressGridMap from "$components/book/ProgressGridMap.astro"
+import { getCollection, type CollectionEntry } from "astro:content"
+
+interface Props {
+  book: CollectionEntry<"book">
+  toc?: CollectionEntry<"book_toc">
+  lang?: string
+}
+
+const { book, toc } = Astro.props
+const { title, url, started_at, progress_ref } = book.data
+const { Content } = await book.render()
+
+const builPageUrl = buildPageUrlFor("input")
+const { slug: id, lang } = splitLangSlug(book.slug)
+const pageUrl = builPageUrl(id, lang)
+
+const progress = await (async () => {
+  if (progress_ref) {
+    const progressObj = (await getCollection("book_progress")).find((p) => p.id === progress_ref.id)
+    if (progressObj) {
+      return progressObj.data
+    }
+  }
+})()
+---
+
+<div class="flex gap-6">
+  <div>TODO: Progress Circle</div>
+  <div>
+    <h2 class="text-2xl font-semibold text-theme-primary dark:text-theme-dark-primary hover:underline mb-2">
+      <a href={pageUrl}>{title}</a>
+    </h2>
+    <Content />
+    {progress && <ProgressGridMap progressObj={progress} />}
+  </div>
+</div>

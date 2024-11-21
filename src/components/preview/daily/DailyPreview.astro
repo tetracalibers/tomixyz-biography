@@ -1,0 +1,62 @@
+---
+import { splitLangSlug } from "$/utils/i18n/collection"
+import type { CollectionEntry } from "astro:content"
+
+interface Props {
+  entry: CollectionEntry<"daily"> & { date: string; year: string; month: string; day: string }
+  lang?: string
+}
+
+const { entry } = Astro.props
+
+const { Content } = await entry.render()
+const { slug: date } = splitLangSlug(entry.slug)
+
+const formatDate = (date: string) => {
+  return date.replaceAll("-", ".")
+}
+---
+
+<div class="_timeline-section-inner flex flex-col gap-6">
+  <div
+    class="_timeline-date relative w-fit bg-purple-200 border border-purple-300 rounded-sm dark:text-theme-secondary py-0.5 px-[15px]"
+  >
+    {formatDate(date)}
+  </div>
+  <div class="_row flex flex-col gap-8">
+    <div
+      class="_timeline-box flex flex-col justify-between rounded-br-2xl bg-white/30 dark:bg-slate-300/20 border border-slate-300 shadow-sm"
+    >
+      <div class="_box-content flex flex-col gap-2 flex-1 p-4">
+        <div
+          class="prose dark:prose-dark max-w-full prose-sm prose-img:m-0 prose-img:max-w-full lg:prose-img:max-w-lg prose-a:underline-offset-[6px] prose-a:decoration-1 prose-a:decoration-dotted prose-a:break-all leading-loose tracking-wide"
+        >
+          <Content />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  ._box-content {
+    font-family: "Zen Maru Gothic", serif;
+  }
+
+  .prose :global(:not(pre, h1, h2, h3, h4, h5, h6) > code) {
+    color: inherit;
+    padding: 0.3em 0.5em;
+    background-color: rgba(210, 218, 255, 0.15);
+    border-radius: 1em;
+    font-weight: normal;
+  }
+  :global(.dark) .prose :global(:not(pre, h1, h2, h3, h4, h5, h6) > code) {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  .prose :global(:not(pre) > code)::before {
+    display: none;
+  }
+  .prose :global(:not(pre) > code)::after {
+    display: none;
+  }
+</style>

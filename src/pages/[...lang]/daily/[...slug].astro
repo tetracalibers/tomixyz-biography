@@ -1,0 +1,26 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content"
+import DailyLayout from "$/layouts/daily.astro"
+import { i18nPaths } from "$/utils/i18n/routing/article-page"
+
+export async function getStaticPaths() {
+  const collection = await getCollection("daily")
+  return i18nPaths(collection)
+}
+
+interface Props {
+  page: CollectionEntry<"daily">
+  lang: string
+}
+
+const { page, lang } = Astro.props
+const { slug } = Astro.params
+
+const { Content } = await page.render()
+
+const ogimage = `/og-image/${lang}/input/${slug}.png`
+---
+
+<DailyLayout entry={page} ogimage={ogimage} lang={lang}>
+  <Content />
+</DailyLayout>

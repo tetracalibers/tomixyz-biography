@@ -10,3 +10,8 @@ export const groupByLang = <C extends ContentCollectionKey>(collection: Collecti
     return acc
   }, initial)
 }
+
+export const splitLangSlug = (entrySlug: string): { lang: string; slug: string } => {
+  const [lang, slug] = entrySlug.split("/")
+  return { lang, slug }
+}
