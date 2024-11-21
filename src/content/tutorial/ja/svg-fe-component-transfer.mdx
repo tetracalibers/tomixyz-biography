@@ -1,0 +1,54 @@
+---
+title: feComponentTransferを理解する
+date: "2023-11-11"
+description: todo
+tags:
+  - SVG
+  - SVG Filter
+---
+
+import img_bars_gray from "$/assets/tutorial/svg-fe-component-transfer/grayscale.png"
+
+<DemoArea>
+  <svg xmlns="http://www.w3.org/2000/svg" height="0">
+    <defs>
+      <filter id="blue-mapping">
+        <feComponentTransfer in="SourceGraphic">
+          <feFuncR type="table" tableValues="0.329 0.125 0.647"></feFuncR>
+          <feFuncG type="table" tableValues="0.2 0.741 0.996"></feFuncG>
+          <feFuncB type="table" tableValues="1.0 1.0 0.796"></feFuncB>
+        </feComponentTransfer>
+      </filter>
+    </defs>
+  </svg>
+  <div class="flex flex-wrap justify-center gap-20 text-center text-xl">
+    <figure class="flex flex-col items-center my-0">
+      <figcaption class="mt-0">
+        <code>filter: none;</code>
+      </figcaption>
+      <img src={img_bars_gray.src} width="220" height="220" />
+    </figure>
+    <figure class="flex flex-col items-center my-0">
+      <figcaption class="mt-0">
+        <code>filter: url(#blue-mapping);</code>
+      </figcaption>
+      <img style="filter: url(#blue-mapping);" src={img_bars_gray.src} width="220" height="220" />
+    </figure>
+  </div>
+</DemoArea>
+
+```html showLineNumbers
+<filter id="blue-mapping">
+  <feComponentTransfer in="SourceGraphic">
+    <feFuncR type="table" tableValues="0.329 0.125 0.647"></feFuncR>
+    <feFuncG type="table" tableValues="0.2 0.741 0.996"></feFuncG>
+    <feFuncB type="table" tableValues="1.0 1.0 0.796"></feFuncB>
+  </feComponentTransfer>
+</filter>
+```
+
+`<feComponentTransfer />`は、入力画像の色のR, G, B, Aそれぞれを個別に操作して色を加工するフィルタ。
+子要素として、`<feFuncR />`, `<feFuncG />`, `<feFuncB />`, `<feFuncA />`を並べることで、それぞれの色を操作することができる。
+
+`<feFuncX />`では、`type`属性で操作の種類を指定する。
+`type="table"`と指定すると、`tableValues`属性で指定した値に従って、色の範囲を変換することができる。
