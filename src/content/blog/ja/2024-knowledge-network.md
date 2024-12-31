@@ -125,9 +125,10 @@ Obsidianの思想は、「知識を関連づけて理解する」という目的
 
 知識体系が育ってきている実感を得る上で、全体像を可視化できるマインドマップはかなり優秀だったが、Obsidianでも[グラフビュー](https://help.obsidian.md/Plugins/Graph+view)を使うことでその実感が得られる。
 
+![](../../../assets/blog/2024-knowledge-network/obsidian-graph-view.png)
+
 トピックの詳細情報が子トピックとして表示されてしまうマインドマップとは違って、Obsidianのグラフビューではトピック名だけが表示されるのも良い。
 
-![](../../../assets/blog/2024-knowledge-network/obsidian-graph-view.png)
 ![](../../../assets/blog/2024-knowledge-network/obsidian-graph-view-hover.png)
 
 まだ使い始めて間もないObsidianだが、知識を繋げて広げていく感覚が手に取るようにわかってくるのが楽しい。
