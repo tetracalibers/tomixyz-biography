@@ -25,6 +25,14 @@ export const NAV_ITEMS: NavItems = {
     path: "/tutorial/",
     title: "tutorial"
   },
+  daily: {
+    path: "/daily/",
+    title: "daily"
+  },
+  input: {
+    path: "/input/",
+    title: "input"
+  },
   tags: {
     path: "/tags/",
     title: "tags"
@@ -55,3 +63,9 @@ export const SITE = {
 
 // Ink - Theme configuration
 export const PAGE_SIZE = 8
+
+// for expressive-code
+export const EXP_CODE_THEME = {
+  dark: "monokai",
+  light: "github-light"
+}
