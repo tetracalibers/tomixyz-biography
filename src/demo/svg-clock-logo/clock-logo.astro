@@ -1,0 +1,59 @@
+---
+import { cx, cy, nr, r, textLength } from "./config"
+import { calcArcLength, calcClockHourHandAngle, calcClockMinuteHandAngle } from "./utils"
+---
+
+<svg width="600" height="600" viewBox="0 0 600 600">
+  <g stroke="black">
+    <!-- 時計の目盛り -->
+    <g filter="url(#rainbow)" fill="none" stroke-linecap="round">
+      <!-- 1分ごとの目盛り -->
+      <circle cx={cx} cy={cy} r={r} stroke-width="4" stroke-dasharray={`0.01 ${calcArcLength(r, 6)}`}></circle>
+      <!-- 5分ごとの目盛り -->
+      <circle cx={cx} cy={cy} r={r} stroke-width="8" stroke-dasharray={`0.1 ${calcArcLength(r, 30)}`}></circle>
+    </g>
+    <!-- 時計の針（7時24分） -->
+    <g stroke-width="3" stroke-linecap="round" filter="url(#rainbow)">
+      <!-- 短針 -->
+      <line
+        x1={cx}
+        x2={cx}
+        y1={cy}
+        y2={(cy - nr) * 2.25}
+        transform={`rotate(${calcClockHourHandAngle(7, 24)}, ${cx}, ${cy})`}
+      >
+      </line>
+      <!-- 長針 -->
+      <line
+        x1={cx}
+        x2={cx}
+        y1={cy}
+        y2={(cy - nr) * 1.75}
+        transform={`rotate(${calcClockMinuteHandAngle(24)}, ${cx}, ${cy})`}
+      >
+      </line>
+    </g>
+    <g filter="url(#offset-blur)">
+      <!-- 時計の数字（3, 6, 7, 9, 12） -->
+      <g font-size="2.5rem" stroke-width="1.6" filter="url(#refrect-rainbow)">
+        <text x={cx} y={cy - nr} text-anchor="middle" dominant-baseline="central">12</text>
+        <text x={cx + nr} y={cy} text-anchor="middle" dominant-baseline="central">3</text>
+        <text x={cy} y={cy + nr} text-anchor="middle" dominant-baseline="central">6</text>
+        <g transform-origin={`${cx} ${cy}`} transform="rotate(28)">
+          <text x={cx} y={cy + nr} rotate="-28" text-anchor="middle" dominant-baseline="central">7</text>
+        </g>
+        <text x={cx - nr} y={cy} text-anchor="middle" dominant-baseline="central">9</text>
+      </g>
+      <!-- 時計の円周上に並ぶテキスト -->
+      <text font-size="4rem" stroke-width="2" filter="url(#refrect-rainbow)" textLength={textLength}>
+        <textPath href="#text-circle" textLength={textLength}>Conquer yourself,not the world.</textPath>
+      </text>
+    </g>
+  </g>
+</svg>
+
+<style>
+  text {
+    font-family: "Megrim";
+  }
+</style>
